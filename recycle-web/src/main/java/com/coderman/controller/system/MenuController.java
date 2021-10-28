@@ -76,7 +76,7 @@ public class MenuController {
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "删除菜单/按钮失败", operation = "删除菜单/按钮")
-    @ApiOperation(value = "删除菜单", notes = "根据id删除菜单节点")
+    @ApiOperation(value = "删除菜单", notes = "根據id删除菜单節點")
     @RequiresPermissions({"menu:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
@@ -90,7 +90,7 @@ public class MenuController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "菜单详情", notes = "根据id编辑菜单，获取菜单详情")
+    @ApiOperation(value = "菜单详情", notes = "根據id编辑菜单，获取菜单详情")
     @RequiresPermissions({"menu:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean<MenuVO> edit(@PathVariable Long id) throws SystemException {
@@ -106,7 +106,7 @@ public class MenuController {
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "更新菜单失败", operation = "更新菜单")
-    @ApiOperation(value = "更新菜单", notes = "根据id更新菜单节点")
+    @ApiOperation(value = "更新菜单", notes = "根據id更新菜单節點")
     @RequiresPermissions({"menu:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated MenuVO menuVO) throws SystemException {

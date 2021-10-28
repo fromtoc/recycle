@@ -105,7 +105,7 @@ public class OutStockServiceImpl implements OutStockService {
                 if (dbProduct == null) {
                     throw new BusinessException(BusinessCodeEnum.PRODUCT_NOT_FOUND);
                 }else if(productNumber<=0){
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_OUT_STOCK_NUMBER_ERROR,dbProduct.getName()+"发放数量不合法,无法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_OUT_STOCK_NUMBER_ERROR,dbProduct.getName()+"发放数量不合法,無法入库");
                 } else {
                     //校验库存
                     Example o=new Example(ProductStock.class);
@@ -167,7 +167,7 @@ public class OutStockServiceImpl implements OutStockService {
     }
 
     /**
-     * 从回收站恢复数据
+     * 从回收站恢复数據
      * @param id
      */
     @Override
@@ -246,7 +246,7 @@ public class OutStockServiceImpl implements OutStockService {
         if(outStock==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单不存在");
         }else if(outStock.getStatus()!=1&&outStock.getStatus()!=2){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态错误,无法删除");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态错误,無法删除");
         }else {
            outStockMapper.deleteByPrimaryKey(id);
         }

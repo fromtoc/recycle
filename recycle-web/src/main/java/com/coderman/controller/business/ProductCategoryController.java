@@ -38,7 +38,7 @@ public class ProductCategoryController {
      *
      * @return
      */
-    @ApiOperation(value = "分类列表", notes = "物资分类列表,根据物资分类名模糊查询")
+    @ApiOperation(value = "分类列表", notes = "物资分类列表,根據物资分类名模糊查询")
     @GetMapping("/findProductCategoryList")
     public ResponseBean findProductCategoryList(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,

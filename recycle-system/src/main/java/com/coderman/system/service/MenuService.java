@@ -27,20 +27,20 @@ public interface MenuService {
     Menu add(MenuVO menuVO);
 
     /**
-     * 删除节点
+     * 删除節點
      * @param id
      */
     void delete(Long id) throws SystemException;
 
     /**
-     * 编辑节点
+     * 编辑節點
      * @param id
      * @return
      */
     MenuVO edit(Long id) throws SystemException;
 
     /**
-     * 更新节点
+     * 更新節點
      * @param id
      */
     void update(Long id, MenuVO menuVO) throws SystemException;

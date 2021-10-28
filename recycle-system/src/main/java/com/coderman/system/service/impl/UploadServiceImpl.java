@@ -48,7 +48,7 @@ public class UploadServiceImpl implements UploadService {
         String originalFilename = file.getOriginalFilename();
         String fileExtName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
         String path = fdfsUtil.upfileImage(inputStream, size, fileExtName.toUpperCase(), null);
-        //保存图片信息到数据库
+        //保存图片信息到数據库
         BufferedImage image = ImageIO.read(file.getInputStream());
         if (image != null) {//如果image=null 表示上传的不是图片格式
             ImageAttachment imageAttachment = new ImageAttachment();

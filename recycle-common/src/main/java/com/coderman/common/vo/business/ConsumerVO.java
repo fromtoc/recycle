@@ -18,7 +18,7 @@ public class ConsumerVO {
 
     private Long id;
 
-    @NotBlank(message = "物资发放地点不能为空")
+    @NotBlank(message = "物资发放地點不能为空")
     private String name;
 
     @NotBlank(message = "省市县不能为空")

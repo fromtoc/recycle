@@ -38,7 +38,7 @@ public class MenuNodeVO {
     private List<MenuNodeVO> children=new ArrayList<>();
 
     /*
-     * 排序,根据order排序
+     * 排序,根據order排序
      */
     public static Comparator<MenuNodeVO> order(){
         Comparator<MenuNodeVO> comparator = (o1, o2) -> {

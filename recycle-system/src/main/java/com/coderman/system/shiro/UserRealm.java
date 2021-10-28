@@ -38,7 +38,7 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 只有当需要检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的
+     * 只有当需要检测用戶权限的时候才会调用此方法，例如checkRole,checkPermission之类的
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -70,13 +70,13 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
+     * 默认使用此方法进行用戶名正确与否验证，错误抛出异常即可。
      */
     @SneakyThrows
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
         String token = (String) auth.getCredentials();
-        // 解密获得username，用于和数据库进行对比
+        // 解密获得username，用于和数據库进行对比
         String username = JWTUtils.getUsername(token);
 
         if (username == null) {
@@ -100,9 +100,9 @@ public class UserRealm extends AuthorizingRealm {
             throw new LockedAccountException("账号已被锁定!");
         }
 
-        //如果验证通过，获取用户的角色
+        //如果验证通过，获取用戶的角色
         List<Role> roles= userService.findRolesById(userBean.getId());
-        //查询用户的所有菜单(包括了菜单和按钮)
+        //查询用戶的所有菜单(包括了菜单和按钮)
         List<Menu> menus=userService.findMenuByRoles(roles);
 
         Set<String> urls=new HashSet<>();
@@ -119,7 +119,7 @@ public class UserRealm extends AuthorizingRealm {
                 }
             }
         }
-        //过滤出url,和用户的权限
+        //过滤出url,和用戶的权限
         ActiveUser activeUser = new ActiveUser();
         activeUser.setRoles(roles);
         activeUser.setUser(userBean);

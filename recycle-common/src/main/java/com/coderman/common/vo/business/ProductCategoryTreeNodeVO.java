@@ -35,7 +35,7 @@ public class ProductCategoryTreeNodeVO {
     private List<ProductCategoryTreeNodeVO> children;
 
     /*
-     * 排序,根据order排序
+     * 排序,根據order排序
      */
     public static Comparator<ProductCategoryTreeNodeVO> order(){
         Comparator<ProductCategoryTreeNodeVO> comparator = (o1, o2) -> {

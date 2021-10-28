@@ -35,7 +35,7 @@ public class ProductController {
      * 全部物资列表
      * @return
      */
-    @ApiOperation(value = "物资列表", notes = "物资列表,根据物资名模糊查询")
+    @ApiOperation(value = "物资列表", notes = "物资列表,根據物资名模糊查询")
     @GetMapping("/findProductList")
     public ResponseBean findProductList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                         @RequestParam(value = "pageSize") Integer pageSize,
@@ -50,7 +50,7 @@ public class ProductController {
      * 可入库物资(入库页面使用)
      * @return
      */
-    @ApiOperation(value = "可入库物资列表", notes = "物资列表,根据物资名模糊查询")
+    @ApiOperation(value = "可入库物资列表", notes = "物资列表,根據物资名模糊查询")
     @GetMapping("/findProducts")
     public ResponseBean findProducts(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize") Integer pageSize,
@@ -66,7 +66,7 @@ public class ProductController {
      * 库存列表
      * @return
      */
-    @ApiOperation(value = "库存列表", notes = "物资列表,根据物资名模糊查询")
+    @ApiOperation(value = "库存列表", notes = "物资列表,根據物资名模糊查询")
     @GetMapping("/findProductStocks")
     public ResponseBean findProductStocks(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                         @RequestParam(value = "pageSize") Integer pageSize,
@@ -212,7 +212,7 @@ public class ProductController {
         return ResponseBean.success();
     }
     /**
-     * 恢复数据从回收站
+     * 恢复数據从回收站
      * @param id
      * @return
      */

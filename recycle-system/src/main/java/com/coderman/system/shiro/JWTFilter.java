@@ -52,9 +52,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         //1.检查请求头中是否含有token
         HttpServletRequest httpServletRequest= (HttpServletRequest) request;
         String token = httpServletRequest.getHeader("Authorization");
-        //2. 如果客户端没有携带token，拦下请求
+        //2. 如果客戶端没有携带token，拦下请求
         if(null==token||"".equals(token)){
-            responseTokenError(response,"Token无效，您无权访问该接口");
+            responseTokenError(response,"Token無效，您無权访问该接口");
             return false;
         }
         //3. 如果有，对进行进行token验证
@@ -88,7 +88,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         return super.preHandle(request, response);
     }
     /**
-     * 无需转发，直接返回Response信息 Token认证错误
+     * 無需转发，直接返回Response信息 Token认证错误
      */
     private void responseTokenError(ServletResponse response, String msg) {
         HttpServletResponse httpServletResponse = WebUtils.toHttp(response);

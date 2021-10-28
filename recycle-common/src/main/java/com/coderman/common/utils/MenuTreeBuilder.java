@@ -20,20 +20,20 @@ public class MenuTreeBuilder {
      * @return
      */
     public static List<MenuNodeVO> build(List<MenuNodeVO> nodes){
-        //根节点
+        //根節點
         List<MenuNodeVO> rootMenu = new ArrayList<>();
         for (MenuNodeVO nav : nodes) {
             if(nav.getParentId()==0){
                 rootMenu.add(nav);
             }
         }
-        /* 根据Menu类的order排序 */
+        /* 根據Menu类的order排序 */
         Collections.sort(rootMenu,MenuNodeVO.order());
         /*为根菜单设置子菜单，getChild是递归调用的*/
         for (MenuNodeVO nav : rootMenu) {
-            /* 获取根节点下的所有子节点 使用getChild方法*/
+            /* 获取根節點下的所有子節點 使用getChild方法*/
             List<MenuNodeVO> childList = getChild(nav.getId(), nodes);
-            nav.setChildren(childList);//给根节点设置子节点
+            nav.setChildren(childList);//给根節點设置子節點
         }
         return rootMenu;
     }
@@ -48,8 +48,8 @@ public class MenuTreeBuilder {
         //子菜单
         List<MenuNodeVO> childList = new ArrayList<MenuNodeVO>();
         for (MenuNodeVO nav : nodes) {
-            // 遍历所有节点，将所有菜单的父id与传过来的根节点的id比较
-            //相等说明：为该根节点的子节点。
+            // 遍历所有節點，将所有菜单的父id与传过来的根節點的id比较
+            //相等说明：为该根節點的子節點。
             if(nav.getParentId().equals(id)){
                 childList.add(nav);
             }
@@ -59,7 +59,7 @@ public class MenuTreeBuilder {
             nav.setChildren(getChild(nav.getId(), nodes));
         }
         Collections.sort(childList,MenuNodeVO.order());//排序
-        //如果节点下没有子节点，返回一个空List（递归退出）
+        //如果節點下没有子節點，返回一个空List（递归退出）
         if(childList.size() == 0){
             return new ArrayList<MenuNodeVO>();
         }

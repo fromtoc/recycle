@@ -148,7 +148,7 @@ public class InStockServiceImpl implements InStockService {
         if(inStock==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单不存在");
         }else if(inStock.getStatus()!=1&&inStock.getStatus()!=2){
-           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态错误,无法删除");
+           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态错误,無法删除");
         }else {
             inStockMapper.deleteByPrimaryKey(id);
         }
@@ -181,11 +181,11 @@ public class InStockServiceImpl implements InStockService {
                 if (dbProduct == null) {
                     throw new BusinessException(BusinessCodeEnum.PRODUCT_NOT_FOUND);
                 }else if(dbProduct.getStatus()==1) {
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IS_REMOVE, dbProduct.getName() + "物资已被回收,无法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IS_REMOVE, dbProduct.getName() + "物资已被回收,無法入库");
                 } else if(dbProduct.getStatus()==2){
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_WAIT_PASS, dbProduct.getName() + "物资待审核,无法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_WAIT_PASS, dbProduct.getName() + "物资待审核,無法入库");
                 }else if(productNumber<=0){
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IN_STOCK_NUMBER_ERROR,dbProduct.getName()+"入库数量不合法,无法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IN_STOCK_NUMBER_ERROR,dbProduct.getName()+"入库数量不合法,無法入库");
                 } else {
                     itemNumber += productNumber;
                     //插入入库单明细
@@ -239,7 +239,7 @@ public class InStockServiceImpl implements InStockService {
     }
 
     /**
-     * 从回收站恢复数据
+     * 从回收站恢复数據
      * @param id
      */
     @Override

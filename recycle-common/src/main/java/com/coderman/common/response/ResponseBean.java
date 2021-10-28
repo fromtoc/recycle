@@ -10,7 +10,7 @@ public class ResponseBean<T> {
     // http 状态码
     private boolean success;
 
-    // 返回的数据
+    // 返回的数據
     private T data;
 
     public static <T> ResponseBean<T> success(T data) {

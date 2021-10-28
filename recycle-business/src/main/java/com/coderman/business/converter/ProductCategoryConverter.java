@@ -45,7 +45,7 @@ public class ProductCategoryConverter {
     }
 
     /**
-     * 转树节点
+     * 转树節點
      * @param productCategoryVOList
      * @return
      */

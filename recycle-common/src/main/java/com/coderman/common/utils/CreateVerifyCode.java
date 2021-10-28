@@ -109,7 +109,7 @@ public class CreateVerifyCode {
                 g.drawLine(xs, ys, xe, ye);
             }
 
-            // 添加噪点
+            // 添加噪點
             float yawpRate = 0.01f;// 噪声率
             int area = (int) (yawpRate * width * height);
             for (int i = 0; i < area; i++) {
@@ -164,7 +164,7 @@ public class CreateVerifyCode {
                 g.drawLine(xs, ys, xe, ye);
             }
 
-            // 添加噪点
+            // 添加噪點
             float yawpRate = 0.01f;// 噪声率
             int area = (int) (yawpRate * width * height);
             for (int i = 0; i < area; i++) {

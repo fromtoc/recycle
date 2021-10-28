@@ -22,7 +22,7 @@ public class MenuConverter {
      * @return
      */
     public static List<MenuNodeVO> converterToMenuNodeVO(List<Menu> menus){
-        //先过滤出用户的菜单
+        //先过滤出用戶的菜单
         List<MenuNodeVO> menuNodeVOS=new ArrayList<>();
         if(!CollectionUtils.isEmpty(menus)){
             for (Menu menu : menus) {
@@ -44,7 +44,7 @@ public class MenuConverter {
      * @return
      */
     public static List<MenuNodeVO> converterToALLMenuNodeVO(List<Menu> menus){
-        //先过滤出用户的菜单
+        //先过滤出用戶的菜单
         List<MenuNodeVO> menuNodeVOS=new ArrayList<>();
         if(!CollectionUtils.isEmpty(menus)){
             for (Menu menu : menus) {

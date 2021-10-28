@@ -6,7 +6,7 @@ SOURCE_HOME="/root/application/recycle-api/recycle-web"
 PARENT_HOME="/root/application/recycle-api"
 #日志地址
 APP_LOG="$SOURCE_HOME/target/log_info.log"
-#环境配置 用户配置开发(dev)，测试(test)，生产(prod)的配置文件，避免频繁改动
+#环境配置 用戶配置开发(dev)，测试(test)，生产(prod)的配置文件，避免频繁改动
 PROFILES_ACTIVE="spring.profiles.active=prod"
 
 #JVM启动参数，关于JVM调优这里不介绍，感兴趣的可以自行百度 JVM调优

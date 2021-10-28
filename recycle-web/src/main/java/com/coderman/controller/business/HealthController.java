@@ -35,7 +35,7 @@ public class HealthController {
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "健康上报失败", operation = "健康上报")
-    @ApiOperation(value = "健康上报",notes = "用户健康上报")
+    @ApiOperation(value = "健康上报",notes = "用戶健康上报")
     @RequiresPermissions({"health:report"})
     @PostMapping("/report")
     public ResponseBean report(@Validated @RequestBody HealthVO healthVO) throws BusinessException {
@@ -49,7 +49,7 @@ public class HealthController {
      * 签到记录
      * @return
      */
-    @ApiOperation(value = "健康记录",notes = "用户健康上报历史记录")
+    @ApiOperation(value = "健康记录",notes = "用戶健康上报历史记录")
     @GetMapping("/history")
     public ResponseBean history(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                 @RequestParam(value = "pageSize") Integer pageSize){

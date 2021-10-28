@@ -50,7 +50,7 @@ public class MyMebMvcConfigurer implements WebMvcConfigurer {
                 UnauthorizedException unauthorizedException = (UnauthorizedException) e;
                 logger.info("系统模块-错误码：{},错误信息:{}", HttpStatus.UNAUTHORIZED.value(), unauthorizedException.getMessage());
                 errorData.put("errorCode", HttpStatus.UNAUTHORIZED.value());
-                errorData.put("errorMsg", "服务器向你抛了一个异常,并表示（操作无权限）");
+                errorData.put("errorMsg", "服务器向你抛了一个异常,并表示（操作無权限）");
             }else if(e instanceof HttpRequestMethodNotSupportedException){
                 logger.info("系统模块-错误码：{},错误信息:{}", HttpStatus.BAD_REQUEST.value(), e.getMessage());
                 errorData.put("errorCode", HttpStatus.BAD_REQUEST.value());

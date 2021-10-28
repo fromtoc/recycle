@@ -90,7 +90,7 @@ public class LoginLogController {
      * @return
      */
     @PostMapping("/loginReport")
-    @ApiOperation(value = "登入报表",notes = "用户登入报表")
+    @ApiOperation(value = "登入报表",notes = "用戶登入报表")
     public ResponseBean loginReport(@RequestBody UserVO userVO){
         List<Map<String,Object>> mapList= loginLogService.loginReport(userVO);
         Map<String,Object> map=new HashMap<>();

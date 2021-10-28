@@ -1,7 +1,7 @@
 package com.coderman.common.enums.system;
 
 /**
- * 用户类型
+ * 用戶类型
  * @Author zhangyukang
  * @Date 2020/5/29 12:25
  * @Version 1.0
@@ -10,7 +10,7 @@ public enum UserTypeEnum {
 
     SYSTEM_ADMIN(0),//系统管理员admin
 
-    SYSTEM_USER(1);//系统的普通用户
+    SYSTEM_USER(1);//系统的普通用戶
 
     private int typeCode;
 

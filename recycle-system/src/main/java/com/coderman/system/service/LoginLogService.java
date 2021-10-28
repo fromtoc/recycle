@@ -47,7 +47,7 @@ public interface LoginLogService {
     void batchDelete(List<Long> list) throws SystemException;
 
     /**
-     * 用户登入报表
+     * 用戶登入报表
      * @param userVO
      * @return
      */

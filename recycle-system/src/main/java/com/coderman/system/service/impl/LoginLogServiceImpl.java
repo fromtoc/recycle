@@ -123,7 +123,7 @@ public class LoginLogServiceImpl implements LoginLogService {
         loginLog.setUsername(activeUser.getUser().getUsername());
         loginLog.setIp(IPUtil.getIpAddr(request));
         loginLog.setLocation(AddressUtil.getCityInfo(IPUtil.getIpAddr(request)));
-        // 获取客户端操作系统
+        // 获取客戶端操作系统
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         Browser browser = userAgent.getBrowser();
         OperatingSystem os = userAgent.getOperatingSystem();

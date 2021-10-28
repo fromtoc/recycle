@@ -16,15 +16,15 @@ import java.util.Set;
 public class ActiveUser {
 
     /**
-     * 当前用户对象
+     * 当前用戶对象
      */
     private User user;
     /**
-     * 当前用户具有的角色
+     * 当前用戶具有的角色
      */
     private List<Role> roles;
     /**
-     * 当前用户具有的url
+     * 当前用戶具有的url
      */
     private Set<String> urls;
 
@@ -33,7 +33,7 @@ public class ActiveUser {
      */
     private List<Menu> menus;
     /**
-     * 当前用户具有的权限API:例如[user:add],[user:delete]...
+     * 当前用戶具有的权限API:例如[user:add],[user:delete]...
      */
     private Set<String> permissions;
 
@@ -42,19 +42,19 @@ public class ActiveUser {
      */
     private String id;
     /**
-     * 用户 id
+     * 用戶 id
      */
     private String userId;
     /**
-     * 用户名称
+     * 用戶名称
      */
     private String username;
     /**
-     * 用户主机地址
+     * 用戶主机地址
      */
     private String host;
     /**
-     * 用户登录时系统 IP
+     * 用戶登录时系统 IP
      */
     private String systemHost;
     /**
@@ -78,7 +78,7 @@ public class ActiveUser {
      */
     private String location;
     /**
-     * 是否为当前登录用户
+     * 是否为当前登录用戶
      */
     private Boolean current;
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 public class UserEditVO {
     private Long id;
 
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "用戶名不能为空")
     private String username;
 
     @NotBlank(message = "昵称不能为空")

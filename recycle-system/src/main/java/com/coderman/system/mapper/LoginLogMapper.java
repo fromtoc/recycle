@@ -16,7 +16,7 @@ import java.util.Map;
 public interface LoginLogMapper extends Mapper<LoginLog> {
 
     /**
-     * 用户登入报表
+     * 用戶登入报表
      * @param userVO
      * @return
      */

@@ -16,26 +16,26 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 根据用户名查询用户
+     * 根據用戶名查询用戶
      *
-     * @param name 用户名
+     * @param name 用戶名
      * @return
      */
      User findUserByName(String name);
 
     /**
-     * 查询用户角色
+     * 查询用戶角色
      *
-     * @param id 用户id
+     * @param id 用戶id
      * @return
      */
      List<Role> findRolesById(Long id) throws SystemException;
 
     /**
-     * 根据用户角色查询用户的菜单
+     * 根據用戶角色查询用戶的菜单
      * 菜单: menu+button
      *
-     * @param roles 用户的角色
+     * @param roles 用戶的角色
      * @return
      */
     List<Menu> findMenuByRoles(List<Role> roles);
@@ -48,14 +48,14 @@ public interface UserService {
     List<MenuNodeVO> findMenu();
 
     /**
-     * 用户列表
+     * 用戶列表
      * @param userVO
      * @return
      */
     PageVO<UserVO> findUserList(Integer pageNum, Integer pageSize, UserVO userVO);
 
     /**
-     * 删除用户
+     * 删除用戶
      *
      * @param id
      */
@@ -70,13 +70,13 @@ public interface UserService {
     void updateStatus(Long id, Boolean status) throws SystemException;
 
     /**
-     * 添加用户
+     * 添加用戶
      * @param userVO
      */
     void add(UserVO userVO) throws SystemException;
 
     /**
-     * 更新用户
+     * 更新用戶
      *
      * @param id
      * @param userVO
@@ -84,7 +84,23 @@ public interface UserService {
     void update(Long id, UserEditVO userVO) throws SystemException;
 
     /**
-     * 编辑用户
+     * 更新用戶密碼
+     *
+     * @param oldPassword
+     * @param newPassword
+     */
+    boolean updatePassword(String oldPassword, String newPassword) throws SystemException;
+
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param password
+     */
+    void changePassword(Long id, String password) throws SystemException;
+
+    /**
+     * 编辑用戶
      *
      * @param id
      * @return
@@ -94,7 +110,7 @@ public interface UserService {
     /**
      * 已拥有的角色ids
      *
-     * @param id 用户id
+     * @param id 用戶id
      * @return
      */
     List<Long> roles(Long id) throws SystemException;
@@ -108,14 +124,14 @@ public interface UserService {
     void assignRoles(Long id, Long[] rids) throws SystemException;
 
     /**
-     * 所有用户
+     * 所有用戶
      *
      * @return
      */
     List<User> findAll();
 
     /**
-     * 用户登入
+     * 用戶登入
      *
      * @param username
      * @param password
@@ -125,7 +141,7 @@ public interface UserService {
 
 
     /**
-     * 用户详情
+     * 用戶详情
      *
      * @return
      */

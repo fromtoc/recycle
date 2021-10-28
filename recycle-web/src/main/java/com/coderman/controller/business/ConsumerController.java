@@ -35,7 +35,7 @@ public class ConsumerController {
      *
      * @return
      */
-    @ApiOperation(value = "去向列表", notes = "去向列表,根据去向名模糊查询")
+    @ApiOperation(value = "去向列表", notes = "去向列表,根據去向名模糊查询")
     @GetMapping("/findConsumerList")
     public ResponseBean findConsumerList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize") Integer pageSize,

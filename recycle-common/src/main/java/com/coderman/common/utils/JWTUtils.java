@@ -23,7 +23,7 @@ public class JWTUtils {
     /**
      * 校验token是否正确
      * @param token 密钥
-     * @param secret 用户的密码
+     * @param secret 用戶的密码
      * @return 是否正确
      */
     public static boolean verify(String token, String username, String secret) {
@@ -40,8 +40,8 @@ public class JWTUtils {
     }
 
     /**
-     * 获得token中的信息无需secret解密也能获得
-     * @return token中包含的用户名
+     * 获得token中的信息無需secret解密也能获得
+     * @return token中包含的用戶名
      */
     public static String getUsername(String token) {
         try {
@@ -54,8 +54,8 @@ public class JWTUtils {
 
     /**
      * 生成签名,2min后过期
-     * @param username 用户名
-     * @param secret 用户的密码
+     * @param username 用戶名
+     * @param secret 用戶的密码
      * @return 加密的token
      */
     public static String sign(String username, String secret) {

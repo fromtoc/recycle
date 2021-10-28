@@ -36,7 +36,7 @@ public class HealthServiceImpl implements HealthService {
     public void report(HealthVO healthVO) throws BusinessException {
         Health report = isReport(healthVO.getUserId());
         if(report!=null) {
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "今日已经打卡,无法重复打卡！");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "今日已经打卡,無法重复打卡！");
         }
         Health health = new Health();
         BeanUtils.copyProperties(healthVO,health);

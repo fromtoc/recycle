@@ -112,7 +112,7 @@ public class RoleController {
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "删除角色失败", operation = "删除角色")
-    @ApiOperation(value = "删除角色", notes = "根据id删除角色信息")
+    @ApiOperation(value = "删除角色", notes = "根據id删除角色信息")
     @RequiresPermissions({"role:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
@@ -127,7 +127,7 @@ public class RoleController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑用户", notes = "根据id更新角色信息")
+    @ApiOperation(value = "编辑用戶", notes = "根據id更新角色信息")
     @GetMapping("/edit/{id}")
     @RequiresPermissions({"role:edit"})
     public ResponseBean<RoleVO> edit(@PathVariable Long id) throws SystemException {
@@ -143,7 +143,7 @@ public class RoleController {
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "更新角色失败", operation = "更新角色")
-    @ApiOperation(value = "更新角色", notes = "根据id更新角色信息")
+    @ApiOperation(value = "更新角色", notes = "根據id更新角色信息")
     @RequiresPermissions({"role:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated RoleVO roleVO) throws SystemException {

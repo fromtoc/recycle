@@ -6,7 +6,7 @@ import lombok.Getter;
  *
  * 业务错误码：返回结果的状态码
  *
- * 如果想要代码更具维护性一点,可以定义不同种类的错误码,都实现 BaseCodeInterface
+ * 如果想要代码更具维护性一點,可以定义不同种类的错误码,都实现 BaseCodeInterface
  * @Author zhangyukang
  * @Date 2020/3/1 14:51
  * @Version 1.0
@@ -17,15 +17,15 @@ public enum  BusinessCodeEnum implements BaseError {
     //通用的异常以0000开头
     PARAMETER_ERROR(00001,"参数不合法"),
 
-    // 数据操作错误定义
-    BODY_NOT_MATCH(400,"请求的数据格式不符!"),
+    // 数據操作错误定义
+    BODY_NOT_MATCH(400,"请求的数據格式不符!"),
     SIGNATURE_NOT_MATCH(401,"请求的数字签名不匹配!"),
     NOT_FOUND(404, "未找到该资源!"),
     INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
     SERVER_BUSY(503,"服务器正忙，请稍后再试!"),
-    //用户相关：10000**
+    //用戶相关：10000**
     USER_ACCOUNT_NOT_FOUND(10001, "账号不存在!"),
-    DoNotAllowToDisableTheCurrentUser(10002,"不允许禁用当前用户"),
+    DoNotAllowToDisableTheCurrentUser(10002,"不允许禁用当前用戶"),
     //业务异常
     PRODUCT_IS_REMOVE(30001,"物资已移入回收站"),
     PRODUCT_NOT_FOUND(30002,"物资找不到"),

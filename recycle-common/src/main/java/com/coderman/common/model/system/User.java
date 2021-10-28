@@ -16,7 +16,7 @@ public class User {
     @ExcelField(value = "编号", width = 50)
     private Long id;
 
-    @ExcelField(value = "用户名", width = 100)
+    @ExcelField(value = "用戶名", width = 100)
     private String username;
 
     @ExcelField(value = "昵称", width = 100)
@@ -48,14 +48,14 @@ public class User {
     private String salt;
 
     @ExcelField(//
-            value = "用户类型",
-            readConverterExp = "超级管理员=0,普通用户=1",
-            writeConverterExp = "0=超级管理员,1=普通用户"
+            value = "用戶类型",
+            readConverterExp = "超级管理员=0,普通用戶=1",
+            writeConverterExp = "0=超级管理员,1=普通用戶"
             ,width = 80
     )
     private Integer type;
 
-    @ExcelField(value = "用户密码", width = 100)
+    @ExcelField(value = "用戶密码", width = 100)
     private String password;
 
     @ExcelField(value = "出生日期", dateFormat = "yyyy/MM/dd",width = 100)

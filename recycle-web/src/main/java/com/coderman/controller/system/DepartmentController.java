@@ -40,7 +40,7 @@ public class DepartmentController {
      *
      * @return
      */
-    @ApiOperation(value = "部门列表", notes = "部门列表,根据部门名模糊查询")
+    @ApiOperation(value = "部门列表", notes = "部门列表,根據部门名模糊查询")
     @GetMapping("/findDepartmentList")
     public ResponseBean<PageVO<DepartmentVO>> findDepartmentList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                            @RequestParam(value = "pageSize") Integer pageSize,
@@ -66,7 +66,7 @@ public class DepartmentController {
      *
      * @return
      */
-    @ApiOperation(value = "部门主任", notes = "查找部门主任,排除掉已经禁用的用户")
+    @ApiOperation(value = "部门主任", notes = "查找部门主任,排除掉已经禁用的用戶")
     @GetMapping("/findDeanList")
     public ResponseBean<List<DeanVO>> findDeanList() {
         List<DeanVO> managerList = departmentService.findDeanList();

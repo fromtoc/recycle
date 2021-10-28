@@ -150,12 +150,12 @@ public class InStockController {
     }
 
     /**
-     * 恢复数据从回收站
+     * 恢复数據从回收站
      * @param id
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "入库单恢复失败", operation = "入库单恢复")
-    @ApiOperation(value = "恢复数据", notes = "从回收站中恢复入库单")
+    @ApiOperation(value = "恢复数據", notes = "从回收站中恢复入库单")
     @RequiresPermissions({"inStock:back"})
     @PutMapping("/back/{id}")
     public ResponseBean back(@PathVariable Long id) throws BusinessException {

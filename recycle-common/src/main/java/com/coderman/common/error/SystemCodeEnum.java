@@ -7,7 +7,7 @@ package com.coderman.common.error;
  **/
 public enum SystemCodeEnum  implements BaseError {
     PARAMETER_ERROR(50000,"参数不合法"),
-    TOKEN_ERROR(50001,"用户未认证")
+    TOKEN_ERROR(50001,"用戶未认证")
     ;
 
     /** 错误码 */

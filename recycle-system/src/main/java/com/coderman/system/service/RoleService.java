@@ -51,7 +51,7 @@ public interface RoleService {
     void update(Long id, RoleVO roleVO) throws SystemException;
 
     /**
-     * 根据角色状态
+     * 根據角色状态
      * @param id
      * @param status
      */

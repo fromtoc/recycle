@@ -12,10 +12,10 @@ import javax.validation.constraints.NotBlank;
  * @Version 1.0
  **/
 @Data
-@ApiModel(value = "用户登入表单")
+@ApiModel(value = "用戶登入表单")
 public class UserLoginDTO {
-    @NotBlank(message = "用户名不能为空")
-    @ApiModelProperty(value = "用户名")
+    @NotBlank(message = "用戶名不能为空")
+    @ApiModelProperty(value = "用戶名")
     private String username;
     @NotBlank(message = "密码不能为空")
     @ApiModelProperty(value = "密码")

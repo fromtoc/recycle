@@ -35,7 +35,7 @@ public class SupplierController {
      *
      * @return
      */
-    @ApiOperation(value = "来源列表", notes = "来源列表,根据来源名模糊查询")
+    @ApiOperation(value = "来源列表", notes = "来源列表,根據来源名模糊查询")
     @GetMapping("/findSupplierList")
     public ResponseBean findSupplierList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize") Integer pageSize,

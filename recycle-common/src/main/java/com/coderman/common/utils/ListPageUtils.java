@@ -18,7 +18,7 @@ public class ListPageUtils {
      * @return
      */
     public static <T> List<T> page(List<T> datas,int pageSize,int pageNo){
-        int startNum = (pageNo-1)* pageSize+1 ;                     //起始截取数据位置
+        int startNum = (pageNo-1)* pageSize+1 ;                     //起始截取数據位置
         if(startNum > datas.size()){
             return null;
         }
@@ -32,12 +32,12 @@ public class ListPageUtils {
             res.add(datas.get(index));
             return res;
         }
-        if(rum / pageSize >= 1){                                    //剩下的数据还够1页，返回整页的数据
-            for(int i=startNum;i<startNum + pageSize;i++){          //截取从startNum开始的数据
+        if(rum / pageSize >= 1){                                    //剩下的数據还够1页，返回整页的数據
+            for(int i=startNum;i<startNum + pageSize;i++){          //截取从startNum开始的数據
                 res.add(datas.get(i-1));
             }
             return res;
-        }else if((rum / pageSize == 0) && rum > 0){                 //不够一页，直接返回剩下数据
+        }else if((rum / pageSize == 0) && rum > 0){                 //不够一页，直接返回剩下数據
             for(int j = startNum ;j<=datas.size();j++){
                 res.add(datas.get(j-1));
             }

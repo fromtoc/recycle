@@ -21,7 +21,7 @@
 
 >该项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模块和业务模块,业务模块是处理疫情期间,物资的发放,物资入库,以及查看物资的库存等.
 系统模块是一个后台通用的RBAC权限模块,可以精确的控制到后台API级别的权限控制,项目不定期更新中.武汉加油~~
-开发模式:前后端分离,前端负责数据渲染,后端返回数据。
+开发模式:前后端分离,前端负责数據渲染,后端返回数據。
 
 
 ### [在线预览](https://www.zykhome.club/#/login "在线预览") & [后端项目](https://github.com/zykzhangyukang/recycle "后端项目") & [前端项目](https://github.com/zykzhangyukang/recycle-vue "前端项目")
@@ -30,7 +30,7 @@
 
 - recycle-business: 业务模块,所有与业务相关的代码放在此工程中。
 - recycle-system: 系统模块,权限控制相关的代码放在此工程中。
-- recycle-common: 公共模块,存放工具类、领域模型（DTO）、数据模型对象(DO)一些通用的类。
+- recycle-common: 公共模块,存放工具类、领域模型（DTO）、数據模型对象(DO)一些通用的类。
 - recycle-generator: 代码生成器，生成Controller,Service,ServiceImpl,以及前端代码。
 - recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  启动该项目。
 - recycle-web: 处理前端请求的Controller,放在此工程中。

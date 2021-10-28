@@ -13,10 +13,10 @@ import java.util.Set;
  * @Version 1.0
  **/
 @Data
-@ApiModel(value = "用户登入信息")
+@ApiModel(value = "用戶登入信息")
 public class UserInfoVO {
 
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "用戶名")
     private String username;
 
     @ApiModelProperty(value = "昵称")

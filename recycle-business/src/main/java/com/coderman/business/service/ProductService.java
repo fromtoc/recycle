@@ -74,7 +74,7 @@ public interface ProductService {
     void remove(Long id) throws BusinessException;
 
     /**
-     * 从回收站恢复数据
+     * 从回收站恢复数據
      * @param id
      */
     void back(Long id) throws BusinessException;

@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService {
     private DepartmentService departmentService;
 
     /**
-     * 查询用户
-     * @param name 用户名
+     * 查询用戶
+     * @param name 用戶名
      * @return
      */
     @Override
@@ -77,15 +77,15 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 查询用户角色
-     * @param id 用户ID
+     * 查询用戶角色
+     * @param id 用戶ID
      * @return
      */
     @Override
     public List<Role> findRolesById(Long id) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if(dbUser==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用戶不存在");
         }
         List<Role> roles=new ArrayList<>();
         UserRole t = new UserRole();
@@ -110,17 +110,17 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 查询权限
-     * @param roles 用户的角色
+     * @param roles 用戶的角色
      * @return
      */
     @Override
     public List<Menu> findMenuByRoles(List<Role> roles) {
         List<Menu> menus=new ArrayList<>();
         if(!CollectionUtils.isEmpty(roles)){
-            Set<Long> menuIds=new HashSet<>();//存放用户的菜单id
+            Set<Long> menuIds=new HashSet<>();//存放用戶的菜单id
             List<RoleMenu> roleMenus;
             for (Role role : roles) {
-                //根据角色ID查询权限ID
+                //根據角色ID查询权限ID
                 Example o = new Example(RoleMenu.class);
                 o.createCriteria().andEqualTo("roleId",role.getId());
                 roleMenus= roleMenuMapper.selectByExample(o);
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
             }
             if(!CollectionUtils.isEmpty(menuIds)){
                 for (Long menuId : menuIds) {
-                    //该用户所有的菜单
+                    //该用戶所有的菜单
                     Menu menu = menuMapper.selectByPrimaryKey(menuId);
                     if(menu!=null){
                         menus.add(menu);
@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
             //超级管理员
             menus=menuMapper.selectAll();
         }else if(activeUser.getUser().getType()== UserTypeEnum.SYSTEM_USER.getTypeCode()){
-            //普通系统用户
+            //普通系统用戶
             menus= activeUser.getMenus();
         }
         if(!CollectionUtils.isEmpty(menus)){
@@ -167,7 +167,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 用户列表
+     * 用戶列表
      * @param userVO
      * @return
      */
@@ -206,8 +206,8 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 删除用户
-     * @param id 用户ID
+     * 删除用戶
+     * @param id 用戶ID
      */
     @Transactional
     @Override
@@ -216,22 +216,22 @@ public class UserServiceImpl implements UserService {
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
 
         if(user==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的用戶不存在");
         }
 
         if(user.getId().equals(activeUser.getUser().getId())){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"不能删除当前登入用户");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"不能删除当前登入用戶");
         }
 
         userMapper.deleteByPrimaryKey(id);
-        //删除对应[用户-角色]记录
+        //删除对应[用戶-角色]记录
         Example o = new Example(UserRole.class);
         o.createCriteria().andEqualTo("userId",id);
         userRoleMapper.deleteByExample(o);
     }
 
     /**
-     * 更新用户禁用状态
+     * 更新用戶禁用状态
      * @param id
      * @param status
      */
@@ -239,11 +239,11 @@ public class UserServiceImpl implements UserService {
     public void updateStatus(Long id, Boolean status) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if(dbUser==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新状态的用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新状态的用戶不存在");
         }
         ActiveUser activeUser= (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         if(dbUser.getId().equals(activeUser.getUser().getId())){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"无法改变当前用户状态");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"無法改变当前用戶状态");
         }else {
             User t = new User();
             t.setId(id);
@@ -254,19 +254,19 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 添加用户
+     * 添加用戶
      * @param userVO
      */
     @Transactional
     @Override
     public void add(UserVO userVO) throws SystemException {
-        @NotBlank(message = "用户名不能为空") String username = userVO.getUsername();
+        @NotBlank(message = "用戶名不能为空") String username = userVO.getUsername();
         @NotNull(message = "部门id不能为空") Long departmentId = userVO.getDepartmentId();
         Example o = new Example(User.class);
         o.createCriteria().andEqualTo("username",username);
         int i = userMapper.selectCountByExample(o);
         if(i!=0){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用户名已被占用");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用戶名已被占用");
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if(department==null){
@@ -279,8 +279,8 @@ public class UserServiceImpl implements UserService {
         user.setModifiedTime(new Date());
         user.setCreateTime(new Date());
         user.setSalt(salt);
-        user.setType(UserTypeEnum.SYSTEM_USER.getTypeCode());//添加的用户默认是普通用户
-        user.setStatus(UserStatusEnum.AVAILABLE.getStatusCode());//添加的用户默认启用
+        user.setType(UserTypeEnum.SYSTEM_USER.getTypeCode());//添加的用戶默认是普通用戶
+        user.setStatus(UserStatusEnum.AVAILABLE.getStatusCode());//添加的用戶默认启用
         user.setAvatar("http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg");
         userMapper.insert(user);
     }
@@ -294,10 +294,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(Long id, UserEditVO userVO) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
-        @NotBlank(message = "用户名不能为空") String username = userVO.getUsername();
+        @NotBlank(message = "用戶名不能为空") String username = userVO.getUsername();
         @NotNull(message = "部门不能为空") Long departmentId = userVO.getDepartmentId();
         if(dbUser==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的用戶不存在");
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if(department==null){
@@ -308,13 +308,46 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectByExample(o);
         if(!CollectionUtils.isEmpty(users)){
             if(!users.get(0).getId().equals(id)){
-                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用户名已被占用");
+                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用戶名已被占用");
             }
         }
         User user = new User();
         BeanUtils.copyProperties(userVO,user);
         user.setModifiedTime(new Date());
         user.setId(dbUser.getId());
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public boolean updatePassword(String oldPassword, String newPassword) throws SystemException {
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        User dbUser = activeUser.getUser();
+        if(dbUser==null){
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新密碼的用戶不存在");
+        }
+        if (dbUser != null) {
+            String salt = dbUser.getSalt();
+            //秘钥为盐
+            String target = MD5Utils.md5Encryption(oldPassword, salt);
+            String password = dbUser.getPassword();
+            if (target.equals(password)) {
+                User user = new User();
+                user.setId(dbUser.getId());
+                user.setPassword(MD5Utils.md5Encryption(newPassword, salt));
+                userMapper.updateByPrimaryKeySelective(user);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    @Override
+    public void changePassword(Long id, String password) throws SystemException {
+        User user = new User();
+        String salt = userMapper.selectByPrimaryKey(id).getSalt();
+        user.setId(id);
+        user.setPassword(MD5Utils.md5Encryption(password, salt));
         userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -328,7 +361,7 @@ public class UserServiceImpl implements UserService {
     public UserEditVO edit(Long id) throws SystemException {
         User user = userMapper.selectByPrimaryKey(id);
         if(user==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要编辑的用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要编辑的用戶不存在");
         }
         UserEditVO userEditVO = new UserEditVO();
         BeanUtils.copyProperties(user,userEditVO);
@@ -340,8 +373,8 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 用户拥有的角色ID
-     * @param id 用户id
+     * 用戶拥有的角色ID
+     * @param id 用戶id
      * @return
      */
     @Transactional
@@ -349,7 +382,7 @@ public class UserServiceImpl implements UserService {
     public List<Long> roles(Long id) throws SystemException {
         User user = userMapper.selectByPrimaryKey(id);
         if(user==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该用戶不存在");
         }
         Example o = new Example(UserRole.class);
         o.createCriteria().andEqualTo("userId",user.getId());
@@ -368,16 +401,16 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 分配角色
-     * @param id 用户id
+     * @param id 用戶id
      * @param rids 角色数组
      */
     @Override
     @Transactional
     public void assignRoles(Long id, Long[] rids) throws SystemException {
-        //删除之前用户的所有角色
+        //删除之前用戶的所有角色
         User user = userMapper.selectByPrimaryKey(id);
         if(user==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"用戶不存在");
         }
         //删除之前分配的
         Example o = new Example(UserRole.class);
@@ -408,7 +441,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 用户登入
+     * 用戶登入
      * @param username
      * @param password
      * @return
@@ -430,13 +463,13 @@ public class UserServiceImpl implements UserService {
                 throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,e.getMessage());
             }
         } else {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"用户不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"用戶不存在");
         }
         return token;
     }
 
     /**
-     * 用户详情
+     * 用戶详情
      *
      * @return
      */

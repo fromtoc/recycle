@@ -111,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
             product.setTwoCategoryId(categoryKeys[1]);
             product.setThreeCategoryId(categoryKeys[2]);
         }
-        product.setStatus(2);//未审核
+        product.setStatus(0);//2未審核
         product.setPNum(UUID.randomUUID().toString().substring(0,32));
         productMapper.insert(product);
     }
@@ -206,7 +206,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 从回收站恢复数据
+     * 从回收站恢复数據
      * @param id
      */
     @Override
