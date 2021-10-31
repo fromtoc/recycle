@@ -17,7 +17,7 @@ public class Product {
 
     private String name;
 
-    private String model;
+    private Long model;
 
     private String unit;
 

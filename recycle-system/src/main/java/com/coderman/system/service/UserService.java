@@ -4,6 +4,7 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Menu;
 import com.coderman.common.model.system.Role;
 import com.coderman.common.model.system.User;
+import com.coderman.common.model.system.UserCard;
 import com.coderman.common.vo.system.*;
 
 import java.util.List;
@@ -30,6 +31,21 @@ public interface UserService {
      * @return
      */
      List<Role> findRolesById(Long id) throws SystemException;
+
+     /**
+     * 查询用戶卡片
+     * @param id 用戶ID
+     * @return
+     */
+    List<UserCard> findCardsById(Long id) throws SystemException;
+
+    /**
+     * 查询用戶卡片
+     * @param userId 用戶ID
+     * @param cardId 卡片ID
+     * @return
+     */
+    void addUserCard(Long userId, String cardId) throws SystemException;
 
     /**
      * 根據用戶角色查询用戶的菜单
@@ -68,6 +84,14 @@ public interface UserService {
      * @param status
      */
     void updateStatus(Long id, Boolean status) throws SystemException;
+
+    /**
+     * 更新卡片状态
+     *
+     * @param id
+     * @param status
+     */
+    void updateCardStatus(Long id, Boolean status) throws SystemException;
 
     /**
      * 添加用戶

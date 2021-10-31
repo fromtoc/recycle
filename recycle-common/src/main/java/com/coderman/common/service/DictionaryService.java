@@ -1,4 +1,4 @@
-package com.coderman.system.service;
+package com.coderman.common.service;
 
 
 import com.coderman.common.error.SystemException;

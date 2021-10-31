@@ -5,7 +5,7 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.PageVO;
-import com.coderman.system.service.DictionaryService;
+import com.coderman.common.service.DictionaryService;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

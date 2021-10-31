@@ -6,6 +6,7 @@ import com.coderman.common.dto.UserLoginDTO;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Role;
 import com.coderman.common.model.system.User;
+import com.coderman.common.model.system.UserCard;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.*;
 import com.coderman.system.converter.RoleConverter;
@@ -259,6 +260,46 @@ public class UserController {
     public void export(HttpServletResponse response) {
         List<User> users = this.userService.findAll();
         ExcelKit.$Export(User.class, response).downXlsx(users, false);
+    }
+
+    /**
+     * 加载用戶卡片列表
+     *
+     * @return
+     */
+    @ApiOperation(value = "加载用戶卡片列表", notes = "加载用戶卡片列表")
+    @GetMapping("/card/list/{id}")
+    public ResponseBean<List<UserCard>> findUserCard(@PathVariable Long id) throws SystemException {
+        List<UserCard> userCardList = userService.findCardsById(id);
+        return ResponseBean.success(userCardList);
+    }
+
+    /**
+     * 添加用戶卡片
+     *
+     * @return
+     */
+    @ApiOperation(value = "添加用戶卡片", notes = "添加用戶卡片")
+    @PutMapping("/card/add/{userId}/{cardId}")
+    public ResponseBean findUserCard(@PathVariable Long userId, @PathVariable String cardId) throws SystemException {
+        userService.addUserCard(userId, cardId);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 更新卡片状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新卡片狀態失败", operation = "卡片|禁用/啟用")
+    @ApiOperation(value = "卡片狀態", notes = "禁用和啟用這兩種狀態")
+    @RequiresPermissions({"card:status"})
+    @PutMapping("/updateCardStatus/{id}/{status}")
+    public ResponseBean updateCardStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        userService.updateCardStatus(id, status);
+        return ResponseBean.success();
     }
 
 }

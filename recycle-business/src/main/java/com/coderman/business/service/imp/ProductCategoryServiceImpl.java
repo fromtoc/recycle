@@ -22,6 +22,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author zhangyukang
@@ -84,6 +85,17 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public ProductCategoryVO edit(Long id) {
         ProductCategory productCategory = productCategoryMapper.selectByPrimaryKey(id);
         return  ProductCategoryConverter.converterToProductCategoryVO(productCategory);
+    }
+
+    /**
+     * 查詢商品类别名稱
+     * @param id
+     * @return
+     */
+    @Override
+    public String getName(Long id) {
+        ProductCategory productCategory = productCategoryMapper.selectByPrimaryKey(id);
+        return productCategory.getName();
     }
 
     /**
@@ -164,7 +176,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public List<ProductCategoryTreeNodeVO> getParentCategoryTree() {
         List<ProductCategoryVO> productCategoryVOList = findAll();
         List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
-        return  CategoryTreeBuilder.buildParent(nodeVOS);
+        List<ProductCategoryTreeNodeVO> parentNode = CategoryTreeBuilder.buildParent(nodeVOS);
+        //只有兩階
+        parentNode.stream()
+                .filter(v -> v.getLev()==1)
+                .forEach(v -> v.setChildren(null));
+        return parentNode;
+
     }
 
 }

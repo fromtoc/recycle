@@ -23,7 +23,7 @@ public class ProductVO {
     private String name;
 
     @NotBlank
-    private String model;
+    private Long model;
 
     @NotBlank
     private String unit;
@@ -50,6 +50,14 @@ public class ProductVO {
     private Long twoCategoryId;
 
     private Long threeCategoryId;
+
+    private String oneCategoryName;
+
+    private String twoCategoryName;
+
+    private String threeCategoryName;
+
+    private String modelName;
 
     private Integer status;//是否已经进入回收站:1:逻辑删除,0:正常数據,2:添加待审核
 

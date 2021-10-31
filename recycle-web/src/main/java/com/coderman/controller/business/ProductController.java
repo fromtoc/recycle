@@ -4,6 +4,7 @@ import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.BusinessCodeEnum;
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ public class ProductController {
 
     /**
      * 全部物资列表
+     *
      * @return
      */
     @ApiOperation(value = "物资列表", notes = "物资列表,根據物资名模糊查询")
@@ -48,6 +51,7 @@ public class ProductController {
 
     /**
      * 可入库物资(入库页面使用)
+     *
      * @return
      */
     @ApiOperation(value = "可入库物资列表", notes = "物资列表,根據物资名模糊查询")
@@ -55,7 +59,7 @@ public class ProductController {
     public ResponseBean findProducts(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize") Integer pageSize,
                                      @RequestParam(value = "categorys", required = false) String categorys,
-                                     ProductVO productVO){
+                                     ProductVO productVO) {
         productVO.setStatus(0);
         buildCategorySearch(categorys, productVO);
         PageVO<ProductVO> productVOPageVO = productService.findProductList(pageNum, pageSize, productVO);
@@ -64,14 +68,15 @@ public class ProductController {
 
     /**
      * 库存列表
+     *
      * @return
      */
     @ApiOperation(value = "库存列表", notes = "物资列表,根據物资名模糊查询")
     @GetMapping("/findProductStocks")
     public ResponseBean findProductStocks(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                        @RequestParam(value = "pageSize") Integer pageSize,
-                                        @RequestParam(value = "categorys", required = false) String categorys,
-                                        ProductVO productVO) {
+                                          @RequestParam(value = "pageSize") Integer pageSize,
+                                          @RequestParam(value = "categorys", required = false) String categorys,
+                                          ProductVO productVO) {
 
         buildCategorySearch(categorys, productVO);
         PageVO<ProductStockVO> productVOPageVO = productService.findProductStocks(pageNum, pageSize, productVO);
@@ -79,9 +84,9 @@ public class ProductController {
     }
 
 
-
     /**
      * 所有库存(饼图使用)
+     *
      * @return
      */
     @ApiOperation(value = "全部库存", notes = "物资所有库存信息,饼图使用")
@@ -91,14 +96,14 @@ public class ProductController {
                                       @RequestParam(value = "categorys", required = false) String categorys,
                                       ProductVO productVO) {
         buildCategorySearch(categorys, productVO);
-        List<ProductStockVO> list = productService.findAllStocks(pageNum, pageSize,productVO);
+        List<ProductStockVO> list = productService.findAllStocks(pageNum, pageSize, productVO);
         return ResponseBean.success(list);
     }
 
 
-
     /**
      * 封装物资查询条件
+     *
      * @param categorys
      * @param productVO
      */
@@ -125,6 +130,7 @@ public class ProductController {
 
     /**
      * 添加物资
+     *
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "添加物资失败", operation = "物资资料添加")
@@ -132,8 +138,8 @@ public class ProductController {
     @RequiresPermissions({"product:add"})
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductVO productVO) throws BusinessException {
-        if (productVO.getCategoryKeys().length != 3) {
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资需要3级分类");
+        if (productVO.getCategoryKeys().length != 2) {
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "物资需要2级分类");
         }
         productService.add(productVO);
         return ResponseBean.success();
@@ -141,6 +147,7 @@ public class ProductController {
 
     /**
      * 编辑物资
+     *
      * @param id
      * @return
      */
@@ -162,8 +169,8 @@ public class ProductController {
     @RequiresPermissions({"product:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody ProductVO productVO) throws BusinessException {
-        if (productVO.getCategoryKeys().length != 3) {
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资需要3级分类");
+        if (productVO.getCategoryKeys().length != 2) {
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "物资需要2级分类");
         }
         productService.update(id, productVO);
         return ResponseBean.success();
@@ -171,6 +178,7 @@ public class ProductController {
 
     /**
      * 删除物资
+     *
      * @param id
      * @return
      */
@@ -184,9 +192,9 @@ public class ProductController {
     }
 
 
-
     /**
      * 移入回收站
+     *
      * @param id
      * @return
      */
@@ -198,8 +206,10 @@ public class ProductController {
         productService.remove(id);
         return ResponseBean.success();
     }
+
     /**
      * 物资添加审核
+     *
      * @param id
      * @return
      */
@@ -211,8 +221,10 @@ public class ProductController {
         productService.publish(id);
         return ResponseBean.success();
     }
+
     /**
      * 恢复数據从回收站
+     *
      * @param id
      * @return
      */
@@ -222,6 +234,43 @@ public class ProductController {
     @PutMapping("/back/{id}")
     public ResponseBean back(@PathVariable Long id) throws BusinessException {
         productService.back(id);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新廢棄物狀態失敗", operation = "廢棄物|禁用/啟用")
+    @ApiOperation(value = "廢棄物狀態", notes = "禁用和啟用兩種狀態")
+    @RequiresPermissions({"product:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        productService.updateStatus(id, status);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 成本中心分配
+     *
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "成本中心分配失败", operation = "成本中心分配")
+    @ApiOperation(value = "成本中心分配", notes = "成本中心分配")
+    @RequiresPermissions({"product:costCenter"})
+    @PutMapping("/costCenter/{ids}/{costCenterId}")
+    public ResponseBean assignCostCenter(@PathVariable String ids, @PathVariable Long costCenterId) throws BusinessException, SystemException {
+        String[] idList = ids.split(",");
+        List<Long> list = new ArrayList<>();
+        if (idList.length > 0) {
+            for (String s : idList) {
+                list.add(Long.parseLong(s));
+            }
+        }
+        productService.updateCostCenter(list, costCenterId);
         return ResponseBean.success();
     }
 }

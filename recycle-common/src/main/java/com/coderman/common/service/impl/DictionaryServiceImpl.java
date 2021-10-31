@@ -1,29 +1,18 @@
-package com.coderman.system.service.impl;
+package com.coderman.common.service.impl;
 
 
-import com.coderman.common.enums.buisiness.BizUserTypeEnum;
-import com.coderman.common.enums.system.UserStatusEnum;
-import com.coderman.common.enums.system.UserTypeEnum;
 import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.mapper.DictionaryMapper;
 import com.coderman.common.model.system.*;
-import com.coderman.common.vo.system.DeanVO;
-import com.coderman.common.vo.system.DepartmentVO;
 import com.coderman.common.vo.system.PageVO;
-import com.coderman.system.converter.DepartmentConverter;
-import com.coderman.system.mapper.*;
-import com.coderman.system.service.DepartmentService;
-import com.coderman.system.service.DictionaryService;
+import com.coderman.common.service.DictionaryService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -40,6 +40,13 @@ public interface ProductCategoryService {
     ProductCategoryVO edit(Long id);
 
     /**
+     * 查詢商品类别名稱
+     * @param id
+     * @return
+     */
+    String getName(Long id);
+
+    /**
      * 更新物资类别
      * @param id
      * @param ProductCategoryVO

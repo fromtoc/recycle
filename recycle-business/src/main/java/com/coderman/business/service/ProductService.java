@@ -2,6 +2,7 @@ package com.coderman.business.service;
 
 
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
@@ -84,6 +85,22 @@ public interface ProductService {
      * @param id
      */
     void publish(Long id) throws BusinessException;
+
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     */
+    void updateStatus(Long id, Boolean status) throws SystemException;
+
+    /**
+     * 更新状态
+     *
+     * @param ids
+     * @param costCenterId
+     */
+    void updateCostCenter(List<Long> ids, Long costCenterId) throws SystemException;
 
 
 }

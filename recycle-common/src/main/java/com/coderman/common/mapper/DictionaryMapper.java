@@ -1,4 +1,4 @@
-package com.coderman.system.mapper;
+package com.coderman.common.mapper;
 
 import com.coderman.common.model.system.Dictionary;
 import tk.mybatis.mapper.common.Mapper;

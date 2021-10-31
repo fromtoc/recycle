@@ -3,15 +3,23 @@ package com.coderman.business.service.imp;
 import com.coderman.business.converter.ProductConverter;
 import com.coderman.business.mapper.ProductMapper;
 import com.coderman.business.mapper.ProductStockMapper;
+import com.coderman.business.service.ProductCategoryService;
 import com.coderman.business.service.ProductService;
+import com.coderman.common.enums.system.UserStatusEnum;
 import com.coderman.common.error.BusinessCodeEnum;
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemCodeEnum;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
+import com.coderman.common.model.system.User;
+import com.coderman.common.response.ActiveUser;
+import com.coderman.common.service.DictionaryService;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +30,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @Author zhangyukang
@@ -40,10 +49,16 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductStockMapper productStockMapper;
 
+    @Autowired
+    ProductCategoryService productCategoryService;
+
+    @Autowired
+    DictionaryService dictionaryService;
 
 
     /**
      * 商品列表
+     *
      * @param pageNum
      * @param pageSize
      * @param productVO
@@ -58,24 +73,24 @@ public class ProductServiceImpl implements ProductService {
         if (productVO.getStatus() != null) {
             criteria.andEqualTo("status", productVO.getStatus());
         }
-        if(productVO.getThreeCategoryId()!=null){
-            criteria.andEqualTo("oneCategoryId",productVO.getOneCategoryId())
-                    .andEqualTo("twoCategoryId",productVO.getTwoCategoryId())
-                    .andEqualTo("threeCategoryId",productVO.getThreeCategoryId());
+        if (productVO.getThreeCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productVO.getTwoCategoryId())
+                    .andEqualTo("threeCategoryId", productVO.getThreeCategoryId());
             products = productMapper.selectByExample(o);
-            List<ProductVO> categoryVOS= ProductConverter.converterToVOList(products);
+            List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
             PageInfo<Product> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOS);
         }
-        if(productVO.getTwoCategoryId()!=null){
-            criteria.andEqualTo("oneCategoryId",productVO.getOneCategoryId())
-                    .andEqualTo("twoCategoryId",productVO.getTwoCategoryId());
+        if (productVO.getTwoCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productVO.getTwoCategoryId());
             products = productMapper.selectByExample(o);
-            List<ProductVO> categoryVOS=ProductConverter.converterToVOList(products);
+            List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
             PageInfo<Product> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOS);
         }
-        if(productVO.getOneCategoryId()!=null) {
+        if (productVO.getOneCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId());
             products = productMapper.selectByExample(o);
             List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
@@ -88,36 +103,40 @@ public class ProductServiceImpl implements ProductService {
         }
 
         products = productMapper.selectByExample(o);
-        List<ProductVO> categoryVOS=ProductConverter.converterToVOList(products);
+        List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
+        List<ProductVO> categoryVOSWithName = categoryVOS.stream()
+                .map(vo -> getCategoryName(vo))
+                .collect(Collectors.toList());
         PageInfo<Product> info = new PageInfo<>(products);
-        return new PageVO<>(info.getTotal(), categoryVOS);
+        return new PageVO<>(info.getTotal(), categoryVOSWithName);
     }
-
 
 
     /**
      * 添加商品
+     *
      * @param ProductVO
      */
     @Override
     public void add(ProductVO ProductVO) {
         Product product = new Product();
-        BeanUtils.copyProperties(ProductVO,product);
+        BeanUtils.copyProperties(ProductVO, product);
         product.setCreateTime(new Date());
         product.setModifiedTime(new Date());
         @NotNull(message = "分类不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
-        if(categoryKeys.length==3){
+        if (categoryKeys.length == 2) {
             product.setOneCategoryId(categoryKeys[0]);
             product.setTwoCategoryId(categoryKeys[1]);
-            product.setThreeCategoryId(categoryKeys[2]);
+//            product.setThreeCategoryId(categoryKeys[2]);
         }
         product.setStatus(0);//2未審核
-        product.setPNum(UUID.randomUUID().toString().substring(0,32));
+        product.setPNum(UUID.randomUUID().toString().substring(0, 32));
         productMapper.insert(product);
     }
 
     /**
      * 编辑商品
+     *
      * @param id
      * @return
      */
@@ -129,25 +148,27 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 更新商品
+     *
      * @param id
      * @param ProductVO
      */
     @Override
     public void update(Long id, ProductVO ProductVO) {
         Product product = new Product();
-        BeanUtils.copyProperties(ProductVO,product);
+        BeanUtils.copyProperties(ProductVO, product);
         product.setModifiedTime(new Date());
         @NotNull(message = "分类不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
-        if(categoryKeys.length==3){
+        if (categoryKeys.length == 2) {
             product.setOneCategoryId(categoryKeys[0]);
             product.setTwoCategoryId(categoryKeys[1]);
-            product.setThreeCategoryId(categoryKeys[2]);
+//            product.setThreeCategoryId(categoryKeys[2]);
         }
         productMapper.updateByPrimaryKey(product);
     }
 
     /**
      * 删除商品
+     *
      * @param id
      */
     @Override
@@ -156,15 +177,16 @@ public class ProductServiceImpl implements ProductService {
         t.setId(id);
         Product product = productMapper.selectByPrimaryKey(t);
         //只有物资处于回收站,或者待审核的情况下可删除
-        if(product.getStatus()!=1&&product.getStatus()!=2){
+        if (product.getStatus() != 1 && product.getStatus() != 2) {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
-        }else {
+        } else {
             productMapper.deleteByPrimaryKey(id);
         }
     }
 
     /**
      * 物资库存列表
+     *
      * @param pageNum
      * @param pageSize
      * @param productVO
@@ -173,13 +195,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PageVO<ProductStockVO> findProductStocks(Integer pageNum, Integer pageSize, ProductVO productVO) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ProductStockVO> productStockVOList=productStockMapper.findProductStocks(productVO);
+        List<ProductStockVO> productStockVOList = productStockMapper.findProductStocks(productVO);
         PageInfo<ProductStockVO> info = new PageInfo<>(productStockVOList);
         return new PageVO<>(info.getTotal(), productStockVOList);
     }
 
     /**
      * 所有库存信息
+     *
      * @return
      */
     @Override
@@ -190,6 +213,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 移入回收站
+     *
      * @param id
      */
     @Override
@@ -197,9 +221,9 @@ public class ProductServiceImpl implements ProductService {
         Product t = new Product();
         t.setId(id);
         Product product = productMapper.selectByPrimaryKey(t);
-        if(product.getStatus()!=0){
+        if (product.getStatus() != 0) {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
-        }else {
+        } else {
             t.setStatus(1);
             productMapper.updateByPrimaryKeySelective(t);
         }
@@ -207,6 +231,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 从回收站恢复数據
+     *
      * @param id
      */
     @Override
@@ -214,9 +239,9 @@ public class ProductServiceImpl implements ProductService {
         Product t = new Product();
         t.setId(id);
         Product product = productMapper.selectByPrimaryKey(t);
-        if(product.getStatus()!=1){
+        if (product.getStatus() != 1) {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
-        }else {
+        } else {
             t.setStatus(0);
             productMapper.updateByPrimaryKeySelective(t);
         }
@@ -224,6 +249,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 物资审核
+     *
      * @param id
      */
     @Override
@@ -231,14 +257,57 @@ public class ProductServiceImpl implements ProductService {
         Product t = new Product();
         t.setId(id);
         Product product = productMapper.selectByPrimaryKey(t);
-        if(product.getStatus()!=2){
+        if (product.getStatus() != 2) {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
-        }else {
+        } else {
             t.setStatus(0);
             productMapper.updateByPrimaryKeySelective(t);
         }
     }
 
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     */
+    @Override
+    public void updateStatus(Long id, Boolean status) throws SystemException {
+        Product product = productMapper.selectByPrimaryKey(id);
+        if (product == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新狀態的廢棄物不存在");
+        }
+        Product update = new Product();
+        update.setId(product.getId());
+        update.setStatus(status ? 0 : 1);
+        productMapper.updateByPrimaryKeySelective(update);
+    }
+
+    @Override
+    public void updateCostCenter(List<Long> ids, Long costCenterId) throws SystemException {
+        for (Long id :ids){
+            Product update = new Product();
+            update.setId(id);
+            update.setModel(costCenterId);
+            productMapper.updateByPrimaryKeySelective(update);
+        }
+
+    }
+
+    private ProductVO getCategoryName(ProductVO p) {
+        p.setOneCategoryName(productCategoryService.getName(p.getOneCategoryId()));
+        p.setTwoCategoryName(productCategoryService.getName(p.getTwoCategoryId()));
+        if (p.getModel()!=null){
+            try {
+                String modelName = dictionaryService.selectByPrimaryKey(p.getModel()).getValue();
+                p.setModelName(modelName);
+            } catch (SystemException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return p;
+    }
 
 
 }
