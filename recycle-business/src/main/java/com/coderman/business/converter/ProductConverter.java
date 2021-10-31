@@ -40,6 +40,7 @@ public class ProductConverter {
     public static ProductVO converterToProductVO(Product product) {
         ProductVO productVO = new ProductVO();
         BeanUtils.copyProperties(product,productVO);
+        productVO.setStatus(product.getStatus() == 0);
         return productVO;
     }
 }

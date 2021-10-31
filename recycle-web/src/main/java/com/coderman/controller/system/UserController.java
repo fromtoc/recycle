@@ -1,9 +1,13 @@
 package com.coderman.controller.system;
 
 
+import com.coderman.business.mapper.ProductMapper;
+import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.dto.UserLoginDTO;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.model.business.Product;
+import com.coderman.common.model.system.CardProduct;
 import com.coderman.common.model.system.Role;
 import com.coderman.common.model.system.User;
 import com.coderman.common.model.system.UserCard;
@@ -18,12 +22,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +54,9 @@ public class UserController {
 
     @Autowired
     private LoginLogService loginLogService;
+
+    @Autowired
+    private ProductMapper productMapper;
 
 
     /**
@@ -250,6 +259,33 @@ public class UserController {
     }
 
     /**
+     * 卡片產品信息
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "卡片已有產品", notes = "根據卡片id，獲取卡片已經擁有的產品")
+    @GetMapping("/card/{id}/products")
+    public ResponseBean<Map<String, Object>> cardProducts(@PathVariable Long id) throws SystemException {
+        List<Long> productsByCard = userService.findProductsByCard(id);
+        List<Product> products = productMapper.selectAll();
+        //转成前端需要的產品Item
+        List<RoleTransferItemVO> itemVOList=new ArrayList<>();
+        if(!CollectionUtils.isEmpty(products)){
+            for (Product p : products) {
+                RoleTransferItemVO item = new RoleTransferItemVO();
+                item.setLabel(p.getName());
+                item.setDisabled(p.getStatus()==0);
+                item.setKey(p.getId());
+                itemVOList.add(item);
+            }
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("products", itemVOList);
+        map.put("values", productsByCard);
+        return ResponseBean.success(map);
+    }
+
+    /**
      * 导出excel
      * @param response
      */
@@ -269,9 +305,18 @@ public class UserController {
      */
     @ApiOperation(value = "加载用戶卡片列表", notes = "加载用戶卡片列表")
     @GetMapping("/card/list/{id}")
-    public ResponseBean<List<UserCard>> findUserCard(@PathVariable Long id) throws SystemException {
+    public ResponseBean<List<UserCardVO>> findUserCard(@PathVariable Long id) throws SystemException {
         List<UserCard> userCardList = userService.findCardsById(id);
-        return ResponseBean.success(userCardList);
+        List<UserCardVO> list = new ArrayList<>();
+        for (UserCard c: userCardList) {
+            UserCardVO vo = new UserCardVO();
+            vo.setId(c.getId());
+            vo.setUserId(c.getUserId());
+            vo.setCardId(c.getCardId());
+            vo.setStatus(c.getStatus()==0);
+            list.add(vo);
+        }
+        return ResponseBean.success(list);
     }
 
     /**
@@ -281,7 +326,7 @@ public class UserController {
      */
     @ApiOperation(value = "添加用戶卡片", notes = "添加用戶卡片")
     @PutMapping("/card/add/{userId}/{cardId}")
-    public ResponseBean findUserCard(@PathVariable Long userId, @PathVariable String cardId) throws SystemException {
+    public ResponseBean addUserCard(@PathVariable Long userId, @PathVariable String cardId) throws SystemException {
         userService.addUserCard(userId, cardId);
         return ResponseBean.success();
     }

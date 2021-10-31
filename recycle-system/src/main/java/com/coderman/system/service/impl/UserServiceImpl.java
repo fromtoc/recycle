@@ -50,6 +50,9 @@ public class UserServiceImpl implements UserService {
     private UserCardMapper userCardMapper;
 
     @Autowired
+    private CardProductMapper cardProductMapper;
+
+    @Autowired
     private RoleMapper roleMapper;
 
     @Autowired
@@ -128,6 +131,20 @@ public class UserServiceImpl implements UserService {
         UserCard t = new UserCard();
         t.setUserId(dbUser.getId());
         return userCardMapper.select(t);
+    }
+
+    @Override
+    public List<Long> findProductsByCard(Long id) throws SystemException {
+        Example o = new Example(CardProduct.class);
+        o.createCriteria().andEqualTo("cardId", id);
+        List<CardProduct> cardProducts = cardProductMapper.selectByExample(o);
+        List<Long> productIds = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(cardProducts)) {
+            for (CardProduct cp : cardProducts) {
+                productIds.add(cp.getProductId());
+            }
+        }
+        return productIds;
     }
 
     @Override

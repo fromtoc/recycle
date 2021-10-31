@@ -1,10 +1,7 @@
 package com.coderman.system.service;
 
 import com.coderman.common.error.SystemException;
-import com.coderman.common.model.system.Menu;
-import com.coderman.common.model.system.Role;
-import com.coderman.common.model.system.User;
-import com.coderman.common.model.system.UserCard;
+import com.coderman.common.model.system.*;
 import com.coderman.common.vo.system.*;
 
 import java.util.List;
@@ -38,6 +35,13 @@ public interface UserService {
      * @return
      */
     List<UserCard> findCardsById(Long id) throws SystemException;
+
+    /**
+     * 查询卡片產品
+     * @param id 用戶ID
+     * @return
+     */
+    List<Long> findProductsByCard(Long id) throws SystemException;
 
     /**
      * 查询用戶卡片

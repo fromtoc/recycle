@@ -60,7 +60,7 @@ public class ProductController {
                                      @RequestParam(value = "pageSize") Integer pageSize,
                                      @RequestParam(value = "categorys", required = false) String categorys,
                                      ProductVO productVO) {
-        productVO.setStatus(0);
+        productVO.setStatus(true);
         buildCategorySearch(categorys, productVO);
         PageVO<ProductVO> productVOPageVO = productService.findProductList(pageNum, pageSize, productVO);
         return ResponseBean.success(productVOPageVO);

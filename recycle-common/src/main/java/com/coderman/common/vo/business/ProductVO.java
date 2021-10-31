@@ -22,7 +22,6 @@ public class ProductVO {
     @NotBlank
     private String name;
 
-    @NotBlank
     private Long model;
 
     @NotBlank
@@ -59,6 +58,6 @@ public class ProductVO {
 
     private String modelName;
 
-    private Integer status;//是否已经进入回收站:1:逻辑删除,0:正常数據,2:添加待审核
+    private Boolean status;//是否已经进入回收站:1:逻辑删除,0:正常数據,2:添加待审核
 
 }

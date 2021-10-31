@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
         Example o = new Example(Product.class);
         Example.Criteria criteria = o.createCriteria();
         if (productVO.getStatus() != null) {
-            criteria.andEqualTo("status", productVO.getStatus());
+            criteria.andEqualTo("status", productVO.getStatus()? 1: 0);
         }
         if (productVO.getThreeCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId())
@@ -79,23 +79,32 @@ public class ProductServiceImpl implements ProductService {
                     .andEqualTo("threeCategoryId", productVO.getThreeCategoryId());
             products = productMapper.selectByExample(o);
             List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
+            List<ProductVO> categoryVOSWithName = categoryVOS.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
             PageInfo<Product> info = new PageInfo<>(products);
-            return new PageVO<>(info.getTotal(), categoryVOS);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
         if (productVO.getTwoCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId())
                     .andEqualTo("twoCategoryId", productVO.getTwoCategoryId());
             products = productMapper.selectByExample(o);
             List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
+            List<ProductVO> categoryVOSWithName = categoryVOS.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
             PageInfo<Product> info = new PageInfo<>(products);
-            return new PageVO<>(info.getTotal(), categoryVOS);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
         if (productVO.getOneCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId());
             products = productMapper.selectByExample(o);
             List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
+            List<ProductVO> categoryVOSWithName = categoryVOS.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
             PageInfo<Product> info = new PageInfo<>(products);
-            return new PageVO<>(info.getTotal(), categoryVOS);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
         o.setOrderByClause("sort asc");
         if (productVO.getName() != null && !"".equals(productVO.getName())) {
