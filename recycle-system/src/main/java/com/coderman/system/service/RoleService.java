@@ -37,7 +37,7 @@ public interface RoleService {
     void deleteById(Long id) throws SystemException;
 
     /**
-     * 编辑角色
+     * 編辑角色
      * @param id
      * @return
      */
@@ -64,7 +64,7 @@ public interface RoleService {
     List<Role> findAll();
 
     /**
-     * 查询角色拥有的菜单权限id
+     * 查询角色拥有的選單权限id
      * @param id
      * @return
      */

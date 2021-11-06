@@ -53,7 +53,7 @@ public class ControllerEndpointAspect extends AspectSupport {
     @Around("pointcut()")
     public Object saveSysLog(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result=null;
-        //开始时间
+        //开始時間
         startTime=System.currentTimeMillis();
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
@@ -81,7 +81,7 @@ public class ControllerEndpointAspect extends AspectSupport {
         //操作人
         ActiveUser activeUser= (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         sysLog.setUsername(activeUser.getUser().getUsername());
-        //添加时间
+        //添加時間
         sysLog.setCreateTime(new Date());
         //执行目标方法
         result=joinPoint.proceed();
@@ -90,7 +90,7 @@ public class ControllerEndpointAspect extends AspectSupport {
         String methodName = signature.getName();
         sysLog.setMethod(className + "." + methodName + "()\n"
                 +"\nresponse:"+postHandle(result));
-        //执行耗时
+        //执行耗時
         sysLog.setTime(System.currentTimeMillis()-startTime);
         //保存系统日志
         logService.saveLog(sysLog);

@@ -8,7 +8,7 @@ package com.coderman.common.enums.buisiness;
  **/
 public enum BizUserTypeEnum {
 
-    DEAN("部门主任");
+    DEAN("部門主任");
     private String val;
 
     BizUserTypeEnum(String val) {

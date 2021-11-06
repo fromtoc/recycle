@@ -33,7 +33,7 @@ public class MenuServiceImpl implements MenuService {
 
 
     /**
-     * 加载菜单树（按钮和菜单）
+     * 加载選單树（按钮和選單）
      *
      * @return
      */
@@ -45,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     /**
-     * 添加菜单
+     * 添加選單
      *
      * @param menuVO
      */
@@ -61,20 +61,20 @@ public class MenuServiceImpl implements MenuService {
     }
 
     /**
-     * 删除菜单
+     * 删除選單
      * @param id
      */
     @Override
     public void delete(Long id) throws SystemException {
         Menu menu = menuMapper.selectByPrimaryKey(id);
         if(menu==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的菜单不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的選單不存在");
         }
         menuMapper.deleteByPrimaryKey(id);
     }
 
     /**
-     * 编辑菜单
+     * 編辑選單
      * @param id
      * @return
      */
@@ -82,13 +82,13 @@ public class MenuServiceImpl implements MenuService {
     public MenuVO edit(Long id) throws SystemException {
         Menu menu = menuMapper.selectByPrimaryKey(id);
         if(menu==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该编辑的菜单不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该編辑的選單不存在");
         }
         return MenuConverter.converterToMenuVO(menu);
     }
 
     /**
-     * 更新菜单
+     * 更新選單
      * @param id
      * @param menuVO
      */
@@ -96,7 +96,7 @@ public class MenuServiceImpl implements MenuService {
     public void update(Long id, MenuVO menuVO) throws SystemException {
         Menu dbMenu = menuMapper.selectByPrimaryKey(id);
         if(dbMenu==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的菜单不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的選單不存在");
         }
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuVO,menu);
@@ -128,7 +128,7 @@ public class MenuServiceImpl implements MenuService {
 
 
     /**
-     * 获取所有菜单
+     * 获取所有選單
      * @return
      */
     @Override

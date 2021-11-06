@@ -24,7 +24,7 @@ public enum  BusinessCodeEnum implements BaseError {
     INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
     SERVER_BUSY(503,"服务器正忙，请稍后再试!"),
     //用戶相关：10000**
-    USER_ACCOUNT_NOT_FOUND(10001, "账号不存在!"),
+    USER_ACCOUNT_NOT_FOUND(10001, "账號不存在!"),
     DoNotAllowToDisableTheCurrentUser(10002,"不允许禁用当前用戶"),
     //业务异常
     PRODUCT_IS_REMOVE(30001,"物资已移入回收站"),

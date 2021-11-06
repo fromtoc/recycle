@@ -86,7 +86,7 @@ public class FdfsUtil {
     }
 
     /**
-     * 返回文件上传成功后的地址名称ַ
+     * 返回文件上传成功后的地址名稱ַ
      * @param storePath
      * @return
      */

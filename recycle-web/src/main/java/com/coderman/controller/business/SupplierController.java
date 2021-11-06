@@ -60,12 +60,12 @@ public class SupplierController {
     }
 
     /**
-     * 编辑来源
+     * 編辑来源
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑来源", notes = "编辑来源信息")
+    @ApiOperation(value = "編辑来源", notes = "編辑来源信息")
     @RequiresPermissions({"supplier:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean<SupplierVO> edit(@PathVariable Long id) {

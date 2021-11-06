@@ -32,7 +32,7 @@ public interface SupplierService {
 
 
     /**
-     * 编辑供应商
+     * 編辑供应商
      * @param id
      * @return
      */

@@ -8,14 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 该类用于递归构建树形菜单
+ * 该类用于递归构建树形選單
  * Created by zhangyukang on 2020/2/6 15:34
  */
 public class MenuTreeBuilder {
 
 
     /**
-     * 构建多级菜单树
+     * 构建多级選單树
      * @param nodes
      * @return
      */
@@ -29,7 +29,7 @@ public class MenuTreeBuilder {
         }
         /* 根據Menu类的order排序 */
         Collections.sort(rootMenu,MenuNodeVO.order());
-        /*为根菜单设置子菜单，getChild是递归调用的*/
+        /*为根選單设置子選單，getChild是递归调用的*/
         for (MenuNodeVO nav : rootMenu) {
             /* 获取根節點下的所有子節點 使用getChild方法*/
             List<MenuNodeVO> childList = getChild(nav.getId(), nodes);
@@ -39,16 +39,16 @@ public class MenuTreeBuilder {
     }
 
     /**
-     * 获取子菜单
+     * 获取子選單
      * @param id
      * @param nodes
      * @return
      */
     private static List<MenuNodeVO> getChild(Long id, List<MenuNodeVO> nodes) {
-        //子菜单
+        //子選單
         List<MenuNodeVO> childList = new ArrayList<MenuNodeVO>();
         for (MenuNodeVO nav : nodes) {
-            // 遍历所有節點，将所有菜单的父id与传过来的根節點的id比较
+            // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
             //相等说明：为该根節點的子節點。
             if(nav.getParentId().equals(id)){
                 childList.add(nav);

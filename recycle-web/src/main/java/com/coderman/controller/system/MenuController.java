@@ -26,7 +26,7 @@ import java.util.Map;
  * @Date 2020/3/10 11:51
  * @Version 1.0
  **/
-@Api(tags = "系统模块-菜单权限相关接口")
+@Api(tags = "系统模块-選單权限相关接口")
 @RequestMapping("/system/menu")
 @RestController
 public class MenuController {
@@ -35,11 +35,11 @@ public class MenuController {
     private MenuService menuService;
 
     /**
-     * 加载菜单树
+     * 加载選單树
      *
      * @return
      */
-    @ApiOperation(value = "加载菜单树", notes = "获取所有菜单树，以及展开项")
+    @ApiOperation(value = "加载選單树", notes = "获取所有選單树，以及展开项")
     @GetMapping("/tree")
     public ResponseBean<Map<String, Object>> tree() {
         List<MenuNodeVO> menuTree = menuService.findMenuTree();
@@ -51,12 +51,12 @@ public class MenuController {
     }
 
     /**
-     * 新增菜单/按钮
+     * 新增選單/按钮
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增菜单/按钮失败", operation = "新增菜单/按钮")
-    @ApiOperation(value = "新增菜单")
+    @ControllerEndpoint(exceptionMessage = "新增選單/按钮失败", operation = "新增選單/按钮")
+    @ApiOperation(value = "新增選單")
     @RequiresPermissions({"menu:add"})
     @PostMapping("/add")
     public ResponseBean<Map<String, Object>> add(@RequestBody @Validated MenuVO menuVO) {
@@ -70,13 +70,13 @@ public class MenuController {
     }
 
     /**
-     * 删除菜单/按钮
+     * 删除選單/按钮
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除菜单/按钮失败", operation = "删除菜单/按钮")
-    @ApiOperation(value = "删除菜单", notes = "根據id删除菜单節點")
+    @ControllerEndpoint(exceptionMessage = "删除選單/按钮失败", operation = "删除選單/按钮")
+    @ApiOperation(value = "删除選單", notes = "根據id删除選單節點")
     @RequiresPermissions({"menu:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
@@ -85,12 +85,12 @@ public class MenuController {
     }
 
     /**
-     * 菜单详情
+     * 選單详情
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "菜单详情", notes = "根據id编辑菜单，获取菜单详情")
+    @ApiOperation(value = "選單详情", notes = "根據id編辑選單，获取選單详情")
     @RequiresPermissions({"menu:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean<MenuVO> edit(@PathVariable Long id) throws SystemException {
@@ -99,14 +99,14 @@ public class MenuController {
     }
 
     /**
-     * 更新菜单
+     * 更新選單
      *
      * @param id
      * @param menuVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新菜单失败", operation = "更新菜单")
-    @ApiOperation(value = "更新菜单", notes = "根據id更新菜单節點")
+    @ControllerEndpoint(exceptionMessage = "更新選單失败", operation = "更新選單")
+    @ApiOperation(value = "更新選單", notes = "根據id更新選單節點")
     @RequiresPermissions({"menu:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated MenuVO menuVO) throws SystemException {
@@ -118,10 +118,10 @@ public class MenuController {
      * 导出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有菜单的excel表格")
+    @ApiOperation(value = "导出excel", notes = "导出所有選單的excel表格")
     @PostMapping("excel")
     @RequiresPermissions("menu:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出菜单excel")
+    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出選單excel")
     public void export(HttpServletResponse response) {
         List<Menu> menus = this.menuService.findAll();
         ExcelKit.$Export(Menu.class, response).downXlsx(menus, false);

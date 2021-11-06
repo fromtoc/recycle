@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 部门管理
+ * 部門管理
  *
  * @Author zhangyukang
  * @Date 2020/3/15 14:11
  * @Version 1.0
  **/
-@Api(tags = "系统模块-部门相关接口")
+@Api(tags = "系统模块-部門相关接口")
 @RestController
 @RequestMapping("/system/department")
 public class DepartmentController {
@@ -36,11 +36,11 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     /**
-     * 部门列表
+     * 部門列表
      *
      * @return
      */
-    @ApiOperation(value = "部门列表", notes = "部门列表,根據部门名模糊查询")
+    @ApiOperation(value = "部門列表", notes = "部門列表,根據部門名模糊查询")
     @GetMapping("/findDepartmentList")
     public ResponseBean<PageVO<DepartmentVO>> findDepartmentList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                            @RequestParam(value = "pageSize") Integer pageSize,
@@ -50,11 +50,11 @@ public class DepartmentController {
     }
 
     /**
-     * 所有部门
+     * 所有部門
      *
      * @return
      */
-    @ApiOperation(value = "所有部门")
+    @ApiOperation(value = "所有部門")
     @GetMapping("/findAll")
     public ResponseBean<List<DepartmentVO>> findAll() {
         List<DepartmentVO> departmentVOS = departmentService.findAllVO();
@@ -62,11 +62,11 @@ public class DepartmentController {
     }
 
     /**
-     * 查找部门主任
+     * 查找部門主任
      *
      * @return
      */
-    @ApiOperation(value = "部门主任", notes = "查找部门主任,排除掉已经禁用的用戶")
+    @ApiOperation(value = "部門主任", notes = "查找部門主任,排除掉已经禁用的用戶")
     @GetMapping("/findDeanList")
     public ResponseBean<List<DeanVO>> findDeanList() {
         List<DeanVO> managerList = departmentService.findDeanList();
@@ -74,13 +74,13 @@ public class DepartmentController {
     }
 
     /**
-     * 添加部门
+     * 添加部門
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加部门失败", operation = "添加部门")
+    @ControllerEndpoint(exceptionMessage = "添加部門失败", operation = "添加部門")
     @RequiresPermissions({"department:add"})
-    @ApiOperation(value = "添加部门")
+    @ApiOperation(value = "添加部門")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated DepartmentVO departmentVO) {
         departmentService.add(departmentVO);
@@ -88,12 +88,12 @@ public class DepartmentController {
     }
 
     /**
-     * 编辑部门
+     * 編辑部門
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑部门")
+    @ApiOperation(value = "編辑部門")
     @RequiresPermissions({"department:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) throws SystemException {
@@ -102,12 +102,12 @@ public class DepartmentController {
     }
 
     /**
-     * 更新部门
+     * 更新部門
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新部门失败", operation = "更新部门")
-    @ApiOperation(value = "更新部门")
+    @ControllerEndpoint(exceptionMessage = "更新部門失败", operation = "更新部門")
+    @ApiOperation(value = "更新部門")
     @RequiresPermissions({"department:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated DepartmentVO departmentVO) throws SystemException {
@@ -116,13 +116,13 @@ public class DepartmentController {
     }
 
     /**
-     * 删除部门
+     * 删除部門
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除部门失败", operation = "删除部门")
-    @ApiOperation(value = "删除部门")
+    @ControllerEndpoint(exceptionMessage = "删除部門失败", operation = "删除部門")
+    @ApiOperation(value = "删除部門")
     @RequiresPermissions({"department:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
@@ -134,10 +134,10 @@ public class DepartmentController {
      * 导出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有部门的excel表格")
+    @ApiOperation(value = "导出excel", notes = "导出所有部門的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("department:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出部门excel")
+    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出部門excel")
     public void export(HttpServletResponse response) {
         List<Department> departments = this.departmentService.findAll();
         ExcelKit.$Export(Department.class, response).downXlsx(departments, false);

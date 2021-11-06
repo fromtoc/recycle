@@ -77,12 +77,12 @@ public class CostCenterController {
     }
 
     /**
-     * 编辑成本中心
+     * 編辑成本中心
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑成本中心")
+    @ApiOperation(value = "編辑成本中心")
     @RequiresPermissions({"costCenter:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) throws SystemException {

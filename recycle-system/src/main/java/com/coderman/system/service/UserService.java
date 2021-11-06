@@ -52,8 +52,8 @@ public interface UserService {
     void addUserCard(Long userId, String cardId) throws SystemException;
 
     /**
-     * 根據用戶角色查询用戶的菜单
-     * 菜单: menu+button
+     * 根據用戶角色查询用戶的選單
+     * 選單: menu+button
      *
      * @param roles 用戶的角色
      * @return
@@ -61,7 +61,7 @@ public interface UserService {
     List<Menu> findMenuByRoles(List<Role> roles);
 
     /**
-     * 加载菜单
+     * 加载選單
      *
      * @return
      */
@@ -128,7 +128,7 @@ public interface UserService {
     void changePassword(Long id, String password) throws SystemException;
 
     /**
-     * 编辑用戶
+     * 編辑用戶
      *
      * @param id
      * @return
@@ -150,6 +150,14 @@ public interface UserService {
      * @param rids
      */
     void assignRoles(Long id, Long[] rids) throws SystemException;
+
+    /**
+     * 分配廢棄物
+     *
+     * @param id
+     * @param pids
+     */
+    void assignProducts(Long id, Long[] pids) throws SystemException;
 
     /**
      * 所有用戶

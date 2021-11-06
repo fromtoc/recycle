@@ -30,7 +30,7 @@ public class CategoryTreeBuilder {
         }
         /* 根據Menu类的order排序 */
         Collections.sort(rootMenu,ProductCategoryTreeNodeVO.order());
-        /*为根菜单设置子菜单，getChild是递归调用的*/
+        /*为根選單设置子選單，getChild是递归调用的*/
         for (ProductCategoryTreeNodeVO nav : rootMenu) {
             /* 获取根節點下的所有子節點 使用getChild方法*/
             List<ProductCategoryTreeNodeVO> childList = getChild(nav, nodes);
@@ -40,16 +40,16 @@ public class CategoryTreeBuilder {
     }
 
     /**
-     * 获取子菜单
+     * 获取子選單
      * @param pNode
      * @param nodes
      * @return
      */
     private static List<ProductCategoryTreeNodeVO> getChild(ProductCategoryTreeNodeVO pNode, List<ProductCategoryTreeNodeVO> nodes) {
-        //子菜单
+        //子選單
         List<ProductCategoryTreeNodeVO> childList = new ArrayList<>();
         for (ProductCategoryTreeNodeVO nav : nodes) {
-            // 遍历所有節點，将所有菜单的父id与传过来的根節點的id比较
+            // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
             //相等说明：为该根節點的子節點。
             if(nav.getPid().equals(pNode.getId())){
                 nav.setLev(pNode.getLev()+1);
@@ -81,7 +81,7 @@ public class CategoryTreeBuilder {
         }
         /* 根據Menu类的order排序 */
         Collections.sort(rootMenu,ProductCategoryTreeNodeVO.order());
-        /*为根菜单设置子菜单，getChild是递归调用的*/
+        /*为根選單设置子選單，getChild是递归调用的*/
         for (ProductCategoryTreeNodeVO nav : rootMenu) {
             /* 获取根節點下的所有子節點 使用getChild方法*/
             List<ProductCategoryTreeNodeVO> childList = getParentChild(nav, nodes);
@@ -91,10 +91,10 @@ public class CategoryTreeBuilder {
     }
 
     private static List<ProductCategoryTreeNodeVO> getParentChild(ProductCategoryTreeNodeVO pNode, List<ProductCategoryTreeNodeVO> nodes) {
-        //子菜单
+        //子選單
         List<ProductCategoryTreeNodeVO> childList = new ArrayList<>();
         for (ProductCategoryTreeNodeVO nav : nodes) {
-            // 遍历所有節點，将所有菜单的父id与传过来的根節點的id比较
+            // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
             //相等说明：为该根節點的子節點。
             if(nav.getPid().equals(pNode.getId())){
                 nav.setLev(2);

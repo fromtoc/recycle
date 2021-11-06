@@ -137,7 +137,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     /**
-     * 编辑院系
+     * 編辑院系
      * @param id
      * @return
      */
@@ -145,13 +145,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentVO edit(Long id) throws SystemException {
         Department department = departmentMapper.selectByPrimaryKey(id);
         if(department==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"编辑的部门不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"編辑的部門不存在");
         }
         return DepartmentConverter.converterToDepartmentVO(department);
     }
 
     /**
-     * 更新部门
+     * 更新部門
      * @param id
      * @param departmentVO
      */
@@ -159,7 +159,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void update(Long id, DepartmentVO departmentVO) throws SystemException {
         Department dbDepartment = departmentMapper.selectByPrimaryKey(id);
         if(dbDepartment==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的部门不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的部門不存在");
         }
         Department department = new Department();
         BeanUtils.copyProperties(departmentVO,department);
@@ -169,14 +169,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     /**
-     * 删除部门信息
+     * 删除部門信息
      * @param id
      */
     @Override
     public void delete(Long id) throws SystemException {
         Department department = departmentMapper.selectByPrimaryKey(id);
         if(department==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的部门不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的部門不存在");
         }
         departmentMapper.deleteByPrimaryKey(id);
     }

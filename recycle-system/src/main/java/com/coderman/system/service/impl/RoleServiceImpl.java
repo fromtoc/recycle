@@ -99,14 +99,14 @@ public class RoleServiceImpl implements RoleService {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的角色不存在");
         }
         roleMapper.deleteByPrimaryKey(id);
-        //删除对应的[角色-菜单]记录
+        //删除对应的[角色-選單]记录
         Example o = new Example(RoleMenu.class);
         o.createCriteria().andEqualTo("roleId",id);
         roleMenuMapper.deleteByExample(o);
     }
 
     /**
-     * 编辑角色信息
+     * 編辑角色信息
      * @param id
      * @return
      */
@@ -114,7 +114,7 @@ public class RoleServiceImpl implements RoleService {
     public RoleVO edit(Long id) throws SystemException {
         Role role = roleMapper.selectByPrimaryKey(id);
         if(role==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"编辑的角色不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"編辑的角色不存在");
         }
         RoleVO roleVO = new RoleVO();
         BeanUtils.copyProperties(role,roleVO);
@@ -215,7 +215,7 @@ public class RoleServiceImpl implements RoleService {
             for (Long mid : mids) {
                 Menu menu = menuMapper.selectByPrimaryKey(mid);
                 if(menu==null){
-                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"menuId="+mid+",菜单权限不存在");
+                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"menuId="+mid+",選單权限不存在");
                 }else {
                     RoleMenu roleMenu = new RoleMenu();
                     roleMenu.setRoleId(id);

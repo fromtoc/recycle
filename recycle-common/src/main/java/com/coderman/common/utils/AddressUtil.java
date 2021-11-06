@@ -32,10 +32,10 @@ public class AddressUtil {
             log.info("地址库文件不存在,进行其他处理");
             String tmpDir = System.getProperties().getProperty("java.io.tmpdir");
             dbPath = tmpDir + File.separator + "ip2region.db";
-            log.info("临时文件路径:{}", dbPath);
+            log.info("临時文件路径:{}", dbPath);
             file = new File(dbPath);
             if (!file.exists() || (System.currentTimeMillis() - file.lastModified() > 86400000L)) {
-                log.info("文件不存在或者文件存在时间超过1天进入...");
+                log.info("文件不存在或者文件存在時間超过1天进入...");
                 try {
                     InputStream inputStream = new ClassPathResource("ip2region/ip2region.db").getInputStream();
                     IOUtils.copy(inputStream, new FileOutputStream(file));

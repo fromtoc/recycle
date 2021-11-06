@@ -146,12 +146,12 @@ public class ProductController {
     }
 
     /**
-     * 编辑物资
+     * 編辑物资
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑物资", notes = "编辑物资信息")
+    @ApiOperation(value = "編辑物资", notes = "編辑物资信息")
     @RequiresPermissions({"product:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) {

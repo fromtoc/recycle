@@ -46,7 +46,7 @@ public class ActiveUser {
      */
     private String userId;
     /**
-     * 用戶名称
+     * 用戶名稱
      */
     private String username;
     /**
@@ -54,7 +54,7 @@ public class ActiveUser {
      */
     private String host;
     /**
-     * 用戶登录时系统 IP
+     * 用戶登录時系统 IP
      */
     private String systemHost;
     /**
@@ -62,15 +62,15 @@ public class ActiveUser {
      */
     private String status;
     /**
-     * session 创建时间
+     * session 创建時間
      */
     private String startTimestamp;
     /**
-     * session 最后访问时间
+     * session 最后访问時間
      */
     private String lastAccessTime;
     /**
-     * 超时时间
+     * 超時時間
      */
     private Long timeout;
     /**

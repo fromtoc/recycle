@@ -33,7 +33,7 @@ public class ConsumerVO {
     @NotBlank(message = "联系人电话不能为空")
     private String phone;
 
-    @NotNull(message = "排序号不能为空")
+    @NotNull(message = "排序號不能为空")
     private  Integer sort;
 
     @NotBlank(message = "联系人姓名不能为空")

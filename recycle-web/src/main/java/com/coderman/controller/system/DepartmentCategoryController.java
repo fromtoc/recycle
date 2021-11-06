@@ -77,12 +77,12 @@ public class DepartmentCategoryController {
     }
 
     /**
-     * 编辑公司類型
+     * 編辑公司類型
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑公司類型")
+    @ApiOperation(value = "編辑公司類型")
     @RequiresPermissions({"departmentCategory:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) throws SystemException {

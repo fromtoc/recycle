@@ -32,7 +32,7 @@ public interface ConsumerService {
 
 
     /**
-     * 编辑物资去向
+     * 編辑物资去向
      * @param id
      * @return
      */

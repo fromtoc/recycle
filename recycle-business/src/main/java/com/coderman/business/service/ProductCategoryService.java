@@ -23,7 +23,7 @@ public interface ProductCategoryService {
 
 
     /**
-     * 部门列表
+     * 部門列表
      * @param pageNum
      * @param pageSize
      * @param ProductCategoryVO
@@ -33,7 +33,7 @@ public interface ProductCategoryService {
 
 
     /**
-     * 编辑物资类别
+     * 編辑物资类别
      * @param id
      * @return
      */

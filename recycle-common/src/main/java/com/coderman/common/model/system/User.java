@@ -13,27 +13,27 @@ import java.util.Date;
 @Table(name = "tb_user")
 public class User {
     @Id
-    @ExcelField(value = "编号", width = 50)
+    @ExcelField(value = "編號", width = 50)
     private Long id;
 
-    @ExcelField(value = "用戶名", width = 100)
+    @ExcelField(value = "帳號", width = 100)
     private String username;
 
-    @ExcelField(value = "昵称", width = 100)
+    @ExcelField(value = "名稱", width = 100)
     private String nickname;
 
-    @ExcelField(value = "邮箱", width = 150)
+    @ExcelField(value = "信箱", width = 150)
     private String email;
 
-    @ExcelField(value = "电话号码", width = 100)
+    @ExcelField(value = "电话號码", width = 100)
     private String phoneNumber;
 
     private Integer status;
 
-    @ExcelField(value = "创建时间", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "创建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date createTime;
 
-    @ExcelField(value = "修改时间", dateFormat = "yyyy年MM月dd日 HH:mm:ss",width = 180)
+    @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss",width = 180)
     private Date modifiedTime;
 
     @ExcelField(//

@@ -89,7 +89,7 @@ public class OutStockServiceImpl implements OutStockService {
     @Transactional
     @Override
     public void addOutStock(OutStockVO outStockVO) throws BusinessException {
-        //随机生成发放单号
+        //随机生成发放单號
         String OUT_STOCK_NUM = UUID.randomUUID().toString().substring(0, 32).replace("-","");
         int itemNumber=0;//记录该单的总数
         //获取商品的明细
@@ -99,7 +99,7 @@ public class OutStockServiceImpl implements OutStockService {
                 LinkedHashMap item = (LinkedHashMap) product;
                 //发放数量
                 int productNumber = (int) item.get("productNumber");
-                //物资编号
+                //物资編號
                 Integer productId = (Integer) item.get("productId");
                 Product dbProduct = productMapper.selectByPrimaryKey(productId);
                 if (dbProduct == null) {
@@ -205,7 +205,7 @@ public class OutStockServiceImpl implements OutStockService {
         ConsumerVO consumerVO = new ConsumerVO();
         BeanUtils.copyProperties(consumer,consumerVO);
         outStockDetailVO.setConsumerVO(consumerVO);
-        String outNum = outStock.getOutNum();//发放单号
+        String outNum = outStock.getOutNum();//发放单號
         //查询该单所有的物资
         Example o = new Example(OutStockInfo.class);
         PageHelper.startPage(pageNum,pageSize);
@@ -227,11 +227,11 @@ public class OutStockServiceImpl implements OutStockService {
                     outStockItemVO.setCount(outStockInfo.getProductNumber());
                     outStockDetailVO.getItemVOS().add(outStockItemVO);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"编号为:["+pNum+"]的物资找不到,或已被删除");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"編號为:["+pNum+"]的物资找不到,或已被删除");
                 }
             }
         }else {
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放编号为:["+outNum+"]的明细找不到,或已被删除");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放編號为:["+outNum+"]的明细找不到,或已被删除");
         }
         return outStockDetailVO;
     }
@@ -250,7 +250,7 @@ public class OutStockServiceImpl implements OutStockService {
         }else {
            outStockMapper.deleteByPrimaryKey(id);
         }
-        String inNum = outStock.getOutNum();//单号
+        String inNum = outStock.getOutNum();//单號
         Example o = new Example(OutStockInfo.class);
         o.createCriteria().andEqualTo("outNum",inNum);
         outStockInfoMapper.deleteByExample(o);
@@ -273,13 +273,13 @@ public class OutStockServiceImpl implements OutStockService {
         if(consumer==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放来源信息错误");
         }
-        String outNum = outStock.getOutNum();//发放单号
+        String outNum = outStock.getOutNum();//发放单號
         Example o = new Example(OutStockInfo.class);
         o.createCriteria().andEqualTo("outNum",outNum);
         List<OutStockInfo> infoList = outStockInfoMapper.selectByExample(o);//发放详情
         if(!CollectionUtils.isEmpty(infoList)){
             for (OutStockInfo outStockInfo : infoList) {
-                //物资编号
+                //物资編號
                 String pNum = outStockInfo.getPNum();
                 Integer productNumber = outStockInfo.getProductNumber();//入库物资数
                 Example o1 = new Example(Product.class);
@@ -307,7 +307,7 @@ public class OutStockServiceImpl implements OutStockService {
                     outStock.setStatus(0);
                     outStockMapper.updateByPrimaryKeySelective(outStock);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资编号为:["+pNum+"]的物资不存在");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资編號为:["+pNum+"]的物资不存在");
                 }
             }
         }else {

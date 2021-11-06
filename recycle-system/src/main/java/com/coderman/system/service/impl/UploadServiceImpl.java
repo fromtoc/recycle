@@ -43,7 +43,7 @@ public class UploadServiceImpl implements UploadService {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"上传的文件不能为空");
         }
         InputStream inputStream = file.getInputStream();
-        //文件的原名称
+        //文件的原名稱
         long size = file.getSize();
         String originalFilename = file.getOriginalFilename();
         String fileExtName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);

@@ -16,7 +16,7 @@ import java.util.List;
  **/
 public interface DepartmentService {
     /**
-     * 部门列表
+     * 部門列表
      * @param pageNum
      * @param pageSize
      * @param departmentVO
@@ -25,46 +25,46 @@ public interface DepartmentService {
     PageVO<DepartmentVO> findDepartmentList(Integer pageNum, Integer pageSize, DepartmentVO departmentVO);
 
     /**
-     * 查询所有部门主任
+     * 查询所有部門主任
      * @return
      */
     List<DeanVO> findDeanList();
 
     /**
-     * 添加院部门
+     * 添加院部門
      * @param departmentVO
      */
     void add(DepartmentVO departmentVO);
 
     /**
-     * 编辑院部门
+     * 編辑院部門
      * @param id
      * @return
      */
     DepartmentVO edit(Long id) throws SystemException;
 
     /**
-     * 更新院部门
+     * 更新院部門
      * @param id
      * @param departmentVO
      */
     void update(Long id, DepartmentVO departmentVO) throws SystemException;
 
     /**
-     * 删除院部门
+     * 删除院部門
      * @param id
      */
     void delete(Long id) throws SystemException;
 
     /**
-     * 所有部门
+     * 所有部門
      * @return
      */
     List<DepartmentVO> findAllVO();
 
 
     /**
-     * 全部部门
+     * 全部部門
      * @return
      */
     List<Department> findAll();

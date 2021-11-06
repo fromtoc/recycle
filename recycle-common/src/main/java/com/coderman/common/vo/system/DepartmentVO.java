@@ -16,15 +16,35 @@ public class DepartmentVO {
 
     private Long id;
 
-    @NotBlank(message = "院系名称不能为空")
+    private Long typeCode;
+
+    private String typeName;
+
+    private Long number;
+
+    private String typeNumber;
+
     private String name;
 
-    @NotBlank(message = "办公电话不能为空")
+    private String nickname;
+
+    private Long regionId;
+
+    private String contact;
+
     private String phone;
 
-    @NotBlank(message = "办公地址不能为空")
-    private String address;
+    private String cellPhone;
 
+    private String email;
+
+    private String remark;
+
+    private Integer food;
+
+    private Integer status;
+
+    private String address;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date createTime;
@@ -33,7 +53,7 @@ public class DepartmentVO {
     private Date modifiedTime;
 
 
-    /** 部门内人数**/
+    /** 部門内人数**/
     private int total;
 
 }

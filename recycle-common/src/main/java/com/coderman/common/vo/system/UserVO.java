@@ -21,13 +21,13 @@ public class UserVO{
     @NotBlank(message = "用戶名不能为空")
     private String username;
 
-    @NotBlank(message = "昵称不能为空")
+    @NotBlank(message = "昵稱不能为空")
     private String nickname;
 
     @Email(message = "请输入正确的邮箱格式")
     private String email;
 
-    @NotBlank(message = "电话号码不能为空")
+    @NotBlank(message = "电话號码不能为空")
     private String phoneNumber;
 
     private Boolean status;
@@ -47,7 +47,7 @@ public class UserVO{
 
     private String departmentName;
 
-    @NotNull(message = "部门id不能为空")
+    @NotNull(message = "部門id不能为空")
     private Long departmentId;
 
 }

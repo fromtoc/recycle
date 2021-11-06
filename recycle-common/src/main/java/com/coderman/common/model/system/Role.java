@@ -13,19 +13,19 @@ import java.util.Date;
 @Table(name = "tb_role")
 public class Role {
     @Id
-    @ExcelField(value = "编号", width = 50)
+    @ExcelField(value = "編號", width = 50)
     private Long id;
 
-    @ExcelField(value = "角色名称", width = 100)
+    @ExcelField(value = "角色名稱", width = 100)
     private String roleName;
 
     @ExcelField(value = "备注信息", width = 180)
     private String remark;
 
-    @ExcelField(value = "创建时间", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "创建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date createTime;
 
-    @ExcelField(value = "修改时间", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date modifiedTime;
 
     @ExcelField(value = "禁用状态", width = 50)

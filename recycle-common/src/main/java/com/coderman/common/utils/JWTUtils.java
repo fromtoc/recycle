@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class JWTUtils {
     /**
-     * 过期时间6小时
+     * 过期時間6小時
      */
     private static final long EXPIRE_TIME = 6*60*60*1000;
 

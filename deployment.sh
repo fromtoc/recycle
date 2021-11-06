@@ -1,4 +1,4 @@
-#打包完后的jar名称，替换成你自己项目的名称，该名称可以在maven项目的pom中配置
+#打包完后的jar名稱，替换成你自己项目的名稱，该名稱可以在maven项目的pom中配置
 proc="recycle-web-0.0.1-SNAPSHOT.jar"
 #项目源码的目录地址（初始可能需要自己从Git拉下来）
 SOURCE_HOME="/root/application/recycle-api/recycle-web"
@@ -25,7 +25,7 @@ checkpid() {
 }
 
 
-#编写启动方法
+#編写启动方法
 start() {
    checkpid
 
@@ -127,7 +127,7 @@ status() {
 }
 
 
-#设置脚本参数，启动的时候可以采用./脚本名称.sh start/stop/restart/log/status等参数
+#设置脚本参数，启动的時候可以采用./脚本名稱.sh start/stop/restart/log/status等参数
 case "$1" in
   start)
     start

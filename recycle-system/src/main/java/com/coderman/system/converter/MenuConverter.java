@@ -17,12 +17,12 @@ import java.util.List;
 public class MenuConverter {
 
     /**
-     * 转成menuVO(只包含菜单)List
+     * 转成menuVO(只包含選單)List
      * @param menus
      * @return
      */
     public static List<MenuNodeVO> converterToMenuNodeVO(List<Menu> menus){
-        //先过滤出用戶的菜单
+        //先过滤出用戶的選單
         List<MenuNodeVO> menuNodeVOS=new ArrayList<>();
         if(!CollectionUtils.isEmpty(menus)){
             for (Menu menu : menus) {
@@ -39,12 +39,12 @@ public class MenuConverter {
 
 
     /**
-     * 转成menuVO(菜单和按钮）
+     * 转成menuVO(選單和按钮）
      * @param menus
      * @return
      */
     public static List<MenuNodeVO> converterToALLMenuNodeVO(List<Menu> menus){
-        //先过滤出用戶的菜单
+        //先过滤出用戶的選單
         List<MenuNodeVO> menuNodeVOS=new ArrayList<>();
         if(!CollectionUtils.isEmpty(menus)){
             for (Menu menu : menus) {
@@ -57,7 +57,7 @@ public class MenuConverter {
         return menuNodeVOS;
     }
     /**
-     * 转成menuVO(菜单和按钮）
+     * 转成menuVO(選單和按钮）
      * @param menu
      * @return
      */

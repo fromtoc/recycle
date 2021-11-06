@@ -15,13 +15,13 @@ import java.util.List;
  **/
 public interface MenuService {
     /**
-     * 获取菜单树
+     * 获取選單树
      * @return
      */
     List<MenuNodeVO> findMenuTree();
 
     /**
-     * 添加菜单
+     * 添加選單
      * @param menuVO
      */
     Menu add(MenuVO menuVO);
@@ -33,7 +33,7 @@ public interface MenuService {
     void delete(Long id) throws SystemException;
 
     /**
-     * 编辑節點
+     * 編辑節點
      * @param id
      * @return
      */
@@ -46,14 +46,14 @@ public interface MenuService {
     void update(Long id, MenuVO menuVO) throws SystemException;
 
     /**
-     * 所有展开菜单的ID
+     * 所有展开選單的ID
      * @return
      */
     List<Long> findOpenIds();
 
 
     /**
-     * 获取所有菜单
+     * 获取所有選單
      * @return
      */
     List<Menu> findAll();

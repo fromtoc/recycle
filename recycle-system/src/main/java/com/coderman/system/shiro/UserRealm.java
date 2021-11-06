@@ -38,7 +38,7 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 只有当需要检测用戶权限的时候才会调用此方法，例如checkRole,checkPermission之类的
+     * 只有当需要检测用戶权限的時候才会调用此方法，例如checkRole,checkPermission之类的
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -86,7 +86,7 @@ public class UserRealm extends AuthorizingRealm {
         User userBean = userService.findUserByName(username);
 
         if (userBean == null) {
-            throw new AccountException("账号不存在!");
+            throw new AccountException("账號不存在!");
         }
         if(JWTUtils.isExpire(token)){
             throw new AuthenticationException(" token过期，请重新登入！");
@@ -97,12 +97,12 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         if(userBean.getStatus()==0){
-            throw new LockedAccountException("账号已被锁定!");
+            throw new LockedAccountException("账號已被锁定!");
         }
 
         //如果验证通过，获取用戶的角色
         List<Role> roles= userService.findRolesById(userBean.getId());
-        //查询用戶的所有菜单(包括了菜单和按钮)
+        //查询用戶的所有選單(包括了選單和按钮)
         List<Menu> menus=userService.findMenuByRoles(roles);
 
         Set<String> urls=new HashSet<>();

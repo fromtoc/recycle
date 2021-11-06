@@ -101,12 +101,12 @@ public class ProductCategoryController {
     }
 
     /**
-     * 编辑物资分类
+     * 編辑物资分类
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑分类")
+    @ApiOperation(value = "編辑分类")
     @RequiresPermissions({"productCategory:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) {

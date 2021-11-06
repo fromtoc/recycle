@@ -19,14 +19,14 @@ public class MenuVO {
     @NotNull(message = "父级ID必须")
     private Long parentId;
 
-    @NotBlank(message = "菜单名称不能为空")
+    @NotBlank(message = "選單名稱不能为空")
     private String menuName;
 
     private String url;
 
     private String icon;
 
-    @NotNull(message = "菜单类型不为空")
+    @NotNull(message = "選單类型不为空")
     private Integer type;
 
     @NotNull(message = "排序数不能为空")
@@ -36,7 +36,7 @@ public class MenuVO {
 
     private Date modifiedTime;
 
-    @NotNull(message = "菜单状态不能为空")
+    @NotNull(message = "選單状态不能为空")
     private boolean disabled;
 
     private Integer open;

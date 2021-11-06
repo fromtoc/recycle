@@ -59,12 +59,12 @@ public class ConsumerController {
     }
 
     /**
-     * 编辑去向
+     * 編辑去向
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑去向", notes = "编辑去向信息")
+    @ApiOperation(value = "編辑去向", notes = "編辑去向信息")
     @RequiresPermissions({"consumer:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) {

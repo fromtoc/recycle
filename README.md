@@ -1,6 +1,6 @@
 <p align="center"><img src="./document/images/logo.png" height="100" alt="logo"/></p>
 <h1 align="center"> recycle &nbsp; 🚀 &nbsp; 新冠-物资管理系统  </h1>
-<h3 align="center">2020新冠疫情期间, 寂寞消遣之作~</h3>
+<h3 align="center">2020新冠疫情期間, 寂寞消遣之作~</h3>
 <h3 align="center"><a href="https://www.zykhome.club" target="_blank">https://www.zykhome.club</a></h3>
 
 
@@ -19,7 +19,7 @@
 
 ---
 
->该项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模块和业务模块,业务模块是处理疫情期间,物资的发放,物资入库,以及查看物资的库存等.
+>该项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模块和业务模块,业务模块是处理疫情期間,物资的发放,物资入库,以及查看物资的库存等.
 系统模块是一个后台通用的RBAC权限模块,可以精确的控制到后台API级别的权限控制,项目不定期更新中.武汉加油~~
 开发模式:前后端分离,前端负责数據渲染,后端返回数據。
 

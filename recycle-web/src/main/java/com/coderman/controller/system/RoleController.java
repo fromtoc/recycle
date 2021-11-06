@@ -57,16 +57,16 @@ public class RoleController {
     }
 
     /**
-     * 角色拥有的菜单权限id和菜单树
+     * 角色拥有的選單权限id和選單树
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "角色菜单")
+    @ApiOperation(value = "角色選單")
     @GetMapping("/findRoleMenu/{id}")
     public ResponseBean<Map<String, Object>> findRoleMenu(@PathVariable Long id) throws SystemException {
         List<MenuNodeVO> tree = menuService.findMenuTree();
-        //角色拥有的菜单id
+        //角色拥有的選單id
         List<Long> mids = roleService.findMenuIdsByRoleId(id);
         List<Long> ids = menuService.findOpenIds();
         Map<String, Object> map = new HashMap<>();
@@ -122,12 +122,12 @@ public class RoleController {
 
 
     /**
-     * 编辑角色信息
+     * 編辑角色信息
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑用戶", notes = "根據id更新角色信息")
+    @ApiOperation(value = "編辑用戶", notes = "根據id更新角色信息")
     @GetMapping("/edit/{id}")
     @RequiresPermissions({"role:edit"})
     public ResponseBean<RoleVO> edit(@PathVariable Long id) throws SystemException {

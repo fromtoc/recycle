@@ -16,7 +16,7 @@ import java.util.Date;
 public class SupplierVO {
     private Long id;
 
-    @NotBlank(message = "供应商名称不能为空")
+    @NotBlank(message = "供应商名稱不能为空")
     private String name;
 
     @NotBlank(message = "地址不能为空")
@@ -28,7 +28,7 @@ public class SupplierVO {
     @NotBlank(message = "电话不能为空")
     private String phone;
 
-    @NotNull(message = "排序号不能为空")
+    @NotNull(message = "排序號不能为空")
     private Integer sort;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")

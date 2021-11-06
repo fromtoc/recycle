@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
     public List<Menu> findMenuByRoles(List<Role> roles) {
         List<Menu> menus = new ArrayList<>();
         if (!CollectionUtils.isEmpty(roles)) {
-            Set<Long> menuIds = new HashSet<>();//存放用戶的菜单id
+            Set<Long> menuIds = new HashSet<>();//存放用戶的選單id
             List<RoleMenu> roleMenus;
             for (Role role : roles) {
                 //根據角色ID查询权限ID
@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
             }
             if (!CollectionUtils.isEmpty(menuIds)) {
                 for (Long menuId : menuIds) {
-                    //该用戶所有的菜单
+                    //该用戶所有的選單
                     Menu menu = menuMapper.selectByPrimaryKey(menuId);
                     if (menu != null) {
                         menus.add(menu);
@@ -193,7 +193,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 获取菜单
+     * 获取選單
      *
      * @return
      */
@@ -212,7 +212,7 @@ public class UserServiceImpl implements UserService {
         if (!CollectionUtils.isEmpty(menus)) {
             menuNodeVOS = MenuConverter.converterToMenuNodeVO(menus);
         }
-        //构建树形菜单
+        //构建树形選單
         return MenuTreeBuilder.build(menuNodeVOS);
     }
 
@@ -323,7 +323,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void add(UserVO userVO) throws SystemException {
         @NotBlank(message = "用戶名不能为空") String username = userVO.getUsername();
-        @NotNull(message = "部门id不能为空") Long departmentId = userVO.getDepartmentId();
+        @NotNull(message = "部門id不能为空") Long departmentId = userVO.getDepartmentId();
         Example o = new Example(User.class);
         o.createCriteria().andEqualTo("username", username);
         int i = userMapper.selectCountByExample(o);
@@ -332,7 +332,7 @@ public class UserServiceImpl implements UserService {
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if (department == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部门不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部門不存在");
         }
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
@@ -358,13 +358,13 @@ public class UserServiceImpl implements UserService {
     public void update(Long id, UserEditVO userVO) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         @NotBlank(message = "用戶名不能为空") String username = userVO.getUsername();
-        @NotNull(message = "部门不能为空") Long departmentId = userVO.getDepartmentId();
+        @NotNull(message = "部門不能为空") Long departmentId = userVO.getDepartmentId();
         if (dbUser == null) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要删除的用戶不存在");
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if (department == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部门不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部門不存在");
         }
         Example o = new Example(User.class);
         o.createCriteria().andEqualTo("username", username);
@@ -415,7 +415,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 编辑
+     * 編辑
      *
      * @param id
      * @return
@@ -425,7 +425,7 @@ public class UserServiceImpl implements UserService {
     public UserEditVO edit(Long id) throws SystemException {
         User user = userMapper.selectByPrimaryKey(id);
         if (user == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要编辑的用戶不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要編辑的用戶不存在");
         }
         UserEditVO userEditVO = new UserEditVO();
         BeanUtils.copyProperties(user, userEditVO);
@@ -497,6 +497,24 @@ public class UserServiceImpl implements UserService {
                 userRole.setUserId(id);
                 userRole.setRoleId(rid);
                 userRoleMapper.insert(userRole);
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void assignProducts(Long id, Long[] pids) throws SystemException {
+        //删除之前分配的
+        Example o = new Example(CardProduct.class);
+        o.createCriteria().andEqualTo("cardId", id);
+        cardProductMapper.deleteByExample(o);
+        //增加现在分配的
+        if (pids.length > 0) {
+            for (Long pid : pids) {
+                CardProduct cardProduct = new CardProduct();
+                cardProduct.setCardId(id);
+                cardProduct.setProductId(pid);
+                cardProductMapper.insert(cardProduct);
             }
         }
     }

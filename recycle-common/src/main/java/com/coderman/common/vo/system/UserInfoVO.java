@@ -19,13 +19,13 @@ public class UserInfoVO {
     @ApiModelProperty(value = "用戶名")
     private String username;
 
-    @ApiModelProperty(value = "昵称")
+    @ApiModelProperty(value = "昵稱")
     private String nickname;
 
     @ApiModelProperty(value = "头像")
     private String avatar;
 
-    @ApiModelProperty(value = "菜单")
+    @ApiModelProperty(value = "選單")
     private Set<String> url;
 
     @ApiModelProperty(value = "权限")
@@ -34,7 +34,7 @@ public class UserInfoVO {
     @ApiModelProperty(value = "角色集合")
     private List<String> roles;
 
-    @ApiModelProperty(value = "所在部门")
+    @ApiModelProperty(value = "所在部門")
     private String department;
 
     @ApiModelProperty(value = "是否是超管")

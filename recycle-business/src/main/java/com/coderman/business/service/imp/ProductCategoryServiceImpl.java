@@ -77,7 +77,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 编辑商品类别
+     * 編辑商品类别
      * @param id
      * @return
      */

@@ -34,7 +34,7 @@ public interface ProductService {
 
 
     /**
-     * 编辑商品
+     * 編辑商品
      * @param id
      * @return
      */

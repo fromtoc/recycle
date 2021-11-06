@@ -101,11 +101,11 @@ public class UserController {
     }
 
     /**
-     * 加载菜单
+     * 加载選單
      *
      * @return
      */
-    @ApiOperation(value = "加载菜单", notes = "用戶登入后,根據角色加载菜单树")
+    @ApiOperation(value = "加载選單", notes = "用戶登入后,根據角色加载選單树")
     @GetMapping("/findMenu")
     public ResponseBean<List<MenuNodeVO>> findMenu() {
         List<MenuNodeVO> menuTreeVOS = userService.findMenu();
@@ -214,11 +214,11 @@ public class UserController {
     }
 
     /**
-     * 编辑用戶
+     * 編辑用戶
      * @param id
      * @return
      */
-    @ApiOperation(value = "编辑用戶", notes = "获取用戶的详情，编辑用戶信息")
+    @ApiOperation(value = "編辑用戶", notes = "获取用戶的详情，編辑用戶信息")
     @RequiresPermissions({"user:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean<UserEditVO> edit(@PathVariable Long id) throws SystemException {
@@ -344,6 +344,22 @@ public class UserController {
     @PutMapping("/updateCardStatus/{id}/{status}")
     public ResponseBean updateCardStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
         userService.updateCardStatus(id, status);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 分配卡片廢棄物
+     *
+     * @param id
+     * @param pids
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "分配卡片廢棄物失败", operation = "分配卡片廢棄物")
+    @ApiOperation(value = "分配卡片廢棄物", notes = "廢棄物分配给卡片")
+    @RequiresPermissions({"product:assign"})
+    @PostMapping("/{id}/assignProducts")
+    public ResponseBean assignProducts(@PathVariable Long id, @RequestBody Long[] pids) throws SystemException {
+        userService.assignProducts(id, pids);
         return ResponseBean.success();
     }
 
