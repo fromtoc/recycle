@@ -1,22 +1,20 @@
-package com.coderman.controller.system;
+package com.coderman.controller.business;
 
 
 import com.coderman.business.mapper.ProductMapper;
-import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.dto.UserLoginDTO;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
-import com.coderman.common.model.system.CardProduct;
-import com.coderman.common.model.system.Role;
-import com.coderman.common.model.system.User;
-import com.coderman.common.model.system.UserCard;
+import com.coderman.common.model.system.*;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.*;
 import com.coderman.system.converter.RoleConverter;
-import com.coderman.system.service.LoginLogService;
-import com.coderman.system.service.RoleService;
-import com.coderman.system.service.UserService;
+import com.coderman.system.mapper.CardProductMapper;
+import com.coderman.system.mapper.UserCardMapper;
+import com.coderman.system.mapper.UserMapper;
+import com.coderman.system.service.*;
+import com.coderman.system.util.MD5Utils;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,14 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author zhangyukang
@@ -41,10 +37,10 @@ import java.util.Map;
  **/
 
 @RestController
-@RequestMapping("/system/user")
+@RequestMapping("/business/weight")
 @Validated
-@Api(tags = "系统模塊-用戶相关接口")
-public class UserController {
+@Api(tags = "秤重相關接口")
+public class WeightController {
 
     @Autowired
     private UserService userService;
@@ -56,7 +52,23 @@ public class UserController {
     private LoginLogService loginLogService;
 
     @Autowired
+    private LogService logService;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private CardProductMapper cardProductMapper;
+
+    @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private UserCardMapper userCardMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
 
 
     /**
@@ -64,12 +76,38 @@ public class UserController {
      *
      * @return
      */
-    @ApiOperation(value = "用戶登入", notes = "接收参数用戶名和密码,登入成功后,返回JWTToken")
+    @ApiOperation(value = "用戶登入", notes = "接收参数卡號登入")
     @PostMapping("/login")
-    public ResponseBean<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) throws SystemException {
-        String token=userService.login(userLoginDTO.getUsername(),userLoginDTO.getPassword());
-        loginLogService.add(request);
-        return ResponseBean.success(token);
+    public ResponseBean login(@RequestBody Map<String, String> map, HttpServletRequest request) throws SystemException {
+        String cardId = map.get("cardId");
+        Example o = new Example(UserCard.class);
+        o.createCriteria().andEqualTo("cardId", cardId);
+        List<UserCard> cardProducts = userCardMapper.selectByExample(o);
+        if (!CollectionUtils.isEmpty(cardProducts)) {
+            UserCard userCard = cardProducts.get(0);
+            Long userId = userCard.getUserId();
+            User user = userMapper.selectByPrimaryKey(userId);
+            //登入log
+            Log sysLog=new Log();
+            sysLog.setOperation("刷卡登入");
+            sysLog.setUsername(user.getUsername());
+            sysLog.setCreateTime(new Date());
+            logService.saveLog(sysLog);
+            //取得公司資訊
+            DepartmentVO dept = departmentService.edit(user.getDepartmentId());
+            //取得卡片廢棄物
+            List<Long> productsByCard = userService.findProductsByCard(userCard.getId());
+            List<Product> productList = productsByCard.stream()
+                    .map(id -> productMapper.selectByPrimaryKey(id))
+                    .collect(Collectors.toList());
+
+            Map responseMap = new HashMap();
+            responseMap.put("deptName", dept.getName());
+            responseMap.put("products", productList);
+
+            return ResponseBean.success(responseMap);
+        }
+        return ResponseBean.error("卡號錯誤");
     }
 
 

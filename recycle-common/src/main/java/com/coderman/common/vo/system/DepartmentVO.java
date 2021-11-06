@@ -16,7 +16,11 @@ public class DepartmentVO {
 
     private Long id;
 
-    private Long typeCode;
+    private Long typeId;
+
+    private String typeCode;
+
+    private String typeCodeName;
 
     private String typeName;
 
@@ -30,6 +34,8 @@ public class DepartmentVO {
 
     private Long regionId;
 
+    private String regionName;
+
     private String contact;
 
     private String phone;
@@ -40,9 +46,9 @@ public class DepartmentVO {
 
     private String remark;
 
-    private Integer food;
+    private Boolean food;
 
-    private Integer status;
+    private Boolean status;
 
     private String address;
 

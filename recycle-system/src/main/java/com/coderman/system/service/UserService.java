@@ -157,7 +157,7 @@ public interface UserService {
      * @param id
      * @param pids
      */
-    void assignProducts(Long id, Long[] pids) throws SystemException;
+    void assignProducts(String id, Long[] pids) throws SystemException;
 
     /**
      * 所有用戶

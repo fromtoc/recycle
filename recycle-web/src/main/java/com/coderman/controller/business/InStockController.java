@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2020/3/19 09:53
  * @Version 1.0
  **/
-@Api(tags = "业务模块-物资入库相关接口")
+@Api(tags = "业务模塊-物资入库相关接口")
 @RestController
 @RequestMapping("/business/inStock")
 public class InStockController {

@@ -238,17 +238,17 @@ DROP TABLE IF EXISTS `tb_department`;
 
 CREATE TABLE `tb_department` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `type_code` bigint(20) DEFAULT NULL COMMENT '公司類型id',
-  `type_name` varchar(100) DEFAULT NULL COMMENT '公司類型名稱',
+  `type_id` bigint(20) DEFAULT NULL COMMENT '公司類型id',
+  `type_code` varchar(100) DEFAULT NULL COMMENT '公司類型代碼',
   `number` bigint(20) DEFAULT NULL COMMENT '流水編號',
   `type_number` varchar(100) DEFAULT NULL COMMENT '公司帳號',
   `name` varchar(100) DEFAULT NULL COMMENT '公司名稱',
   `nickname` varchar(100) DEFAULT NULL COMMENT '公司簡稱',
   `region_id` bigint(20) DEFAULT NULL COMMENT '區域id',
-  `contact` varchar(20) NOT NULL COMMENT '聯絡人',
-  `phone` varchar(20) NOT NULL COMMENT '電話',
-  `cell_phone` varchar(20) NOT NULL COMMENT '手機',
-  `email` varchar(100) NOT NULL COMMENT '信箱',
+  `contact` varchar(20) DEFAULT NULL COMMENT '聯絡人',
+  `phone` varchar(20) DEFAULT NULL COMMENT '電話',
+  `cell_phone` varchar(20) DEFAULT NULL COMMENT '手機',
+  `email` varchar(100) DEFAULT NULL COMMENT '信箱',
   `remark` varchar(200) DEFAULT NULL COMMENT '備註',
   `food` int(2) DEFAULT NULL COMMENT '廚餘標記：0：無，1：有',
   `status` int(2) DEFAULT NULL COMMENT '狀態：0：刪除，1：存在',
@@ -259,7 +259,7 @@ CREATE TABLE `tb_department` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 INSERT INTO recycle.tb_department
-(id, type_code, type_name, `number`, type_number, name, nickname, region_id, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
+(id, type_id, type_code, `number`, type_number, name, nickname, region_id, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
 VALUES(1, 1, 'A', 1, 'A001', '101大樓', '101', 1, 'jimmy', '22222222', '0911111111', '123456@gmail.com', '123', 1, 1, '123', '2020-12-17 21:31:44', '2020-12-17 21:31:44');
 
 
@@ -295,7 +295,7 @@ DROP TABLE IF EXISTS `tb_user_card`;
 CREATE TABLE `tb_user_card` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `card_id` bigint(20) NOT NULL,
+  `card_id` varchar(100) NOT NULL,
   `status` int(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -303,7 +303,7 @@ CREATE TABLE `tb_user_card` (
 DROP TABLE IF EXISTS `tb_card_product`;
 
 CREATE TABLE `tb_card_product` (
-  `card_id` bigint(20) NOT NULL,
+  `card_id` varchar(100) NOT NULL,
   `product_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
@@ -338,7 +338,10 @@ DROP TABLE IF EXISTS `biz_product_price`;
 
 CREATE TABLE `biz_product_price` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `one_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物大類',
+  `two_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物小類',
   `product_id` bigint(20) NOT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '名稱',
   `price` bigint(20) DEFAULT NULL,
   `unit` varchar(50) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL COMMENT '生效時間',
@@ -354,7 +357,7 @@ CREATE TABLE `tb_weight` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `department_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `card_id` bigint(20) NOT NULL,
+  `card_id` varchar(100) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `total_weight` double DEFAULT NULL,
   `deduct_weight` double DEFAULT NULL,

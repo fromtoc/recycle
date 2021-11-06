@@ -69,4 +69,20 @@ public interface DepartmentService {
      */
     List<Department> findAll();
 
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     */
+    void updateStatus(Long id, Boolean status) throws SystemException;
+
+    /**
+     * 更新廚餘標記
+     *
+     * @param id
+     * @param status
+     */
+    void updateFood(Long id, Boolean status) throws SystemException;
+
 }

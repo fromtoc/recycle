@@ -25,7 +25,7 @@ import java.util.Map;
  * @Date 2020/3/22 21:03
  * @Version 1.0
  **/
-@Api(tags = "系统模块-登入日志相关接口")
+@Api(tags = "系统模塊-登入日志相关接口")
 @RestController
 @RequestMapping("/system/loginLog")
 public class LoginLogController {

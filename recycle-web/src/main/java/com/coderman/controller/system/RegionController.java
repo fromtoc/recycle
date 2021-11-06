@@ -4,8 +4,8 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
-import com.coderman.common.vo.system.PageVO;
 import com.coderman.common.service.DictionaryService;
+import com.coderman.common.vo.system.PageVO;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,72 +18,72 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 公司類型管理
+ * 區域管理
  *
  * @Author zhangyukang
  * @Date 2020/3/15 14:11
  * @Version 1.0
  **/
-@Api(tags = "系统模塊-公司類型相關接口")
+@Api(tags = "系统模塊-區域相關接口")
 @RestController
-@RequestMapping("/system/departmentCategory")
-public class DepartmentCategoryController {
+@RequestMapping("/system/region")
+public class RegionController {
 
 
     @Autowired
     private DictionaryService dictionaryService;
 
     /**
-     * 公司類型列表
+     * 區域列表
      *
      * @return
      */
-    @ApiOperation(value = "公司類型列表", notes = "公司類型列表,根據公司類型名模糊查询")
+    @ApiOperation(value = "區域列表", notes = "區域列表,根據區域名模糊查询")
     @GetMapping("/findByPage")
     public ResponseBean<PageVO<Dictionary>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                        @RequestParam(value = "pageSize") Integer pageSize,
                                                        Dictionary dictionary) {
-        dictionary.setType(1);
-        PageVO<Dictionary> departmentCategoryList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
-        return ResponseBean.success(departmentCategoryList);
+        dictionary.setType(3);
+        PageVO<Dictionary> regionList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
+        return ResponseBean.success(regionList);
     }
 
     /**
-     * 所有公司類型
+     * 所有區域
      *
      * @return
      */
-    @ApiOperation(value = "所有公司類型")
+    @ApiOperation(value = "所有區域")
     @GetMapping("/findAll")
     public ResponseBean<List<Dictionary>> findAll() throws SystemException {
-        List<Dictionary> departmentCategoryList = dictionaryService.selectByType(1);
-        return ResponseBean.success(departmentCategoryList);
+        List<Dictionary> regionList = dictionaryService.selectByType(3);
+        return ResponseBean.success(regionList);
     }
 
     /**
-     * 添加公司類型
+     * 添加區域
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加公司類型失败", operation = "添加公司類型")
-    @RequiresPermissions({"departmentCategory:add"})
-    @ApiOperation(value = "添加公司類型")
+    @ControllerEndpoint(exceptionMessage = "添加區域失败", operation = "添加區域")
+    @RequiresPermissions({"region:add"})
+    @ApiOperation(value = "添加區域")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated Dictionary dictionary) {
-        dictionary.setType(1);
+        dictionary.setType(3);
         dictionary.setStatus(1);
         dictionaryService.add(dictionary);
         return ResponseBean.success();
     }
 
     /**
-     * 編辑公司類型
+     * 編辑區域
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "編辑公司類型")
-    @RequiresPermissions({"departmentCategory:edit"})
+    @ApiOperation(value = "編辑區域")
+    @RequiresPermissions({"region:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) throws SystemException {
         Dictionary dictionary = dictionaryService.selectByPrimaryKey(id);
@@ -91,13 +91,13 @@ public class DepartmentCategoryController {
     }
 
     /**
-     * 更新公司類型
+     * 更新區域
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新公司類型失败", operation = "更新公司類型")
-    @ApiOperation(value = "更新公司類型")
-    @RequiresPermissions({"departmentCategory:update"})
+    @ControllerEndpoint(exceptionMessage = "更新區域失败", operation = "更新區域")
+    @ApiOperation(value = "更新區域")
+    @RequiresPermissions({"region:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated Dictionary dictionary) throws SystemException {
         dictionaryService.update(id, dictionary);
@@ -105,14 +105,14 @@ public class DepartmentCategoryController {
     }
 
     /**
-     * 删除公司類型
+     * 删除區域
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除公司類型失败", operation = "删除公司類型")
-    @ApiOperation(value = "删除公司類型")
-    @RequiresPermissions({"departmentCategory:delete"})
+    @ControllerEndpoint(exceptionMessage = "删除區域失败", operation = "删除區域")
+    @ApiOperation(value = "删除區域")
+    @RequiresPermissions({"region:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
         dictionaryService.delete(id);
@@ -124,13 +124,13 @@ public class DepartmentCategoryController {
      *
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有公司類型的excel表格")
+    @ApiOperation(value = "导出excel", notes = "导出所有區域的excel表格")
     @PostMapping("/excel")
-    @RequiresPermissions("departmentCategory:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出公司類型excel")
+    @RequiresPermissions("region:export")
+    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出區域excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> departmentCategoryList = this.dictionaryService.selectByType(1);
-        ExcelKit.$Export(Dictionary.class, response).downXlsx(departmentCategoryList, false);
+        List<Dictionary> regionList = this.dictionaryService.selectByType(3);
+        ExcelKit.$Export(Dictionary.class, response).downXlsx(regionList, false);
     }
 
 }

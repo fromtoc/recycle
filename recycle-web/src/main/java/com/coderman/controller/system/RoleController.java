@@ -27,7 +27,7 @@ import java.util.Map;
  * @Date 2020/3/9 16:21
  * @Version 1.0
  **/
-@Api(tags = "系统模块-角色相关接口")
+@Api(tags = "系统模塊-角色相关接口")
 @RestController
 @RequestMapping("/system/role")
 public class RoleController {

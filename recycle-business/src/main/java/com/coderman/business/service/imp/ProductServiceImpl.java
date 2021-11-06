@@ -138,7 +138,7 @@ public class ProductServiceImpl implements ProductService {
             product.setTwoCategoryId(categoryKeys[1]);
 //            product.setThreeCategoryId(categoryKeys[2]);
         }
-        product.setStatus(0);//2未審核
+        product.setStatus(1);//2未審核
         product.setPNum(UUID.randomUUID().toString().substring(0, 32));
         productMapper.insert(product);
     }

@@ -26,7 +26,7 @@ import java.util.List;
  * @Version 1.0
  **/
 @Slf4j
-@Api(tags = "系统模块-文件上传相关接口")
+@Api(tags = "系统模塊-文件上传相关接口")
 @RestController
 @RequestMapping("/system/upload")
 public class UploadController {

@@ -6,10 +6,10 @@ import com.coderman.common.enums.system.UserStatusEnum;
 import com.coderman.common.enums.system.UserTypeEnum;
 import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
-import com.coderman.common.model.system.Department;
-import com.coderman.common.model.system.Role;
-import com.coderman.common.model.system.User;
-import com.coderman.common.model.system.UserRole;
+import com.coderman.common.mapper.DictionaryMapper;
+import com.coderman.common.model.business.Supplier;
+import com.coderman.common.model.system.*;
+import com.coderman.common.response.ActiveUser;
 import com.coderman.common.vo.system.DeanVO;
 import com.coderman.common.vo.system.DepartmentVO;
 import com.coderman.common.vo.system.PageVO;
@@ -21,6 +21,7 @@ import com.coderman.system.mapper.UserRoleMapper;
 import com.coderman.system.service.DepartmentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private RoleMapper roleMapper;
 
+    @Autowired
+    private DictionaryMapper dictionaryMapper;
+
     /**
      * 系别列表
      *
@@ -74,9 +78,17 @@ public class DepartmentServiceImpl implements DepartmentService {
                 DepartmentVO d = new DepartmentVO();
                 BeanUtils.copyProperties(department, d);
                 Example o1 = new Example(User.class);
-                o1.createCriteria().andEqualTo("departmentId",department.getId())
+                o1.createCriteria().andEqualTo("departmentId", department.getId())
                         .andNotEqualTo("type", UserTypeEnum.SYSTEM_ADMIN.getTypeCode());
+                String typeName = dictionaryMapper.selectByPrimaryKey(d.getTypeId()).getValue();
+                if (d.getRegionId() != null) {
+                    String regionName = dictionaryMapper.selectByPrimaryKey(d.getRegionId()).getValue();
+                    d.setRegionName(regionName);
+                }
+                d.setTypeCodeName(typeName);
                 d.setTotal(userMapper.selectCountByExample(o1));
+                d.setStatus(department.getStatus() == 0 ? true : false);
+                d.setFood(department.getFood() == 1 ? true : false);
                 departmentVOS.add(d);
             }
         }
@@ -106,11 +118,11 @@ public class DepartmentServiceImpl implements DepartmentService {
                 for (UserRole userRole : userRoleList) {
                     userIds.add(userRole.getUserId());
                 }
-                if(userIds.size()>0){
+                if (userIds.size() > 0) {
                     for (Long userId : userIds) {
                         User user = userMapper.selectByPrimaryKey(userId);
                         //所有可用的
-                        if(user!=null&&user.getStatus()== UserStatusEnum.AVAILABLE.getStatusCode()){
+                        if (user != null && user.getStatus() == UserStatusEnum.AVAILABLE.getStatusCode()) {
                             DeanVO deanVO = new DeanVO();
                             deanVO.setName(user.getUsername());
                             deanVO.setId(user.getId());
@@ -125,44 +137,66 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     /**
      * 添加院系
+     *
      * @param departmentVO
      */
     @Override
     public void add(DepartmentVO departmentVO) {
         Department department = new Department();
-        BeanUtils.copyProperties(departmentVO,department);
+        BeanUtils.copyProperties(departmentVO, department);
+        Long typeId = departmentVO.getTypeId();
+        String code = dictionaryMapper.selectByPrimaryKey(typeId).getCode();
+        Long newNumber = 1L;
+        Example o = new Example(Department.class);
+        Example.Criteria criteria = o.createCriteria();
+        criteria.andEqualTo("typeId", typeId);
+        o.setOrderByClause("number desc");
+        List<Department> departments = departmentMapper.selectByExample(o);
+        if (!CollectionUtils.isEmpty(departments)) {
+            Long number = departments.get(0).getNumber();
+            newNumber = number + 1;
+        }
+        String pattern = "%03d";
+        String str = String.format(pattern, newNumber);
+
+        department.setTypeCode(code);
+        department.setNumber(newNumber);
+        department.setTypeNumber(code + str);
         department.setCreateTime(new Date());
         department.setModifiedTime(new Date());
+        department.setStatus(1);
         departmentMapper.insert(department);
     }
 
     /**
      * 編辑院系
+     *
      * @param id
      * @return
      */
     @Override
     public DepartmentVO edit(Long id) throws SystemException {
         Department department = departmentMapper.selectByPrimaryKey(id);
-        if(department==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"編辑的部門不存在");
+        if (department == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "編辑的部門不存在");
         }
         return DepartmentConverter.converterToDepartmentVO(department);
     }
 
     /**
      * 更新部門
+     *
      * @param id
      * @param departmentVO
      */
     @Override
     public void update(Long id, DepartmentVO departmentVO) throws SystemException {
         Department dbDepartment = departmentMapper.selectByPrimaryKey(id);
-        if(dbDepartment==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的部門不存在");
+        if (dbDepartment == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新的部門不存在");
         }
         Department department = new Department();
-        BeanUtils.copyProperties(departmentVO,department);
+        BeanUtils.copyProperties(departmentVO, department);
         department.setId(id);
         department.setModifiedTime(new Date());
         departmentMapper.updateByPrimaryKeySelective(department);
@@ -170,13 +204,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     /**
      * 删除部門信息
+     *
      * @param id
      */
     @Override
     public void delete(Long id) throws SystemException {
         Department department = departmentMapper.selectByPrimaryKey(id);
-        if(department==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的部門不存在");
+        if (department == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要删除的部門不存在");
         }
         departmentMapper.deleteByPrimaryKey(id);
     }
@@ -191,8 +226,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                 DepartmentVO d = new DepartmentVO();
                 BeanUtils.copyProperties(department, d);
                 Example o = new Example(User.class);
-                o.createCriteria().andEqualTo("departmentId",department.getId())
-                .andNotEqualTo("type",0);
+                o.createCriteria().andEqualTo("departmentId", department.getId())
+                        .andNotEqualTo("type", 0);
                 d.setTotal(userMapper.selectCountByExample(o));
                 departmentVOS.add(d);
             }
@@ -203,5 +238,41 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> findAll() {
         return departmentMapper.selectAll();
+    }
+
+    @Override
+    public void updateStatus(Long id, Boolean status) throws SystemException {
+        Department department = departmentMapper.selectByPrimaryKey(id);
+        if (department == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新状态的公司不存在");
+        }
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        if (department.getId().equals(activeUser.getUser().getId())) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "無法改變當前公司狀態");
+        } else {
+            Department t = new Department();
+            t.setId(id);
+            t.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
+                    UserStatusEnum.AVAILABLE.getStatusCode());
+            departmentMapper.updateByPrimaryKeySelective(t);
+        }
+    }
+
+    @Override
+    public void updateFood(Long id, Boolean food) throws SystemException {
+        Department department = departmentMapper.selectByPrimaryKey(id);
+        if (department == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新廚餘標記的公司不存在");
+        }
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        if (department.getId().equals(activeUser.getUser().getId())) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "無法改變當前公司廚餘標記");
+        } else {
+            Department t = new Department();
+            t.setId(id);
+            t.setFood(food ? UserStatusEnum.AVAILABLE.getStatusCode() :
+                    UserStatusEnum.DISABLE.getStatusCode());
+            departmentMapper.updateByPrimaryKeySelective(t);
+        }
     }
 }

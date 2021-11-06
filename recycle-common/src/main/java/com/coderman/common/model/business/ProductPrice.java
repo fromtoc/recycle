@@ -14,7 +14,15 @@ public class ProductPrice {
     @Id
     private Long id;
 
+    private Long oneCategoryId;
+
+    private Long twoCategoryId;
+
+    private Long threeCategoryId;
+
     private Long productId;
+
+    private String name;
 
     private BigDecimal price;
 

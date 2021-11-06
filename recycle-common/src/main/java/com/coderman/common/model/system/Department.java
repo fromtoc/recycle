@@ -17,10 +17,10 @@ public class Department {
     private Long id;
 
     @ExcelField(value = "公司類型id", width = 50)
-    private Long typeCode;
+    private Long typeId;
 
     @ExcelField(value = "公司類型名稱", width = 50)
-    private String typeName;
+    private String typeCode;
 
     @ExcelField(value = "流水編號", width = 50)
     private Long number;

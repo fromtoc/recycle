@@ -21,7 +21,7 @@ import java.util.List;
  * @Date 2020/3/16 20:18
  * @Version 1.0
  **/
-@Api(tags = "业务模块-物资来源相关接口")
+@Api(tags = "业务模塊-物资来源相关接口")
 @RestController
 @RequestMapping("/business/supplier")
 public class SupplierController {

@@ -26,7 +26,7 @@ import java.util.List;
  * @Date 2020/3/15 14:11
  * @Version 1.0
  **/
-@Api(tags = "系统模块-部門相关接口")
+@Api(tags = "系统模塊-部門相关接口")
 @RestController
 @RequestMapping("/system/department")
 public class DepartmentController {
@@ -141,6 +141,38 @@ public class DepartmentController {
     public void export(HttpServletResponse response) {
         List<Department> departments = this.departmentService.findAll();
         ExcelKit.$Export(Department.class, response).downXlsx(departments, false);
+    }
+
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新公司狀態失敗", operation = "公司|禁用/啟用")
+    @ApiOperation(value = "公司狀態", notes = "禁用和啟用这兩種狀態")
+    @RequiresPermissions({"department:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        departmentService.updateStatus(id, status);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 更新廚餘標記
+     *
+     * @param id
+     * @param food
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新廚餘標記失敗", operation = "廚餘|標記/移除標記")
+    @ApiOperation(value = "廚餘標記", notes = "廚餘標記")
+    @RequiresPermissions({"department:food"})
+    @PutMapping("/updateFood/{id}/{food}")
+    public ResponseBean updateFood(@PathVariable Long id, @PathVariable Boolean food) throws SystemException {
+        departmentService.updateFood(id, food);
+        return ResponseBean.success();
     }
 
 }

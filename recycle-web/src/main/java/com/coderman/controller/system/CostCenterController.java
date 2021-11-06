@@ -24,7 +24,7 @@ import java.util.List;
  * @Date 2020/3/15 14:11
  * @Version 1.0
  **/
-@Api(tags = "系统模块-成本中心相關接口")
+@Api(tags = "系统模塊-成本中心相關接口")
 @RestController
 @RequestMapping("/system/costCenter")
 public class CostCenterController {

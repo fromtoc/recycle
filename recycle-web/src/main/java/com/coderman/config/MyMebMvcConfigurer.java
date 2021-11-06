@@ -38,21 +38,21 @@ public class MyMebMvcConfigurer implements WebMvcConfigurer {
             logger.info("请求错误，url:{}", httpServletRequest.getRequestURL());
             if (e instanceof BusinessException) {
                 BusinessException businessException = (BusinessException) e;
-                logger.info("业务模块-错误码：{},错误信息:{}", businessException.getErrorCode(), businessException.getErrorMsg());
+                logger.info("业务模塊-错误码：{},错误信息:{}", businessException.getErrorCode(), businessException.getErrorMsg());
                 errorData.put("errorCode", businessException.getErrorCode());
                 errorData.put("errorMsg", businessException.getErrorMsg());
             }else if(e instanceof SystemException){
                 SystemException systemException = (SystemException) e;
-                logger.info("系统模块-错误码：{},错误信息:{}", systemException.getErrorCode(), systemException.getErrorMsg());
+                logger.info("系统模塊-错误码：{},错误信息:{}", systemException.getErrorCode(), systemException.getErrorMsg());
                 errorData.put("errorCode", systemException.getErrorCode());
                 errorData.put("errorMsg", systemException.getErrorMsg());
             } else if(e instanceof UnauthorizedException){
                 UnauthorizedException unauthorizedException = (UnauthorizedException) e;
-                logger.info("系统模块-错误码：{},错误信息:{}", HttpStatus.UNAUTHORIZED.value(), unauthorizedException.getMessage());
+                logger.info("系统模塊-错误码：{},错误信息:{}", HttpStatus.UNAUTHORIZED.value(), unauthorizedException.getMessage());
                 errorData.put("errorCode", HttpStatus.UNAUTHORIZED.value());
                 errorData.put("errorMsg", "服务器向你抛了一个异常,并表示（操作無权限）");
             }else if(e instanceof HttpRequestMethodNotSupportedException){
-                logger.info("系统模块-错误码：{},错误信息:{}", HttpStatus.BAD_REQUEST.value(), e.getMessage());
+                logger.info("系统模塊-错误码：{},错误信息:{}", HttpStatus.BAD_REQUEST.value(), e.getMessage());
                 errorData.put("errorCode", HttpStatus.BAD_REQUEST.value());
                 errorData.put("errorMsg", "不支持该http请求方式");
             }else if(e instanceof NoHandlerFoundException){

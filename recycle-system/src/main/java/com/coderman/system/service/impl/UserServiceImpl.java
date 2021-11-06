@@ -503,7 +503,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void assignProducts(Long id, Long[] pids) throws SystemException {
+    public void assignProducts(String id, Long[] pids) throws SystemException {
         //删除之前分配的
         Example o = new Example(CardProduct.class);
         o.createCriteria().andEqualTo("cardId", id);
