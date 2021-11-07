@@ -64,14 +64,14 @@ public interface RoleService {
     List<Role> findAll();
 
     /**
-     * 查询角色拥有的選單权限id
+     * 查询角色拥有的選單權限id
      * @param id
      * @return
      */
     List<Long> findMenuIdsByRoleId(Long id) throws SystemException;
 
     /**
-     * 角色授权
+     * 角色授權
      * @param mids
      */
     void authority(Long id,Long[] mids) throws SystemException;

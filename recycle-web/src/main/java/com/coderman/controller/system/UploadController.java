@@ -71,7 +71,7 @@ public class UploadController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "删除图片", notes = "删除数據库记录,删除图片服务器上的图片")
+    @ApiOperation(value = "删除图片", notes = "删除数據库记录,删除图片服務器上的图片")
     @RequiresPermissions("attachment:delete")
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {

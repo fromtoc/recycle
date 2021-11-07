@@ -36,7 +36,7 @@ public class InStockVO {
 
     private Date modified;
 
-    /** 该入库单的总数**/
+    /** 該入库单的总数**/
     private Integer productNumber;
 
 

@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * 自定义注解,用于标注在controller的方法上,异步记录日志
+ * 自定义注解,用于标注在controller的方法上,異步记录日志
  * create by zhangyukang
  */
 @Target(ElementType.METHOD)
@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
 public @interface ControllerEndpoint {
 
     String operation() default "";
-    String exceptionMessage() default "系统内部异常";
+    String exceptionMessage() default "系统内部異常";
 }

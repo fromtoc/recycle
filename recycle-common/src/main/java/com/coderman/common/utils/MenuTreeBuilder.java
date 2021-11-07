@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 该类用于递归构建树形選單
+ * 該类用于递归构建树形選單
  * Created by zhangyukang on 2020/2/6 15:34
  */
 public class MenuTreeBuilder {
@@ -49,7 +49,7 @@ public class MenuTreeBuilder {
         List<MenuNodeVO> childList = new ArrayList<MenuNodeVO>();
         for (MenuNodeVO nav : nodes) {
             // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
-            //相等说明：为该根節點的子節點。
+            //相等说明：为該根節點的子節點。
             if(nav.getParentId().equals(id)){
                 childList.add(nav);
             }

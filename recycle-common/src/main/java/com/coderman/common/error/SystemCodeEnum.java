@@ -10,10 +10,10 @@ public enum SystemCodeEnum  implements BaseError {
     TOKEN_ERROR(50001,"用戶未认证")
     ;
 
-    /** 错误码 */
+    /** 錯誤碼 */
     private int errorCode;
 
-    /** 错误描述 */
+    /** 錯誤描述 */
     private String errorMsg;
 
     SystemCodeEnum(int errorCode, String errorMsg) {

@@ -1,7 +1,7 @@
 package com.coderman.common.error;
 
 /**
- * 自定义的错误描述枚举类需实现该接口
+ * 自定义的錯誤描述枚举类需实现該接口
  * @Author zhangyukang
  * @Date 2020/3/1 14:49
  * @Version 1.0
@@ -9,20 +9,20 @@ package com.coderman.common.error;
 public interface BaseError {
 
     /**
-     * 获取错误码
+     * 获取錯誤碼
      * @return
      */
     int getErrorCode();
 
     /**
-     * 获取错误信息
+     * 获取錯誤信息
      * @return
      */
     String getErrorMsg();
 
 
     /**
-     * 设置错误信息
+     * 设置錯誤信息
      * @param message
      * @return
      */

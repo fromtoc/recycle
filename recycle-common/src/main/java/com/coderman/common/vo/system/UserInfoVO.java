@@ -28,7 +28,7 @@ public class UserInfoVO {
     @ApiModelProperty(value = "選單")
     private Set<String> url;
 
-    @ApiModelProperty(value = "权限")
+    @ApiModelProperty(value = "權限")
     private Set<String> perms;
 
     @ApiModelProperty(value = "角色集合")

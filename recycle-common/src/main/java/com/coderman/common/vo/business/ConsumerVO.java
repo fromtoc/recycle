@@ -30,13 +30,13 @@ public class ConsumerVO {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifiedTime;
 
-    @NotBlank(message = "联系人电话不能为空")
+    @NotBlank(message = "聯繫人电话不能为空")
     private String phone;
 
     @NotNull(message = "排序號不能为空")
     private  Integer sort;
 
-    @NotBlank(message = "联系人姓名不能为空")
+    @NotBlank(message = "聯繫人姓名不能为空")
     private String contact;
 
 }

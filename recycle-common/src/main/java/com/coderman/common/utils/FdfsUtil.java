@@ -72,7 +72,7 @@ public class FdfsUtil {
     }
 
     /**
-     * 将一段文本文件写到fastdfs的服务器上
+     * 将一段文本文件写到fastdfs的服務器上
      *
      * @param content
      * @param fileExtension
@@ -107,7 +107,7 @@ public class FdfsUtil {
             StorePath storePath = StorePath.praseFromUrl(fileUrl);
             storageClient.deleteFile(storePath.getGroup(), storePath.getPath());
         } catch (FdfsUnsupportStorePathException e) {
-            logger.warn("删除图片错误："+e.getMessage());
+            logger.warn("删除图片錯誤："+e.getMessage());
         }
     }
 

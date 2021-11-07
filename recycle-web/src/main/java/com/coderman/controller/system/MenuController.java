@@ -26,7 +26,7 @@ import java.util.Map;
  * @Date 2020/3/10 11:51
  * @Version 1.0
  **/
-@Api(tags = "系统模塊-選單权限相关接口")
+@Api(tags = "系统模塊-選單權限相关接口")
 @RequestMapping("/system/menu")
 @RestController
 public class MenuController {

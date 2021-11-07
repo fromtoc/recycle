@@ -33,7 +33,7 @@ public class ActiveUser {
      */
     private List<Menu> menus;
     /**
-     * 当前用戶具有的权限API:例如[user:add],[user:delete]...
+     * 当前用戶具有的權限API:例如[user:add],[user:delete]...
      */
     private Set<String> permissions;
 

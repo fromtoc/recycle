@@ -17,9 +17,9 @@ CREATE TABLE `biz_consumer` (
   `address` varchar(20) DEFAULT NULL COMMENT '地址',
   `create_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  `phone` varchar(20) DEFAULT NULL COMMENT '聯繫电话',
   `sort` int(11) DEFAULT NULL,
-  `contact` varchar(10) DEFAULT NULL COMMENT '联系人姓名',
+  `contact` varchar(10) DEFAULT NULL COMMENT '聯繫人姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
@@ -55,7 +55,7 @@ CREATE TABLE `biz_in_stock` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `in_num` varchar(36) DEFAULT NULL COMMENT '入库单编号',
   `type` int(2) DEFAULT NULL COMMENT '類型：1：捐赠，2：下拨，3：采购,4:退货入库',
-  `operator` varchar(20) DEFAULT NULL COMMENT '操作人员',
+  `operator` varchar(20) DEFAULT NULL COMMENT '操作人員',
   `create_time` datetime DEFAULT NULL COMMENT '入库单創建時間',
   `modified` datetime DEFAULT NULL COMMENT '入库单修改時間',
   `product_number` int(11) DEFAULT NULL COMMENT '物资总数',
@@ -69,7 +69,7 @@ CREATE TABLE `biz_in_stock` (
 
 /*Data for the table `biz_in_stock` */
 
-insert  into `biz_in_stock`(`id`,`in_num`,`type`,`operator`,`create_time`,`modified`,`product_number`,`supplier_id`,`remark`,`status`) values (84,'a2ea9b97-ad12-4d85-a9b4-1a644d86',2,'zhangyukang','2020-05-09 20:01:48','2020-05-09 20:01:48',13,15,'333333',0),(85,'78473f1a-405a-4f5e-b08c-42a7b2e8',2,'zhangyukang','2020-05-10 09:27:45','2020-05-10 09:27:45',48,14,'324324242424',0),(86,'31ff3701-c44f-4b98-91e0-1d41d8b2',1,'zhangyukang','2020-05-11 09:59:30','2020-05-11 09:59:30',51,15,'32424',0),(87,'38ed0881-20ed-4cec-a321-eb8f4c3b',1,'zhangyukang','2020-05-11 10:04:05','2020-05-11 10:04:05',30,15,'232323232',0),(90,'db1c2afe-8117-43fd-adf7-866ef7e4',1,'系统测试人员','2020-05-18 10:11:11','2020-05-16 17:37:12',4,15,'2222222',0),(91,'df793f2b-ea13-4d93-b22c-60454f32',2,'系统测试人员','2020-05-18 10:11:09','2020-05-18 10:11:00',25,15,'2342424',0),(92,'c2054c39-a88b-4f47-9f9e-5c57f9e6',1,'系统测试人员','2020-05-18 10:42:04','2020-05-18 10:41:55',3,15,'222222',0),(93,'08a51486-49e9-402e-a10e-3e6a45df',1,'系统测试人员','2020-05-18 11:01:16','2020-05-18 11:01:09',4,15,'2222222',0),(99,'bb5de246-bd56-4987-b027-8fbcf3c3',2,'系统测试人员','2020-05-18 12:21:41','2020-05-18 11:43:49',6,19,'33333',0),(100,'7657f747-ab27-49d7-b1ce-d6d47ecf',1,'系统测试人员','2020-05-18 12:21:40','2020-05-18 12:21:29',2,20,'23432424',1),(101,'03fbc3b3-e28b-418c-a457-87c376c3',1,'系统测试人员','2020-05-18 13:16:38','2020-05-18 13:16:28',12,21,'454545454545',0),(102,'d83621b8-b5c7-4499-a8a0-56af2849',1,'系统测试人员','2020-05-18 13:18:51','2020-05-18 13:18:41',18,17,'33333',0),(103,'51fa7a04-535f-43b5-8972-23d0e55a',1,'系统测试人员','2020-05-18 13:42:41','2020-05-18 13:42:29',6,22,'222222',1),(104,'c96eaa3e-22ee-4f6b-98bd-87d34372',1,'zhangyukang','2020-05-24 21:46:16','2020-05-24 21:46:06',6,15,'432424',1),(105,'5ad278ed-ce30-4f0d-bb67-7f9070fc',1,'zhangyukang','2020-05-25 11:45:10','2020-05-25 10:27:06',6,15,'32432424',0),(106,'efeef1d2-b8c9-4eb5-8ea2-b0695fb9',1,'zhangyukang','2020-05-26 09:35:23','2020-05-26 09:35:17',10,17,'2342424',0),(107,'4d7d332469eb4f2987cbc38fea2b',1,'admin','2020-12-17 19:27:30','2020-12-17 19:26:39',1,14,'2313123',0),(108,'69edf117b8dd478abc37d33bca41',2,'admin','2020-12-17 19:30:44','2020-12-17 19:28:52',6,15,'231313',0),(109,'5e69ad91b41a439b8b4a809e84b4',4,'admin','2020-12-17 19:30:42','2020-12-17 19:30:28',9,14,'232323',0),(110,'532f9951e1d54f4f98263002bea6',1,'admin','2020-12-17 21:00:57','2020-12-17 21:00:50',2,15,'33333',0);
+insert  into `biz_in_stock`(`id`,`in_num`,`type`,`operator`,`create_time`,`modified`,`product_number`,`supplier_id`,`remark`,`status`) values (84,'a2ea9b97-ad12-4d85-a9b4-1a644d86',2,'zhangyukang','2020-05-09 20:01:48','2020-05-09 20:01:48',13,15,'333333',0),(85,'78473f1a-405a-4f5e-b08c-42a7b2e8',2,'zhangyukang','2020-05-10 09:27:45','2020-05-10 09:27:45',48,14,'324324242424',0),(86,'31ff3701-c44f-4b98-91e0-1d41d8b2',1,'zhangyukang','2020-05-11 09:59:30','2020-05-11 09:59:30',51,15,'32424',0),(87,'38ed0881-20ed-4cec-a321-eb8f4c3b',1,'zhangyukang','2020-05-11 10:04:05','2020-05-11 10:04:05',30,15,'232323232',0),(90,'db1c2afe-8117-43fd-adf7-866ef7e4',1,'系统测试人員','2020-05-18 10:11:11','2020-05-16 17:37:12',4,15,'2222222',0),(91,'df793f2b-ea13-4d93-b22c-60454f32',2,'系统测试人員','2020-05-18 10:11:09','2020-05-18 10:11:00',25,15,'2342424',0),(92,'c2054c39-a88b-4f47-9f9e-5c57f9e6',1,'系统测试人員','2020-05-18 10:42:04','2020-05-18 10:41:55',3,15,'222222',0),(93,'08a51486-49e9-402e-a10e-3e6a45df',1,'系统测试人員','2020-05-18 11:01:16','2020-05-18 11:01:09',4,15,'2222222',0),(99,'bb5de246-bd56-4987-b027-8fbcf3c3',2,'系统测试人員','2020-05-18 12:21:41','2020-05-18 11:43:49',6,19,'33333',0),(100,'7657f747-ab27-49d7-b1ce-d6d47ecf',1,'系统测试人員','2020-05-18 12:21:40','2020-05-18 12:21:29',2,20,'23432424',1),(101,'03fbc3b3-e28b-418c-a457-87c376c3',1,'系统测试人員','2020-05-18 13:16:38','2020-05-18 13:16:28',12,21,'454545454545',0),(102,'d83621b8-b5c7-4499-a8a0-56af2849',1,'系统测试人員','2020-05-18 13:18:51','2020-05-18 13:18:41',18,17,'33333',0),(103,'51fa7a04-535f-43b5-8972-23d0e55a',1,'系统测试人員','2020-05-18 13:42:41','2020-05-18 13:42:29',6,22,'222222',1),(104,'c96eaa3e-22ee-4f6b-98bd-87d34372',1,'zhangyukang','2020-05-24 21:46:16','2020-05-24 21:46:06',6,15,'432424',1),(105,'5ad278ed-ce30-4f0d-bb67-7f9070fc',1,'zhangyukang','2020-05-25 11:45:10','2020-05-25 10:27:06',6,15,'32432424',0),(106,'efeef1d2-b8c9-4eb5-8ea2-b0695fb9',1,'zhangyukang','2020-05-26 09:35:23','2020-05-26 09:35:17',10,17,'2342424',0),(107,'4d7d332469eb4f2987cbc38fea2b',1,'admin','2020-12-17 19:27:30','2020-12-17 19:26:39',1,14,'2313123',0),(108,'69edf117b8dd478abc37d33bca41',2,'admin','2020-12-17 19:30:44','2020-12-17 19:28:52',6,15,'231313',0),(109,'5e69ad91b41a439b8b4a809e84b4',4,'admin','2020-12-17 19:30:42','2020-12-17 19:30:28',9,14,'232323',0),(110,'532f9951e1d54f4f98263002bea6',1,'admin','2020-12-17 21:00:57','2020-12-17 21:00:50',2,15,'33333',0);
 
 /*Table structure for table `biz_in_stock_info` */
 
@@ -158,7 +158,7 @@ CREATE TABLE `biz_supplier` (
   `create_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
   `sort` int(10) DEFAULT NULL COMMENT '排序',
-  `contact` varchar(20) DEFAULT NULL COMMENT '联系人',
+  `contact` varchar(20) DEFAULT NULL COMMENT '聯繫人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
@@ -274,11 +274,11 @@ CREATE TABLE `tb_user` (
   `department_id` bigint(20) DEFAULT '1' COMMENT '公司id',
   `email` varchar(128) DEFAULT NULL COMMENT '信箱',
   `status` int(1) NOT NULL COMMENT '状态 0锁定 1有效',
-  `password` varchar(128) NOT NULL COMMENT '密码',
+  `password` varchar(128) NOT NULL COMMENT '密碼',
   `salt` varchar(255) DEFAULT NULL COMMENT '盐',
-  `type` int(11) NOT NULL DEFAULT '1' COMMENT '0:超级管理员，1：系统用户',
+  `type` int(11) NOT NULL DEFAULT '1' COMMENT '0:超级管理員，1：系统用户',
   `avatar` text COMMENT '頭像',
-  `phone_number` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  `phone_number` varchar(20) DEFAULT NULL COMMENT '聯繫电话',
   `create_time` datetime NOT NULL COMMENT '創建時間',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   `sex` int(1) DEFAULT NULL COMMENT '性别 0男 1女 2保密',
@@ -295,7 +295,7 @@ DROP TABLE IF EXISTS `tb_user_card`;
 CREATE TABLE `tb_user_card` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `card_id` varchar(100) NOT NULL,
+  `card_name` varchar(100) NOT NULL,
   `status` int(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -359,9 +359,9 @@ CREATE TABLE `tb_weight` (
   `user_id` bigint(20) NOT NULL,
   `card_id` varchar(100) NOT NULL,
   `product_id` bigint(20) NOT NULL,
-  `total_weight` double DEFAULT NULL,
-  `deduct_weight` double DEFAULT NULL,
-  `net_weight` double DEFAULT NULL,
+  `total_weight` decimal(20,6) DEFAULT NULL,
+  `deduct_weight` decimal(20,6) DEFAULT NULL,
+  `net_weight` decimal(20,6) DEFAULT NULL,
   `status` int(2) NOT NULL,
   `create_time` datetime NOT NULL COMMENT '創建時間',
   PRIMARY KEY (`id`)

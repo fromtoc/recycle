@@ -15,7 +15,7 @@ import java.util.List;
 public interface LogService  {
 
     /**
-     * 异步保存操作日志
+     * 異步保存操作日志
      */
     @Async("CodeAsyncThreadPool")
     void saveLog(Log log);

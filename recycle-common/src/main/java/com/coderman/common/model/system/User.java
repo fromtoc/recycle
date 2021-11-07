@@ -25,7 +25,7 @@ public class User {
     @ExcelField(value = "信箱", width = 150)
     private String email;
 
-    @ExcelField(value = "电话號码", width = 100)
+    @ExcelField(value = "电话號碼", width = 100)
     private String phoneNumber;
 
     private Integer status;
@@ -44,18 +44,18 @@ public class User {
     )
     private Integer sex;
 
-    @ExcelField(value = "密码盐值", width = 100)
+    @ExcelField(value = "密碼盐值", width = 100)
     private String salt;
 
     @ExcelField(//
             value = "用戶类型",
-            readConverterExp = "超级管理员=0,普通用戶=1",
-            writeConverterExp = "0=超级管理员,1=普通用戶"
+            readConverterExp = "超级管理員=0,普通用戶=1",
+            writeConverterExp = "0=超级管理員,1=普通用戶"
             ,width = 80
     )
     private Integer type;
 
-    @ExcelField(value = "用戶密码", width = 100)
+    @ExcelField(value = "用戶密碼", width = 100)
     private String password;
 
     @ExcelField(value = "出生日期", dateFormat = "yyyy/MM/dd",width = 100)

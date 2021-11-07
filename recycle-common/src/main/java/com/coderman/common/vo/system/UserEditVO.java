@@ -23,10 +23,10 @@ public class UserEditVO {
     @NotBlank(message = "昵稱不能为空")
     private String nickname;
 
-    @Email(message = "请输入正确的邮箱格式")
+    @Email(message = "請输入正确的邮箱格式")
     private String email;
 
-    @NotBlank(message = "电话號码不能为空")
+    @NotBlank(message = "电话號碼不能为空")
     private String phoneNumber;
 
     @NotNull(message = "性别不能为空")

@@ -28,7 +28,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
 
 
     /**
-     * 认证之前执行该方法
+     * 认证之前执行該方法
      * @param request
      * @param response
      * @param mappedValue
@@ -41,7 +41,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     }
 
     /**
-     * 认证未通过执行该方法
+     * 认证未通过执行該方法
      * @param request
      * @param response
      * @return
@@ -49,12 +49,12 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response){
         //完成token登入
-        //1.检查请求头中是否含有token
+        //1.检查請求头中是否含有token
         HttpServletRequest httpServletRequest= (HttpServletRequest) request;
         String token = httpServletRequest.getHeader("Authorization");
-        //2. 如果客戶端没有携带token，拦下请求
+        //2. 如果客戶端没有携带token，拦下請求
         if(null==token||"".equals(token)){
-            responseTokenError(response,"Token無效，您無权访问该接口");
+            responseTokenError(response,"Token無效，您無權访问該接口");
             return false;
         }
         //3. 如果有，对进行进行token验证
@@ -80,7 +80,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("Origin"));
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletRequest.getHeader("Access-Control-Request-Headers"));
-        // 跨域時会首先发送一个option请求，这里我们给option请求直接返回正常状态
+        // 跨域時会首先发送一个option請求，这里我们给option請求直接返回正常状态
         if (httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
             httpServletResponse.setStatus(HttpStatus.OK.value());
             return false;
@@ -88,7 +88,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         return super.preHandle(request, response);
     }
     /**
-     * 無需转发，直接返回Response信息 Token认证错误
+     * 無需转发，直接返回Response信息 Token认证錯誤
      */
     private void responseTokenError(ServletResponse response, String msg) {
         HttpServletResponse httpServletResponse = WebUtils.toHttp(response);

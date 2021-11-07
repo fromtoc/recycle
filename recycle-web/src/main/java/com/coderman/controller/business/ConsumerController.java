@@ -21,7 +21,7 @@ import java.util.List;
  * @Date 2020/3/16 20:18
  * @Version 1.0
  **/
-@Api(tags = "业务模塊-物资去向相关接口")
+@Api(tags = "業務模塊-物资去向相关接口")
 @RestController
 @RequestMapping("/business/consumer")
 public class ConsumerController {

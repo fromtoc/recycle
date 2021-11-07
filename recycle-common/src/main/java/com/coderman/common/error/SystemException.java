@@ -9,13 +9,13 @@ public class SystemException extends Exception implements BaseError{
     //所有实现了BaseError的ErrorEnum.
     private BaseError baseError;
 
-    //直接构造错误消息的构造异常
+    //直接构造錯誤消息的构造異常
     public SystemException(BaseError baseError){
         super(baseError.getErrorMsg());
         this.baseError=baseError;
     }
 
-    //自定义错误消息的构造异常
+    //自定义錯誤消息的构造異常
     public SystemException(BaseError baseError,String customErrorMessage){
         super(customErrorMessage);
         this.baseError=baseError;

@@ -66,13 +66,13 @@ public class ControllerEndpointAspect extends AspectSupport {
             sysLog.setOperation(operation);
         }
 
-        //请求的参数
+        //請求的参数
         Object[] args = joinPoint.getArgs();
         LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
         String[] paramNames = u.getParameterNames(method);
         sysLog.setParams("paramName:"+ Arrays.toString(paramNames) +",args:"+ Arrays.toString(args));
 
-        //请求的IP
+        //請求的IP
         HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         String ipAddr = IPUtil.getIpAddr(request);
         sysLog.setIp(ipAddr);
@@ -85,7 +85,7 @@ public class ControllerEndpointAspect extends AspectSupport {
         sysLog.setCreateTime(new Date());
         //执行目标方法
         result=joinPoint.proceed();
-        //请求的方法名
+        //請求的方法名
         String className = joinPoint.getTarget().getClass().getName();
         String methodName = signature.getName();
         sysLog.setMethod(className + "." + methodName + "()\n"

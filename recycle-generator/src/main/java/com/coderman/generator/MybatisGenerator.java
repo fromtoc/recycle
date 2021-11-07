@@ -25,6 +25,6 @@ public class MybatisGenerator {
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
-        System.out.println("代码生成成功");
+        System.out.println("代碼生成成功");
     }
 }

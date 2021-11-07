@@ -17,7 +17,7 @@ public class UserLoginDTO {
     @NotBlank(message = "用戶名不能为空")
     @ApiModelProperty(value = "用戶名")
     private String username;
-    @NotBlank(message = "密码不能为空")
-    @ApiModelProperty(value = "密码")
+    @NotBlank(message = "密碼不能为空")
+    @ApiModelProperty(value = "密碼")
     private String password;
 }

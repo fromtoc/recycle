@@ -14,7 +14,7 @@ public class UserCard {
 
     private Long userId;
 
-    private String cardId;
+    private String cardName;
 
     private Integer status;
 }

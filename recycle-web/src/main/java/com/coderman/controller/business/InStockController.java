@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2020/3/19 09:53
  * @Version 1.0
  **/
-@Api(tags = "业务模塊-物资入库相关接口")
+@Api(tags = "業務模塊-物资入库相关接口")
 @RestController
 @RequestMapping("/business/inStock")
 public class InStockController {
@@ -59,7 +59,7 @@ public class InStockController {
      * @param inStockVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单申请失败", operation = "入库单申请")
+    @ControllerEndpoint(exceptionMessage = "入库单申請失败", operation = "入库单申請")
     @ApiOperation(value = "物资入库")
     @PostMapping("/addIntoStock")
     @RequiresPermissions({"inStock:in"})
@@ -75,13 +75,13 @@ public class InStockController {
                 throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"邮箱不能为空");
             }
             if("".equals(supplierVO.getContact())||supplierVO.getContact()==null){
-                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"联系人不能为空");
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"聯繫人不能为空");
             }
             if("".equals(supplierVO.getAddress())||supplierVO.getAddress()==null){
                 throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"地址不能为空");
             }
             if("".equals(supplierVO.getPhone())||supplierVO.getPhone()==null){
-                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"联系方式不能为空");
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"聯繫方式不能为空");
             }
             if(supplierVO.getSort()==null){
                 throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"排序不能为空");

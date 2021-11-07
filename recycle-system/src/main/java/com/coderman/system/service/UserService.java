@@ -49,7 +49,7 @@ public interface UserService {
      * @param cardId 卡片ID
      * @return
      */
-    void addUserCard(Long userId, String cardId) throws SystemException;
+    int addUserCard(Long userId, String cardId) throws SystemException;
 
     /**
      * 根據用戶角色查询用戶的選單

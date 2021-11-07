@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     public List<Role> findRolesById(Long id) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if (dbUser == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该用戶不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶不存在");
         }
         List<Role> roles = new ArrayList<>();
         UserRole t = new UserRole();
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
     public List<UserCard> findCardsById(Long id) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if (dbUser == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该用戶不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶不存在");
         }
         UserCard t = new UserCard();
         t.setUserId(dbUser.getId());
@@ -148,16 +148,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserCard(Long userId, String cardId) throws SystemException {
+    public int addUserCard(Long userId, String cardName) throws SystemException {
+        Example o = new Example(UserCard.class);
+        o.createCriteria().andEqualTo("cardName", cardName);
+        List<UserCard> userCardList = userCardMapper.selectByExample(o);
+        if (!CollectionUtils.isEmpty(userCardList)){
+            return 0;
+        }
         UserCard userCard = new UserCard();
         userCard.setUserId(userId);
-        userCard.setCardId(cardId);
+        userCard.setCardName(cardName);
         userCard.setStatus(1);
-        userCardMapper.insert(userCard);
+        return userCardMapper.insert(userCard);
     }
 
     /**
-     * 查询权限
+     * 查询權限
      *
      * @param roles 用戶的角色
      * @return
@@ -169,7 +175,7 @@ public class UserServiceImpl implements UserService {
             Set<Long> menuIds = new HashSet<>();//存放用戶的選單id
             List<RoleMenu> roleMenus;
             for (Role role : roles) {
-                //根據角色ID查询权限ID
+                //根據角色ID查询權限ID
                 Example o = new Example(RoleMenu.class);
                 o.createCriteria().andEqualTo("roleId", role.getId());
                 roleMenus = roleMenuMapper.selectByExample(o);
@@ -181,7 +187,7 @@ public class UserServiceImpl implements UserService {
             }
             if (!CollectionUtils.isEmpty(menuIds)) {
                 for (Long menuId : menuIds) {
-                    //该用戶所有的選單
+                    //該用戶所有的選單
                     Menu menu = menuMapper.selectByPrimaryKey(menuId);
                     if (menu != null) {
                         menus.add(menu);
@@ -203,7 +209,7 @@ public class UserServiceImpl implements UserService {
         List<MenuNodeVO> menuNodeVOS = new ArrayList<>();
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         if (activeUser.getUser().getType() == UserTypeEnum.SYSTEM_ADMIN.getTypeCode()) {
-            //超级管理员
+            //超级管理員
             menus = menuMapper.selectAll();
         } else if (activeUser.getUser().getType() == UserTypeEnum.SYSTEM_USER.getTypeCode()) {
             //普通系统用戶
@@ -328,11 +334,11 @@ public class UserServiceImpl implements UserService {
         o.createCriteria().andEqualTo("username", username);
         int i = userMapper.selectCountByExample(o);
         if (i != 0) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该用戶名已被占用");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名已被占用");
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if (department == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部門不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該部門不存在");
         }
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
@@ -364,14 +370,14 @@ public class UserServiceImpl implements UserService {
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if (department == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该部門不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該部門不存在");
         }
         Example o = new Example(User.class);
         o.createCriteria().andEqualTo("username", username);
         List<User> users = userMapper.selectByExample(o);
         if (!CollectionUtils.isEmpty(users)) {
             if (!users.get(0).getId().equals(id)) {
-                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该用戶名已被占用");
+                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名已被占用");
             }
         }
         User user = new User();
@@ -447,7 +453,7 @@ public class UserServiceImpl implements UserService {
     public List<Long> roles(Long id) throws SystemException {
         User user = userMapper.selectByPrimaryKey(id);
         if (user == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "该用戶不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶不存在");
         }
         Example o = new Example(UserRole.class);
         o.createCriteria().andEqualTo("userId", user.getId());
@@ -487,11 +493,11 @@ public class UserServiceImpl implements UserService {
             for (Long rid : rids) {
                 Role role = roleMapper.selectByPrimaryKey(rid);
                 if (role == null) {
-                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleId=" + rid + ",该角色不存在");
+                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleId=" + rid + ",該角色不存在");
                 }
                 //判断角色状态
                 if (role.getStatus() == 0) {
-                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleName=" + role.getRoleName() + ",该角色已禁用");
+                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleName=" + role.getRoleName() + ",該角色已禁用");
                 }
                 UserRole userRole = new UserRole();
                 userRole.setUserId(id);

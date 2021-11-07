@@ -9,7 +9,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
  **/
 public class MD5Utils {
     /**
-     * 密码加密
+     * 密碼加密
      * @return
      */
     public static String md5Encryption(String source,String salt){

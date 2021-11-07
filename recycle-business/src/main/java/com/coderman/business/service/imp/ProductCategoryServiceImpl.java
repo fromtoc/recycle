@@ -119,7 +119,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public void delete(Long id) throws BusinessException {
         ProductCategory category = productCategoryMapper.selectByPrimaryKey(id);
         if(null==category){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"该分类不存在");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分类不存在");
         }else {
             //检查是否存在子分类
             Example o = new Example(ProductCategory.class);
@@ -128,13 +128,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             if(childCount!=0){
                 throw  new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"存在子節點,無法直接删除");
             }
-            //检查该分类是否有物资引用
+            //检查該分类是否有物资引用
             Example o1 = new Example(Product.class);
             o1.createCriteria().andEqualTo("oneCategoryId",id)
                     .orEqualTo("twoCategoryId",id)
                     .orEqualTo("threeCategoryId",id);
            if(productMapper.selectCountByExample(o1)!=0){
-               throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"该分类存在物资引用,無法直接删除");
+               throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分类存在物资引用,無法直接删除");
            }
             productCategoryMapper.deleteByPrimaryKey(id);
         }

@@ -42,13 +42,13 @@ public class RoleController {
 
 
     /**
-     * 角色授权
+     * 角色授權
      *
      * @param mids
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "角色授权失败", operation = "角色授权")
-    @ApiOperation(value = "角色授权")
+    @ControllerEndpoint(exceptionMessage = "角色授權失败", operation = "角色授權")
+    @ApiOperation(value = "角色授權")
     @RequiresPermissions({"role:authority"})
     @PostMapping("/authority/{id}")
     public ResponseBean authority(@PathVariable Long id, @RequestBody Long[] mids) throws SystemException {
@@ -57,7 +57,7 @@ public class RoleController {
     }
 
     /**
-     * 角色拥有的選單权限id和選單树
+     * 角色拥有的選單權限id和選單树
      *
      * @param id
      * @return

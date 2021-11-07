@@ -30,7 +30,7 @@ public class UserRealm extends AuthorizingRealm {
     private UserService userService;
 
     /**
-     * 大坑！，必须重写此方法，不然Shiro会报错
+     * 大坑！，必须重写此方法，不然Shiro会报錯
      */
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -38,7 +38,7 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 只有当需要检测用戶权限的時候才会调用此方法，例如checkRole,checkPermission之类的
+     * 只有当需要检测用戶權限的時候才会调用此方法，例如checkRole,checkPermission之类的
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -51,13 +51,13 @@ public class UserRealm extends AuthorizingRealm {
         }else {
             List<String> permissions = new ArrayList<>(activeUser.getPermissions());
             List<Role> roleList = activeUser.getRoles();
-            //授权角色
+            //授權角色
             if (!CollectionUtils.isEmpty(roleList)) {
                 for (Role role : roleList) {
                     authorizationInfo.addRole(role.getRoleName());
                 }
             }
-            //授权权限
+            //授權權限
             if (!CollectionUtils.isEmpty(permissions)) {
                 for (String  permission : permissions) {
                     if (permission != null && !"".equals(permission)) {
@@ -70,7 +70,7 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 默认使用此方法进行用戶名正确与否验证，错误抛出异常即可。
+     * 默认使用此方法进行用戶名正确与否验证，錯誤抛出異常即可。
      */
     @SneakyThrows
     @Override
@@ -80,7 +80,7 @@ public class UserRealm extends AuthorizingRealm {
         String username = JWTUtils.getUsername(token);
 
         if (username == null) {
-            throw new AuthenticationException(" token错误，请重新登入！");
+            throw new AuthenticationException(" token錯誤，請重新登入！");
         }
 
         User userBean = userService.findUserByName(username);
@@ -89,11 +89,11 @@ public class UserRealm extends AuthorizingRealm {
             throw new AccountException("账號不存在!");
         }
         if(JWTUtils.isExpire(token)){
-            throw new AuthenticationException(" token过期，请重新登入！");
+            throw new AuthenticationException(" token过期，請重新登入！");
         }
 
         if (! JWTUtils.verify(token, username, userBean.getPassword())) {
-            throw new CredentialsException("密码错误!");
+            throw new CredentialsException("密碼錯誤!");
         }
 
         if(userBean.getStatus()==0){
@@ -119,7 +119,7 @@ public class UserRealm extends AuthorizingRealm {
                 }
             }
         }
-        //过滤出url,和用戶的权限
+        //过滤出url,和用戶的權限
         ActiveUser activeUser = new ActiveUser();
         activeUser.setRoles(roles);
         activeUser.setUser(userBean);

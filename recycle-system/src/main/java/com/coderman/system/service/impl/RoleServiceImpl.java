@@ -77,7 +77,7 @@ public class RoleServiceImpl implements RoleService {
         o.createCriteria().andEqualTo("roleName",roleName);
         int i = roleMapper.selectCountByExample(o);
         if(i!=0){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该角色名已被占用");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"該角色名已被占用");
         }
         Role role = new Role();
         BeanUtils.copyProperties(roleVO,role);
@@ -139,7 +139,7 @@ public class RoleServiceImpl implements RoleService {
         if(!CollectionUtils.isEmpty(roles)){
             Role role = roles.get(0);
             if(!role.getId().equals(id)){
-                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该角色名已被占用");
+                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"該角色名已被占用");
             }
         }
         Role role = new Role();
@@ -172,7 +172,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * 获取角色已有权限id
+     * 获取角色已有權限id
      * @param id
      * @return
      */
@@ -180,7 +180,7 @@ public class RoleServiceImpl implements RoleService {
     public List<Long> findMenuIdsByRoleId(Long id) throws SystemException {
         Role role = roleMapper.selectByPrimaryKey(id);
         if(role==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该角色已不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"該角色已不存在");
         }
         List<Long> ids=new ArrayList<>();
         Example o = new Example(RoleMenu.class);
@@ -195,7 +195,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * 角色授权
+     * 角色授權
      * @param id
      * @param mids
      */
@@ -204,9 +204,9 @@ public class RoleServiceImpl implements RoleService {
     public void authority(Long id,Long[] mids) throws SystemException {
         Role role = roleMapper.selectByPrimaryKey(id);
         if(role==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该角色不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"該角色不存在");
         }
-        //先删除原来的权限
+        //先删除原来的權限
         Example o = new Example(RoleMenu.class);
         o.createCriteria().andEqualTo("roleId",id);
         roleMenuMapper.deleteByExample(o);
@@ -215,7 +215,7 @@ public class RoleServiceImpl implements RoleService {
             for (Long mid : mids) {
                 Menu menu = menuMapper.selectByPrimaryKey(mid);
                 if(menu==null){
-                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"menuId="+mid+",選單权限不存在");
+                    throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"menuId="+mid+",選單權限不存在");
                 }else {
                     RoleMenu roleMenu = new RoleMenu();
                     roleMenu.setRoleId(id);

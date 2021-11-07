@@ -64,7 +64,7 @@ public class UserController {
      *
      * @return
      */
-    @ApiOperation(value = "用戶登入", notes = "接收参数用戶名和密码,登入成功后,返回JWTToken")
+    @ApiOperation(value = "用戶登入", notes = "接收参数用戶名和密碼,登入成功后,返回JWTToken")
     @PostMapping("/login")
     public ResponseBean<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) throws SystemException {
         String token=userService.login(userLoginDTO.getUsername(),userLoginDTO.getPassword());
@@ -312,7 +312,7 @@ public class UserController {
             UserCardVO vo = new UserCardVO();
             vo.setId(c.getId());
             vo.setUserId(c.getUserId());
-            vo.setCardId(c.getCardId());
+            vo.setCardName(c.getCardName());
             vo.setStatus(c.getStatus()==0);
             list.add(vo);
         }
@@ -327,7 +327,10 @@ public class UserController {
     @ApiOperation(value = "添加用戶卡片", notes = "添加用戶卡片")
     @PutMapping("/card/add/{userId}/{cardId}")
     public ResponseBean addUserCard(@PathVariable Long userId, @PathVariable String cardId) throws SystemException {
-        userService.addUserCard(userId, cardId);
+        int insert = userService.addUserCard(userId, cardId);
+        if (insert==0) {
+            return ResponseBean.error("請確認卡號是否重複");
+        }
         return ResponseBean.success();
     }
 

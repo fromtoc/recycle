@@ -19,8 +19,8 @@
 
 ---
 
->该项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模塊和业务模塊,业务模塊是处理疫情期間,物资的发放,物资入库,以及查看物资的库存等.
-系统模塊是一个后台通用的RBAC权限模塊,可以精确的控制到后台API级别的权限控制,项目不定期更新中.武汉加油~~
+>該项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模塊和業務模塊,業務模塊是处理疫情期間,物资的发放,物资入库,以及查看物资的库存等.
+系统模塊是一个后台通用的RBAC權限模塊,可以精确的控制到后台API级别的權限控制,项目不定期更新中.武汉加油~~
 开发模式:前后端分离,前端负责数據渲染,后端返回数據。
 
 
@@ -28,12 +28,12 @@
 
 #### 模塊划分
 
-- recycle-business: 业务模塊,所有与业务相关的代码放在此工程中。
-- recycle-system: 系统模塊,权限控制相关的代码放在此工程中。
+- recycle-business: 業務模塊,所有与業務相关的代碼放在此工程中。
+- recycle-system: 系统模塊,權限控制相关的代碼放在此工程中。
 - recycle-common: 公共模塊,存放工具类、领域模型（DTO）、数據模型对象(DO)一些通用的类。
-- recycle-generator: 代码生成器，生成Controller,Service,ServiceImpl,以及前端代码。
-- recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  启动该项目。
-- recycle-web: 处理前端请求的Controller,放在此工程中。
+- recycle-generator: 代碼生成器，生成Controller,Service,ServiceImpl,以及前端代碼。
+- recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  启动該项目。
+- recycle-web: 处理前端請求的Controller,放在此工程中。
 
 #### 技术栈
 
@@ -61,7 +61,7 @@ SpringBoot, Shiro ,Swagger-UI,mybatis,JWT,Mysql,通用mapper,Vue.js+element-ui,F
 
 ### 打赏作者
 
-> 一分一毛也是爱,用于服务器维护. 欢迎大家提意哦见~
+> 一分一毛也是爱,用于服務器维护. 欢迎大家提意哦见~
 
 
 ![](http://myforum.oss-cn-beijing.aliyuncs.com/postImages/15906789481049ab74aee-3679-4de1-b252-d9fbdda90a08pay.PNG?Expires=1685286948&OSSAccessKeyId=LTAI4FsV5R1tnt8W8kqFqBYh&Signature=yvXZZiVP1pYWeIMkKBILRcHWkHg%3D)

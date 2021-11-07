@@ -50,10 +50,10 @@ public class OutStockVO {
     //地址
     private String address;
 
-    //联系电话
+    //聯繫电话
     private String phone;
 
-    //联系人
+    //聯繫人
     private String contact;
 
     //排序

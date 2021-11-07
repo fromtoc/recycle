@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
- * 随机字符验证码生成工具类
+ * 随机字符验证碼生成工具类
  * @author Exrickx
  */
 
@@ -25,19 +25,19 @@ public class CreateVerifyCode {
          */
         private int height = 40;
         /**
-         * 验证码字符个数
+         * 验证碼字符个数
          */
         private int codeCount = 4;
         /**
-         * 验证码干扰线数
+         * 验证碼干扰线数
          */
         private int lineCount = 20;
         /**
-         * 验证码
+         * 验证碼
          */
         private String code = null;
         /**
-         * 验证码图片Buffer
+         * 验证碼图片Buffer
          */
         private BufferedImage buffImg = null;
 

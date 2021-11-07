@@ -1,6 +1,6 @@
-#打包完后的jar名稱，替换成你自己项目的名稱，该名稱可以在maven项目的pom中配置
+#打包完后的jar名稱，替换成你自己项目的名稱，該名稱可以在maven项目的pom中配置
 proc="recycle-web-0.0.1-SNAPSHOT.jar"
-#项目源码的目录地址（初始可能需要自己从Git拉下来）
+#项目源碼的目录地址（初始可能需要自己从Git拉下来）
 SOURCE_HOME="/root/application/recycle-api/recycle-web"
 #项目父工程的目录地址
 PARENT_HOME="/root/application/recycle-api"
@@ -35,15 +35,15 @@ start() {
       echo "================================"
    else
       echo "Starting $proc ..."
-	  #到项目源码目录
+	  #到项目源碼目录
       cd $SOURCE_HOME
-	  #输出，准备获取最新代码
+	  #输出，准备获取最新代碼
       echo -n "git pull source ,please wait ....."
-	  #获取最新代码，此列只在目录所在分支pull
-      #若想部署指定分支代码，可以在脚本调用参数中添加一个变量，用git checkout ${targer_branch}
+	  #获取最新代碼，此列只在目录所在分支pull
+      #若想部署指定分支代碼，可以在脚本调用参数中添加一个变量，用git checkout ${targer_branch}
       git pull
 
-      #输出，最新代码已拉取完毕，准备打包
+      #输出，最新代碼已拉取完毕，准备打包
       echo -n "mvn package source ,please wait ....."
 
       #maven打包命令，此处特别注意是 —U ,是指引用快照版本的jar（引用自己的项目）每次都更新最新的。
@@ -52,7 +52,7 @@ start() {
       mvn clean package -Dmaven.test.skip=true
       echo "======================================项目打包完成================================================"
       #打包成功后默认是在父工程中
-       #到项目源码目录
+       #到项目源碼目录
       cd $SOURCE_HOME
       cd target
       #输出，准备启动

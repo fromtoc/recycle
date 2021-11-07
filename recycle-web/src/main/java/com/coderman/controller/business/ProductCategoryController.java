@@ -24,7 +24,7 @@ import java.util.List;
  * @Date 2020/3/16 17:16
  * @Version 1.0
  **/
-@Api(tags = "业务模塊-物资类别相关接口")
+@Api(tags = "業務模塊-物资类别相关接口")
 @RestController
 @RequestMapping("/business/productCategory")
 public class ProductCategoryController {

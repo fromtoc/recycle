@@ -109,7 +109,7 @@ public class InStockServiceImpl implements InStockService {
         BeanUtils.copyProperties(supplier,supplierVO);
         inStockDetailVO.setSupplierVO(supplierVO);
         String inNum = inStock.getInNum();//入库单號
-        //查询该单所有的物资
+        //查询該单所有的物资
         Example o = new Example(InStockInfo.class);
         PageHelper.startPage(pageNum,pageSize);
         o.createCriteria().andEqualTo("inNum",inNum);
@@ -148,7 +148,7 @@ public class InStockServiceImpl implements InStockService {
         if(inStock==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单不存在");
         }else if(inStock.getStatus()!=1&&inStock.getStatus()!=2){
-           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态错误,無法删除");
+           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态錯誤,無法删除");
         }else {
             inStockMapper.deleteByPrimaryKey(id);
         }
@@ -167,7 +167,7 @@ public class InStockServiceImpl implements InStockService {
     public  void addIntoStock(InStockVO inStockVO) throws BusinessException {
         //随机生成入库单號
         String IN_STOCK_NUM = UUID.randomUUID().toString().substring(0, 32).replace("-","");
-        int itemNumber=0;//记录该单的总数
+        int itemNumber=0;//记录該单的总数
         //获取商品的明细
         List<Object> products = inStockVO.getProducts();
         if(!CollectionUtils.isEmpty(products)) {
@@ -267,10 +267,10 @@ public class InStockServiceImpl implements InStockService {
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单不存在");
         }
         if(inStock.getStatus()!=2){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态错误");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态錯誤");
         }
         if(supplier==null){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库来源信息错误");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库来源信息錯誤");
         }
         String inNum = inStock.getInNum();//单號
         Example o = new Example(InStockInfo.class);

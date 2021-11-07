@@ -49,6 +49,6 @@ public class Menu {
     @ExcelField(value = "是否可用",width = 80)
     private Integer available;
 
-    @ExcelField(value = "权限編码", width = 180)
+    @ExcelField(value = "權限編碼", width = 180)
     private String perms;
 }

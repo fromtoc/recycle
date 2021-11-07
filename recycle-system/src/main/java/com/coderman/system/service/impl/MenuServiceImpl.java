@@ -82,7 +82,7 @@ public class MenuServiceImpl implements MenuService {
     public MenuVO edit(Long id) throws SystemException {
         Menu menu = menuMapper.selectByPrimaryKey(id);
         if(menu==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"该編辑的選單不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"該編辑的選單不存在");
         }
         return MenuConverter.converterToMenuVO(menu);
     }

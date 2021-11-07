@@ -8,7 +8,7 @@ package com.coderman.common.enums.system;
  **/
 public enum UserTypeEnum {
 
-    SYSTEM_ADMIN(0),//系统管理员admin
+    SYSTEM_ADMIN(0),//系统管理員admin
 
     SYSTEM_USER(1);//系统的普通用戶
 

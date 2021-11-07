@@ -35,34 +35,34 @@ public class MyMebMvcConfigurer implements WebMvcConfigurer {
         resolvers.add((httpServletRequest, httpServletResponse, o, e) -> {
             ResponseBean result;
             HashMap<String, Object> errorData = new HashMap<>();
-            logger.info("请求错误，url:{}", httpServletRequest.getRequestURL());
+            logger.info("請求錯誤，url:{}", httpServletRequest.getRequestURL());
             if (e instanceof BusinessException) {
                 BusinessException businessException = (BusinessException) e;
-                logger.info("业务模塊-错误码：{},错误信息:{}", businessException.getErrorCode(), businessException.getErrorMsg());
+                logger.info("業務模塊-錯誤碼：{},錯誤信息:{}", businessException.getErrorCode(), businessException.getErrorMsg());
                 errorData.put("errorCode", businessException.getErrorCode());
                 errorData.put("errorMsg", businessException.getErrorMsg());
             }else if(e instanceof SystemException){
                 SystemException systemException = (SystemException) e;
-                logger.info("系统模塊-错误码：{},错误信息:{}", systemException.getErrorCode(), systemException.getErrorMsg());
+                logger.info("系统模塊-錯誤碼：{},錯誤信息:{}", systemException.getErrorCode(), systemException.getErrorMsg());
                 errorData.put("errorCode", systemException.getErrorCode());
                 errorData.put("errorMsg", systemException.getErrorMsg());
             } else if(e instanceof UnauthorizedException){
                 UnauthorizedException unauthorizedException = (UnauthorizedException) e;
-                logger.info("系统模塊-错误码：{},错误信息:{}", HttpStatus.UNAUTHORIZED.value(), unauthorizedException.getMessage());
+                logger.info("系统模塊-錯誤碼：{},錯誤信息:{}", HttpStatus.UNAUTHORIZED.value(), unauthorizedException.getMessage());
                 errorData.put("errorCode", HttpStatus.UNAUTHORIZED.value());
-                errorData.put("errorMsg", "服务器向你抛了一个异常,并表示（操作無权限）");
+                errorData.put("errorMsg", "服務器像你拋了一個異常，並表示(操作無權限)");
             }else if(e instanceof HttpRequestMethodNotSupportedException){
-                logger.info("系统模塊-错误码：{},错误信息:{}", HttpStatus.BAD_REQUEST.value(), e.getMessage());
+                logger.info("系统模塊-錯誤碼：{},錯誤信息:{}", HttpStatus.BAD_REQUEST.value(), e.getMessage());
                 errorData.put("errorCode", HttpStatus.BAD_REQUEST.value());
-                errorData.put("errorMsg", "不支持该http请求方式");
+                errorData.put("errorMsg", "不支持該http請求方式");
             }else if(e instanceof NoHandlerFoundException){
-                logger.error("接口不存在-错误码：{},错误信息:{}", HttpStatus.NOT_FOUND.value(),e.getMessage());
+                logger.error("接口不存在-錯誤碼：{},錯誤信息:{}", HttpStatus.NOT_FOUND.value(),e.getMessage());
                 errorData.put("errorCode", HttpStatus.NOT_FOUND.value());
                 errorData.put("errorMsg", "API接口:["+httpServletRequest.getServletPath()+"]不存在");
             }  else {
-                logger.error("系统异常-错误码：{},错误信息:{}", HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage(),e);
+                logger.error("系统異常-錯誤碼：{},錯誤信息:{}", HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage(),e);
                 errorData.put("errorCode", HttpStatus.INTERNAL_SERVER_ERROR.value());
-                errorData.put("errorMsg", "服务器异常，请联系管理员");
+                errorData.put("errorMsg", "服務器異常，請聯繫管理員");
             }
             result = ResponseBean.error(errorData);
             responseResult(httpServletResponse, result);

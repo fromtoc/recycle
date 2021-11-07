@@ -20,7 +20,7 @@ public class UserCardVO {
 
     private Long userId;
 
-    private String cardId;
+    private String cardName;
 
     private Boolean status;
 

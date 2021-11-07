@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2020/5/7 10:14
  * @Version 1.0
  **/
-@Api(tags = "业务模塊-健康上报相关接口")
+@Api(tags = "業務模塊-健康上报相关接口")
 @RestController
 @RequestMapping("/business/health")
 public class HealthController {

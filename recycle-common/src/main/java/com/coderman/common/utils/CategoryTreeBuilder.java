@@ -50,7 +50,7 @@ public class CategoryTreeBuilder {
         List<ProductCategoryTreeNodeVO> childList = new ArrayList<>();
         for (ProductCategoryTreeNodeVO nav : nodes) {
             // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
-            //相等说明：为该根節點的子節點。
+            //相等说明：为該根節點的子節點。
             if(nav.getPid().equals(pNode.getId())){
                 nav.setLev(pNode.getLev()+1);
                 childList.add(nav);
@@ -95,7 +95,7 @@ public class CategoryTreeBuilder {
         List<ProductCategoryTreeNodeVO> childList = new ArrayList<>();
         for (ProductCategoryTreeNodeVO nav : nodes) {
             // 遍历所有節點，将所有選單的父id与传过来的根節點的id比较
-            //相等说明：为该根節點的子節點。
+            //相等说明：为該根節點的子節點。
             if(nav.getPid().equals(pNode.getId())){
                 nav.setLev(2);
                 childList.add(nav);
