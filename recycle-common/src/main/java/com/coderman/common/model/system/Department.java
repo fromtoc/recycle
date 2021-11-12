@@ -34,9 +34,6 @@ public class Department {
     @ExcelField(value = "公司簡稱", width = 100)
     private String nickname;
 
-    @ExcelField(value = "區域id", width = 50)
-    private Long regionId;
-
     @ExcelField(value = "聯絡人姓名", width = 120)
     private String contact;
 

@@ -16,6 +16,8 @@ public class RoleVO {
 
     private Long id;
 
+    private String type;
+
     @NotBlank(message = "角色名必填")
     private String roleName;
 

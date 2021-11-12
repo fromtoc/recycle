@@ -47,6 +47,10 @@ public class UserVO{
 
     private String departmentName;
 
+    private Long regionId;
+
+    private String regionName;
+
     @NotNull(message = "部門id不能为空")
     private Long departmentId;
 

@@ -255,6 +255,7 @@ public class UserServiceImpl implements UserService {
             criteria.andEqualTo("departmentId", departmentId);
         }
 
+
         criteria.andNotEqualTo("type", 0);
         List<User> userList = userMapper.selectByExample(o);
         List<UserVO> userVOS = userConverter.converterToUserVOList(userList);

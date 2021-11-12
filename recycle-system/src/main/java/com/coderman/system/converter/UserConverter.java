@@ -1,5 +1,6 @@
 package com.coderman.system.converter;
 
+import com.coderman.common.mapper.DictionaryMapper;
 import com.coderman.common.model.system.Department;
 import com.coderman.common.model.system.User;
 import com.coderman.common.vo.system.UserVO;
@@ -23,6 +24,8 @@ public class UserConverter {
     @Autowired
     private DepartmentMapper departmentMapper;
 
+    @Autowired
+    private DictionaryMapper dictionaryMapper;
     /**
      * 转voList
      * @param users
@@ -51,6 +54,10 @@ public class UserConverter {
         if(department!=null&&department.getName()!=null){
             userVO.setDepartmentName(department.getName());
             userVO.setDepartmentId(department.getId());
+        }
+        if (userVO.getRegionId() != null) {
+            String regionName = dictionaryMapper.selectByPrimaryKey(userVO.getRegionId()).getValue();
+            userVO.setRegionName(regionName);
         }
         return userVO;
     }

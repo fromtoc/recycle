@@ -244,7 +244,6 @@ CREATE TABLE `tb_department` (
   `type_number` varchar(100) DEFAULT NULL COMMENT '公司帳號',
   `name` varchar(100) DEFAULT NULL COMMENT '公司名稱',
   `nickname` varchar(100) DEFAULT NULL COMMENT '公司簡稱',
-  `region_id` bigint(20) DEFAULT NULL COMMENT '區域id',
   `contact` varchar(20) DEFAULT NULL COMMENT '聯絡人',
   `phone` varchar(20) DEFAULT NULL COMMENT '電話',
   `cell_phone` varchar(20) DEFAULT NULL COMMENT '手機',
@@ -259,8 +258,8 @@ CREATE TABLE `tb_department` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 INSERT INTO recycle.tb_department
-(id, type_id, type_code, `number`, type_number, name, nickname, region_id, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
-VALUES(1, 1, 'A', 1, 'A001', '101大樓', '101', 1, 'jimmy', '22222222', '0911111111', '123456@gmail.com', '123', 1, 1, '123', '2020-12-17 21:31:44', '2020-12-17 21:31:44');
+(id, type_id, type_code, `number`, type_number, name, nickname, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
+VALUES(1, 1, 'A', 1, 'A001', '101大樓', '101', 'jimmy', '22222222', '0911111111', '123456@gmail.com', '123', 1, 1, '123', '2020-12-17 21:31:44', '2020-12-17 21:31:44');
 
 
 /*Table structure for table `tb_user` */
@@ -272,6 +271,7 @@ CREATE TABLE `tb_user` (
   `username` varchar(50) NOT NULL COMMENT '帳號',
   `nickname` varchar(20) DEFAULT NULL,
   `department_id` bigint(20) DEFAULT '1' COMMENT '公司id',
+  `region_id` bigint(20) DEFAULT '1' COMMENT '地區id',
   `email` varchar(128) DEFAULT NULL COMMENT '信箱',
   `status` int(1) NOT NULL COMMENT '状态 0锁定 1有效',
   `password` varchar(128) NOT NULL COMMENT '密碼',
@@ -283,12 +283,24 @@ CREATE TABLE `tb_user` (
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   `sex` int(1) DEFAULT NULL COMMENT '性别 0男 1女 2保密',
   `birth` date DEFAULT NULL,
+
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户表';
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`id`,`username`,`nickname`,`email`,`avatar`,`phone_number`,`status`,`create_time`,`modified_time`,`sex`,`salt`,`type`,`password`,`birth`,`department_id`) values (5,'admin','小章鱼','Jana@126.com','http://thirdqq.qlogo.cn/g?b=oidb&k=icTYjyV5afABvE1v4ge9SLg&s=100&t=1584195695','17744444444',1,'2019-06-14 21:12:16','2020-03-19 04:20:40',0,'cfbf6d34-d3e4-4653-86f0-e33d4595d52b',0,'d7b9c28cac022955cff27947eafce0ad','2020-03-27',1),(196,'jack','testetst','test@qq.com','http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg','15045414141',1,'2020-08-19 17:41:20','2020-08-19 17:41:20',1,'303191e1-4082-4d2d-8976-5a93426a',1,'49bdaf7293cc9bd6fc9f50c3b03b7d6d','2020-08-17',12),(197,'3333333','33333','333@qq.com','http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg','15041414141',0,'2020-12-16 21:32:22','2020-12-16 21:32:22',1,'62a6dd8f-9efd-4ae4-98f3-c0382299',1,'2168d955d03701181dd6b3bab7647694','2020-12-29',1),(198,'test','testnickn','test@qq.com','http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg','15074857474',1,'2020-12-17 18:49:59','2020-12-17 18:50:08',1,'7cb34dcf-62a7-4404-b802-93ebcb1f',1,'9b9013e2729f0c23852ef2801cd5344b','2020-12-15',12),(199,'蔡徐坤','偶像练习生','caixukun@qq.com','http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg','15041414514',0,'2020-12-17 21:31:44','2020-12-17 21:31:44',1,'9fb8c514-7484-4f6e-a155-6c90ca16',1,'d0e8cf620adb72d66e975e932afb960b','2020-12-16',14);
+INSERT INTO recycle.tb_user
+(id, username, nickname, department_id, region_id, email, status, password, salt, `type`, avatar, phone_number, create_time, modified_time, sex, birth)
+VALUES(5, 'admin', '小章鱼', 1, 2, 'Jana@126.com', 1, 'd7b9c28cac022955cff27947eafce0ad', 'cfbf6d34-d3e4-4653-86f0-e33d4595d52b', 0, 'http://thirdqq.qlogo.cn/g?b=oidb&k=icTYjyV5afABvE1v4ge9SLg&s=100&t=1584195695', '17744444444', '2019-06-14 21:12:16', '2020-03-19 04:20:40', 0, '2020-03-27');
+INSERT INTO recycle.tb_user
+(id, username, nickname, department_id, region_id, email, status, password, salt, `type`, avatar, phone_number, create_time, modified_time, sex, birth)
+VALUES(196, 'jack', 'testetst', 1, 2, 'test@qq.com', 1, '49bdaf7293cc9bd6fc9f50c3b03b7d6d', '303191e1-4082-4d2d-8976-5a93426a', 1, 'http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg', '15045414141', '2020-08-19 17:41:20', '2021-11-06 16:57:41', 1, '2020-08-17');
+INSERT INTO recycle.tb_user
+(id, username, nickname, department_id, region_id, email, status, password, salt, `type`, avatar, phone_number, create_time, modified_time, sex, birth)
+VALUES(197, '3333333', '33333', 1, 2, '333@qq.com', 0, '2168d955d03701181dd6b3bab7647694', '62a6dd8f-9efd-4ae4-98f3-c0382299', 1, 'http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg', '15041414141', '2020-12-16 21:32:22', '2020-12-16 21:32:22', 1, '2020-12-29');
+INSERT INTO recycle.tb_user
+(id, username, nickname, department_id, region_id, email, status, password, salt, `type`, avatar, phone_number, create_time, modified_time, sex, birth)
+VALUES(198, 'test', 'testnickn', 1, 2, 'test@qq.com', 1, '9b9013e2729f0c23852ef2801cd5344b', '7cb34dcf-62a7-4404-b802-93ebcb1f', 1, 'http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg', '15074857474', '2020-12-17 18:49:59', '2021-11-07 17:08:57', 1, '2020-12-15');
 
 DROP TABLE IF EXISTS `tb_user_card`;
 
@@ -303,7 +315,7 @@ CREATE TABLE `tb_user_card` (
 DROP TABLE IF EXISTS `tb_card_product`;
 
 CREATE TABLE `tb_card_product` (
-  `card_id` varchar(100) NOT NULL,
+  `card_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
@@ -342,7 +354,7 @@ CREATE TABLE `biz_product_price` (
   `two_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物小類',
   `product_id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '名稱',
-  `price` bigint(20) DEFAULT NULL,
+  `price` decimal(20,6) DEFAULT NULL,
   `unit` varchar(50) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL COMMENT '生效時間',
   `end_time` datetime DEFAULT NULL COMMENT '失效時間',
@@ -357,7 +369,7 @@ CREATE TABLE `tb_weight` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `department_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `card_id` varchar(100) NOT NULL,
+  `card_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `total_weight` decimal(20,6) DEFAULT NULL,
   `deduct_weight` decimal(20,6) DEFAULT NULL,
@@ -406,46 +418,46 @@ INSERT INTO recycle.tb_menu
 VALUES(5, 0, '權限管理', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(6, 0, '後台功能', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+VALUES(6, 0, '後臺功能', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(7, 1, '公司類型設定', '', '', 'el-icon-star-off', '0', 1, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+VALUES(7, 1, '公司類型設定', '/system/departmentCategories', '', 'el-icon-star-off', '0', 1, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(8, 1, '樓層區域設定', '', '', 'el-icon-star-off', '0', 2, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
-INSERT INTO recycle.tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(9, 1, '成本中心設定', '', '', 'el-icon-star-off', '0', 3, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+VALUES(8, 1, '區域設定', '/system/region', '', 'el-icon-star-off', '0', 2, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+-- INSERT INTO recycle.tb_menu
+-- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+-- VALUES(9, 1, '成本中心設定', '', '', 'el-icon-star-off', '0', 3, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(10, 1, '廢棄物類型設定', '/business/product/categories', '', 'el-icon-star-off', '0', 4, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-values(11, 1, '跑馬燈設定', '', '', 'el-icon-star-off', '0', 5, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+values(11, 1, '跑馬燈設定', '/system/runText', '', 'el-icon-star-off', '0', 5, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(12, 2, '公司管理', '/system/departments', '', 'el-icon-s-home', '0', 1, '2020-03-15 06:05:48', '2020-12-15 17:25:18', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(13, 2, '用户管理', '/system/users', 'users', 'el-icon-user', '0', 2, '2020-03-10 05:27:54', '2020-12-15 17:24:22', 1, 0);
+VALUES(13, 2, '用戶管理', '/system/users', 'users', 'el-icon-user', '0', 2, '2020-03-10 05:27:54', '2020-12-15 17:24:22', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(14, 2, '廢棄物管理', '/business/product/list', '', 'el-icon-goods', '0', 3, '2020-03-16 09:01:02', '2020-12-15 19:51:38', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(15, 3, '秤重明細查詢', '/business/product/in-stocks', 'el-icon-date', 'el-icon-date', '0', 1, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
+VALUES(15, 3, '秤重明細維護', '/business/weight/list', 'el-icon-date', 'el-icon-date', '0', 1, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(16, 3, '相關資料補登', '', 'el-icon-date', 'el-icon-date', '0', 2, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
+VALUES(16, 3, '相關資料補登', '/business/weight/refill', 'el-icon-date', 'el-icon-date', '0', 2, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(17, 5, '選單管理', '/system/menus', 'menus', 'el-icon-help', '0', 1, '2020-03-07 18:57:42', '2020-12-15 17:25:02', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(18, 5, '權限管理', '/system/roles', 'roles', 'el-icon-postcard', '0', 3, '2020-03-10 05:51:28', '2020-12-15 17:24:41', 1, 0);
+VALUES(18, 5, '角色權限', '/system/roles', 'roles', 'el-icon-postcard', '0', 3, '2020-03-10 05:51:28', '2020-12-15 17:24:41', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(19, 6, '操作日志', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0);
+VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0);
 -- 用戶
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
@@ -673,17 +685,18 @@ DROP TABLE IF EXISTS `tb_role`;
 
 CREATE TABLE `tb_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `type` int(1) DEFAULT '1' COMMENT '類型,0:所有資料，1:限本帳號',
   `role_name` varchar(100) NOT NULL COMMENT '角色名稱',
   `remark` varchar(100) DEFAULT NULL COMMENT '角色描述',
   `create_time` datetime NOT NULL COMMENT '創建時間',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
-  `status` int(1) DEFAULT '1' COMMENT '是否可用,0:不可用，1：可用',
+  `status` int(1) DEFAULT '1' COMMENT '是否可用,0:不可用，1:可用',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色表';
 
 /*Data for the table `tb_role` */
 
-insert  into `tb_role`(`id`,`role_name`,`remark`,`create_time`,`modified_time`,`status`) values (145,'测试角色','用于测试的账号','2020-12-17 00:00:00','2020-12-17 20:33:46',1);
+insert  into `tb_role`(`id`,`type`,`role_name`,`remark`,`create_time`,`modified_time`,`status`) values (145,0,'测试角色','用于测试的账号','2020-12-17 00:00:00','2020-12-17 20:33:46',1);
 
 /*Table structure for table `tb_role_menu` */
 

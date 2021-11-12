@@ -63,6 +63,8 @@ public class User {
 
     private Long departmentId;
 
+    private Long regionId;
+
     @ExcelField(value = "头像url", width = 200)
     private String avatar;
 

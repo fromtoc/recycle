@@ -16,6 +16,9 @@ public class Role {
     @ExcelField(value = "編號", width = 50)
     private Long id;
 
+    @ExcelField(value = "類型", width = 100)
+    private String type;
+
     @ExcelField(value = "角色名稱", width = 100)
     private String roleName;
 

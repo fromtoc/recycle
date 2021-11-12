@@ -81,10 +81,6 @@ public class DepartmentServiceImpl implements DepartmentService {
                 o1.createCriteria().andEqualTo("departmentId", department.getId())
                         .andNotEqualTo("type", UserTypeEnum.SYSTEM_ADMIN.getTypeCode());
                 String typeName = dictionaryMapper.selectByPrimaryKey(d.getTypeId()).getValue();
-                if (d.getRegionId() != null) {
-                    String regionName = dictionaryMapper.selectByPrimaryKey(d.getRegionId()).getValue();
-                    d.setRegionName(regionName);
-                }
                 d.setTypeCodeName(typeName);
                 d.setTotal(userMapper.selectCountByExample(o1));
                 d.setStatus(department.getStatus() == 0 ? true : false);
@@ -165,6 +161,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         department.setCreateTime(new Date());
         department.setModifiedTime(new Date());
         department.setStatus(1);
+        department.setFood(0);
         departmentMapper.insert(department);
     }
 
