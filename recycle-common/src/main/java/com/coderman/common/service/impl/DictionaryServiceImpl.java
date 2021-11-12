@@ -1,10 +1,12 @@
 package com.coderman.common.service.impl;
 
 
+import com.coderman.common.enums.system.UserStatusEnum;
 import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.mapper.DictionaryMapper;
 import com.coderman.common.model.system.*;
+import com.coderman.common.response.ActiveUser;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.common.service.DictionaryService;
 import com.github.pagehelper.PageHelper;
@@ -43,7 +45,6 @@ public class DictionaryServiceImpl implements DictionaryService {
         if (value != null && !"".equals(value)) {
             criteria.andLike("value", "%" + value + "%");
         }
-        criteria.andEqualTo("status", 1);
         List<Dictionary> dictionaries = dictionaryMapper.selectByExample(o);
 
         PageInfo<Dictionary> dictionaryPageInfo = new PageInfo<>(dictionaries);
@@ -90,5 +91,14 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public List<Dictionary> findAll() {
         return dictionaryMapper.selectAll();
+    }
+
+    @Override
+    public void updateStatus(Long id, Boolean status) throws SystemException {
+        Dictionary d = new Dictionary();
+        d.setId(id);
+        d.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
+                UserStatusEnum.AVAILABLE.getStatusCode());
+        dictionaryMapper.updateByPrimaryKeySelective(d);
     }
 }

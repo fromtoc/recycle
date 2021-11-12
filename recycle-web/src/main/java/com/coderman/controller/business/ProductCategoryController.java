@@ -3,6 +3,7 @@ package com.coderman.controller.business;
 import com.coderman.business.service.ProductCategoryService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
 import com.coderman.common.vo.business.ProductCategoryVO;
@@ -140,6 +141,22 @@ public class ProductCategoryController {
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws BusinessException {
         productCategoryService.delete(id);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新廢棄物類型狀態失敗", operation = "廢棄物類型|禁用/啟用")
+    @ApiOperation(value = "廢棄物類型狀態", notes = "禁用和啟用这兩種狀態")
+    @RequiresPermissions({"productCategory:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        productCategoryService.updateStatus(id, status);
         return ResponseBean.success();
     }
 }

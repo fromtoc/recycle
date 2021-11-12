@@ -204,6 +204,15 @@ CREATE TABLE `tb_login_log` (
 
 /*==========================================*/
 
+DROP TABLE IF EXISTS `tb_run_text`;
+
+CREATE TABLE `tb_run_text` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `message` varchar(200) NOT NULL,
+  `status` int(2) NOT NULL COMMENT '狀態：0：刪除，1：存在',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 DROP TABLE IF EXISTS `tb_dictionary`;
 
 CREATE TABLE `tb_dictionary` (
@@ -215,6 +224,12 @@ CREATE TABLE `tb_dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO recycle.tb_dictionary
+(id, `type`, code, value, status)
+VALUES(2, 3, '1', '123', 1);
+INSERT INTO recycle.tb_dictionary
+(id, `type`, code, value, status)
+VALUES(1, 1, 'A', 'AA', 1);
 
 /*Table structure for table `biz_product_category` */
 
@@ -228,8 +243,9 @@ CREATE TABLE `biz_product_category` (
   `create_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
   `pid` bigint(20) DEFAULT NULL COMMENT '父级分類id',
+  `status` int(2) DEFAULT NULL COMMENT '狀態：0：刪除，1：存在',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 /*Table structure for table `tb_department` */
@@ -255,7 +271,7 @@ CREATE TABLE `tb_department` (
   `create_time` datetime DEFAULT NULL COMMENT '創建時間',
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO recycle.tb_department
 (id, type_id, type_code, `number`, type_number, name, nickname, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
@@ -285,7 +301,7 @@ CREATE TABLE `tb_user` (
   `birth` date DEFAULT NULL,
 
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户表';
 
 /*Data for the table `tb_user` */
 
@@ -342,7 +358,7 @@ CREATE TABLE `biz_product` (
   KEY `category_id` (`one_category_id`),
   KEY `two_category_id` (`two_category_id`),
   KEY `three_category_id` (`three_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `biz_product_price` */
 
@@ -398,7 +414,7 @@ CREATE TABLE `tb_menu` (
   `available` int(11) DEFAULT '1' COMMENT '0：不可用，1：可用',
   `open` int(1) DEFAULT '1' COMMENT '0:不展開，1：展開',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='選單表';
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='選單表';
 
 /*Data for the table `tb_menu` */
 INSERT INTO recycle.tb_menu
@@ -692,7 +708,7 @@ CREATE TABLE `tb_role` (
   `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
   `status` int(1) DEFAULT '1' COMMENT '是否可用,0:不可用，1:可用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色表';
 
 /*Data for the table `tb_role` */
 
@@ -740,7 +756,7 @@ CREATE TABLE `tb_log` (
   `create_time` datetime DEFAULT NULL COMMENT '創建時間',
   `location` varchar(50) DEFAULT NULL COMMENT '操作地点',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2192 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='操作日志表';
 
 --  Auto-generated SQL script #202111060034
 UPDATE recycle.tb_menu

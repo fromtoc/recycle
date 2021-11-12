@@ -133,4 +133,20 @@ public class DepartmentCategoryController {
         ExcelKit.$Export(Dictionary.class, response).downXlsx(departmentCategoryList, false);
     }
 
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新公司類型狀態失敗", operation = "公司類型|禁用/啟用")
+    @ApiOperation(value = "公司類型狀態", notes = "禁用和啟用这兩種狀態")
+    @RequiresPermissions({"departmentCategory:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        dictionaryService.updateStatus(id, status);
+        return ResponseBean.success();
+    }
+
 }

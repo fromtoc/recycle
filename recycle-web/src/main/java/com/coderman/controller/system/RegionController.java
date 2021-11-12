@@ -133,4 +133,20 @@ public class RegionController {
         ExcelKit.$Export(Dictionary.class, response).downXlsx(regionList, false);
     }
 
+    /**
+     * 更新状态
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新地區狀態失敗", operation = "地區|禁用/啟用")
+    @ApiOperation(value = "地區狀態", notes = "禁用和啟用这兩種狀態")
+    @RequiresPermissions({"region:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        dictionaryService.updateStatus(id, status);
+        return ResponseBean.success();
+    }
+
 }

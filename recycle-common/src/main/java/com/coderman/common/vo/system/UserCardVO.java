@@ -22,6 +22,12 @@ public class UserCardVO {
 
     private String cardName;
 
+    private String departmentCategoryName;
+
+    private String departmentName;
+
+    private String regionName;
+
     private Boolean status;
 
 }

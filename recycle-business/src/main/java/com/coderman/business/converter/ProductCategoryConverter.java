@@ -38,6 +38,7 @@ public class ProductCategoryConverter {
             for (ProductCategory productCategory : productCategories) {
                 ProductCategoryVO productCategoryVO = new ProductCategoryVO();
                 BeanUtils.copyProperties(productCategory,productCategoryVO);
+                productCategoryVO.setStatus(productCategory.getStatus()==1? false: true);
                 productCategoryVOS.add(productCategoryVO);
             }
         }

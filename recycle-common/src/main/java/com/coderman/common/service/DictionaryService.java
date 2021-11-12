@@ -64,4 +64,6 @@ public interface DictionaryService {
      */
     List<Dictionary> findAll();
 
+    void updateStatus(Long id, Boolean status) throws SystemException;
+
 }

@@ -2,6 +2,7 @@ package com.coderman.business.service;
 
 
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
 import com.coderman.common.vo.business.ProductCategoryVO;
 import com.coderman.common.vo.system.PageVO;
@@ -76,5 +77,7 @@ public interface ProductCategoryService {
      * @return
      */
     List<ProductCategoryTreeNodeVO> getParentCategoryTree();
+
+    void updateStatus(Long id, Boolean status) throws SystemException;
 
 }

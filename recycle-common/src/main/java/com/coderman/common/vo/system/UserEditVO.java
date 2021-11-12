@@ -17,26 +17,23 @@ import java.util.Date;
 public class UserEditVO {
     private Long id;
 
-    @NotBlank(message = "用戶名不能为空")
+    @NotBlank(message = "用戶帳號不能為空")
     private String username;
 
-    @NotBlank(message = "昵稱不能为空")
+    @NotBlank(message = "用戶名稱不能為空")
     private String nickname;
 
-    @Email(message = "請输入正确的邮箱格式")
     private String email;
 
-    @NotBlank(message = "电话號碼不能为空")
     private String phoneNumber;
 
-    @NotNull(message = "性别不能为空")
     private Integer sex;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy年MM月dd日")
-    @NotNull(message = "生日不能为空")
     private Date birth;
 
-    @NotNull(message = "部門不能为空")
+    @NotNull(message = "所屬公司不能為空")
     private Long departmentId;
+
+    private Long regionId;
 
 }

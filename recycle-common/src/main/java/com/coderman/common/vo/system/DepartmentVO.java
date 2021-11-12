@@ -32,8 +32,6 @@ public class DepartmentVO {
 
     private String nickname;
 
-    private String regionName;
-
     private String contact;
 
     private String phone;

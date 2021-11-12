@@ -4,10 +4,13 @@ import com.coderman.business.converter.ProductCategoryConverter;
 import com.coderman.business.mapper.ProductCategoryMapper;
 import com.coderman.business.mapper.ProductMapper;
 import com.coderman.business.service.ProductCategoryService;
+import com.coderman.common.enums.system.UserStatusEnum;
 import com.coderman.common.error.BusinessCodeEnum;
 import com.coderman.common.error.BusinessException;
+import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.ProductCategory;
+import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.utils.CategoryTreeBuilder;
 import com.coderman.common.utils.ListPageUtils;
 import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
@@ -73,6 +76,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         BeanUtils.copyProperties(ProductCategoryVO,productCategory);
         productCategory.setCreateTime(new Date());
         productCategory.setModifiedTime(new Date());
+        productCategory.setStatus(1);
         productCategoryMapper.insert(productCategory);
     }
 
@@ -183,6 +187,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 .forEach(v -> v.setChildren(null));
         return parentNode;
 
+    }
+
+    @Override
+    public void updateStatus(Long id, Boolean status) throws SystemException {
+        ProductCategory p = new ProductCategory();
+        p.setId(id);
+        p.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
+                UserStatusEnum.AVAILABLE.getStatusCode());
+        productCategoryMapper.updateByPrimaryKeySelective(p);
     }
 
 }

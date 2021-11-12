@@ -24,4 +24,6 @@ public class ProductCategory {
 
     private Long pid;
 
+    private Integer status;
+
 }

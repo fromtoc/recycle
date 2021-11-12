@@ -6,14 +6,13 @@ import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.dto.UserLoginDTO;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.mapper.DictionaryMapper;
 import com.coderman.common.model.business.Product;
-import com.coderman.common.model.system.CardProduct;
-import com.coderman.common.model.system.Role;
-import com.coderman.common.model.system.User;
-import com.coderman.common.model.system.UserCard;
+import com.coderman.common.model.system.*;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.*;
 import com.coderman.system.converter.RoleConverter;
+import com.coderman.system.mapper.DepartmentMapper;
 import com.coderman.system.service.LoginLogService;
 import com.coderman.system.service.RoleService;
 import com.coderman.system.service.UserService;
@@ -58,6 +57,11 @@ public class UserController {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private DictionaryMapper dictionaryMapper;
 
     /**
      * 用戶登入
@@ -309,10 +313,16 @@ public class UserController {
         List<UserCard> userCardList = userService.findCardsById(id);
         List<UserCardVO> list = new ArrayList<>();
         for (UserCard c: userCardList) {
+            Long userId = c.getUserId();
+            UserEditVO user = userService.edit(userId);
+            Department department = departmentMapper.selectByPrimaryKey(user.getDepartmentId());
             UserCardVO vo = new UserCardVO();
             vo.setId(c.getId());
-            vo.setUserId(c.getUserId());
+            vo.setUserId(userId);
             vo.setCardName(c.getCardName());
+            vo.setDepartmentCategoryName(dictionaryMapper.selectByPrimaryKey(department.getTypeId()).getValue());
+            vo.setDepartmentName(department.getNickname());
+            vo.setRegionName(dictionaryMapper.selectByPrimaryKey(user.getRegionId()).getValue());
             vo.setStatus(c.getStatus()==0);
             list.add(vo);
         }

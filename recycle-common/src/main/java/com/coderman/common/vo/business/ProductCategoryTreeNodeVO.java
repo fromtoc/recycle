@@ -32,6 +32,8 @@ public class ProductCategoryTreeNodeVO {
 
     private int lev;
 
+    private Boolean status;
+
     private List<ProductCategoryTreeNodeVO> children;
 
     /*

@@ -35,4 +35,6 @@ public class ProductCategoryVO {
     @NotNull(message = "父级選單不能为空")
     private Long pid;
 
+    private Boolean status;
+
 }
