@@ -148,7 +148,7 @@ public class InStockServiceImpl implements InStockService {
         if(inStock==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单不存在");
         }else if(inStock.getStatus()!=1&&inStock.getStatus()!=2){
-           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态錯誤,無法删除");
+           throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单狀態錯誤,無法删除");
         }else {
             inStockMapper.deleteByPrimaryKey(id);
         }
@@ -229,7 +229,7 @@ public class InStockServiceImpl implements InStockService {
         Integer status = inStock.getStatus();
         //只有status=0,正常的情况下,才可移入回收站
         if(status!=0){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态不正确");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单狀態不正确");
         }else {
             InStock in = new InStock();
             in.setStatus(1);
@@ -248,7 +248,7 @@ public class InStockServiceImpl implements InStockService {
         t.setId(id);
         InStock inStock = inStockMapper.selectByPrimaryKey(t);
         if(inStock.getStatus()!=1){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态不正确");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单狀態不正确");
         }else {
             t.setStatus(0);
             inStockMapper.updateByPrimaryKeySelective(t);
@@ -267,7 +267,7 @@ public class InStockServiceImpl implements InStockService {
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单不存在");
         }
         if(inStock.getStatus()!=2){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单状态錯誤");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库单狀態錯誤");
         }
         if(supplier==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"入库来源信息錯誤");
@@ -301,7 +301,7 @@ public class InStockServiceImpl implements InStockService {
                         productStock.setStock((long) productNumber);
                         productStockMapper.insert(productStock);
                     }
-                    //修改入库单状态.
+                    //修改入库单狀態.
                     inStock.setCreateTime(new Date());
                     inStock.setStatus(0);
                     inStockMapper.updateByPrimaryKeySelective(inStock);

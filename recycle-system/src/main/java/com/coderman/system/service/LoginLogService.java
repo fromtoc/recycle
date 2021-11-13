@@ -18,7 +18,7 @@ import java.util.Map;
 public interface LoginLogService {
 
     /**
-     * 添加登入日志
+     * 新增登入日志
      * @param request
      */
     void add(HttpServletRequest request);

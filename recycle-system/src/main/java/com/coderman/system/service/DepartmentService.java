@@ -31,7 +31,7 @@ public interface DepartmentService {
     List<DeanVO> findDeanList();
 
     /**
-     * 添加院部門
+     * 新增院部門
      * @param departmentVO
      */
     void add(DepartmentVO departmentVO);
@@ -70,7 +70,7 @@ public interface DepartmentService {
     List<Department> findAll();
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

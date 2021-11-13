@@ -17,21 +17,21 @@ public class Role {
     private Long id;
 
     @ExcelField(value = "類型", width = 100)
-    private String type;
+    private Integer type;
 
     @ExcelField(value = "角色名稱", width = 100)
     private String roleName;
 
-    @ExcelField(value = "备注信息", width = 180)
+    @ExcelField(value = "備註信息", width = 180)
     private String remark;
 
-    @ExcelField(value = "创建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "創建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date createTime;
 
     @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date modifiedTime;
 
-    @ExcelField(value = "禁用状态", width = 50)
+    @ExcelField(value = "禁用狀態", width = 50)
     private Integer status;
 
     @Override

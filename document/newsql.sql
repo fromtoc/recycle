@@ -102,7 +102,7 @@ CREATE TABLE `biz_out_stock` (
   `product_number` int(11) DEFAULT NULL COMMENT '出库总数',
   `consumer_id` bigint(20) NOT NULL COMMENT '消费者id',
   `remark` varchar(50) DEFAULT NULL COMMENT '备注',
-  `status` int(1) DEFAULT NULL COMMENT '状态:0:正常入库,1:已进入回收,2:等待审核',
+  `status` int(1) DEFAULT NULL COMMENT '狀態:0:正常入库,1:已进入回收,2:等待审核',
   `priority` int(1) NOT NULL COMMENT '紧急程度:1:不急,2:常规,3:紧急4:特急',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
@@ -289,7 +289,7 @@ CREATE TABLE `tb_user` (
   `department_id` bigint(20) DEFAULT '1' COMMENT '公司id',
   `region_id` bigint(20) DEFAULT '1' COMMENT '地區id',
   `email` varchar(128) DEFAULT NULL COMMENT '信箱',
-  `status` int(1) NOT NULL COMMENT '状态 0锁定 1有效',
+  `status` int(1) NOT NULL COMMENT '狀態 0锁定 1有效',
   `password` varchar(128) NOT NULL COMMENT '密碼',
   `salt` varchar(255) DEFAULT NULL COMMENT '盐',
   `type` int(11) NOT NULL DEFAULT '1' COMMENT '0:超级管理員，1：系统用户',
@@ -342,7 +342,7 @@ DROP TABLE IF EXISTS `biz_product`;
 CREATE TABLE `biz_product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `p_num` varchar(255) DEFAULT NULL COMMENT '商品编号',
-  `name` varchar(255) DEFAULT NULL COMMENT '名稱',
+  `name` varchar(255) NOT NULL UNIQUE COMMENT '名稱',
   `image_url` text COMMENT '图片',
   `model` varchar(100) DEFAULT NULL COMMENT '成本中心id',
   `unit` varchar(10) DEFAULT NULL COMMENT '计算单位',
@@ -368,12 +368,12 @@ CREATE TABLE `biz_product_price` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `one_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物大類',
   `two_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物小類',
+  `three_category_id` bigint(20) DEFAULT NULL COMMENT '廢棄物三分類',
   `product_id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '名稱',
   `price` decimal(20,6) DEFAULT NULL,
   `unit` varchar(50) DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL COMMENT '生效時間',
-  `end_time` datetime DEFAULT NULL COMMENT '失效時間',
+  `valid_month` varchar(50) DEFAULT NULL COMMENT '適用月份',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
 
@@ -477,7 +477,7 @@ VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020
 -- 用戶
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(20, 13, '用戶添加', '', 'user:add', 'el-icon-plus', '1', 1, '2020-03-10 05:50:44', '2020-03-10 07:51:56', 1, 0);
+VALUES(20, 13, '用戶新增', '', 'user:add', 'el-icon-plus', '1', 1, '2020-03-10 05:50:44', '2020-03-10 07:51:56', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(21, 13, '用戶刪除', '', 'user:delete', 'el-icon-picture', '1', 1, '2020-03-10 06:05:30', '2020-03-10 08:10:19', 1, 0);
@@ -500,7 +500,7 @@ VALUES(26, 13, '導出表格', '', 'user:export', 'el-icon-edit', '1', 1, '2020-
 -- 角色
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(27, 18, '添加角色', '', 'role:add', 'el-icon-help', '1', 1, '2020-03-11 01:34:18', '2020-03-11 01:34:18', 1, 0);
+VALUES(27, 18, '新增角色', '', 'role:add', 'el-icon-help', '1', 1, '2020-03-11 01:34:18', '2020-03-11 01:34:18', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(28, 18, '角色編輯', '', 'role:edit', 'el-icon-s-promotion', '1', 2, '2020-03-10 06:11:03', '2020-03-11 11:40:19', 1, 0);
@@ -519,7 +519,7 @@ VALUES(32, 18, '角色刪除', '', 'role:delete', 'el-icon-s-marketing', '1', 3,
 -- 選單
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(33, 17, '添加選單', '', 'menu:add', 'el-icon-s-opportunity', '1', 1, '2020-03-10 07:55:10', '2020-04-27 09:59:43', 1, 0);
+VALUES(33, 17, '新增選單', '', 'menu:add', 'el-icon-s-opportunity', '1', 1, '2020-03-10 07:55:10', '2020-04-27 09:59:43', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(34, 17, '修改選單', '', 'menu:update', 'el-icon-share', '1', 2, '2020-03-10 07:56:55', '2020-03-15 13:29:29', 1, 0);
@@ -535,7 +535,7 @@ VALUES(37, 17, '導出選單', NULL, 'menu:export', 'el-icon-edit', '1', 1, '202
 -- 公司
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(38, 12, '添加公司', '', 'department:add', 'el-icon-plus', '1', 1, '2020-03-15 11:57:42', '2020-03-21 12:37:21', 1, 0);
+VALUES(38, 12, '新增公司', '', 'department:add', 'el-icon-plus', '1', 1, '2020-03-15 11:57:42', '2020-03-21 12:37:21', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(39, 12, '編輯公司', '', 'department:edit', 'el-icon-edit', '1', 1, '2020-03-15 11:59:52', '2020-03-15 12:16:36', 1, 0);
@@ -548,7 +548,7 @@ VALUES(41, 12, '刪除公司', NULL, 'department:delete', 'el-icon-delete', '1',
 -- 廢棄物資料
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(42, 14, '添加物資', '', 'product:add', 'el-icon-s-opportunity', '1', 1, '2020-03-21 02:04:24', '2020-03-21 02:04:24', 1, 0);
+VALUES(42, 14, '新增物資', '', 'product:add', 'el-icon-s-opportunity', '1', 1, '2020-03-21 02:04:24', '2020-03-21 02:04:24', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(43, 14, '上傳圖片', NULL, 'upload:image', 'el-icon-finished', '1', 2, '2020-03-21 02:05:21', '2020-03-21 02:05:21', 1, 0);
@@ -573,7 +573,7 @@ VALUES(49, 14, '物資還原', NULL, 'product:back', 'el-icon-top-left', '1', 1,
 -- 廢棄物類別
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(50, 10, '添加類別', '', 'productCategory:add', ' el-icon-folder-add', '1', 1, '2020-03-21 02:26:12', '2020-03-21 02:44:22', 1, 0);
+VALUES(50, 10, '新增類別', '', 'productCategory:add', ' el-icon-folder-add', '1', 1, '2020-03-21 02:26:12', '2020-03-21 02:44:22', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(51, 10, '刪除類別', NULL, 'productCategory:delete', 'el-icon-delete', '1', 1, '2020-03-21 02:27:05', '2020-03-21 02:28:49', 1, 0);
@@ -593,7 +593,7 @@ VALUES(55, 19, '批量删除', NULL, 'log:batchDelete', 'el-icon-document-delete
 -- 秤重明細查詢(不合?)
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(56, 15, '添加入庫', '', 'inStock:in', 'el-icon-plus', '1', 3, '2020-04-27 17:07:04', '2020-08-19 17:57:15', 1, 1);
+VALUES(56, 15, '新增入庫', '', 'inStock:in', 'el-icon-plus', '1', 3, '2020-04-27 17:07:04', '2020-08-19 17:57:15', 1, 1);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(57, 15, '入庫明細', NULL, 'inStock:detail', 'el-icon-zoom-in', '1', 2, '2020-04-27 17:08:25', '2020-04-27 17:08:25', 1, 0);
@@ -665,7 +665,7 @@ INSERT INTO recycle.tb_menu
 VALUES(1016, 1002, '更新来源', '', 'supplier:update', 'el-icon-paperclip', '1', 1, '2020-03-21 02:18:34', '2020-03-21 12:36:41', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1017, 1002, '添加来源', NULL, 'supplier:add', 'el-icon-document-add', '1', 1, '2020-03-21 02:19:02', '2020-03-21 02:19:02', 1, 1);
+VALUES(1017, 1002, '新增来源', NULL, 'supplier:add', 'el-icon-document-add', '1', 1, '2020-03-21 02:19:02', '2020-03-21 02:19:02', 1, 1);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(1018, 1002, '编辑来源', NULL, 'supplier:edit', 'el-icon-scissors', '1', 2, '2020-03-21 02:19:36', '2020-03-21 02:19:36', 1, 1);
@@ -677,7 +677,7 @@ INSERT INTO recycle.tb_menu
 VALUES(1020, 1004, '批量刪除', '', 'loginLog:batchDelete', 'el-icon-delete-solid', '1', 1, '2020-03-22 22:19:26', '2020-03-22 22:19:26', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1021, 1009, '添加去处', '', 'consumer:add', 'el-icon-plus', '1', 2, '2020-04-27 16:57:04', '2020-04-27 16:58:21', 1, 1);
+VALUES(1021, 1009, '新增去处', '', 'consumer:add', 'el-icon-plus', '1', 2, '2020-04-27 16:57:04', '2020-04-27 16:58:21', 1, 1);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(1022, 1009, '删除去处', NULL, 'consumer:delete', 'el-icon-delete', '1', 1, '2020-04-27 16:57:42', '2020-04-27 16:57:42', 1, 0);

@@ -19,20 +19,20 @@ import java.util.List;
 public interface ProductPriceService {
 
     /**
-     * 添加單價
-     * @param productPrice
+     * 新增單價
+     * @param productPriceVO
      */
-    void add(ProductPrice productPrice);
+    int add(ProductPriceVO productPriceVO);
 
 
     /**
      * 單價列表
      * @param pageNum
      * @param pageSize
-     * @param productPrice
+     * @param productPriceVO
      * @return
      */
-    PageVO<ProductPriceVO> findProductPriceList(Integer pageNum, Integer pageSize, ProductPrice productPrice);
+    PageVO<ProductPriceVO> findProductPriceList(Integer pageNum, Integer pageSize, ProductPriceVO productPriceVO);
 
 
     /**
@@ -40,7 +40,7 @@ public interface ProductPriceService {
      * @param id
      * @return
      */
-    ProductPrice edit(Long id);
+    ProductPriceVO edit(Long id);
 
     /**
      * 更新單價

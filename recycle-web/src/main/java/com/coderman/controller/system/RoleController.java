@@ -91,13 +91,13 @@ public class RoleController {
     }
 
     /**
-     * 添加角色信息
+     * 新增角色信息
      *
      * @param roleVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加角色失败", operation = "添加角色")
-    @ApiOperation(value = "添加角色")
+    @ControllerEndpoint(exceptionMessage = "新增角色失败", operation = "新增角色")
+    @ApiOperation(value = "新增角色")
     @RequiresPermissions({"role:add"})
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated RoleVO roleVO) throws SystemException {
@@ -152,14 +152,14 @@ public class RoleController {
     }
 
     /**
-     * 更新角色状态
+     * 更新角色狀態
      *
      * @param id
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "角色更新状态失败", operation = "角色|禁用/启用")
-    @ApiOperation(value = "更新状态", notes = "禁用和更新两种状态")
+    @ControllerEndpoint(exceptionMessage = "角色更新狀態失败", operation = "角色|禁用/啟用")
+    @ApiOperation(value = "更新狀態", notes = "禁用和更新两种狀態")
     @RequiresPermissions({"role:status"})
     @PutMapping("/updateStatus/{id}/{status}")
     public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {

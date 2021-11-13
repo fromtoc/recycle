@@ -56,18 +56,18 @@ public class RegionController {
     @ApiOperation(value = "所有區域")
     @GetMapping("/findAll")
     public ResponseBean<List<Dictionary>> findAll() throws SystemException {
-        List<Dictionary> regionList = dictionaryService.selectByType(3);
+        List<Dictionary> regionList = dictionaryService.selectByType(3,1);
         return ResponseBean.success(regionList);
     }
 
     /**
-     * 添加區域
+     * 新增區域
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加區域失败", operation = "添加區域")
+    @ControllerEndpoint(exceptionMessage = "新增區域失败", operation = "新增區域")
     @RequiresPermissions({"region:add"})
-    @ApiOperation(value = "添加區域")
+    @ApiOperation(value = "新增區域")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated Dictionary dictionary) {
         dictionary.setType(3);
@@ -129,12 +129,12 @@ public class RegionController {
     @RequiresPermissions("region:export")
     @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出區域excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> regionList = this.dictionaryService.selectByType(3);
+        List<Dictionary> regionList = this.dictionaryService.selectByType(3,null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(regionList, false);
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

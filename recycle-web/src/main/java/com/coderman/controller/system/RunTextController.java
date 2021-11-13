@@ -62,13 +62,13 @@ public class RunTextController {
     }
 
     /**
-     * 添加跑馬燈
+     * 新增跑馬燈
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加跑馬燈失败", operation = "添加跑馬燈")
+    @ControllerEndpoint(exceptionMessage = "新增跑馬燈失败", operation = "新增跑馬燈")
     @RequiresPermissions({"runText:add"})
-    @ApiOperation(value = "添加跑馬燈")
+    @ApiOperation(value = "新增跑馬燈")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated RunText runText) {
         runText.setStatus(1);
@@ -119,7 +119,7 @@ public class RunTextController {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

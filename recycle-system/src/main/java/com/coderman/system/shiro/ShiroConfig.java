@@ -40,7 +40,7 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 
-        // 添加自己的过滤器并且取名为jwt
+        // 新增自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new HashMap<>();
         filterMap.put("jwt", new JWTFilter());
         factoryBean.setFilters(filterMap);
@@ -55,7 +55,8 @@ public class ShiroConfig {
         filterRuleMap.put("/**", "jwt");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/system/user/login", "anon");
-        filterRuleMap.put("/business/weight/**", "anon");
+        filterRuleMap.put("/business/weight/login", "anon");
+        filterRuleMap.put("/business/weight/add", "anon");
         filterRuleMap.put("/user/imgCode", "anon");
         //开放API文档接口
         filterRuleMap.put("/swagger-ui.html", "anon");
@@ -70,7 +71,7 @@ public class ShiroConfig {
     }
 
     /**
-     * 下面的代碼是添加注解支持
+     * 下面的代碼是新增注解支持
      */
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")

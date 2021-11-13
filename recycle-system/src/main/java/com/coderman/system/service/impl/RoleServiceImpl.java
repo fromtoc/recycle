@@ -67,7 +67,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * 添加角色
+     * 新增角色
      * @param roleVO
      */
     @Override
@@ -83,7 +83,7 @@ public class RoleServiceImpl implements RoleService {
         BeanUtils.copyProperties(roleVO,role);
         role.setCreateTime(new Date());
         role.setModifiedTime(new Date());
-        role.setStatus(RoleStatusEnum.AVAILABLE.getStatusCode());//默认启用添加的角色
+        role.setStatus(RoleStatusEnum.AVAILABLE.getStatusCode());//默认啟用新增的角色
         roleMapper.insert(role);
     }
 
@@ -149,7 +149,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     /**
-     * 角色状态
+     * 角色狀態
      * @param id
      * @param status
      */

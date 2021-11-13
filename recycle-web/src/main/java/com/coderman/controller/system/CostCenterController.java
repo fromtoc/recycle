@@ -56,18 +56,18 @@ public class CostCenterController {
     @ApiOperation(value = "所有成本中心")
     @GetMapping("/findAll")
     public ResponseBean<List<Dictionary>> findAll() throws SystemException {
-        List<Dictionary> list = dictionaryService.selectByType(2);
+        List<Dictionary> list = dictionaryService.selectByType(2, 1);
         return ResponseBean.success(list);
     }
 
     /**
-     * 添加成本中心
+     * 新增成本中心
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加成本中心失败", operation = "添加成本中心")
+    @ControllerEndpoint(exceptionMessage = "新增成本中心失败", operation = "新增成本中心")
     @RequiresPermissions({"costCenter:add"})
-    @ApiOperation(value = "添加成本中心")
+    @ApiOperation(value = "新增成本中心")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated Dictionary dictionary) {
         dictionary.setType(2);
@@ -129,7 +129,7 @@ public class CostCenterController {
     @RequiresPermissions("costCenter:export")
     @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出成本中心excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> list = this.dictionaryService.selectByType(2);
+        List<Dictionary> list = this.dictionaryService.selectByType(2, null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(list, false);
     }
 

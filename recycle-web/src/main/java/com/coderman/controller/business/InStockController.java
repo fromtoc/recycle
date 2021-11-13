@@ -65,7 +65,7 @@ public class InStockController {
     @RequiresPermissions({"inStock:in"})
     public ResponseBean addIntoStock(@RequestBody @Validated InStockVO inStockVO) throws BusinessException {
         if(inStockVO.getSupplierId()==null){
-            //说明现在添加物资来源
+            //说明现在新增物资来源
             SupplierVO supplierVO = new SupplierVO();
             BeanUtils.copyProperties(inStockVO,supplierVO);
             if("".equals(supplierVO.getName())||supplierVO.getName()==null){

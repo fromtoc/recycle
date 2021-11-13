@@ -129,19 +129,23 @@ public class ProductController {
 
 
     /**
-     * 添加物资
+     * 新增物资
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加物资失败", operation = "物资资料添加")
-    @ApiOperation(value = "添加物资")
+    @ControllerEndpoint(exceptionMessage = "新增物资失败", operation = "物资资料新增")
+    @ApiOperation(value = "新增物资")
     @RequiresPermissions({"product:add"})
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductVO productVO) throws BusinessException {
         if (productVO.getCategoryKeys().length != 2) {
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "物资需要2级分类");
         }
-        productService.add(productVO);
+        try {
+            productService.add(productVO);
+        } catch (Exception e){
+            return ResponseBean.error("廢棄物名稱重複");
+        }
         return ResponseBean.success();
     }
 
@@ -172,7 +176,11 @@ public class ProductController {
         if (productVO.getCategoryKeys().length != 2) {
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "物资需要2级分类");
         }
-        productService.update(id, productVO);
+        try {
+            productService.update(id, productVO);
+        } catch (Exception e){
+            return ResponseBean.error("廢棄物名稱重複");
+        }
         return ResponseBean.success();
     }
 
@@ -208,13 +216,13 @@ public class ProductController {
     }
 
     /**
-     * 物资添加审核
+     * 物资新增审核
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资添加审核失败", operation = "物资资料审核")
-    @ApiOperation(value = "物资添加审核", notes = "物资添加审核")
+    @ControllerEndpoint(exceptionMessage = "物资新增审核失败", operation = "物资资料审核")
+    @ApiOperation(value = "物资新增审核", notes = "物资新增审核")
     @RequiresPermissions({"product:publish"})
     @PutMapping("/publish/{id}")
     public ResponseBean publish(@PathVariable Long id) throws BusinessException {
@@ -238,7 +246,7 @@ public class ProductController {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

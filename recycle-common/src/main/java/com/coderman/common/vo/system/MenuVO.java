@@ -36,7 +36,7 @@ public class MenuVO {
 
     private Date modifiedTime;
 
-    @NotNull(message = "選單状态不能为空")
+    @NotNull(message = "選單狀態不能为空")
     private boolean disabled;
 
     private Integer open;

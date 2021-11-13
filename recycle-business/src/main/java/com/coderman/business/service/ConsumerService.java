@@ -15,7 +15,7 @@ import java.util.List;
 public interface ConsumerService {
 
     /**
-     * 添加物资去向
+     * 新增物资去向
      * @param consumerVO
      */
     Consumer add(ConsumerVO consumerVO);

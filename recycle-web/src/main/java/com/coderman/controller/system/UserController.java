@@ -2,7 +2,6 @@ package com.coderman.controller.system;
 
 
 import com.coderman.business.mapper.ProductMapper;
-import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.dto.UserLoginDTO;
 import com.coderman.common.error.SystemException;
@@ -13,6 +12,7 @@ import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.*;
 import com.coderman.system.converter.RoleConverter;
 import com.coderman.system.mapper.DepartmentMapper;
+import com.coderman.system.service.LogService;
 import com.coderman.system.service.LoginLogService;
 import com.coderman.system.service.RoleService;
 import com.coderman.system.service.UserService;
@@ -27,11 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author zhangyukang
@@ -55,6 +51,9 @@ public class UserController {
     private LoginLogService loginLogService;
 
     @Autowired
+    private LogService logService;
+
+    @Autowired
     private ProductMapper productMapper;
 
     @Autowired
@@ -73,6 +72,11 @@ public class UserController {
     public ResponseBean<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) throws SystemException {
         String token=userService.login(userLoginDTO.getUsername(),userLoginDTO.getPassword());
         loginLogService.add(request);
+        Log sysLog=new Log();
+        sysLog.setOperation("用戶登入");
+        sysLog.setUsername(userLoginDTO.getUsername());
+        sysLog.setCreateTime(new Date());
+        logService.saveLog(sysLog);
         return ResponseBean.success(token);
     }
 
@@ -166,14 +170,14 @@ public class UserController {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新用戶状态失败", operation = "用戶|禁用/启用")
-    @ApiOperation(value = "用戶状态", notes = "禁用和启用这两种状态")
+    @ControllerEndpoint(exceptionMessage = "更新用戶狀態失败", operation = "用戶|禁用/啟用")
+    @ApiOperation(value = "用戶狀態", notes = "禁用和啟用这两种狀態")
     @RequiresPermissions({"user:status"})
     @PutMapping("/updateStatus/{id}/{status}")
     public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
@@ -231,12 +235,12 @@ public class UserController {
     }
 
     /**
-     * 添加用戶信息
+     * 新增用戶信息
      * @param userVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加用戶失败", operation = "添加用戶")
-    @ApiOperation(value = "添加用戶", notes = "添加用戶信息")
+    @ControllerEndpoint(exceptionMessage = "新增用戶失败", operation = "新增用戶")
+    @ApiOperation(value = "新增用戶", notes = "新增用戶信息")
     @RequiresPermissions({"user:add"})
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated UserVO userVO) throws SystemException {
@@ -330,11 +334,11 @@ public class UserController {
     }
 
     /**
-     * 添加用戶卡片
+     * 新增用戶卡片
      *
      * @return
      */
-    @ApiOperation(value = "添加用戶卡片", notes = "添加用戶卡片")
+    @ApiOperation(value = "新增用戶卡片", notes = "新增用戶卡片")
     @PutMapping("/card/add/{userId}/{cardId}")
     public ResponseBean addUserCard(@PathVariable Long userId, @PathVariable String cardId) throws SystemException {
         int insert = userService.addUserCard(userId, cardId);
@@ -345,7 +349,7 @@ public class UserController {
     }
 
     /**
-     * 更新卡片状态
+     * 更新卡片狀態
      *
      * @param id
      * @param status

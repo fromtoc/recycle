@@ -24,7 +24,7 @@ public interface RunTextService {
     PageVO<RunText> findRunTextList(Integer pageNum, Integer pageSize, RunText runText);
 
     /**
-     * 添加跑馬燈
+     * 新增跑馬燈
      * @param runText
      */
     void add(RunText runText);

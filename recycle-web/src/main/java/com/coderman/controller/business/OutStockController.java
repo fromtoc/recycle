@@ -47,7 +47,7 @@ public class OutStockController {
     @RequiresPermissions({"outStock:out"})
     public ResponseBean addOutStock(@RequestBody @Validated OutStockVO outStockVO) throws BusinessException {
         if(outStockVO.getConsumerId()==null){
-            //说明现在添加物资来源
+            //说明现在新增物资来源
             ConsumerVO consumerVO = new ConsumerVO();
             BeanUtils.copyProperties(outStockVO,consumerVO);
             if("".equals(consumerVO.getName())||consumerVO.getName()==null){

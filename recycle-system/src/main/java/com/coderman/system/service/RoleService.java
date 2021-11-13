@@ -25,7 +25,7 @@ public interface RoleService {
     PageVO<RoleVO> findRoleList(Integer pageNum, Integer pageSize, RoleVO roleVO);
 
     /**
-     * 添加角色
+     * 新增角色
      * @param roleVO
      */
     void add(RoleVO roleVO) throws SystemException;
@@ -51,7 +51,7 @@ public interface RoleService {
     void update(Long id, RoleVO roleVO) throws SystemException;
 
     /**
-     * 根據角色状态
+     * 根據角色狀態
      * @param id
      * @param status
      */

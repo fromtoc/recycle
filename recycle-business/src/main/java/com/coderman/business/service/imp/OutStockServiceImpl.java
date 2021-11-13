@@ -157,7 +157,7 @@ public class OutStockServiceImpl implements OutStockService {
         Integer status = outStock.getStatus();
         //只有status=0,正常的情况下,才可移入回收站
         if(status!=0){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态不正确");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单狀態不正确");
         }else {
             OutStock out = new OutStock();
             out.setStatus(1);
@@ -176,7 +176,7 @@ public class OutStockServiceImpl implements OutStockService {
         t.setId(id);
         OutStock outStock = outStockMapper.selectByPrimaryKey(t);
         if(outStock.getStatus()!=1){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态不正确");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单狀態不正确");
         }else {
             t.setStatus(0);
             outStockMapper.updateByPrimaryKeySelective(t);
@@ -246,7 +246,7 @@ public class OutStockServiceImpl implements OutStockService {
         if(outStock==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单不存在");
         }else if(outStock.getStatus()!=1&&outStock.getStatus()!=2){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态錯誤,無法删除");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单狀態錯誤,無法删除");
         }else {
            outStockMapper.deleteByPrimaryKey(id);
         }
@@ -268,7 +268,7 @@ public class OutStockServiceImpl implements OutStockService {
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单不存在");
         }
         if(outStock.getStatus()!=2){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单状态錯誤");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放单狀態錯誤");
         }
         if(consumer==null){
             throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"发放来源信息錯誤");
@@ -302,7 +302,7 @@ public class OutStockServiceImpl implements OutStockService {
                     }else {
                         throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該物资在库存中找不到");
                     }
-                    //修改入库单状态.
+                    //修改入库单狀態.
                     outStock.setCreateTime(new Date());
                     outStock.setStatus(0);
                     outStockMapper.updateByPrimaryKeySelective(outStock);

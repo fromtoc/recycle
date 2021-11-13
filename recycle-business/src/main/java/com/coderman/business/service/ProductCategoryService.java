@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProductCategoryService {
 
     /**
-     * 添加物资类别
+     * 新增物资类别
      * @param ProductCategoryVO
      */
     void add(ProductCategoryVO ProductCategoryVO);

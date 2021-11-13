@@ -36,7 +36,7 @@ public class OutStockVO {
 
     private String remark;
 
-    //发放单的状态
+    //发放单的狀態
     private Integer status;
 
 

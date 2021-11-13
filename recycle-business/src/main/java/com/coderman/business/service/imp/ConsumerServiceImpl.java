@@ -59,7 +59,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
 
     /**
-     * 添加供应商
+     * 新增供应商
      * @param ConsumerVO
      */
     @Override

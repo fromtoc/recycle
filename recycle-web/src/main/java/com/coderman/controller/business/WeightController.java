@@ -4,20 +4,20 @@ package com.coderman.controller.business;
 import com.coderman.business.mapper.ProductMapper;
 import com.coderman.business.service.WeightService;
 import com.coderman.common.annotation.ControllerEndpoint;
-import com.coderman.common.dto.UserLoginDTO;
+import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.Weight;
 import com.coderman.common.model.system.*;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.business.ProductPriceVO;
+import com.coderman.common.vo.business.WeightVO;
+import com.coderman.system.service.UserService;
 import com.coderman.common.vo.system.*;
-import com.coderman.system.converter.RoleConverter;
 import com.coderman.system.mapper.CardProductMapper;
 import com.coderman.system.mapper.UserCardMapper;
 import com.coderman.system.mapper.UserMapper;
 import com.coderman.system.service.*;
-import com.coderman.system.util.MD5Utils;
-import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -88,6 +87,7 @@ public class WeightController {
         String cardName = map.get("cardName");
         Example o = new Example(UserCard.class);
         o.createCriteria().andEqualTo("cardName", cardName);
+        o.createCriteria().andEqualTo("status", 1);
         List<UserCard> cardProducts = userCardMapper.selectByExample(o);
         if (!CollectionUtils.isEmpty(cardProducts)) {
             UserCard userCard = cardProducts.get(0);
@@ -108,6 +108,7 @@ public class WeightController {
             List<Long> productsByCard = userService.findProductsByCard(userCard.getId());
             List<Product> productList = productsByCard.stream()
                     .map(id -> productMapper.selectByPrimaryKey(id))
+                    .filter(product -> product.getStatus()==1)
                     .collect(Collectors.toList());
 
             Map responseMap = new HashMap();
@@ -137,6 +138,79 @@ public class WeightController {
         } catch (Exception e) {
             return ResponseBean.error("新增秤重單失敗");
         }
+        return ResponseBean.success();
+    }
+
+    /**
+     * 秤重列表
+     *
+     * @return
+     */
+    @ApiOperation(value = "秤重列表", notes = "查询秤重列表")
+    @GetMapping("/findWeightList")
+    public ResponseBean<PageVO<WeightVO>> findUserList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                     @RequestParam(value = "pageSize", defaultValue = "7") Integer pageSize,
+                                                     WeightVO weightVO) {
+        PageVO<WeightVO> weightList = weightService.findWeightList(pageNum, pageSize, weightVO);
+        return ResponseBean.success(weightList);
+    }
+
+    /**
+     * 新增秤重明細
+     *
+     * @param weightVO
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "新增秤重明細失败", operation = "新增秤重明細")
+    @ApiOperation(value = "新增秤重明細", notes = "新增秤重明細")
+    @RequiresPermissions({"weight:add"})
+    @PostMapping("/addVO")
+    public ResponseBean addVO(@RequestBody WeightVO weightVO) throws SystemException {
+        weightService.addVO(weightVO);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 編辑秤重明細
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "編辑秤種明細", notes = "編辑秤重明細")
+    @RequiresPermissions({"weight:edit"})
+    @GetMapping("/edit/{id}")
+    public ResponseBean edit(@PathVariable Long id) {
+        WeightVO weightVO = weightService.edit(id);
+        return ResponseBean.success(weightVO);
+    }
+
+    /**
+     * 更新秤種明細
+     *
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "編輯秤種明細失败", operation = "編輯秤種明細")
+    @ApiOperation(value = "編輯秤種明細", notes = "編輯秤種明細")
+    @RequiresPermissions({"weight:update"})
+    @PutMapping("/update/{id}")
+    public ResponseBean update(@PathVariable Long id, @RequestBody WeightVO weightVO) throws BusinessException, SystemException {
+        weightService.update(id, weightVO);
+        return ResponseBean.success();
+    }
+
+    /**
+     * 更新狀態
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "更新秤重明細狀態失敗", operation = "秤重明細|作廢/啟用")
+    @ApiOperation(value = "秤重明細狀態", notes = "作廢和啟用这兩種狀態")
+    @RequiresPermissions({"weight:status"})
+    @PutMapping("/updateStatus/{id}/{status}")
+    public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
+        weightService.updateStatus(id, status);
         return ResponseBean.success();
     }
 

@@ -45,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     /**
-     * 添加選單
+     * 新增選單
      *
      * @param menuVO
      */

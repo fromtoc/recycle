@@ -34,10 +34,8 @@ public class ProductPriceVO {
 
     private String unit;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    private Date startTime;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
-    private Date endTime;
+//    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM")
+    private String validMonth;
 
     private String oneCategoryName;
 

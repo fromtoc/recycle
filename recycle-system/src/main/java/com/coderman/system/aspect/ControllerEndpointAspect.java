@@ -81,7 +81,7 @@ public class ControllerEndpointAspect extends AspectSupport {
         //操作人
         ActiveUser activeUser= (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         sysLog.setUsername(activeUser.getUser().getUsername());
-        //添加時間
+        //新增時間
         sysLog.setCreateTime(new Date());
         //执行目标方法
         result=joinPoint.proceed();

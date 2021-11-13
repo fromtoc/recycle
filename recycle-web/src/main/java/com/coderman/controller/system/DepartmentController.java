@@ -74,13 +74,13 @@ public class DepartmentController {
     }
 
     /**
-     * 添加部門
+     * 新增部門
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加部門失败", operation = "添加部門")
+    @ControllerEndpoint(exceptionMessage = "新增部門失败", operation = "新增部門")
     @RequiresPermissions({"department:add"})
-    @ApiOperation(value = "添加部門")
+    @ApiOperation(value = "新增部門")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated DepartmentVO departmentVO) {
         departmentService.add(departmentVO);
@@ -144,7 +144,7 @@ public class DepartmentController {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

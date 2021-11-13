@@ -24,6 +24,12 @@ public interface WeightService {
      */
     int add(Weight weight);
 
+    /**
+     * 新增秤重單
+     * @param weightVO
+     */
+    int addVO(WeightVO weightVO) throws SystemException;
+
 
     /**
      * 商品列表
@@ -47,7 +53,7 @@ public interface WeightService {
      * @param id
      * @param weightVO
      */
-    void update(Long id, WeightVO weightVO);
+    void update(Long id, WeightVO weightVO) throws SystemException;
 
     /**
      * 删除秤重單
@@ -56,7 +62,7 @@ public interface WeightService {
     void delete(Long id) throws BusinessException;
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

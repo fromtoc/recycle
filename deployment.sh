@@ -9,7 +9,7 @@ APP_LOG="$SOURCE_HOME/target/log_info.log"
 #环境配置 用戶配置开发(dev)，测试(test)，生产(prod)的配置文件，避免频繁改动
 PROFILES_ACTIVE="spring.profiles.active=prod"
 
-#JVM启动参数，关于JVM调优这里不介绍，感兴趣的可以自行百度 JVM调优
+#JVM啟动参数，关于JVM调优这里不介绍，感兴趣的可以自行百度 JVM调优
 JAVA_OPTS="-server -Xms512M -Xmx512M -Xss256k -Xmn256m -XX:SurvivorRatio=4 -XX:+AggressiveOpts -XX:+UseBiasedLocking -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=256M  -XX:CMSInitiatingOccupancyFraction=90 -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:+DisableExplicitGC -XX:MaxTenuringThreshold=0 -XX:CMSFullGCsBeforeCompaction=100 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -Djava.awt.headless=true"
 
 psid=0
@@ -25,7 +25,7 @@ checkpid() {
 }
 
 
-#編写启动方法
+#編写啟动方法
 start() {
    checkpid
 
@@ -40,7 +40,7 @@ start() {
 	  #输出，准备获取最新代碼
       echo -n "git pull source ,please wait ....."
 	  #获取最新代碼，此列只在目录所在分支pull
-      #若想部署指定分支代碼，可以在脚本调用参数中添加一个变量，用git checkout ${targer_branch}
+      #若想部署指定分支代碼，可以在脚本调用参数中新增一个变量，用git checkout ${targer_branch}
       git pull
 
       #输出，最新代碼已拉取完毕，准备打包
@@ -55,7 +55,7 @@ start() {
        #到项目源碼目录
       cd $SOURCE_HOME
       cd target
-      #输出，准备启动
+      #输出，准备啟动
       echo -n $"Starting $proc:"
 
       #循环加载所需的jar，此处和2的pom配置有关
@@ -64,7 +64,7 @@ start() {
         APP_CLASS="$name"
       done
 
-      #启动脚本，--spring.profiles.active=   用于设置环境所使用的配置文件
+      #啟动脚本，--spring.profiles.active=   用于设置环境所使用的配置文件
       JAVA_CMD="java "$JAVA_OPTS" -jar "$APP_CLASS" --"$PROFILES_ACTIVE" &"
       #后台运行
 
@@ -116,7 +116,7 @@ stop() {
 }
 
 
-#项目状态
+#项目狀態
 status() {
    checkpid
    if [ $psid -ne 0 ];  then
@@ -127,7 +127,7 @@ status() {
 }
 
 
-#设置脚本参数，启动的時候可以采用./脚本名稱.sh start/stop/restart/log/status等参数
+#设置脚本参数，啟动的時候可以采用./脚本名稱.sh start/stop/restart/log/status等参数
 case "$1" in
   start)
     start

@@ -132,7 +132,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     /**
-     * 添加院系
+     * 新增院系
      *
      * @param departmentVO
      */
@@ -241,7 +241,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void updateStatus(Long id, Boolean status) throws SystemException {
         Department department = departmentMapper.selectByPrimaryKey(id);
         if (department == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新状态的公司不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新狀態的公司不存在");
         }
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         if (department.getId().equals(activeUser.getUser().getId())) {

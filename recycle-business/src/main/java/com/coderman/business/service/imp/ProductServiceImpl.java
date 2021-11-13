@@ -73,6 +73,10 @@ public class ProductServiceImpl implements ProductService {
         if (productVO.getStatus() != null) {
             criteria.andEqualTo("status", productVO.getStatus()? 1: 0);
         }
+        o.setOrderByClause("sort asc");
+        if (productVO.getName() != null && !"".equals(productVO.getName())) {
+            criteria.andLike("name", "%" + productVO.getName() + "%");
+        }
         if (productVO.getThreeCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productVO.getOneCategoryId())
                     .andEqualTo("twoCategoryId", productVO.getTwoCategoryId())
@@ -106,10 +110,6 @@ public class ProductServiceImpl implements ProductService {
             PageInfo<Product> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
-        o.setOrderByClause("sort asc");
-        if (productVO.getName() != null && !"".equals(productVO.getName())) {
-            criteria.andLike("name", "%" + productVO.getName() + "%");
-        }
 
         products = productMapper.selectByExample(o);
         List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
@@ -122,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     /**
-     * 添加商品
+     * 新增商品
      *
      * @param ProductVO
      */
@@ -172,7 +172,7 @@ public class ProductServiceImpl implements ProductService {
             product.setTwoCategoryId(categoryKeys[1]);
 //            product.setThreeCategoryId(categoryKeys[2]);
         }
-        productMapper.updateByPrimaryKey(product);
+        productMapper.updateByPrimaryKeySelective(product);
     }
 
     /**
@@ -275,7 +275,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status
@@ -316,6 +316,20 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return p;
+    }
+
+    /**
+     * 查询產品
+     *
+     * @param name 產品名
+     * @return
+     */
+    @Override
+    public List<Product> findProductByProductName(String name) {
+
+        Example o = new Example(Product.class);
+        o.createCriteria().andLike("name", "%" + name + "%");
+        return productMapper.selectByExample(o);
     }
 
 

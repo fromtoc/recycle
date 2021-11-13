@@ -15,7 +15,7 @@ import java.util.List;
 public interface SupplierService {
 
     /**
-     * 添加供应商
+     * 新增供应商
      * @param supplierVO
      */
     Supplier add(SupplierVO supplierVO);

@@ -67,7 +67,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
 
     /**
-     * 添加商品类别
+     * 新增商品类别
      * @param ProductCategoryVO
      */
     @Override

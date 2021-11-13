@@ -45,13 +45,13 @@ public class ConsumerController {
     }
 
     /**
-     * 添加去向
+     * 新增去向
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资去向添加失败", operation = "物资去向添加")
+    @ControllerEndpoint(exceptionMessage = "物资去向新增失败", operation = "物资去向新增")
     @RequiresPermissions({"consumer:add"})
-    @ApiOperation(value = "添加去向")
+    @ApiOperation(value = "新增去向")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ConsumerVO consumerVO) {
         consumerService.add(consumerVO);

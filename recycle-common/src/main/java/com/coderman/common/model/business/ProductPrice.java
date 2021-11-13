@@ -28,8 +28,6 @@ public class ProductPrice {
 
     private String unit;
 
-    private Date startTime;
-
-    private Date endTime;
+    private String validMonth;
 
 }

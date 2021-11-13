@@ -19,7 +19,7 @@ public class Menu {
     @GeneratedValue(generator = "JDBC")
     private Long id;
 
-    @ExcelField(value = "父级id", width = 50)
+    @ExcelField(value = "父級id", width = 50)
     private Long parentId;
 
     @ExcelField(value = "選單名稱", width = 100)
@@ -28,19 +28,19 @@ public class Menu {
     @ExcelField(value = "選單url", width = 100)
     private String url;
 
-    @ExcelField(value = "選單图标", width = 80)
+    @ExcelField(value = "選單圖標", width = 80)
     private String icon;
 
-    @ExcelField(value = "是否展开", width = 50)
+    @ExcelField(value = "是否展開", width = 50)
     private Integer open;
 
-    @ExcelField(value = "選單类型", width = 80)
+    @ExcelField(value = "選單類型", width = 80)
     private Integer type;
 
     @ExcelField(value = "排序", width = 90)
     private Long orderNum;
 
-    @ExcelField(value = "创建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "創建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date createTime;
 
     @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)

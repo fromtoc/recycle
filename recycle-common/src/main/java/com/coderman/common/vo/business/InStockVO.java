@@ -56,7 +56,7 @@ public class InStockVO {
     private Date endTime;
 
 
-    /** 如果supplierId不存在需要添加供应商信息**/
+    /** 如果supplierId不存在需要新增供应商信息**/
 
     private String name;
 

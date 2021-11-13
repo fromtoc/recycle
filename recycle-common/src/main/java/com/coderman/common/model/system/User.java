@@ -30,7 +30,7 @@ public class User {
 
     private Integer status;
 
-    @ExcelField(value = "创建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
+    @ExcelField(value = "創建時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date createTime;
 
     @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss",width = 180)

@@ -32,7 +32,7 @@
 - recycle-system: 系统模塊,權限控制相关的代碼放在此工程中。
 - recycle-common: 公共模塊,存放工具类、领域模型（DTO）、数據模型对象(DO)一些通用的类。
 - recycle-generator: 代碼生成器，生成Controller,Service,ServiceImpl,以及前端代碼。
-- recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  启动該项目。
+- recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  啟动該项目。
 - recycle-web: 处理前端請求的Controller,放在此工程中。
 
 #### 技术栈

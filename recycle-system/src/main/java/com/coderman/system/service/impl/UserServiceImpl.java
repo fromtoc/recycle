@@ -84,6 +84,19 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 查询用戶
+     *
+     * @param name 用戶名
+     * @return
+     */
+    @Override
+    public List<User> findUserByNickName(String name) {
+        Example o = new Example(User.class);
+        o.createCriteria().andLike("nickname", "%" + name + "%");
+        return userMapper.selectByExample(o);
+    }
+
+    /**
      * 查询用戶角色
      *
      * @param id 用戶ID
@@ -290,7 +303,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 更新用戶禁用状态
+     * 更新用戶禁用狀態
      *
      * @param id
      * @param status
@@ -299,11 +312,11 @@ public class UserServiceImpl implements UserService {
     public void updateStatus(Long id, Boolean status) throws SystemException {
         User dbUser = userMapper.selectByPrimaryKey(id);
         if (dbUser == null) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新状态的用戶不存在");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新狀態的用戶不存在");
         }
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         if (dbUser.getId().equals(activeUser.getUser().getId())) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "無法改变当前用戶状态");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "無法改变当前用戶狀態");
         } else {
             User t = new User();
             t.setId(id);
@@ -322,7 +335,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 添加用戶
+     * 新增用戶
      *
      * @param userVO
      */
@@ -335,7 +348,13 @@ public class UserServiceImpl implements UserService {
         o.createCriteria().andEqualTo("username", username);
         int i = userMapper.selectCountByExample(o);
         if (i != 0) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名已被占用");
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶帳號已被占用");
+        }
+        Example o1 = new Example(User.class);
+        o.createCriteria().andEqualTo("nickname", userVO.getNickname());
+        int i1 = userMapper.selectCountByExample(o1);
+        if (i1 != 0) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");
         }
         Department department = departmentMapper.selectByPrimaryKey(departmentId);
         if (department == null) {
@@ -348,8 +367,8 @@ public class UserServiceImpl implements UserService {
         user.setModifiedTime(new Date());
         user.setCreateTime(new Date());
         user.setSalt(salt);
-        user.setType(UserTypeEnum.SYSTEM_USER.getTypeCode());//添加的用戶默认是普通用戶
-        user.setStatus(UserStatusEnum.AVAILABLE.getStatusCode());//添加的用戶默认启用
+        user.setType(UserTypeEnum.SYSTEM_USER.getTypeCode());//新增的用戶默认是普通用戶
+        user.setStatus(UserStatusEnum.AVAILABLE.getStatusCode());//新增的用戶默认啟用
         user.setAvatar("http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg");
         userMapper.insert(user);
     }
@@ -378,8 +397,14 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectByExample(o);
         if (!CollectionUtils.isEmpty(users)) {
             if (!users.get(0).getId().equals(id)) {
-                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名已被占用");
+                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶帳號已被占用");
             }
+        }
+        Example o1 = new Example(User.class);
+        o.createCriteria().andEqualTo("nickname", userVO.getNickname());
+        int i1 = userMapper.selectCountByExample(o1);
+        if (i1 != 0) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");
         }
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
@@ -496,7 +521,7 @@ public class UserServiceImpl implements UserService {
                 if (role == null) {
                     throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleId=" + rid + ",該角色不存在");
                 }
-                //判断角色状态
+                //判断角色狀態
                 if (role.getStatus() == 0) {
                     throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "roleName=" + role.getRoleName() + ",該角色已禁用");
                 }

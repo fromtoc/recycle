@@ -16,12 +16,11 @@ public class RoleVO {
 
     private Long id;
 
-    private String type;
+    private Integer type;
 
     @NotBlank(message = "角色名必填")
     private String roleName;
 
-    @NotBlank(message = "角色描述信息必填")
     private String remark;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")

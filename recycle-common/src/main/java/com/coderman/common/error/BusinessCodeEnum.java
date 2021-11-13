@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  *
- * 業務錯誤碼：返回结果的状态碼
+ * 業務錯誤碼：返回结果的狀態碼
  *
  * 如果想要代碼更具维护性一點,可以定义不同种类的錯誤碼,都实现 BaseCodeInterface
  * @Author zhangyukang
@@ -30,7 +30,7 @@ public enum  BusinessCodeEnum implements BaseError {
     PRODUCT_IS_REMOVE(30001,"物资已移入回收站"),
     PRODUCT_NOT_FOUND(30002,"物资找不到"),
     PRODUCT_WAIT_PASS(30003,"物资等待审核"),
-    PRODUCT_STATUS_ERROR(30004,"物资状态錯誤"),
+    PRODUCT_STATUS_ERROR(30004,"物资狀態錯誤"),
     PRODUCT_IN_STOCK_NUMBER_ERROR(30005,"物资入库数量非法"),
     PRODUCT_OUT_STOCK_NUMBER_ERROR(30008,"物资发放数量非法"),
     PRODUCT_IN_STOCK_EMPTY(30006,"物资入库不能为空"),

@@ -46,13 +46,13 @@ public class SupplierController {
 
 
     /**
-     * 添加来源
+     * 新增来源
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资来源添加失败", operation = "物资来源添加")
+    @ControllerEndpoint(exceptionMessage = "物资来源新增失败", operation = "物资来源新增")
     @RequiresPermissions({"supplier:add"})
-    @ApiOperation(value = "添加来源")
+    @ApiOperation(value = "新增来源")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated SupplierVO supplierVO) {
         supplierService.add(supplierVO);

@@ -59,7 +59,7 @@ public class SupplierServiceImpl implements SupplierService {
 
 
     /**
-     * 添加供应商
+     * 新增供应商
      * @param SupplierVO
      */
     @Override

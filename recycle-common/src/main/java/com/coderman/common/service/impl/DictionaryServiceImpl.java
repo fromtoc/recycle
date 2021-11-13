@@ -62,17 +62,20 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public List<Dictionary> selectByType(Integer type) throws SystemException {
+    public List<Dictionary> selectByType(Integer type, Integer status) throws SystemException {
         Dictionary query = new Dictionary();
         query.setType(type);
+        if (status != null) {
+            query.setStatus(status);
+        }
         return dictionaryMapper.select(query);
     }
 
     @Override
     public void update(Long id, Dictionary dictionary) throws SystemException {
         Dictionary originDictionary = dictionaryMapper.selectByPrimaryKey(id);
-        if(originDictionary==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的資料辭典不存在");
+        if (originDictionary == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新的資料辭典不存在");
         }
         dictionaryMapper.updateByPrimaryKeySelective(dictionary);
     }
@@ -80,8 +83,8 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public void delete(Long id) throws SystemException {
         Dictionary originDictionary = dictionaryMapper.selectByPrimaryKey(id);
-        if(originDictionary==null){
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要删除的資料辭典不存在");
+        if (originDictionary == null) {
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要删除的資料辭典不存在");
         }
         originDictionary.setStatus(0);
         dictionaryMapper.updateByPrimaryKeySelective(originDictionary);

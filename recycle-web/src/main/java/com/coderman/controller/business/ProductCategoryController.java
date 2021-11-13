@@ -88,13 +88,13 @@ public class ProductCategoryController {
     }
 
     /**
-     * 添加物资分类
+     * 新增物资分类
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资分类添加失败", operation = "物资分类添加")
+    @ControllerEndpoint(exceptionMessage = "物资分类新增失败", operation = "物资分类新增")
     @RequiresPermissions({"productCategory:add"})
-    @ApiOperation(value = "添加分类")
+    @ApiOperation(value = "新增分类")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductCategoryVO productCategoryVO) {
             productCategoryService.add(productCategoryVO);
@@ -145,7 +145,7 @@ public class ProductCategoryController {
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

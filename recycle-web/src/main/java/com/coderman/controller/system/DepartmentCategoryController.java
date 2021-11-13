@@ -56,18 +56,18 @@ public class DepartmentCategoryController {
     @ApiOperation(value = "所有公司類型")
     @GetMapping("/findAll")
     public ResponseBean<List<Dictionary>> findAll() throws SystemException {
-        List<Dictionary> departmentCategoryList = dictionaryService.selectByType(1);
+        List<Dictionary> departmentCategoryList = dictionaryService.selectByType(1,1);
         return ResponseBean.success(departmentCategoryList);
     }
 
     /**
-     * 添加公司類型
+     * 新增公司類型
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "添加公司類型失败", operation = "添加公司類型")
+    @ControllerEndpoint(exceptionMessage = "新增公司類型失败", operation = "新增公司類型")
     @RequiresPermissions({"departmentCategory:add"})
-    @ApiOperation(value = "添加公司類型")
+    @ApiOperation(value = "新增公司類型")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated Dictionary dictionary) {
         dictionary.setType(1);
@@ -129,12 +129,12 @@ public class DepartmentCategoryController {
     @RequiresPermissions("departmentCategory:export")
     @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出公司類型excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> departmentCategoryList = this.dictionaryService.selectByType(1);
+        List<Dictionary> departmentCategoryList = this.dictionaryService.selectByType(1,null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(departmentCategoryList, false);
     }
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status

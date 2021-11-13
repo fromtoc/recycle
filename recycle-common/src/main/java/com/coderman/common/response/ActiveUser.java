@@ -58,11 +58,11 @@ public class ActiveUser {
      */
     private String systemHost;
     /**
-     * 状态
+     * 狀態
      */
     private String status;
     /**
-     * session 创建時間
+     * session 創建時間
      */
     private String startTimestamp;
     /**

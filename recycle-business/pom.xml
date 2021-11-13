@@ -23,6 +23,11 @@
             <artifactId>recycle-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.coderman</groupId>
+            <artifactId>recycle-system</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

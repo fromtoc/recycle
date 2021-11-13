@@ -22,6 +22,15 @@ public interface UserService {
      User findUserByName(String name);
 
     /**
+     * 根據用戶名查询用戶
+     *
+     * @param name 用戶名
+     * @return
+     */
+    List<User> findUserByNickName(String name);
+
+
+    /**
      * 查询用戶角色
      *
      * @param id 用戶id
@@ -82,7 +91,7 @@ public interface UserService {
     void deleteById(Long id) throws SystemException;
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status
@@ -90,7 +99,7 @@ public interface UserService {
     void updateStatus(Long id, Boolean status) throws SystemException;
 
     /**
-     * 更新卡片状态
+     * 更新卡片狀態
      *
      * @param id
      * @param status
@@ -98,7 +107,7 @@ public interface UserService {
     void updateCardStatus(Long id, Boolean status) throws SystemException;
 
     /**
-     * 添加用戶
+     * 新增用戶
      * @param userVO
      */
     void add(UserVO userVO) throws SystemException;
@@ -120,7 +129,7 @@ public interface UserService {
     boolean updatePassword(String oldPassword, String newPassword) throws SystemException;
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param password

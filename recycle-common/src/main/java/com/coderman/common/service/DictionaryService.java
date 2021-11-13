@@ -26,7 +26,7 @@ public interface DictionaryService {
     PageVO<Dictionary> findDictionaryList(Integer pageNum, Integer pageSize, Dictionary dictionary);
 
     /**
-     * 添加資料辭典
+     * 新增資料辭典
      * @param dictionary
      */
     void add(Dictionary dictionary);
@@ -43,7 +43,7 @@ public interface DictionaryService {
      * @param type
      * @return
      */
-    List<Dictionary> selectByType(Integer type) throws SystemException;
+    List<Dictionary> selectByType(Integer type, Integer status) throws SystemException;
 
     /**
      * 更新資料辭典

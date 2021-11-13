@@ -21,10 +21,12 @@ import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.constraints.NotNull;
@@ -44,42 +46,130 @@ import java.util.stream.Collectors;
 public class ProductPriceServiceImpl implements ProductPriceService {
 
     @Autowired
-    ProductPriceMapper productPriceMapper;
+    private ProductPriceMapper productPriceMapper;
+
+    @Autowired
+    private ProductCategoryService productCategoryService;
+
+    @Autowired
+    private DictionaryService dictionaryService;
+
+    @Autowired
+    private ProductMapper productMapper;
+
 
     @Override
-    public void add(ProductPrice productPrice) {
-        productPriceMapper.insert(productPrice);
-    }
-
-    @Override
-    public PageVO<ProductPriceVO> findProductPriceList(Integer pageNum, Integer pageSize, ProductPrice productPrice) {
-        PageHelper.startPage(pageNum, pageSize);
-        String name = productPrice.getName();
-        Example o = new Example(Dictionary.class);
+    public int add(ProductPriceVO productPriceVO) {
+        ProductPrice productPrice = new ProductPrice();
+        BeanUtils.copyProperties(productPriceVO, productPrice);
+        String productName = productPrice.getName();
+        Example o = new Example(Product.class);
         Example.Criteria criteria = o.createCriteria();
-        if (name != null && !"".equals(name)) {
-            criteria.andLike("name", "%" + name + "%");
+        criteria.andEqualTo("name", productName);
+        List<Product> products = productMapper.selectByExample(o);
+        if (!CollectionUtils.isEmpty(products) && products.size()==1){
+            Product product = products.get(0);
+            productPrice.setProductId(product.getId());
+            productPrice.setOneCategoryId(product.getOneCategoryId());
+            productPrice.setTwoCategoryId(product.getTwoCategoryId());
+            return productPriceMapper.insert(productPrice);
         }
-        List<ProductPrice> productPrices = productPriceMapper.selectByExample(o);
-        List<ProductPriceVO> productPriceVOList = new ArrayList<>();
-        for (ProductPrice price:productPrices) {
-            ProductPriceVO priceVO = new ProductPriceVO();
-            BeanUtils.copyProperties(price, priceVO);
-            productPriceVOList.add(priceVO);
-        }
-
-        PageInfo<ProductPriceVO> productPricePageInfo = new PageInfo<>(productPriceVOList);
-        return new PageVO<ProductPriceVO>(productPricePageInfo.getTotal(), productPriceVOList);
+        return 0;
     }
 
     @Override
-    public ProductPrice edit(Long id) {
-        return productPriceMapper.selectByPrimaryKey(id);
+    public PageVO<ProductPriceVO> findProductPriceList(Integer pageNum, Integer pageSize,  ProductPriceVO productPriceVO) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<ProductPrice> products;
+        List<ProductPriceVO> productPriceVOs = new ArrayList<>();
+        Example o = new Example(ProductPrice.class);
+        Example.Criteria criteria = o.createCriteria();
+        if (productPriceVO.getName() != null && !"".equals(productPriceVO.getName())) {
+            criteria.andLike("name", "%" + productPriceVO.getName() + "%");
+        }
+        if (productPriceVO.getValidMonth() != null && !"".equals(productPriceVO.getValidMonth())) {
+            criteria.andEqualTo("validMonth", productPriceVO.getValidMonth());
+        }
+        if (productPriceVO.getThreeCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId())
+                    .andEqualTo("threeCategoryId", productPriceVO.getThreeCategoryId());
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                productPriceVOs.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
+        }
+        if (productPriceVO.getTwoCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId());
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                productPriceVOs.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
+        }
+        if (productPriceVO.getOneCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId());
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                productPriceVOs.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            return new PageVO<>(info.getTotal(), categoryVOSWithName);
+        }
+
+        products = productPriceMapper.selectByExample(o);
+        for (ProductPrice p: products){
+            ProductPriceVO vo = new ProductPriceVO();
+            BeanUtils.copyProperties(p,vo);
+            productPriceVOs.add(vo);
+        }
+
+        List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
+                .map(vo -> getCategoryName(vo))
+                .collect(Collectors.toList());
+        PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+        return new PageVO<>(info.getTotal(), categoryVOSWithName);
+    }
+
+    @Override
+    public ProductPriceVO edit(Long id) {
+        ProductPrice productPrice = productPriceMapper.selectByPrimaryKey(id);
+        ProductPriceVO productPriceVO = new ProductPriceVO();
+        BeanUtils.copyProperties(productPrice,productPriceVO);
+        return productPriceVO;
     }
 
     @Override
     public void update(Long id, ProductPriceVO productPriceVO) {
-        ProductPrice originProductPrice = productPriceMapper.selectByPrimaryKey(id);
-        productPriceMapper.updateByPrimaryKeySelective(originProductPrice);
+//        ProductPrice originProductPrice = productPriceMapper.selectByPrimaryKey(id);
+        ProductPrice productPrice = new ProductPrice();
+        BeanUtils.copyProperties(productPriceVO, productPrice);
+        productPriceMapper.updateByPrimaryKeySelective(productPrice);
+    }
+
+    private ProductPriceVO getCategoryName(ProductPriceVO p) {
+        p.setOneCategoryName(productCategoryService.getName(p.getOneCategoryId()));
+        p.setTwoCategoryName(productCategoryService.getName(p.getTwoCategoryId()));
+
+        return p;
     }
 }

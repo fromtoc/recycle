@@ -13,7 +13,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @Version 1.0
  **/
 @SpringBootApplication
-@EnableTransactionManagement  //开启事務管理
+@EnableTransactionManagement  //开啟事務管理
 @MapperScan("com.coderman.*.mapper") //扫描mapper
 @Import(FdfsClientConfig.class)
 public class RecycleApplication {

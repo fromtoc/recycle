@@ -21,7 +21,7 @@ public interface MenuService {
     List<MenuNodeVO> findMenuTree();
 
     /**
-     * 添加選單
+     * 新增選單
      * @param menuVO
      */
     Menu add(MenuVO menuVO);

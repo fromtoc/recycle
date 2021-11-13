@@ -3,6 +3,7 @@ package com.coderman.business.service;
 
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.model.business.Product;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
@@ -17,7 +18,7 @@ import java.util.List;
 public interface ProductService {
 
     /**
-     * 添加商品
+     * 新增商品
      * @param productVO
      */
     void add(ProductVO productVO);
@@ -81,13 +82,13 @@ public interface ProductService {
     void back(Long id) throws BusinessException;
 
     /**
-     * 物资添加审核
+     * 物资新增审核
      * @param id
      */
     void publish(Long id) throws BusinessException;
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param id
      * @param status
@@ -95,12 +96,14 @@ public interface ProductService {
     void updateStatus(Long id, Boolean status) throws SystemException;
 
     /**
-     * 更新状态
+     * 更新狀態
      *
      * @param ids
      * @param costCenterId
      */
     void updateCostCenter(List<Long> ids, Long costCenterId) throws SystemException;
+
+    List<Product> findProductByProductName(String name);
 
 
 }
