@@ -1,7 +1,7 @@
 package com.coderman.common.enums.buisiness;
 
 /**
- * 業務用戶类型
+ * 業務用戶類型
  * @Author zhangyukang
  * @Date 2020/3/15 18:37
  * @Version 1.0

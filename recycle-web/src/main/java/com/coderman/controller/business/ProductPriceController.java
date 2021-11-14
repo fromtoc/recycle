@@ -26,7 +26,7 @@ import java.util.List;
  * @Date 2020/3/17 09:19
  * @Version 1.0
  **/
-@Api(tags = "業務模塊-物资资料相关接口")
+@Api(tags = "業務模塊-物資資料相关接口")
 @RestController
 @RequestMapping("/business/productPrice")
 public class ProductPriceController {
@@ -36,7 +36,7 @@ public class ProductPriceController {
     private ProductPriceService productPriceService;
 
     /**
-     * 全部物资列表
+     * 全部物資列表
      *
      * @return
      */
@@ -52,7 +52,7 @@ public class ProductPriceController {
     }
 
     /**
-     * 封装物资查询条件
+     * 封装物資查询条件
      *
      * @param categorys
      * @param productPriceVO
@@ -79,7 +79,7 @@ public class ProductPriceController {
 
 
     /**
-     * 新增物资
+     * 新增物資
      *
      * @return
      */
@@ -96,7 +96,7 @@ public class ProductPriceController {
     }
 
     /**
-     * 編辑物资
+     * 編辑物資
      *
      * @param id
      * @return
@@ -110,7 +110,7 @@ public class ProductPriceController {
     }
 
     /**
-     * 更新物资
+     * 更新物資
      *
      * @return
      */

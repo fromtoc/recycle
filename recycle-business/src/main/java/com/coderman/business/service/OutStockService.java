@@ -23,7 +23,7 @@ public interface OutStockService {
     PageVO<OutStockVO> findOutStockList(Integer pageNum, Integer pageSize, OutStockVO outStockVO);
 
     /**
-     * 提交物资发放单
+     * 提交物資发放单
      * @param outStockVO
      */
     void addOutStock(OutStockVO outStockVO) throws BusinessException;

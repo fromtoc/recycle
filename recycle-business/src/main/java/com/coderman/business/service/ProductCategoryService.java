@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProductCategoryService {
 
     /**
-     * 新增物资类别
+     * 新增物資類别
      * @param ProductCategoryVO
      */
     void add(ProductCategoryVO ProductCategoryVO);
@@ -34,46 +34,46 @@ public interface ProductCategoryService {
 
 
     /**
-     * 編辑物资类别
+     * 編辑物資類别
      * @param id
      * @return
      */
     ProductCategoryVO edit(Long id);
 
     /**
-     * 查詢商品类别名稱
+     * 查詢商品類别名稱
      * @param id
      * @return
      */
     String getName(Long id);
 
     /**
-     * 更新物资类别
+     * 更新物資類别
      * @param id
      * @param ProductCategoryVO
      */
     void update(Long id, ProductCategoryVO ProductCategoryVO);
 
     /**
-     * 删除物资类别
+     * 删除物資類别
      * @param id
      */
     void delete(Long id) throws BusinessException;
 
     /**
-     * 查询所物资类别
+     * 查询所物資類别
      * @return
      */
     List<ProductCategoryVO> findAll();
 
     /**
-     * 分类树形
+     * 分類树形
      * @return
      */
     PageVO<ProductCategoryTreeNodeVO> categoryTree(Integer pageNum, Integer pageSize);
 
     /**
-     * 获取父级分类（2级树）
+     * 获取父级分類（2级树）
      * @return
      */
     List<ProductCategoryTreeNodeVO> getParentCategoryTree();

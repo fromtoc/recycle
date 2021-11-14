@@ -31,7 +31,7 @@ public class OutStockVO {
     private Integer priority;
 
 
-    //发放的物资列表
+    //发放的物資列表
     private List<Object> products=new ArrayList<>();
 
     private String remark;

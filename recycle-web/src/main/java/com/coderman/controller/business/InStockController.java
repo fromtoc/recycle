@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2020/3/19 09:53
  * @Version 1.0
  **/
-@Api(tags = "業務模塊-物资入库相关接口")
+@Api(tags = "業務模塊-物資入库相关接口")
 @RestController
 @RequestMapping("/business/inStock")
 public class InStockController {
@@ -55,21 +55,21 @@ public class InStockController {
 
 
     /**
-     * 物资入库
+     * 物資入库
      * @param inStockVO
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "入库单申請失败", operation = "入库单申請")
-    @ApiOperation(value = "物资入库")
+    @ApiOperation(value = "物資入库")
     @PostMapping("/addIntoStock")
     @RequiresPermissions({"inStock:in"})
     public ResponseBean addIntoStock(@RequestBody @Validated InStockVO inStockVO) throws BusinessException {
         if(inStockVO.getSupplierId()==null){
-            //说明现在新增物资来源
+            //说明现在新增物資来源
             SupplierVO supplierVO = new SupplierVO();
             BeanUtils.copyProperties(inStockVO,supplierVO);
             if("".equals(supplierVO.getName())||supplierVO.getName()==null){
-                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资提供方名不能为空");
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資提供方名不能为空");
             }
             if("".equals(supplierVO.getEmail())||supplierVO.getEmail()==null){
                 throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"邮箱不能为空");
@@ -107,7 +107,7 @@ public class InStockController {
     }
 
     /**
-     * 物资入库单详细
+     * 物資入库单详细
      *
      * @param id
      * @return
@@ -122,13 +122,13 @@ public class InStockController {
         return ResponseBean.success(detail);
     }
     /**
-     * 删除物资入库单
+     * 删除物資入库单
      * @param id
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "入库单删除失败", operation = "入库单删除")
     @RequiresPermissions({"inStock:delete"})
-    @ApiOperation(value = "删除物资入库单")
+    @ApiOperation(value = "删除物資入库单")
     @GetMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws BusinessException {
         inStockService.delete(id);

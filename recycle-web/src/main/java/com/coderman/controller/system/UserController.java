@@ -294,13 +294,13 @@ public class UserController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有用戶的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有用戶的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("user:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出用戶excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出用戶excel")
     public void export(HttpServletResponse response) {
         List<User> users = this.userService.findAll();
         ExcelKit.$Export(User.class, response).downXlsx(users, false);
@@ -312,6 +312,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "加载用戶卡片列表", notes = "加载用戶卡片列表")
+    @RequiresPermissions({"card:manage"})
     @GetMapping("/card/list/{id}")
     public ResponseBean<List<UserCardVO>> findUserCard(@PathVariable Long id) throws SystemException {
         List<UserCard> userCardList = userService.findCardsById(id);
@@ -357,7 +358,6 @@ public class UserController {
      */
     @ControllerEndpoint(exceptionMessage = "更新卡片狀態失败", operation = "卡片|禁用/啟用")
     @ApiOperation(value = "卡片狀態", notes = "禁用和啟用這兩種狀態")
-    @RequiresPermissions({"card:status"})
     @PutMapping("/updateCardStatus/{id}/{status}")
     public ResponseBean updateCardStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
         userService.updateCardStatus(id, status);
@@ -373,7 +373,6 @@ public class UserController {
      */
     @ControllerEndpoint(exceptionMessage = "分配卡片廢棄物失败", operation = "分配卡片廢棄物")
     @ApiOperation(value = "分配卡片廢棄物", notes = "廢棄物分配给卡片")
-    @RequiresPermissions({"product:assign"})
     @PostMapping("/{id}/assignProducts")
     public ResponseBean assignProducts(@PathVariable String id, @RequestBody Long[] pids) throws SystemException {
         userService.assignProducts(id, pids);

@@ -37,7 +37,7 @@ public interface InStockService {
     void delete(Long id) throws BusinessException;
 
     /**
-     * 物资入库
+     * 物資入库
      * @param inStockVO
      */
     void addIntoStock(InStockVO inStockVO) throws BusinessException;

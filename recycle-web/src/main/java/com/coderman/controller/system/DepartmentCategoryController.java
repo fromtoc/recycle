@@ -120,14 +120,14 @@ public class DepartmentCategoryController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      *
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有公司類型的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有公司類型的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("departmentCategory:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出公司類型excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出公司類型excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> departmentCategoryList = this.dictionaryService.selectByType(1,null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(departmentCategoryList, false);

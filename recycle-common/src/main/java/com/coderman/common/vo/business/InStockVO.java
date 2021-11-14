@@ -22,7 +22,7 @@ public class InStockVO {
 
     private String inNum;
 
-    @NotNull(message = "入库单类型不能为空")
+    @NotNull(message = "入库单類型不能为空")
     private Integer type;
 
     private String operator;

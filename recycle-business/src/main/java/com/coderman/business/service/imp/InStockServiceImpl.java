@@ -103,13 +103,13 @@ public class InStockServiceImpl implements InStockService {
         BeanUtils.copyProperties(inStock,inStockDetailVO);
         Supplier supplier = supplierMapper.selectByPrimaryKey(inStock.getSupplierId());
         if(supplier==null){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"提供物资方不存在,或已被删除");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"提供物資方不存在,或已被删除");
         }
         SupplierVO supplierVO = new SupplierVO();
         BeanUtils.copyProperties(supplier,supplierVO);
         inStockDetailVO.setSupplierVO(supplierVO);
         String inNum = inStock.getInNum();//入库单號
-        //查询該单所有的物资
+        //查询該单所有的物資
         Example o = new Example(InStockInfo.class);
         PageHelper.startPage(pageNum,pageSize);
         o.createCriteria().andEqualTo("inNum",inNum);
@@ -118,7 +118,7 @@ public class InStockServiceImpl implements InStockService {
         if(!CollectionUtils.isEmpty(inStockInfoList)){
             for (InStockInfo inStockInfo : inStockInfoList) {
                 String pNum = inStockInfo.getPNum();
-                //查出物资
+                //查出物資
                 Example o1 = new Example(Product.class);
                 o1.createCriteria().andEqualTo("pNum",pNum);
                 List<Product> products = productMapper.selectByExample(o1);
@@ -129,7 +129,7 @@ public class InStockServiceImpl implements InStockService {
                     inStockItemVO.setCount(inStockInfo.getProductNumber());
                     inStockDetailVO.getItemVOS().add(inStockItemVO);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"編號为:["+pNum+"]的物资找不到,或已被删除");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"編號为:["+pNum+"]的物資找不到,或已被删除");
                 }
             }
         }else {
@@ -159,7 +159,7 @@ public class InStockServiceImpl implements InStockService {
     }
 
     /**
-     * 物资入库
+     * 物資入库
      * @param inStockVO
      */
     @Transactional
@@ -175,15 +175,15 @@ public class InStockServiceImpl implements InStockService {
                 LinkedHashMap item = (LinkedHashMap) product;
                 //入库数量
                 int productNumber = (int) item.get("productNumber");
-                //物资編號
+                //物資編號
                 Integer productId = (Integer) item.get("productId");
                 Product dbProduct = productMapper.selectByPrimaryKey(productId);
                 if (dbProduct == null) {
                     throw new BusinessException(BusinessCodeEnum.PRODUCT_NOT_FOUND);
                 }else if(dbProduct.getStatus()==1) {
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IS_REMOVE, dbProduct.getName() + "物资已被回收,無法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_IS_REMOVE, dbProduct.getName() + "物資已被回收,無法入库");
                 } else if(dbProduct.getStatus()==2){
-                    throw new BusinessException(BusinessCodeEnum.PRODUCT_WAIT_PASS, dbProduct.getName() + "物资待审核,無法入库");
+                    throw new BusinessException(BusinessCodeEnum.PRODUCT_WAIT_PASS, dbProduct.getName() + "物資待审核,無法入库");
                 }else if(productNumber<=0){
                     throw new BusinessException(BusinessCodeEnum.PRODUCT_IN_STOCK_NUMBER_ERROR,dbProduct.getName()+"入库数量不合法,無法入库");
                 } else {
@@ -256,7 +256,7 @@ public class InStockServiceImpl implements InStockService {
     }
 
     /**
-     * 物资入库审核
+     * 物資入库审核
      * @param id
      */
     @Override
@@ -278,8 +278,8 @@ public class InStockServiceImpl implements InStockService {
         List<InStockInfo> infoList = inStockInfoMapper.selectByExample(o);
         if(!CollectionUtils.isEmpty(infoList)){
             for (InStockInfo inStockInfo : infoList) {
-                String pNum = inStockInfo.getPNum();//物资編號
-                Integer productNumber = inStockInfo.getProductNumber();//入库物资数
+                String pNum = inStockInfo.getPNum();//物資編號
+                Integer productNumber = inStockInfo.getProductNumber();//入库物資数
                 Example o1 = new Example(Product.class);
                 o1.createCriteria().andEqualTo("pNum",pNum);
                 List<Product> products = productMapper.selectByExample(o1);
@@ -306,7 +306,7 @@ public class InStockServiceImpl implements InStockService {
                     inStock.setStatus(0);
                     inStockMapper.updateByPrimaryKeySelective(inStock);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资編號为:["+pNum+"]的物资不存在");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資編號为:["+pNum+"]的物資不存在");
                 }
             }
         }else {

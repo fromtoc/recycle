@@ -16,10 +16,10 @@ import java.util.Date;
 public class ProductCategoryVO {
     private Long id;
 
-    @NotBlank(message = "类目名稱不能为空")
+    @NotBlank(message = "類目名稱不能为空")
     private String name;
 
-    @NotBlank(message = "类目备注不能为空")
+    @NotBlank(message = "類目备注不能为空")
     private String remark;
 
     @NotNull(message = "排序號不能为空")
@@ -31,7 +31,7 @@ public class ProductCategoryVO {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date modifiedTime;
 
-    /** 父级分类id*/
+    /** 父级分類id*/
     @NotNull(message = "父级選單不能为空")
     private Long pid;
 

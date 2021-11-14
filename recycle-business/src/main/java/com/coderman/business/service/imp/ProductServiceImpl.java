@@ -132,7 +132,7 @@ public class ProductServiceImpl implements ProductService {
         BeanUtils.copyProperties(ProductVO, product);
         product.setCreateTime(new Date());
         product.setModifiedTime(new Date());
-        @NotNull(message = "分类不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
+        @NotNull(message = "分類不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
         if (categoryKeys.length == 2) {
             product.setOneCategoryId(categoryKeys[0]);
             product.setTwoCategoryId(categoryKeys[1]);
@@ -166,7 +166,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         BeanUtils.copyProperties(ProductVO, product);
         product.setModifiedTime(new Date());
-        @NotNull(message = "分类不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
+        @NotNull(message = "分類不能为空") Long[] categoryKeys = ProductVO.getCategoryKeys();
         if (categoryKeys.length == 2) {
             product.setOneCategoryId(categoryKeys[0]);
             product.setTwoCategoryId(categoryKeys[1]);
@@ -185,7 +185,7 @@ public class ProductServiceImpl implements ProductService {
         Product t = new Product();
         t.setId(id);
         Product product = productMapper.selectByPrimaryKey(t);
-        //只有物资处于回收站,或者待审核的情况下可删除
+        //只有物資处于回收站,或者待审核的情况下可删除
         if (product.getStatus() != 1 && product.getStatus() != 2) {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
         } else {
@@ -194,7 +194,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 物资库存列表
+     * 物資库存列表
      *
      * @param pageNum
      * @param pageSize
@@ -257,7 +257,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 物资审核
+     * 物資审核
      *
      * @param id
      */

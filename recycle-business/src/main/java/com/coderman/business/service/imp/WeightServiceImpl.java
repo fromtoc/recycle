@@ -17,6 +17,7 @@ import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.ProductPrice;
 import com.coderman.common.model.business.Weight;
 import com.coderman.common.model.system.*;
+import com.coderman.common.response.ActiveUser;
 import com.coderman.common.service.DictionaryService;
 import com.coderman.common.vo.business.ProductPriceVO;
 import com.coderman.common.vo.business.ProductStockVO;
@@ -30,6 +31,7 @@ import com.coderman.system.service.UserService;
 import com.coderman.system.util.MD5Utils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,14 +123,19 @@ public class WeightServiceImpl implements WeightService {
         if (departmentId != null && !"".equals(departmentId)) {
             criteria.andEqualTo("departmentId", departmentId);
         }
-        String userNickname = weightVO.getUserNickname();
-        if (userNickname != null && !"".equals(userNickname)) {
-            List<User> userList = userService.findUserByNickName(userNickname);
-            if (!CollectionUtils.isEmpty(userList)) {
-                List<Long> userIds = userList.stream().map(user -> user.getId()).collect(Collectors.toList());
-                criteria.andIn("userId", userIds);
-            } else {
-                criteria.andEqualTo("userId", -1);
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        if (activeUser.getLimitUser()){
+            criteria.andEqualTo("userId", activeUser.getUser().getId());
+        } else {
+            String userNickname = weightVO.getUserNickname();
+            if (userNickname != null && !"".equals(userNickname)) {
+                List<User> userList = userService.findUserByNickName(userNickname);
+                if (!CollectionUtils.isEmpty(userList)) {
+                    List<Long> userIds = userList.stream().map(user -> user.getId()).collect(Collectors.toList());
+                    criteria.andIn("userId", userIds);
+                } else {
+                    criteria.andEqualTo("userId", -1);
+                }
             }
         }
         String productName = weightVO.getProductName();

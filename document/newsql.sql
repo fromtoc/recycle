@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `biz_consumer`;
 
 CREATE TABLE `biz_consumer` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL COMMENT '物资消费方',
+  `name` varchar(20) DEFAULT NULL COMMENT '物資消费方',
   `address` varchar(20) DEFAULT NULL COMMENT '地址',
   `create_time` datetime DEFAULT NULL,
   `modified_time` datetime DEFAULT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `biz_in_stock` (
   `operator` varchar(20) DEFAULT NULL COMMENT '操作人員',
   `create_time` datetime DEFAULT NULL COMMENT '入库单創建時間',
   `modified` datetime DEFAULT NULL COMMENT '入库单修改時間',
-  `product_number` int(11) DEFAULT NULL COMMENT '物资总数',
+  `product_number` int(11) DEFAULT NULL COMMENT '物資总数',
   `supplier_id` bigint(20) DEFAULT NULL COMMENT '来源',
   `remark` varchar(100) DEFAULT NULL COMMENT '描述信息',
   `status` int(1) DEFAULT '2' COMMENT '0:正常入库单,1:已进入回收,2:等待审核',
@@ -619,7 +619,7 @@ INSERT INTO recycle.tb_menu
 VALUES(1001, 1000, '控制面板', '/system/welcome', 'welcome:view', 'el-icon-star-off', '0', 1, '2020-03-10 08:46:44', '2020-12-15 19:22:46', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1002, 1000, '物资来源', '/business/product/suppliers', '', 'el-icon-coordinate', '0', 5, '2020-03-16 12:35:10', '2020-12-15 19:52:19', 1, 0);
+VALUES(1002, 1000, '物資来源', '/business/product/suppliers', '', 'el-icon-coordinate', '0', 5, '2020-03-16 12:35:10', '2020-12-15 19:52:19', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(1003, 1000, '发放记录', '/business/product/out-stocks', '', 'el-icon-goods', '0', 5, '2020-03-16 13:55:49', '2020-12-15 19:57:34', 1, 1);
@@ -640,10 +640,10 @@ INSERT INTO recycle.tb_menu
 VALUES(1008, 1000, '健康打卡', '/covid19/health', '', 'el-icon-s-cooperation', '0', 1, '2020-03-24 10:12:57', '2020-12-15 20:19:14', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1009, 1000, '物资去处', '/business/product/consumers', '', 'el-icon-edit', '0', 1, '2020-04-05 10:08:21', '2020-12-15 19:52:10', 1, 0);
+VALUES(1009, 1000, '物資去处', '/business/product/consumers', '', 'el-icon-edit', '0', 1, '2020-04-05 10:08:21', '2020-12-15 19:52:10', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1010, 1000, '物资库存', '/business/product/stocks', '', 'el-icon-tickets', '0', 5, '2020-04-16 08:45:08', '2020-12-15 19:51:58', 1, 0);
+VALUES(1010, 1000, '物資库存', '/business/product/stocks', '', 'el-icon-tickets', '0', 5, '2020-04-16 08:45:08', '2020-12-15 19:51:58', 1, 0);
 INSERT INTO recycle.tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(1011, 1000, '图标管理', '/system/icon', '', 'el-icon-star-off', '0', 7, '2020-04-21 12:06:33', '2020-12-17 21:47:49', 1, 1);

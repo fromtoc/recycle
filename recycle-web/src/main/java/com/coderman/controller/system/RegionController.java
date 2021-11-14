@@ -120,14 +120,14 @@ public class RegionController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      *
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有區域的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有區域的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("region:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出區域excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出區域excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> regionList = this.dictionaryService.selectByType(3,null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(regionList, false);

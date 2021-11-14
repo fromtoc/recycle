@@ -1,8 +1,10 @@
 package com.coderman.controller.system;
 
 import com.coderman.common.annotation.ControllerEndpoint;
+import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Department;
+import com.coderman.common.response.ActiveUser;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.system.DeanVO;
 import com.coderman.common.vo.system.DepartmentVO;
@@ -11,6 +13,7 @@ import com.coderman.system.service.DepartmentService;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,13 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 部門管理
+ * 公司管理
  *
  * @Author zhangyukang
  * @Date 2020/3/15 14:11
  * @Version 1.0
  **/
-@Api(tags = "系统模塊-部門相关接口")
+@Api(tags = "系统模塊-公司相关接口")
 @RestController
 @RequestMapping("/system/department")
 public class DepartmentController {
@@ -36,11 +39,11 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     /**
-     * 部門列表
+     * 公司列表
      *
      * @return
      */
-    @ApiOperation(value = "部門列表", notes = "部門列表,根據部門名模糊查询")
+    @ApiOperation(value = "公司列表", notes = "公司列表,根據公司名模糊查询")
     @GetMapping("/findDepartmentList")
     public ResponseBean<PageVO<DepartmentVO>> findDepartmentList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                            @RequestParam(value = "pageSize") Integer pageSize,
@@ -50,23 +53,27 @@ public class DepartmentController {
     }
 
     /**
-     * 所有部門
+     * 所有公司
      *
      * @return
      */
-    @ApiOperation(value = "所有部門")
+    @ApiOperation(value = "所有公司")
     @GetMapping("/findAll")
-    public ResponseBean<List<DepartmentVO>> findAll() {
+    public ResponseBean<List<DepartmentVO>> findAll() throws SystemException {
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        if (activeUser.getLimitUser()){
+            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "限本帳號");
+        }
         List<DepartmentVO> departmentVOS = departmentService.findAllVO();
         return ResponseBean.success(departmentVOS);
     }
 
     /**
-     * 查找部門主任
+     * 查找公司主任
      *
      * @return
      */
-    @ApiOperation(value = "部門主任", notes = "查找部門主任,排除掉已经禁用的用戶")
+    @ApiOperation(value = "公司主任", notes = "查找公司主任,排除掉已经禁用的用戶")
     @GetMapping("/findDeanList")
     public ResponseBean<List<DeanVO>> findDeanList() {
         List<DeanVO> managerList = departmentService.findDeanList();
@@ -74,13 +81,13 @@ public class DepartmentController {
     }
 
     /**
-     * 新增部門
+     * 新增公司
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增部門失败", operation = "新增部門")
+    @ControllerEndpoint(exceptionMessage = "新增公司失败", operation = "新增公司")
     @RequiresPermissions({"department:add"})
-    @ApiOperation(value = "新增部門")
+    @ApiOperation(value = "新增公司")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated DepartmentVO departmentVO) {
         departmentService.add(departmentVO);
@@ -88,12 +95,12 @@ public class DepartmentController {
     }
 
     /**
-     * 編辑部門
+     * 編辑公司
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "編辑部門")
+    @ApiOperation(value = "編辑公司")
     @RequiresPermissions({"department:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) throws SystemException {
@@ -102,12 +109,12 @@ public class DepartmentController {
     }
 
     /**
-     * 更新部門
+     * 更新公司
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新部門失败", operation = "更新部門")
-    @ApiOperation(value = "更新部門")
+    @ControllerEndpoint(exceptionMessage = "更新公司失败", operation = "更新公司")
+    @ApiOperation(value = "更新公司")
     @RequiresPermissions({"department:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated DepartmentVO departmentVO) throws SystemException {
@@ -116,13 +123,13 @@ public class DepartmentController {
     }
 
     /**
-     * 删除部門
+     * 删除公司
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除部門失败", operation = "删除部門")
-    @ApiOperation(value = "删除部門")
+    @ControllerEndpoint(exceptionMessage = "删除公司失败", operation = "删除公司")
+    @ApiOperation(value = "删除公司")
     @RequiresPermissions({"department:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws SystemException {
@@ -131,13 +138,13 @@ public class DepartmentController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有部門的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有公司的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("department:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出部門excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出公司excel")
     public void export(HttpServletResponse response) {
         List<Department> departments = this.departmentService.findAll();
         ExcelKit.$Export(Department.class, response).downXlsx(departments, false);

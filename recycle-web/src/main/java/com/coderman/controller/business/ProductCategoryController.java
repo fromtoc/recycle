@@ -19,13 +19,13 @@ import java.util.List;
 
 
 /**
- * 物资分类管理
+ * 物資分類管理
  *
  * @Author zhangyukang
  * @Date 2020/3/16 17:16
  * @Version 1.0
  **/
-@Api(tags = "業務模塊-物资类别相关接口")
+@Api(tags = "業務模塊-物資類别相关接口")
 @RestController
 @RequestMapping("/business/productCategory")
 public class ProductCategoryController {
@@ -35,11 +35,11 @@ public class ProductCategoryController {
 
 
     /**
-     * 物资分类列表
+     * 物資分類列表
      *
      * @return
      */
-    @ApiOperation(value = "分类列表", notes = "物资分类列表,根據物资分类名模糊查询")
+    @ApiOperation(value = "分類列表", notes = "物資分類列表,根據物資分類名模糊查询")
     @GetMapping("/findProductCategoryList")
     public ResponseBean findProductCategoryList(
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
@@ -51,11 +51,11 @@ public class ProductCategoryController {
     }
 
     /**
-     * 分类树形结构(分页)
+     * 分類树形结构(分页)
      *
      * @return
      */
-    @ApiOperation(value = "分类树形结构")
+    @ApiOperation(value = "分類树形结构")
     @GetMapping("/categoryTree")
     public ResponseBean categoryTree(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                                      @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -64,11 +64,11 @@ public class ProductCategoryController {
     }
 
     /**
-     * 获取父级分类树：2级树
+     * 获取父级分類树：2级树
      *
      * @return
      */
-    @ApiOperation(value = "父级分类树")
+    @ApiOperation(value = "父级分類树")
     @GetMapping("/getParentCategoryTree")
     public ResponseBean getParentCategoryTree() {
         List<ProductCategoryTreeNodeVO> parentTree = productCategoryService.getParentCategoryTree();
@@ -76,11 +76,11 @@ public class ProductCategoryController {
     }
 
     /**
-     * 查询所有分类
+     * 查询所有分類
      *
      * @return
      */
-    @ApiOperation(value = "所有分类")
+    @ApiOperation(value = "所有分類")
     @GetMapping("/findAll")
     public ResponseBean findAll() {
         List<ProductCategoryVO> productCategoryVOS = productCategoryService.findAll();
@@ -88,13 +88,13 @@ public class ProductCategoryController {
     }
 
     /**
-     * 新增物资分类
+     * 新增物資分類
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资分类新增失败", operation = "物资分类新增")
+    @ControllerEndpoint(exceptionMessage = "廢棄物分類新增失败", operation = "廢棄物分類新增")
     @RequiresPermissions({"productCategory:add"})
-    @ApiOperation(value = "新增分类")
+    @ApiOperation(value = "新增分類")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductCategoryVO productCategoryVO) {
             productCategoryService.add(productCategoryVO);
@@ -102,12 +102,12 @@ public class ProductCategoryController {
     }
 
     /**
-     * 編辑物资分类
+     * 編辑物資分類
      *
      * @param id
      * @return
      */
-    @ApiOperation(value = "編辑分类")
+    @ApiOperation(value = "編辑分類")
     @RequiresPermissions({"productCategory:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) {
@@ -116,12 +116,12 @@ public class ProductCategoryController {
     }
 
     /**
-     * 更新物资分类
+     * 更新物資分類
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资分类更新失败", operation = "物资分类更新")
-    @ApiOperation(value = "更新分类")
+    @ControllerEndpoint(exceptionMessage = "物資分類更新失败", operation = "物資分類更新")
+    @ApiOperation(value = "更新分類")
     @RequiresPermissions({"productCategory:update"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated ProductCategoryVO productCategoryVO) {
@@ -130,13 +130,13 @@ public class ProductCategoryController {
     }
 
     /**
-     * 删除物资分类
+     * 删除物資分類
      *
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物资分类删除失败", operation = "物资分类删除")
-    @ApiOperation(value = "删除分类")
+    @ControllerEndpoint(exceptionMessage = "物資分類删除失败", operation = "物資分類删除")
+    @ApiOperation(value = "删除分類")
     @RequiresPermissions({"productCategory:delete"})
     @DeleteMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws BusinessException {

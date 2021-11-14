@@ -120,14 +120,14 @@ public class CostCenterController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      *
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有成本中心的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有成本中心的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("costCenter:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出成本中心excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出成本中心excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> list = this.dictionaryService.selectByType(2, null);
         ExcelKit.$Export(Dictionary.class, response).downXlsx(list, false);

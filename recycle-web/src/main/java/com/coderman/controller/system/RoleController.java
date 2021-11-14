@@ -168,13 +168,13 @@ public class RoleController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有角色的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有角色的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("role:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出角色excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出角色excel")
     public void export(HttpServletResponse response) {
         List<Role> roles = this.roleService.findAll();
         ExcelKit.$Export(Role.class, response).downXlsx(roles, false);

@@ -10,7 +10,7 @@ import java.util.List;
  **/
 public class ListPageUtils {
     /**
-     * 手动分页类
+     * 手动分页類
      * @param datas
      * @param pageSize
      * @param pageNo

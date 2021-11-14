@@ -15,14 +15,14 @@ import java.util.List;
 public interface ConsumerService {
 
     /**
-     * 新增物资去向
+     * 新增物資去向
      * @param consumerVO
      */
     Consumer add(ConsumerVO consumerVO);
 
 
     /**
-     * 物资去向列表
+     * 物資去向列表
      * @param pageNum
      * @param pageSize
      * @param consumerVO
@@ -32,27 +32,27 @@ public interface ConsumerService {
 
 
     /**
-     * 編辑物资去向
+     * 編辑物資去向
      * @param id
      * @return
      */
     ConsumerVO edit(Long id);
 
     /**
-     * 更新物资去向
+     * 更新物資去向
      * @param id
      * @param consumerVO
      */
     void update(Long id, ConsumerVO consumerVO);
 
     /**
-     * 删除物资去向
+     * 删除物資去向
      * @param id
      */
     void delete(Long id);
 
     /**
-     * 查询所有物资去向
+     * 查询所有物資去向
      * @return
      */
     List<ConsumerVO> findAll();

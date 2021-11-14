@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
- * 随机字符验证碼生成工具类
+ * 随机字符验证碼生成工具類
  * @author Exrickx
  */
 

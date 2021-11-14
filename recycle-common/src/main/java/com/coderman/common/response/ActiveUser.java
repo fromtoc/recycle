@@ -81,4 +81,8 @@ public class ActiveUser {
      * 是否为当前登录用戶
      */
     private Boolean current;
+    /**
+     * 資料權限是否限本帳號
+     */
+    private Boolean limitUser;
 }

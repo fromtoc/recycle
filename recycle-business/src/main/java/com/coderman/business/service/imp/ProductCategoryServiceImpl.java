@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     private ProductMapper productMapper;
 
     /**
-     * 商品类别列表
+     * 商品類别列表
      * @param pageNum
      * @param pageSize
      * @param ProductCategoryVO
@@ -67,7 +67,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
 
     /**
-     * 新增商品类别
+     * 新增商品類别
      * @param ProductCategoryVO
      */
     @Override
@@ -81,7 +81,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 編辑商品类别
+     * 編辑商品類别
      * @param id
      * @return
      */
@@ -92,7 +92,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 查詢商品类别名稱
+     * 查詢商品類别名稱
      * @param id
      * @return
      */
@@ -103,7 +103,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 更新商品类别
+     * 更新商品類别
      * @param id
      * @param ProductCategoryVO
      */
@@ -116,36 +116,36 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 删除商品类别
+     * 删除商品類别
      * @param id
      */
     @Override
     public void delete(Long id) throws BusinessException {
         ProductCategory category = productCategoryMapper.selectByPrimaryKey(id);
         if(null==category){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分类不存在");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分類不存在");
         }else {
-            //检查是否存在子分类
+            //检查是否存在子分類
             Example o = new Example(ProductCategory.class);
             o.createCriteria().andEqualTo("pid",id);
             int childCount=productCategoryMapper.selectCountByExample(o);
             if(childCount!=0){
                 throw  new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"存在子節點,無法直接删除");
             }
-            //检查該分类是否有物资引用
+            //检查該分類是否有物資引用
             Example o1 = new Example(Product.class);
             o1.createCriteria().andEqualTo("oneCategoryId",id)
                     .orEqualTo("twoCategoryId",id)
                     .orEqualTo("threeCategoryId",id);
            if(productMapper.selectCountByExample(o1)!=0){
-               throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分类存在物资引用,無法直接删除");
+               throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分類存在物資引用,無法直接删除");
            }
             productCategoryMapper.deleteByPrimaryKey(id);
         }
     }
 
     /**
-     * 所有商品类别
+     * 所有商品類别
      * @return
      */
     @Override
@@ -155,7 +155,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 分类树形结构
+     * 分類树形结构
      * @return
      */
     @Override
@@ -173,7 +173,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 获取父级分类（2级树）
+     * 获取父级分類（2级树）
      * @return
      */
     @Override

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2020/5/10 14:23
  * @Version 1.0
  **/
-@Api(tags = "業務模塊-物资出库相关接口")
+@Api(tags = "業務模塊-物資出库相关接口")
 @RestController
 @RequestMapping("/business/outStock")
 public class OutStockController {
@@ -38,7 +38,7 @@ public class OutStockController {
     private ConsumerService consumerService;
 
     /**
-     * 提交物资发放单
+     * 提交物資发放单
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "发放单申請失败", operation = "发放单申請")
@@ -47,11 +47,11 @@ public class OutStockController {
     @RequiresPermissions({"outStock:out"})
     public ResponseBean addOutStock(@RequestBody @Validated OutStockVO outStockVO) throws BusinessException {
         if(outStockVO.getConsumerId()==null){
-            //说明现在新增物资来源
+            //说明现在新增物資来源
             ConsumerVO consumerVO = new ConsumerVO();
             BeanUtils.copyProperties(outStockVO,consumerVO);
             if("".equals(consumerVO.getName())||consumerVO.getName()==null){
-                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资去向名不能为空");
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資去向名不能为空");
             }
             if("".equals(consumerVO.getContact())||consumerVO.getContact()==null){
                 throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"聯繫人不能为空");
@@ -105,7 +105,7 @@ public class OutStockController {
         return ResponseBean.success();
     }
     /**
-     * 物资发放单详细
+     * 物資发放单详细
      *
      * @param id
      * @return
@@ -122,13 +122,13 @@ public class OutStockController {
 
 
     /**
-     * 删除物资发放单
+     * 删除物資发放单
      * @param id
      * @return
      */
     @ControllerEndpoint(exceptionMessage = "发放单删除失败", operation = "发放单删除")
     @RequiresPermissions({"outStock:delete"})
-    @ApiOperation(value = "删除物资发放单")
+    @ApiOperation(value = "删除物資发放单")
     @GetMapping("/delete/{id}")
     public ResponseBean delete(@PathVariable Long id) throws BusinessException {
         outStockService.delete(id);

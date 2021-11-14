@@ -26,7 +26,7 @@ public class MenuVO {
 
     private String icon;
 
-    @NotNull(message = "選單类型不为空")
+    @NotNull(message = "選單類型不为空")
     private Integer type;
 
     @NotNull(message = "排序数不能为空")

@@ -1,7 +1,7 @@
 package com.coderman.common.enums.system;
 
 /**
- * 用戶类型
+ * 用戶類型
  * @Author zhangyukang
  * @Date 2020/5/29 12:25
  * @Version 1.0

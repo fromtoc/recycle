@@ -33,7 +33,7 @@ public class FdfsUtil {
 
 
     /**
-     *	MultipartFile类型的文件上传ַ
+     *	MultipartFile類型的文件上传ַ
      * @param file
      * @return
      * @throws IOException

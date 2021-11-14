@@ -115,13 +115,13 @@ public class MenuController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有選單的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有選單的excel表格")
     @PostMapping("excel")
     @RequiresPermissions("menu:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败",operation = "导出選單excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出選單excel")
     public void export(HttpServletResponse response) {
         List<Menu> menus = this.menuService.findAll();
         ExcelKit.$Export(Menu.class, response).downXlsx(menus, false);

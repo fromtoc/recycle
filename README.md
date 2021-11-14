@@ -1,5 +1,5 @@
 <p align="center"><img src="./document/images/logo.png" height="100" alt="logo"/></p>
-<h1 align="center"> recycle &nbsp; 🚀 &nbsp; 新冠-物资管理系统  </h1>
+<h1 align="center"> recycle &nbsp; 🚀 &nbsp; 新冠-物資管理系统  </h1>
 <h3 align="center">2020新冠疫情期間, 寂寞消遣之作~</h3>
 <h3 align="center"><a href="https://www.zykhome.club" target="_blank">https://www.zykhome.club</a></h3>
 
@@ -19,7 +19,7 @@
 
 ---
 
->該项目是一个以新冠疫情为主题开发的一个物资管理系统,主要分为系统模塊和業務模塊,業務模塊是处理疫情期間,物资的发放,物资入库,以及查看物资的库存等.
+>該项目是一个以新冠疫情为主题开发的一个物資管理系统,主要分为系统模塊和業務模塊,業務模塊是处理疫情期間,物資的发放,物資入库,以及查看物資的库存等.
 系统模塊是一个后台通用的RBAC權限模塊,可以精确的控制到后台API级别的權限控制,项目不定期更新中.武汉加油~~
 开发模式:前后端分离,前端负责数據渲染,后端返回数據。
 
@@ -30,7 +30,7 @@
 
 - recycle-business: 業務模塊,所有与業務相关的代碼放在此工程中。
 - recycle-system: 系统模塊,權限控制相关的代碼放在此工程中。
-- recycle-common: 公共模塊,存放工具类、领域模型（DTO）、数據模型对象(DO)一些通用的类。
+- recycle-common: 公共模塊,存放工具類、领域模型（DTO）、数據模型对象(DO)一些通用的類。
 - recycle-generator: 代碼生成器，生成Controller,Service,ServiceImpl,以及前端代碼。
 - recycle-vue: 前端项目, npm install 安装依赖后, npm run serve  啟动該项目。
 - recycle-web: 处理前端請求的Controller,放在此工程中。
@@ -51,11 +51,11 @@ SpringBoot, Shiro ,Swagger-UI,mybatis,JWT,Mysql,通用mapper,Vue.js+element-ui,F
 
 ![3](https://www.zykhome.club/group1/M00/00/13/rBofMmAT9Z-AAZx3AAmL5u2dO1U985.PNG)
 
-- 物资库存管理
+- 物資库存管理
 
 ![5](https://www.zykhome.club/group1/M00/00/13/rBofMmAT9TSAELlUAAM8r-W_KnQ759.PNG)
 
-- 物资入库管理
+- 物資入库管理
 
 ![6](https://coderman-blog.oss-cn-beijing.aliyuncs.com/6_1588596788146.PNG)
 

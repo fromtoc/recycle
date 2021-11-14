@@ -48,7 +48,7 @@ public class User {
     private String salt;
 
     @ExcelField(//
-            value = "用戶类型",
+            value = "用戶類型",
             readConverterExp = "超级管理員=0,普通用戶=1",
             writeConverterExp = "0=超级管理員,1=普通用戶"
             ,width = 80

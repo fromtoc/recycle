@@ -82,7 +82,7 @@ public interface ProductService {
     void back(Long id) throws BusinessException;
 
     /**
-     * 物资新增审核
+     * 物資新增审核
      * @param id
      */
     void publish(Long id) throws BusinessException;

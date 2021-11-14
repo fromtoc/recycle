@@ -83,7 +83,7 @@ public class OutStockServiceImpl implements OutStockService {
     }
 
     /**
-     * 提交物资发放
+     * 提交物資发放
      * @param outStockVO
      */
     @Transactional
@@ -99,7 +99,7 @@ public class OutStockServiceImpl implements OutStockService {
                 LinkedHashMap item = (LinkedHashMap) product;
                 //发放数量
                 int productNumber = (int) item.get("productNumber");
-                //物资編號
+                //物資編號
                 Integer productId = (Integer) item.get("productId");
                 Product dbProduct = productMapper.selectByPrimaryKey(productId);
                 if (dbProduct == null) {
@@ -112,7 +112,7 @@ public class OutStockServiceImpl implements OutStockService {
                     o.createCriteria().andEqualTo("pNum",dbProduct.getPNum());
                     ProductStock productStock = productStockMapper.selectOneByExample(o);
                     if(productStock==null){
-                        throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該物资在库存中不存在");
+                        throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該物資在库存中不存在");
                     }
                     if(productNumber>productStock.getStock()){
                         throw new BusinessException(BusinessCodeEnum.PRODUCT_STOCK_ERROR,dbProduct.getName()+"库存不足,库存剩余:"+productStock);
@@ -200,13 +200,13 @@ public class OutStockServiceImpl implements OutStockService {
         BeanUtils.copyProperties(outStock,outStockDetailVO);
         Consumer consumer = consumerMapper.selectByPrimaryKey(outStock.getConsumerId());
         if(consumer==null){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资领取方不存在,或已被删除");
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資领取方不存在,或已被删除");
         }
         ConsumerVO consumerVO = new ConsumerVO();
         BeanUtils.copyProperties(consumer,consumerVO);
         outStockDetailVO.setConsumerVO(consumerVO);
         String outNum = outStock.getOutNum();//发放单號
-        //查询該单所有的物资
+        //查询該单所有的物資
         Example o = new Example(OutStockInfo.class);
         PageHelper.startPage(pageNum,pageSize);
         o.createCriteria().andEqualTo("outNum",outNum);
@@ -216,7 +216,7 @@ public class OutStockServiceImpl implements OutStockService {
         if(!CollectionUtils.isEmpty(outStockInfoList)){
             for (OutStockInfo outStockInfo : outStockInfoList) {
                 String pNum = outStockInfo.getPNum();
-                //查出物资
+                //查出物資
                 Example o1 = new Example(Product.class);
                 o1.createCriteria().andEqualTo("pNum",pNum);
                 List<Product> products = productMapper.selectByExample(o1);
@@ -227,7 +227,7 @@ public class OutStockServiceImpl implements OutStockService {
                     outStockItemVO.setCount(outStockInfo.getProductNumber());
                     outStockDetailVO.getItemVOS().add(outStockItemVO);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"編號为:["+pNum+"]的物资找不到,或已被删除");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"編號为:["+pNum+"]的物資找不到,或已被删除");
                 }
             }
         }else {
@@ -279,9 +279,9 @@ public class OutStockServiceImpl implements OutStockService {
         List<OutStockInfo> infoList = outStockInfoMapper.selectByExample(o);//发放详情
         if(!CollectionUtils.isEmpty(infoList)){
             for (OutStockInfo outStockInfo : infoList) {
-                //物资編號
+                //物資編號
                 String pNum = outStockInfo.getPNum();
-                Integer productNumber = outStockInfo.getProductNumber();//入库物资数
+                Integer productNumber = outStockInfo.getProductNumber();//入库物資数
                 Example o1 = new Example(Product.class);
                 o1.createCriteria().andEqualTo("pNum",pNum);
                 List<Product> products = productMapper.selectByExample(o1);
@@ -295,19 +295,19 @@ public class OutStockServiceImpl implements OutStockService {
                         //更新数量
                         ProductStock productStock = productStocks.get(0);
                         if(productStock.getStock()<productNumber){
-                            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资:"+product.getName()+"的库存不足");
+                            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資:"+product.getName()+"的库存不足");
                         }
                         productStock.setStock(productStock.getStock()-productNumber);
                         productStockMapper.updateByPrimaryKey(productStock);
                     }else {
-                        throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該物资在库存中找不到");
+                        throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該物資在库存中找不到");
                     }
                     //修改入库单狀態.
                     outStock.setCreateTime(new Date());
                     outStock.setStatus(0);
                     outStockMapper.updateByPrimaryKeySelective(outStock);
                 }else {
-                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物资編號为:["+pNum+"]的物资不存在");
+                    throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"物資編號为:["+pNum+"]的物資不存在");
                 }
             }
         }else {

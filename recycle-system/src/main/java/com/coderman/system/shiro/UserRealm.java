@@ -1,5 +1,6 @@
 package com.coderman.system.shiro;
 
+import com.coderman.common.enums.system.UserTypeEnum;
 import com.coderman.common.model.system.Menu;
 import com.coderman.common.model.system.Role;
 import com.coderman.common.model.system.User;
@@ -38,7 +39,7 @@ public class UserRealm extends AuthorizingRealm {
     }
 
     /**
-     * 只有当需要检测用戶權限的時候才会调用此方法，例如checkRole,checkPermission之类的
+     * 只有当需要检测用戶權限的時候才会调用此方法，例如checkRole,checkPermission之類的
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -46,9 +47,9 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
 
-        if(activeUser.getUser().getType()==0){
+        if (activeUser.getUser().getType() == 0) {
             authorizationInfo.addStringPermission("*:*");
-        }else {
+        } else {
             List<String> permissions = new ArrayList<>(activeUser.getPermissions());
             List<Role> roleList = activeUser.getRoles();
             //授權角色
@@ -59,7 +60,7 @@ public class UserRealm extends AuthorizingRealm {
             }
             //授權權限
             if (!CollectionUtils.isEmpty(permissions)) {
-                for (String  permission : permissions) {
+                for (String permission : permissions) {
                     if (permission != null && !"".equals(permission)) {
                         authorizationInfo.addStringPermission(permission);
                     }
@@ -88,33 +89,45 @@ public class UserRealm extends AuthorizingRealm {
         if (userBean == null) {
             throw new AccountException("账號不存在!");
         }
-        if(JWTUtils.isExpire(token)){
+        if (JWTUtils.isExpire(token)) {
             throw new AuthenticationException(" token过期，請重新登入！");
         }
 
-        if (! JWTUtils.verify(token, username, userBean.getPassword())) {
+        if (!JWTUtils.verify(token, username, userBean.getPassword())) {
             throw new CredentialsException("密碼錯誤!");
         }
 
-        if(userBean.getStatus()==0){
+        if (userBean.getStatus() == 0) {
             throw new LockedAccountException("账號已被锁定!");
         }
 
         //如果验证通过，获取用戶的角色
-        List<Role> roles= userService.findRolesById(userBean.getId());
+        List<Role> roles = userService.findRolesById(userBean.getId());
+        Boolean limitUser = true;
+        if (userBean.getType() == UserTypeEnum.SYSTEM_ADMIN.getTypeCode()) {
+            //超级管理員
+            limitUser = false;
+        } else {
+            for (Role r : roles) {
+                if (r.getType()==0) {
+                    limitUser = false;
+                    break;
+                }
+            }
+        }
         //查询用戶的所有選單(包括了選單和按钮)
-        List<Menu> menus=userService.findMenuByRoles(roles);
+        List<Menu> menus = userService.findMenuByRoles(roles);
 
-        Set<String> urls=new HashSet<>();
-        Set<String> perms=new HashSet<>();
-        if(!CollectionUtils.isEmpty(menus)){
+        Set<String> urls = new HashSet<>();
+        Set<String> perms = new HashSet<>();
+        if (!CollectionUtils.isEmpty(menus)) {
             for (Menu menu : menus) {
                 String url = menu.getUrl();
                 String per = menu.getPerms();
-                if(menu.getType()==0&& !StringUtils.isEmpty(url)){
+                if (menu.getType() == 0 && !StringUtils.isEmpty(url)) {
                     urls.add(menu.getUrl());
                 }
-                if(menu.getType()==1&&!StringUtils.isEmpty(per)){
+                if (menu.getType() == 1 && !StringUtils.isEmpty(per)) {
                     perms.add(menu.getPerms());
                 }
             }
@@ -126,6 +139,7 @@ public class UserRealm extends AuthorizingRealm {
         activeUser.setMenus(menus);
         activeUser.setUrls(urls);
         activeUser.setPermissions(perms);
+        activeUser.setLimitUser(limitUser);
         return new SimpleAuthenticationInfo(activeUser, token, getName());
     }
 }

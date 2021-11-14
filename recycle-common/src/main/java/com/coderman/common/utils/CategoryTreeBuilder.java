@@ -28,7 +28,7 @@ public class CategoryTreeBuilder {
                 rootMenu.add(nav);
             }
         }
-        /* 根據Menu类的order排序 */
+        /* 根據Menu類的order排序 */
         Collections.sort(rootMenu,ProductCategoryTreeNodeVO.order());
         /*为根選單设置子選單，getChild是递归调用的*/
         for (ProductCategoryTreeNodeVO nav : rootMenu) {
@@ -68,7 +68,7 @@ public class CategoryTreeBuilder {
         return childList;
     }
 
-//    获取二级父级分类
+//    获取二级父级分類
 
     public static List<ProductCategoryTreeNodeVO> buildParent(List<ProductCategoryTreeNodeVO> nodes) {
         //根節點
@@ -79,7 +79,7 @@ public class CategoryTreeBuilder {
                 rootMenu.add(nav);
             }
         }
-        /* 根據Menu类的order排序 */
+        /* 根據Menu類的order排序 */
         Collections.sort(rootMenu,ProductCategoryTreeNodeVO.order());
         /*为根選單设置子選單，getChild是递归调用的*/
         for (ProductCategoryTreeNodeVO nav : rootMenu) {

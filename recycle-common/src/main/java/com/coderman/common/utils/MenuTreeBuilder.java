@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 該类用于递归构建树形選單
+ * 該類用于递归构建树形選單
  * Created by zhangyukang on 2020/2/6 15:34
  */
 public class MenuTreeBuilder {
@@ -27,7 +27,7 @@ public class MenuTreeBuilder {
                 rootMenu.add(nav);
             }
         }
-        /* 根據Menu类的order排序 */
+        /* 根據Menu類的order排序 */
         Collections.sort(rootMenu,MenuNodeVO.order());
         /*为根選單设置子選單，getChild是递归调用的*/
         for (MenuNodeVO nav : rootMenu) {

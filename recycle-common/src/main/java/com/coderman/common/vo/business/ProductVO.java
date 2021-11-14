@@ -39,7 +39,7 @@ public class ProductVO {
     private String imageUrl;
 
 
-    @NotNull(message = "分类不能为空")
+    @NotNull(message = "分類不能为空")
     private Long[] categoryKeys;
 
     private Long oneCategoryId;

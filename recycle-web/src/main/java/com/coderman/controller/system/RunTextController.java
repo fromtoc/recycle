@@ -105,14 +105,14 @@ public class RunTextController {
     }
 
     /**
-     * 导出excel
+     * 導出excel
      *
      * @param response
      */
-    @ApiOperation(value = "导出excel", notes = "导出所有跑馬燈的excel表格")
+    @ApiOperation(value = "導出excel", notes = "導出所有跑馬燈的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("runText:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败", operation = "导出跑馬燈excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出跑馬燈excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<RunText> runTextList = this.runTextService.findAll();
         ExcelKit.$Export(RunText.class, response).downXlsx(runTextList, false);
