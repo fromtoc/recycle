@@ -302,8 +302,8 @@ public class UserController {
     @RequiresPermissions("user:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出用戶excel")
     public void export(HttpServletResponse response) {
-        List<User> users = this.userService.findAll();
-        ExcelKit.$Export(User.class, response).downXlsx(users, false);
+        List<UserVO> users = this.userService.findAll();
+        ExcelKit.$Export(UserVO.class, response).downXlsx(users, false);
     }
 
     /**

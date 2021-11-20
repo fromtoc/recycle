@@ -19,7 +19,6 @@ public class ProductCategoryVO {
     @NotBlank(message = "類目名稱不能为空")
     private String name;
 
-    @NotBlank(message = "類目备注不能为空")
     private String remark;
 
     @NotNull(message = "排序號不能为空")

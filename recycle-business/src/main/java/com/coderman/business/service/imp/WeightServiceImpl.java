@@ -228,4 +228,9 @@ public class WeightServiceImpl implements WeightService {
         d.setLoadTime(new Date());
         weightMapper.updateByPrimaryKeySelective(d);
     }
+
+    @Override
+    public List<Weight> findAll() {
+        return weightMapper.selectAll();
+    }
 }

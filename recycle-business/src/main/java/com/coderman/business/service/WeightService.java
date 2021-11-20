@@ -3,6 +3,7 @@ package com.coderman.business.service;
 
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.Weight;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
@@ -68,5 +69,10 @@ public interface WeightService {
      * @param status
      */
     void updateStatus(Long id, Boolean status) throws SystemException;
+    /**
+     * 全部秤重明細
+     * @return
+     */
+    List<Weight> findAll();
 
 }

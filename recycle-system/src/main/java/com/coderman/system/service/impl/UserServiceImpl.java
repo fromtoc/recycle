@@ -561,8 +561,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userMapper.selectAll();
+    public List<UserVO> findAll() {
+        List<User> userList = userMapper.selectAll();
+        List<UserVO> userVOS = userConverter.converterToUserVOList(userList);
+        return userVOS;
     }
 
     /**

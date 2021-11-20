@@ -5,17 +5,25 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.BusinessCodeEnum;
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
+import com.coderman.common.model.business.Product;
+import com.coderman.common.model.system.Department;
+import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
+import com.coderman.common.vo.system.DepartmentVO;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
+import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -280,6 +288,25 @@ public class ProductController {
         }
         productService.updateCostCenter(list, costCenterId);
         return ResponseBean.success();
+    }
+
+    /**
+     * 導出excel
+     * @param response
+     */
+    @ApiOperation(value = "導出excel", notes = "導出所有廢棄物的excel表格")
+    @PostMapping("/excel")
+    @RequiresPermissions("product:export")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出廢棄物excel")
+    public void export(HttpServletResponse response) {
+        List<Product> productList = this.productService.findAll();
+        List<ProductVO> voList = new ArrayList<>();
+        productList.stream().forEach(d-> {
+            ProductVO vo = new ProductVO();
+            BeanUtils.copyProperties(d, vo);
+            voList.add(vo);
+        });
+        ExcelKit.$Export(ProductVO.class, response).downXlsx(voList, false);
     }
 }
 

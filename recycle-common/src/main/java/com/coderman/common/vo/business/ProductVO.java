@@ -1,6 +1,8 @@
 package com.coderman.common.vo.business;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wuwenze.poi.annotation.Excel;
+import com.wuwenze.poi.annotation.ExcelField;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,13 +14,14 @@ import java.util.Date;
  * @Date 2020/3/17 09:16
  * @Version 1.0
  **/
+@Excel("product")
 @Data
 public class ProductVO {
 
     private Long id;
 
     private String pNum;
-
+    @ExcelField(value = "廢棄物名稱", width = 100)
     @NotBlank
     private String name;
 
@@ -41,9 +44,9 @@ public class ProductVO {
 
     @NotNull(message = "分類不能为空")
     private Long[] categoryKeys;
-
+    @ExcelField(value = "廢棄物大分類", width = 100)
     private Long oneCategoryId;
-
+    @ExcelField(value = "廢棄物小分類", width = 100)
     private Long twoCategoryId;
 
     private Long threeCategoryId;
@@ -56,6 +59,12 @@ public class ProductVO {
 
     private String modelName;
 
-    private Boolean status;//是否已经进入回收站:1:逻辑删除,0:正常数據,2:新增待审核
+    private Boolean status;
+    @ExcelField(value = "狀態", width = 100)
+    private String statusName;
+
+    public String getStatusName() {
+        return status? "停用": "啟用";
+    }
 
 }

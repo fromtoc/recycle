@@ -4,17 +4,20 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.common.service.DictionaryService;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -130,7 +133,13 @@ public class CostCenterController {
     @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出成本中心excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> list = this.dictionaryService.selectByType(2, null);
-        ExcelKit.$Export(Dictionary.class, response).downXlsx(list, false);
+        List<DictionaryVO> voList = new ArrayList<>();
+        list.stream().forEach(d-> {
+            DictionaryVO vo = new DictionaryVO();
+            BeanUtils.copyProperties(d, vo);
+            voList.add(vo);
+        });
+        ExcelKit.$Export(DictionaryVO.class, response).downXlsx(voList, false);
     }
 
 }

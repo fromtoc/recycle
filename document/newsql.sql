@@ -228,7 +228,7 @@ CREATE TABLE `tb_dictionary` (
 
 INSERT INTO recycle.tb_dictionary
 (id, `type`, code, value, status)
-VALUES(2, 3, '1', '123', 1);
+VALUES(2, 2, '1', '123', 1);
 INSERT INTO recycle.tb_dictionary
 (id, `type`, code, value, status)
 VALUES(1, 1, 'A', 'AA', 1);

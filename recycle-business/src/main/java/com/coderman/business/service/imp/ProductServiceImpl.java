@@ -11,6 +11,7 @@ import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
+import com.coderman.common.model.system.Department;
 import com.coderman.common.model.system.User;
 import com.coderman.common.response.ActiveUser;
 import com.coderman.common.service.DictionaryService;
@@ -339,5 +340,9 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.selectByExample(o);
     }
 
+    @Override
+    public List<Product> findAll() {
+        return productMapper.selectAll();
+    }
 
 }

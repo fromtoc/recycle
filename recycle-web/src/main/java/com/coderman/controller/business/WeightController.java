@@ -11,6 +11,7 @@ import com.coderman.common.model.business.Weight;
 import com.coderman.common.model.system.*;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.business.ProductPriceVO;
+import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.business.WeightVO;
 import com.coderman.system.service.UserService;
 import com.coderman.common.vo.system.*;
@@ -18,9 +19,11 @@ import com.coderman.system.mapper.CardProductMapper;
 import com.coderman.system.mapper.UserCardMapper;
 import com.coderman.system.mapper.UserMapper;
 import com.coderman.system.service.*;
+import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -212,6 +216,25 @@ public class WeightController {
     public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
         weightService.updateStatus(id, status);
         return ResponseBean.success();
+    }
+
+    /**
+     * 導出excel
+     * @param response
+     */
+    @ApiOperation(value = "導出excel", notes = "導出所有秤重明細的excel表格")
+    @PostMapping("/excel")
+    @RequiresPermissions("weight:export")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出秤重明細excel")
+    public void export(HttpServletResponse response) {
+        List<Weight> weightList = this.weightService.findAll();
+        List<WeightVO> voList = new ArrayList<>();
+        weightList.stream().forEach(d-> {
+            WeightVO vo = new WeightVO();
+            BeanUtils.copyProperties(d, vo);
+            voList.add(vo);
+        });
+        ExcelKit.$Export(WeightVO.class, response).downXlsx(voList, false);
     }
 
 

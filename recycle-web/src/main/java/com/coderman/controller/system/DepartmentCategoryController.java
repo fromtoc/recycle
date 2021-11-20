@@ -4,17 +4,20 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.common.service.DictionaryService;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,8 +132,14 @@ public class DepartmentCategoryController {
     @RequiresPermissions("departmentCategory:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出公司類型excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> departmentCategoryList = this.dictionaryService.selectByType(1,null);
-        ExcelKit.$Export(Dictionary.class, response).downXlsx(departmentCategoryList, false);
+        List<Dictionary> list = this.dictionaryService.selectByType(1, null);
+        List<DictionaryVO> voList = new ArrayList<>();
+        list.stream().forEach(d-> {
+            DictionaryVO vo = new DictionaryVO();
+            BeanUtils.copyProperties(d, vo);
+            voList.add(vo);
+        });
+        ExcelKit.$Export(DictionaryVO.class, response).downXlsx(voList, false);
     }
 
     /**

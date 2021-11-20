@@ -174,4 +174,9 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         return p;
     }
+
+    @Override
+    public List<ProductPrice> findAll() {
+        return productPriceMapper.selectAll();
+    }
 }

@@ -173,7 +173,7 @@ public interface UserService {
      *
      * @return
      */
-    List<User> findAll();
+    List<UserVO> findAll();
 
     /**
      * 用戶登入

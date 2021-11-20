@@ -5,16 +5,19 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.service.DictionaryService;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +46,7 @@ public class RegionController {
     public ResponseBean<PageVO<Dictionary>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                        @RequestParam(value = "pageSize") Integer pageSize,
                                                        Dictionary dictionary) {
-        dictionary.setType(3);
+        dictionary.setType(2);
         PageVO<Dictionary> regionList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
         return ResponseBean.success(regionList);
     }
@@ -56,7 +59,7 @@ public class RegionController {
     @ApiOperation(value = "所有區域")
     @GetMapping("/findAll")
     public ResponseBean<List<Dictionary>> findAll() throws SystemException {
-        List<Dictionary> regionList = dictionaryService.selectByType(3,1);
+        List<Dictionary> regionList = dictionaryService.selectByType(2,1);
         return ResponseBean.success(regionList);
     }
 
@@ -70,7 +73,7 @@ public class RegionController {
     @ApiOperation(value = "新增區域")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated Dictionary dictionary) {
-        dictionary.setType(3);
+        dictionary.setType(2);
         dictionary.setStatus(1);
         dictionaryService.add(dictionary);
         return ResponseBean.success();
@@ -129,8 +132,14 @@ public class RegionController {
     @RequiresPermissions("region:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出區域excel")
     public void export(HttpServletResponse response) throws SystemException {
-        List<Dictionary> regionList = this.dictionaryService.selectByType(3,null);
-        ExcelKit.$Export(Dictionary.class, response).downXlsx(regionList, false);
+        List<Dictionary> list = this.dictionaryService.selectByType(2, null);
+        List<DictionaryVO> voList = new ArrayList<>();
+        list.stream().forEach(d-> {
+            DictionaryVO vo = new DictionaryVO();
+            BeanUtils.copyProperties(d, vo);
+            voList.add(vo);
+        });
+        ExcelKit.$Export(DictionaryVO.class, response).downXlsx(voList, false);
     }
 
     /**
@@ -140,8 +149,8 @@ public class RegionController {
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新地區狀態失敗", operation = "地區|禁用/啟用")
-    @ApiOperation(value = "地區狀態", notes = "禁用和啟用这兩種狀態")
+    @ControllerEndpoint(exceptionMessage = "更新區域狀態失敗", operation = "區域|禁用/啟用")
+    @ApiOperation(value = "區域狀態", notes = "禁用和啟用这兩種狀態")
     @RequiresPermissions({"region:status"})
     @PutMapping("/updateStatus/{id}/{status}")
     public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {

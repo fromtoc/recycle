@@ -1,4 +1,4 @@
-package com.coderman.common.model.system;
+package com.coderman.common.vo.system;
 
 import com.wuwenze.poi.annotation.Excel;
 import com.wuwenze.poi.annotation.ExcelField;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Excel("dictionary")
 @Data
 @Table(name = "tb_dictionary")
-public class Dictionary {
+public class DictionaryVO {
     @Id
     private Long id;
 
@@ -26,5 +26,12 @@ public class Dictionary {
     private Integer status;
 
     private Date loadTime;
+
+    @ExcelField(value = "狀態", width = 100)
+    private String statusName;
+
+    public String getStatusName() {
+        return status==0? "停用": "啟用";
+    }
 
 }

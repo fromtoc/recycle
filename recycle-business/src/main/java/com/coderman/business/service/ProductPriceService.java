@@ -4,6 +4,7 @@ package com.coderman.business.service;
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.ProductPrice;
+import com.coderman.common.model.business.Weight;
 import com.coderman.common.vo.business.ProductPriceVO;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
@@ -48,6 +49,10 @@ public interface ProductPriceService {
      * @param productPriceVO
      */
     void update(Long id, ProductPriceVO productPriceVO);
-
+    /**
+     * 全部單價
+     * @return
+     */
+    List<ProductPrice> findAll();
 
 }
