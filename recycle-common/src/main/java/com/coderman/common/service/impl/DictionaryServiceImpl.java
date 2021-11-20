@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +54,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public void add(Dictionary dictionary) {
+        dictionary.setLoadTime(new Date());
         dictionaryMapper.insert(dictionary);
     }
 
@@ -77,6 +79,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         if (originDictionary == null) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要更新的資料辭典不存在");
         }
+        dictionary.setLoadTime(new Date());
         dictionaryMapper.updateByPrimaryKeySelective(dictionary);
     }
 
@@ -87,6 +90,7 @@ public class DictionaryServiceImpl implements DictionaryService {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "要删除的資料辭典不存在");
         }
         originDictionary.setStatus(0);
+        originDictionary.setLoadTime(new Date());
         dictionaryMapper.updateByPrimaryKeySelective(originDictionary);
 //        dictionaryMapper.deleteByPrimaryKey(id);
     }
@@ -102,6 +106,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         d.setId(id);
         d.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                 UserStatusEnum.AVAILABLE.getStatusCode());
+        d.setLoadTime(new Date());
         dictionaryMapper.updateByPrimaryKeySelective(d);
     }
 }

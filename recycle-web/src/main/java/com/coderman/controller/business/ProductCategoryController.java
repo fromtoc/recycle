@@ -56,6 +56,19 @@ public class ProductCategoryController {
      * @return
      */
     @ApiOperation(value = "分類树形结构")
+    @GetMapping("/categoryTreeAll")
+    public ResponseBean categoryTreeAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
+                                     @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        PageVO<ProductCategoryTreeNodeVO> pageVO = productCategoryService.categoryTreeAll(pageNum, pageSize);
+        return ResponseBean.success(pageVO);
+    }
+
+    /**
+     * 分類树形结构(分页)
+     *
+     * @return
+     */
+    @ApiOperation(value = "分類树形结构")
     @GetMapping("/categoryTree")
     public ResponseBean categoryTree(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                                      @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -122,7 +135,7 @@ public class ProductCategoryController {
      */
     @ControllerEndpoint(exceptionMessage = "物資分類更新失败", operation = "物資分類更新")
     @ApiOperation(value = "更新分類")
-    @RequiresPermissions({"productCategory:update"})
+    @RequiresPermissions({"productCategory:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated ProductCategoryVO productCategoryVO) {
         productCategoryService.update(id, productCategoryVO);

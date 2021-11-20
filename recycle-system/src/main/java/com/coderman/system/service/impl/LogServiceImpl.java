@@ -17,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class LogServiceImpl implements LogService {
      */
     @Override
     public void saveLog(Log log) {
+        log.setLoadTime(new Date());
         logMapper.insert(log);
     }
 

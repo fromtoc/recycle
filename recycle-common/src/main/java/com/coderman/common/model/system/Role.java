@@ -34,6 +34,8 @@ public class Role {
     @ExcelField(value = "禁用狀態", width = 50)
     private Integer status;
 
+    private Date loadTime;
+
     @Override
     public String toString() {
         return "Role{" +

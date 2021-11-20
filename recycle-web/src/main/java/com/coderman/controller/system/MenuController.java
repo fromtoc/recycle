@@ -107,7 +107,7 @@ public class MenuController {
      */
     @ControllerEndpoint(exceptionMessage = "更新選單失败", operation = "更新選單")
     @ApiOperation(value = "更新選單", notes = "根據id更新選單節點")
-    @RequiresPermissions({"menu:update"})
+    @RequiresPermissions({"menu:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated MenuVO menuVO) throws SystemException {
         menuService.update(id, menuVO);

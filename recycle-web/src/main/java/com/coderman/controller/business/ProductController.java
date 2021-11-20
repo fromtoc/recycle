@@ -170,7 +170,7 @@ public class ProductController {
      */
     @ControllerEndpoint(exceptionMessage = "更新廢棄物失败", operation = "廢棄物資料更新")
     @ApiOperation(value = "更新廢棄物", notes = "更新廢棄物信息")
-    @RequiresPermissions({"product:update"})
+    @RequiresPermissions({"product:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody ProductVO productVO) throws BusinessException {
         if (productVO.getCategoryKeys().length != 2) {

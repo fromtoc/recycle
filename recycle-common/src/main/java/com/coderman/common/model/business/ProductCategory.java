@@ -26,4 +26,6 @@ public class ProductCategory {
 
     private Integer status;
 
+    private Date loadTime;
+
 }

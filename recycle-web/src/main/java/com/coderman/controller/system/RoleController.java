@@ -144,7 +144,7 @@ public class RoleController {
      */
     @ControllerEndpoint(exceptionMessage = "更新角色失败", operation = "更新角色")
     @ApiOperation(value = "更新角色", notes = "根據id更新角色信息")
-    @RequiresPermissions({"role:update"})
+    @RequiresPermissions({"role:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated RoleVO roleVO) throws SystemException {
         roleService.update(id, roleVO);

@@ -97,7 +97,7 @@ public class DepartmentCategoryController {
      */
     @ControllerEndpoint(exceptionMessage = "更新公司類型失败", operation = "更新公司類型")
     @ApiOperation(value = "更新公司類型")
-    @RequiresPermissions({"departmentCategory:update"})
+    @RequiresPermissions({"departmentCategory:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated Dictionary dictionary) throws SystemException {
         dictionaryService.update(id, dictionary);

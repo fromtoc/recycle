@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Excel("dictionary")
 @Data
@@ -24,5 +25,7 @@ public class Dictionary {
 
     @ExcelField(value = "狀態", width = 50)
     private Integer status;
+
+    private Date loadTime;
 
 }

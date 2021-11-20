@@ -97,7 +97,7 @@ public class RunTextController {
      */
     @ControllerEndpoint(exceptionMessage = "更新跑馬燈失败", operation = "更新跑馬燈")
     @ApiOperation(value = "更新跑馬燈")
-    @RequiresPermissions({"runText:update"})
+    @RequiresPermissions({"runText:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated RunText runText) throws SystemException {
         runTextService.update(id, runText);

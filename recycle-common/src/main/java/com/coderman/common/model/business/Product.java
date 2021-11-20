@@ -39,4 +39,6 @@ public class Product {
 
     private Integer status;
 
+    private Date loadTime;
+
 }

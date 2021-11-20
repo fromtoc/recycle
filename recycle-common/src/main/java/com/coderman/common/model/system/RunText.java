@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Excel("runText")
 @Data
@@ -19,5 +20,7 @@ public class RunText {
 
     @ExcelField(value = "狀態", width = 50)
     private Integer status;
+
+    private Date loadTime;
 
 }

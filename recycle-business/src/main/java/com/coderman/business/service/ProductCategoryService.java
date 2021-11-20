@@ -73,6 +73,12 @@ public interface ProductCategoryService {
     PageVO<ProductCategoryTreeNodeVO> categoryTree(Integer pageNum, Integer pageSize);
 
     /**
+     * 分類树形
+     * @return
+     */
+    PageVO<ProductCategoryTreeNodeVO> categoryTreeAll(Integer pageNum, Integer pageSize);
+
+    /**
      * 获取父级分類（2级树）
      * @return
      */

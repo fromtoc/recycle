@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +40,7 @@ public class RunTextServiceImpl implements RunTextService {
 
     @Override
     public void add(RunText runText) {
+        runText.setLoadTime(new Date());
         runTextMapper.insert(runText);
     }
 
@@ -53,6 +55,7 @@ public class RunTextServiceImpl implements RunTextService {
         if(originRunText==null){
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR,"要更新的跑馬燈不存在");
         }
+        runText.setLoadTime(new Date());
         runTextMapper.updateByPrimaryKeySelective(runText);
     }
 
@@ -67,6 +70,7 @@ public class RunTextServiceImpl implements RunTextService {
         d.setId(id);
         d.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                 UserStatusEnum.AVAILABLE.getStatusCode());
+        d.setLoadTime(new Date());
         runTextMapper.updateByPrimaryKeySelective(d);
     }
 }

@@ -140,6 +140,7 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setStatus(1);//2未審核
         product.setPNum(UUID.randomUUID().toString().substring(0, 32));
+        product.setLoadTime(new Date());
         productMapper.insert(product);
     }
 
@@ -172,6 +173,7 @@ public class ProductServiceImpl implements ProductService {
             product.setTwoCategoryId(categoryKeys[1]);
 //            product.setThreeCategoryId(categoryKeys[2]);
         }
+        product.setLoadTime(new Date());
         productMapper.updateByPrimaryKeySelective(product);
     }
 
@@ -234,6 +236,7 @@ public class ProductServiceImpl implements ProductService {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
         } else {
             t.setStatus(1);
+            t.setLoadTime(new Date());
             productMapper.updateByPrimaryKeySelective(t);
         }
     }
@@ -252,6 +255,7 @@ public class ProductServiceImpl implements ProductService {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
         } else {
             t.setStatus(0);
+            t.setLoadTime(new Date());
             productMapper.updateByPrimaryKeySelective(t);
         }
     }
@@ -270,6 +274,7 @@ public class ProductServiceImpl implements ProductService {
             throw new BusinessException(BusinessCodeEnum.PRODUCT_STATUS_ERROR);
         } else {
             t.setStatus(0);
+            t.setLoadTime(new Date());
             productMapper.updateByPrimaryKeySelective(t);
         }
     }
@@ -289,6 +294,7 @@ public class ProductServiceImpl implements ProductService {
         Product update = new Product();
         update.setId(product.getId());
         update.setStatus(status ? 0 : 1);
+        update.setLoadTime(new Date());
         productMapper.updateByPrimaryKeySelective(update);
     }
 
@@ -298,6 +304,7 @@ public class ProductServiceImpl implements ProductService {
             Product update = new Product();
             update.setId(id);
             update.setModel(costCenterId);
+            update.setLoadTime(new Date());
             productMapper.updateByPrimaryKeySelective(update);
         }
 

@@ -77,6 +77,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         productCategory.setCreateTime(new Date());
         productCategory.setModifiedTime(new Date());
         productCategory.setStatus(1);
+        productCategory.setLoadTime(new Date());
         productCategoryMapper.insert(productCategory);
     }
 
@@ -112,6 +113,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         ProductCategory productCategory = new ProductCategory();
         BeanUtils.copyProperties(ProductCategoryVO,productCategory);
         productCategory.setModifiedTime(new Date());
+        productCategory.setLoadTime(new Date());
         productCategoryMapper.updateByPrimaryKeySelective(productCategory);
     }
 
@@ -161,6 +163,25 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public PageVO<ProductCategoryTreeNodeVO> categoryTree(Integer pageNum, Integer pageSize) {
         List<ProductCategoryVO> productCategoryVOList = findAll();
+        List<ProductCategoryVO> collect = productCategoryVOList.stream().filter(c -> c.getStatus() == false).collect(Collectors.toList());
+        List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(collect);
+        List<ProductCategoryTreeNodeVO> tree = CategoryTreeBuilder.build(nodeVOS);
+        List<ProductCategoryTreeNodeVO> page;
+        if(pageSize!=null&&pageNum!=null){
+            page= ListPageUtils.page(tree, pageSize, pageNum);
+            return new PageVO<>(tree.size(),page);
+        }else {
+            return new PageVO<>(tree.size(), tree);
+        }
+    }
+
+    /**
+     * 分類树形结构
+     * @return
+     */
+    @Override
+    public PageVO<ProductCategoryTreeNodeVO> categoryTreeAll(Integer pageNum, Integer pageSize) {
+        List<ProductCategoryVO> productCategoryVOList = findAll();
         List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
         List<ProductCategoryTreeNodeVO> tree = CategoryTreeBuilder.build(nodeVOS);
         List<ProductCategoryTreeNodeVO> page;
@@ -195,6 +216,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         p.setId(id);
         p.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                 UserStatusEnum.AVAILABLE.getStatusCode());
+        p.setLoadTime(new Date());
         productCategoryMapper.updateByPrimaryKeySelective(p);
     }
 

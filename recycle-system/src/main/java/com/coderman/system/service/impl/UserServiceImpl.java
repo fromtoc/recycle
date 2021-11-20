@@ -172,6 +172,7 @@ public class UserServiceImpl implements UserService {
         userCard.setUserId(userId);
         userCard.setCardName(cardName);
         userCard.setStatus(1);
+        userCard.setLoadTime(new Date());
         return userCardMapper.insert(userCard);
     }
 
@@ -320,6 +321,7 @@ public class UserServiceImpl implements UserService {
         } else {
             User t = new User();
             t.setId(id);
+            t.setLoadTime(new Date());
             t.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                     UserStatusEnum.AVAILABLE.getStatusCode());
             userMapper.updateByPrimaryKeySelective(t);
@@ -331,6 +333,7 @@ public class UserServiceImpl implements UserService {
         UserCard c = new UserCard();
         c.setId(id);
         c.setStatus(status ? 0 : 1);
+        c.setLoadTime(new Date());
         userCardMapper.updateByPrimaryKeySelective(c);
     }
 
@@ -370,6 +373,7 @@ public class UserServiceImpl implements UserService {
         user.setType(UserTypeEnum.SYSTEM_USER.getTypeCode());//新增的用戶默认是普通用戶
         user.setStatus(UserStatusEnum.AVAILABLE.getStatusCode());//新增的用戶默认啟用
         user.setAvatar("http://badidol.com/uploads/images/avatars/201910/24/18_1571921832_HG9E55x9NY.jpg");
+        user.setLoadTime(new Date());
         userMapper.insert(user);
     }
 
@@ -410,6 +414,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userVO, user);
         user.setModifiedTime(new Date());
         user.setId(dbUser.getId());
+        user.setLoadTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -429,6 +434,7 @@ public class UserServiceImpl implements UserService {
                 User user = new User();
                 user.setId(dbUser.getId());
                 user.setPassword(MD5Utils.md5Encryption(newPassword, salt));
+                user.setLoadTime(new Date());
                 userMapper.updateByPrimaryKeySelective(user);
                 return true;
             }
@@ -443,6 +449,7 @@ public class UserServiceImpl implements UserService {
         String salt = userMapper.selectByPrimaryKey(id).getSalt();
         user.setId(id);
         user.setPassword(MD5Utils.md5Encryption(password, salt));
+        user.setLoadTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -528,6 +535,7 @@ public class UserServiceImpl implements UserService {
                 UserRole userRole = new UserRole();
                 userRole.setUserId(id);
                 userRole.setRoleId(rid);
+                userRole.setLoadTime(new Date());
                 userRoleMapper.insert(userRole);
             }
         }
@@ -546,6 +554,7 @@ public class UserServiceImpl implements UserService {
                 CardProduct cardProduct = new CardProduct();
                 cardProduct.setCardId(id);
                 cardProduct.setProductId(pid);
+                cardProduct.setLoadTime(new Date());
                 cardProductMapper.insert(cardProduct);
             }
         }

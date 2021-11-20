@@ -51,4 +51,6 @@ public class Menu {
 
     @ExcelField(value = "權限編碼", width = 180)
     private String perms;
+
+    private Date loadTime;
 }

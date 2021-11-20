@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @Table(name = "tb_user_card")
@@ -17,4 +18,6 @@ public class UserCard {
     private String cardName;
 
     private Integer status;
+
+    private Date loadTime;
 }

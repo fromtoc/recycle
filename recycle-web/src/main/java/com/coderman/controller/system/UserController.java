@@ -194,7 +194,7 @@ public class UserController {
      */
     @ControllerEndpoint(exceptionMessage = "更新用戶失败", operation = "更新用戶")
     @ApiOperation(value = "更新用戶", notes = "更新用戶信息")
-    @RequiresPermissions({"user:update"})
+    @RequiresPermissions({"user:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated UserEditVO userEditVO) throws SystemException {
         userService.update(id, userEditVO);

@@ -80,6 +80,7 @@ public class WeightServiceImpl implements WeightService {
     public int add(Weight weight) {
         weight.setStatus(1);
         weight.setCreateTime(new Date());
+        weight.setLoadTime(new Date());
         return weightMapper.insert(weight);
     }
 
@@ -110,6 +111,7 @@ public class WeightServiceImpl implements WeightService {
         weight.setProductId(product.getId());
         weight.setCreateTime(new Date());
         weight.setStatus(1);
+        weight.setLoadTime(new Date());
         return weightMapper.insert(weight);
     }
 
@@ -208,6 +210,7 @@ public class WeightServiceImpl implements WeightService {
         weight.setUserId(user.getId());
         weight.setCardId(userCard.getId());
         weight.setProductId(product.getId());
+        weight.setLoadTime(new Date());
         weightMapper.updateByPrimaryKeySelective(weight);
     }
 
@@ -222,6 +225,7 @@ public class WeightServiceImpl implements WeightService {
         d.setId(id);
         d.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                 UserStatusEnum.AVAILABLE.getStatusCode());
+        d.setLoadTime(new Date());
         weightMapper.updateByPrimaryKeySelective(d);
     }
 }

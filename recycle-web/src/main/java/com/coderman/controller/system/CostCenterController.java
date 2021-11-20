@@ -97,7 +97,7 @@ public class CostCenterController {
      */
     @ControllerEndpoint(exceptionMessage = "更新成本中心失败", operation = "更新成本中心")
     @ApiOperation(value = "更新成本中心")
-    @RequiresPermissions({"costCenter:update"})
+    @RequiresPermissions({"costCenter:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated Dictionary dictionary) throws SystemException {
         dictionaryService.update(id, dictionary);

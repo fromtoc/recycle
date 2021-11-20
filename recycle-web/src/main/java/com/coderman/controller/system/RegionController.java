@@ -97,7 +97,7 @@ public class RegionController {
      */
     @ControllerEndpoint(exceptionMessage = "更新區域失败", operation = "更新區域")
     @ApiOperation(value = "更新區域")
-    @RequiresPermissions({"region:update"})
+    @RequiresPermissions({"region:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated Dictionary dictionary) throws SystemException {
         dictionaryService.update(id, dictionary);

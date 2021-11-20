@@ -64,4 +64,6 @@ public class Department {
     @ExcelField(value = "修改時間", dateFormat = "yyyy年MM月dd日 HH:mm:ss", width = 180)
     private Date modifiedTime;
 
+    private Date loadTime;
+
 }

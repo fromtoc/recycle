@@ -30,4 +30,6 @@ public class Log {
     private String method;
 
     private String params;
+
+    private Date loadTime;
 }

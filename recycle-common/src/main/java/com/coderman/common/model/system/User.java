@@ -68,4 +68,6 @@ public class User {
     @ExcelField(value = "头像url", width = 200)
     private String avatar;
 
+    private Date loadTime;
+
 }

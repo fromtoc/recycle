@@ -162,6 +162,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         department.setModifiedTime(new Date());
         department.setStatus(1);
         department.setFood(0);
+        department.setLoadTime(new Date());
         departmentMapper.insert(department);
     }
 
@@ -196,6 +197,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         BeanUtils.copyProperties(departmentVO, department);
         department.setId(id);
         department.setModifiedTime(new Date());
+        department.setLoadTime(new Date());
         departmentMapper.updateByPrimaryKeySelective(department);
     }
 
@@ -251,6 +253,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             t.setId(id);
             t.setStatus(status ? UserStatusEnum.DISABLE.getStatusCode() :
                     UserStatusEnum.AVAILABLE.getStatusCode());
+            t.setLoadTime(new Date());
             departmentMapper.updateByPrimaryKeySelective(t);
         }
     }
@@ -269,6 +272,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             t.setId(id);
             t.setFood(food ? UserStatusEnum.AVAILABLE.getStatusCode() :
                     UserStatusEnum.DISABLE.getStatusCode());
+            t.setLoadTime(new Date());
             departmentMapper.updateByPrimaryKeySelective(t);
         }
     }

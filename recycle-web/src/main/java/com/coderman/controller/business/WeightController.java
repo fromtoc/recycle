@@ -191,7 +191,7 @@ public class WeightController {
      */
     @ControllerEndpoint(exceptionMessage = "編輯秤種明細失败", operation = "編輯秤種明細")
     @ApiOperation(value = "編輯秤種明細", notes = "編輯秤種明細")
-    @RequiresPermissions({"weight:update"})
+    @RequiresPermissions({"weight:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody WeightVO weightVO) throws BusinessException, SystemException {
         weightService.update(id, weightVO);

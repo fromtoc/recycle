@@ -56,6 +56,7 @@ public class MenuServiceImpl implements MenuService {
         menu.setCreateTime(new Date());
         menu.setModifiedTime(new Date());
         menu.setAvailable(menuVO.isDisabled()?0:1);
+        menu.setLoadTime(new Date());
         menuMapper.insert(menu);
         return menu;
     }
@@ -103,6 +104,7 @@ public class MenuServiceImpl implements MenuService {
         menu.setId(id);
         menu.setAvailable(menuVO.isDisabled()?0:1);
         menu.setModifiedTime(new Date());
+        menu.setLoadTime(new Date());
         menuMapper.updateByPrimaryKeySelective(menu);
     }
 

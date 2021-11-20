@@ -72,6 +72,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             productPrice.setProductId(product.getId());
             productPrice.setOneCategoryId(product.getOneCategoryId());
             productPrice.setTwoCategoryId(product.getTwoCategoryId());
+            productPrice.setLoadTime(new Date());
             return productPriceMapper.insert(productPrice);
         }
         return 0;
@@ -163,6 +164,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 //        ProductPrice originProductPrice = productPriceMapper.selectByPrimaryKey(id);
         ProductPrice productPrice = new ProductPrice();
         BeanUtils.copyProperties(productPriceVO, productPrice);
+        productPrice.setLoadTime(new Date());
         productPriceMapper.updateByPrimaryKeySelective(productPrice);
     }
 

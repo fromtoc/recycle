@@ -115,7 +115,7 @@ public class DepartmentController {
      */
     @ControllerEndpoint(exceptionMessage = "更新公司失败", operation = "更新公司")
     @ApiOperation(value = "更新公司")
-    @RequiresPermissions({"department:update"})
+    @RequiresPermissions({"department:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody @Validated DepartmentVO departmentVO) throws SystemException {
         departmentService.update(id, departmentVO);

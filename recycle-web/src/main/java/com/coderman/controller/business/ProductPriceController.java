@@ -116,7 +116,7 @@ public class ProductPriceController {
      */
     @ControllerEndpoint(exceptionMessage = "編輯單價失败", operation = "單價資料編輯")
     @ApiOperation(value = "編輯單價", notes = "編輯單價信息")
-    @RequiresPermissions({"productPrice:update"})
+    @RequiresPermissions({"productPrice:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody ProductPriceVO productPriceVO) throws BusinessException {
         productPriceService.update(id, productPriceVO);

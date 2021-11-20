@@ -32,4 +32,6 @@ public class Weight {
 
     private Date createTime;
 
+    private Date loadTime;
+
 }

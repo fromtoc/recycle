@@ -30,4 +30,6 @@ public class ProductPrice {
 
     private String validMonth;
 
+    private Date loadTime;
+
 }
