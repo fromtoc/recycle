@@ -91,7 +91,6 @@ public class ProductPriceController {
      */
     @ControllerEndpoint(exceptionMessage = "新增單價維護失败", operation = "單價維護新增")
     @ApiOperation(value = "新增單價維護")
-    @RequiresPermissions({"productPrice:add"})
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductPriceVO productPriceVO) throws BusinessException {
         int add = productPriceService.add(productPriceVO);
@@ -108,7 +107,6 @@ public class ProductPriceController {
      * @return
      */
     @ApiOperation(value = "編辑單價", notes = "編辑單價")
-    @RequiresPermissions({"productPrice:edit"})
     @GetMapping("/edit/{id}")
     public ResponseBean edit(@PathVariable Long id) {
         ProductPriceVO productPriceVO = productPriceService.edit(id);
@@ -122,7 +120,6 @@ public class ProductPriceController {
      */
     @ControllerEndpoint(exceptionMessage = "編輯單價失败", operation = "單價資料編輯")
     @ApiOperation(value = "編輯單價", notes = "編輯單價信息")
-    @RequiresPermissions({"productPrice:edit"})
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody ProductPriceVO productPriceVO) throws BusinessException {
         productPriceService.update(id, productPriceVO);
@@ -135,16 +132,9 @@ public class ProductPriceController {
      */
     @ApiOperation(value = "導出excel", notes = "導出所有單價的excel表格")
     @PostMapping("/excel")
-    @RequiresPermissions("productPrice:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出單價excel")
     public void export(HttpServletResponse response) {
-        List<ProductPrice> productPrices = this.productPriceService.findAll();
-        List<ProductPriceVO> voList = new ArrayList<>();
-        productPrices.stream().forEach(d-> {
-            ProductPriceVO vo = new ProductPriceVO();
-            BeanUtils.copyProperties(d, vo);
-            voList.add(vo);
-        });
+        List<ProductPriceVO> voList = this.productPriceService.findAll();
         ExcelKit.$Export(ProductPriceVO.class, response).downXlsx(voList, false);
     }
 

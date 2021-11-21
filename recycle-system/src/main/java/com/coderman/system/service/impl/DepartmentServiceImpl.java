@@ -222,21 +222,36 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<DepartmentVO> departmentVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(departments)) {
             for (Department department : departments) {
-                DepartmentVO d = new DepartmentVO();
-                BeanUtils.copyProperties(department, d);
-                Example o = new Example(User.class);
-                o.createCriteria().andEqualTo("departmentId", department.getId())
-                        .andNotEqualTo("type", 0);
-                d.setTotal(userMapper.selectCountByExample(o));
-                departmentVOS.add(d);
+                if (department.getStatus()!=0) {
+                    DepartmentVO d = new DepartmentVO();
+                    BeanUtils.copyProperties(department, d);
+                    Example o = new Example(User.class);
+                    o.createCriteria().andEqualTo("departmentId", department.getId())
+                            .andNotEqualTo("type", 0);
+                    d.setTotal(userMapper.selectCountByExample(o));
+                    d.setStatus(department.getStatus() == 0 ? true : false);
+                    d.setFood(department.getFood() == 1 ? true : false);
+                    departmentVOS.add(d);
+                }
             }
         }
         return departmentVOS;
     }
 
     @Override
-    public List<Department> findAll() {
-        return departmentMapper.selectAll();
+    public List<DepartmentVO> findAll() {
+        List<Department> departments = departmentMapper.selectAll();
+        List<DepartmentVO> voList = new ArrayList<>();
+        departments.stream().forEach(d -> {
+            DepartmentVO vo = new DepartmentVO();
+            BeanUtils.copyProperties(d, vo);
+            String typeName = dictionaryMapper.selectByPrimaryKey(vo.getTypeId()).getValue();
+            vo.setTypeCodeName(typeName);
+            vo.setFood(d.getFood() == 1 ? true : false);
+            vo.setStatus(d.getStatus() == 1 ? false : true);
+            voList.add(vo);
+        });
+        return voList;
     }
 
     @Override

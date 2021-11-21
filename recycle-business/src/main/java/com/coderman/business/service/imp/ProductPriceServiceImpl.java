@@ -176,7 +176,17 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     }
 
     @Override
-    public List<ProductPrice> findAll() {
-        return productPriceMapper.selectAll();
+    public List<ProductPriceVO> findAll() {
+        List<ProductPrice> products = productPriceMapper.selectAll();
+        List<ProductPriceVO> voList = new ArrayList<>();
+        for (ProductPrice p: products){
+            ProductPriceVO vo = new ProductPriceVO();
+            BeanUtils.copyProperties(p,vo);
+            voList.add(vo);
+        }
+        List<ProductPriceVO> categoryVOSWithName = voList.stream()
+                .map(vo -> getCategoryName(vo))
+                .collect(Collectors.toList());
+        return categoryVOSWithName;
     }
 }

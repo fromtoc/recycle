@@ -184,6 +184,7 @@ public class RoleController {
         roles.stream().forEach(d-> {
             RoleVO vo = new RoleVO();
             BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus() == 1 ? false : true);
             voList.add(vo);
         });
         ExcelKit.$Export(RoleVO.class, response).downXlsx(voList, false);

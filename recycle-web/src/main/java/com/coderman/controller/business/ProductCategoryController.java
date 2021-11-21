@@ -5,9 +5,12 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.business.ProductCategoryExportVO;
 import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
 import com.coderman.common.vo.business.ProductCategoryVO;
+import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
+import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -46,8 +50,8 @@ public class ProductCategoryController {
             @RequestParam(value = "pageSize") Integer pageSize,
             ProductCategoryVO productCategoryVO) {
 
-        PageVO<ProductCategoryVO> departmentsList = productCategoryService.findProductCategoryList(pageNum, pageSize, productCategoryVO);
-        return ResponseBean.success(departmentsList);
+        PageVO<ProductCategoryVO> productCategoryList = productCategoryService.findProductCategoryList(pageNum, pageSize, productCategoryVO);
+        return ResponseBean.success(productCategoryList);
     }
 
     /**
@@ -171,5 +175,18 @@ public class ProductCategoryController {
     public ResponseBean updateStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
         productCategoryService.updateStatus(id, status);
         return ResponseBean.success();
+    }
+
+    /**
+     * 導出excel
+     * @param response
+     */
+    @ApiOperation(value = "導出excel", notes = "導出所有廢棄物類型的excel表格")
+    @PostMapping("/excel")
+    @RequiresPermissions("productCategory:export")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出廢棄物類型excel")
+    public void export(HttpServletResponse response) {
+        List<ProductCategoryExportVO> voList = this.productCategoryService.getAll();
+        ExcelKit.$Export(ProductCategoryExportVO.class, response).downXlsx(voList, false);
     }
 }

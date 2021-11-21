@@ -3,6 +3,7 @@ package com.coderman.system.service;
 
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Menu;
+import com.coderman.common.vo.system.MenuExportVO;
 import com.coderman.common.vo.system.MenuNodeVO;
 import com.coderman.common.vo.system.MenuVO;
 
@@ -56,6 +57,6 @@ public interface MenuService {
      * 获取所有選單
      * @return
      */
-    List<Menu> findAll();
+    List<MenuExportVO> findAll();
 
 }

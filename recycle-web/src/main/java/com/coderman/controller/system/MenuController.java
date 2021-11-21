@@ -4,6 +4,7 @@ import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Menu;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.system.MenuExportVO;
 import com.coderman.common.vo.system.MenuNodeVO;
 import com.coderman.common.vo.system.MenuVO;
 import com.coderman.system.service.MenuService;
@@ -123,8 +124,8 @@ public class MenuController {
     @RequiresPermissions("menu:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出選單excel")
     public void export(HttpServletResponse response) {
-        List<Menu> menus = this.menuService.findAll();
-        ExcelKit.$Export(Menu.class, response).downXlsx(menus, false);
+        List<MenuExportVO> menus = this.menuService.findAll();
+        ExcelKit.$Export(MenuExportVO.class, response).downXlsx(menus, false);
     }
 
 }

@@ -17,6 +17,7 @@ import com.coderman.common.response.ActiveUser;
 import com.coderman.common.service.DictionaryService;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
+import com.coderman.common.vo.system.DepartmentVO;
 import com.coderman.common.vo.system.PageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -341,8 +343,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() {
-        return productMapper.selectAll();
+    public List<ProductVO> findAll() {
+        List<Product> products = productMapper.selectAll();
+        List<ProductVO> categoryVOS = ProductConverter.converterToVOList(products);
+        List<ProductVO> categoryVOSWithName = categoryVOS.stream()
+                .map(vo -> getCategoryName(vo))
+                .collect(Collectors.toList());
+        return categoryVOSWithName;
     }
 
 }

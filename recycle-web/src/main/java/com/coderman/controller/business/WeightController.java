@@ -227,13 +227,7 @@ public class WeightController {
     @RequiresPermissions("weight:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出秤重明細excel")
     public void export(HttpServletResponse response) {
-        List<Weight> weightList = this.weightService.findAll();
-        List<WeightVO> voList = new ArrayList<>();
-        weightList.stream().forEach(d-> {
-            WeightVO vo = new WeightVO();
-            BeanUtils.copyProperties(d, vo);
-            voList.add(vo);
-        });
+        List<WeightVO> voList = this.weightService.findAll();
         ExcelKit.$Export(WeightVO.class, response).downXlsx(voList, false);
     }
 

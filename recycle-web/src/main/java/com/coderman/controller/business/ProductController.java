@@ -299,13 +299,7 @@ public class ProductController {
     @RequiresPermissions("product:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出廢棄物excel")
     public void export(HttpServletResponse response) {
-        List<Product> productList = this.productService.findAll();
-        List<ProductVO> voList = new ArrayList<>();
-        productList.stream().forEach(d-> {
-            ProductVO vo = new ProductVO();
-            BeanUtils.copyProperties(d, vo);
-            voList.add(vo);
-        });
+        List<ProductVO> voList = this.productService.findAll();
         ExcelKit.$Export(ProductVO.class, response).downXlsx(voList, false);
     }
 }

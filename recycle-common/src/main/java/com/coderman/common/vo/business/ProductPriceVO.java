@@ -26,6 +26,8 @@ public class ProductPriceVO {
     private Long oneCategoryId;
 
     private Long twoCategoryId;
+    @ExcelField(value = "廢棄物小分類", width = 100)
+    private String twoCategoryName;
 
     private Long threeCategoryId;
 
@@ -40,8 +42,6 @@ public class ProductPriceVO {
     private String validMonth;
 
     private String oneCategoryName;
-    @ExcelField(value = "廢棄物小分類", width = 100)
-    private String twoCategoryName;
 
     private String threeCategoryName;
 }

@@ -230,7 +230,19 @@ public class WeightServiceImpl implements WeightService {
     }
 
     @Override
-    public List<Weight> findAll() {
-        return weightMapper.selectAll();
+    public List<WeightVO> findAll() {
+        List<Weight> weightList = weightMapper.selectAll();
+        List<WeightVO> voList = new ArrayList<>();
+        weightList.stream().forEach(w-> {
+            WeightVO vo = new WeightVO();
+            BeanUtils.copyProperties(w, vo);
+            vo.setDepartmentName(departmentMapper.selectByPrimaryKey(w.getDepartmentId()).getNickname());
+            vo.setUserNickname(userMapper.selectByPrimaryKey(w.getUserId()).getNickname());
+            vo.setCardName(userCardMapper.selectByPrimaryKey(w.getCardId()).getCardName());
+            vo.setProductName(productMapper.selectByPrimaryKey(w.getProductId()).getName());
+            vo.setStatus(w.getStatus() == 0 ? true : false);
+            voList.add(vo);
+        });
+        return voList;
     }
 }

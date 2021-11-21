@@ -32,10 +32,17 @@ public class RoleVO {
     private Date modifiedTime;
 
     private Boolean status;
+    @ExcelField(value = "資料權限", width = 100)
+    private String typeName;
+
+    public String getTypeName() {
+        return type==0? "所有資料": "限本帳號";
+    }
     @ExcelField(value = "狀態", width = 100)
     private String statusName;
 
     public String getStatusName() {
         return status? "停用": "啟用";
     }
+
 }

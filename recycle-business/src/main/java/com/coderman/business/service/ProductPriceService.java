@@ -53,6 +53,6 @@ public interface ProductPriceService {
      * 全部單價
      * @return
      */
-    List<ProductPrice> findAll();
+    List<ProductPriceVO> findAll();
 
 }

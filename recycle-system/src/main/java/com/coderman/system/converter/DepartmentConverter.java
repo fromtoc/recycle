@@ -19,6 +19,8 @@ public class DepartmentConverter {
     public static DepartmentVO converterToDepartmentVO(Department department){
         DepartmentVO departmentVO = new DepartmentVO();
         BeanUtils.copyProperties(department,departmentVO);
+        departmentVO.setFood(department.getFood()==1?true:false);
+        departmentVO.setStatus(department.getStatus()==1?false:true);
         return departmentVO;
     }
 }

@@ -26,17 +26,21 @@ public class UserConverter {
 
     @Autowired
     private DictionaryMapper dictionaryMapper;
+
     /**
      * 转voList
+     *
      * @param users
      * @return
      */
-    public  List<UserVO> converterToUserVOList(List<User> users){
-        List<UserVO> userVOS=new ArrayList<>();
-        if(!CollectionUtils.isEmpty(users)){
+    public List<UserVO> converterToUserVOList(List<User> users) {
+        List<UserVO> userVOS = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(users)) {
             for (User user : users) {
-                UserVO userVO = converterToUserVO(user);
-                userVOS.add(userVO);
+                if (user.getType() != 0) {
+                    UserVO userVO = converterToUserVO(user);
+                    userVOS.add(userVO);
+                }
             }
         }
         return userVOS;
@@ -44,14 +48,15 @@ public class UserConverter {
 
     /**
      * 转vo
+     *
      * @return
      */
-    public  UserVO converterToUserVO(User user){
+    public UserVO converterToUserVO(User user) {
         UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(user,userVO);
+        BeanUtils.copyProperties(user, userVO);
         userVO.setStatus(user.getStatus() == 0);
         Department department = departmentMapper.selectByPrimaryKey(user.getDepartmentId());
-        if(department!=null&&department.getName()!=null){
+        if (department != null && department.getName() != null) {
             userVO.setDepartmentName(department.getName());
             userVO.setDepartmentId(department.getId());
         }
@@ -59,6 +64,7 @@ public class UserConverter {
             String regionName = dictionaryMapper.selectByPrimaryKey(userVO.getRegionId()).getValue();
             userVO.setRegionName(regionName);
         }
+
         return userVO;
     }
 

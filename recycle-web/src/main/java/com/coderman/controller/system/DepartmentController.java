@@ -49,8 +49,8 @@ public class DepartmentController {
     @ApiOperation(value = "公司列表", notes = "公司列表,根據公司名模糊查询")
     @GetMapping("/findDepartmentList")
     public ResponseBean<PageVO<DepartmentVO>> findDepartmentList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                           @RequestParam(value = "pageSize") Integer pageSize,
-                                           DepartmentVO departmentVO) {
+                                                                 @RequestParam(value = "pageSize") Integer pageSize,
+                                                                 DepartmentVO departmentVO) {
         PageVO<DepartmentVO> departmentsList = departmentService.findDepartmentList(pageNum, pageSize, departmentVO);
         return ResponseBean.success(departmentsList);
     }
@@ -64,7 +64,7 @@ public class DepartmentController {
     @GetMapping("/findAll")
     public ResponseBean<List<DepartmentVO>> findAll() throws SystemException {
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
-        if (activeUser.getLimitUser()){
+        if (activeUser.getLimitUser()) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "限本帳號");
         }
         List<DepartmentVO> departmentVOS = departmentService.findAllVO();
@@ -142,20 +142,15 @@ public class DepartmentController {
 
     /**
      * 導出excel
+     *
      * @param response
      */
     @ApiOperation(value = "導出excel", notes = "導出所有公司的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("department:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出公司excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出公司excel")
     public void export(HttpServletResponse response) {
-        List<Department> departments = this.departmentService.findAll();
-        List<DepartmentVO> voList = new ArrayList<>();
-        departments.stream().forEach(d-> {
-            DepartmentVO vo = new DepartmentVO();
-            BeanUtils.copyProperties(d, vo);
-            voList.add(vo);
-        });
+        List<DepartmentVO> voList = this.departmentService.findAll();
         ExcelKit.$Export(DepartmentVO.class, response).downXlsx(voList, false);
     }
 

@@ -119,6 +119,7 @@ public class RoleServiceImpl implements RoleService {
         }
         RoleVO roleVO = new RoleVO();
         BeanUtils.copyProperties(role,roleVO);
+        roleVO.setStatus(role.getStatus()==0?true:false);
         return roleVO;
     }
 

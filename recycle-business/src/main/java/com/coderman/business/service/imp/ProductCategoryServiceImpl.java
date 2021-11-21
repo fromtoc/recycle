@@ -13,6 +13,7 @@ import com.coderman.common.model.business.ProductCategory;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.utils.CategoryTreeBuilder;
 import com.coderman.common.utils.ListPageUtils;
+import com.coderman.common.vo.business.ProductCategoryExportVO;
 import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
 import com.coderman.common.vo.business.ProductCategoryVO;
 import com.coderman.common.vo.system.PageVO;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +46,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 商品類别列表
+     *
      * @param pageNum
      * @param pageSize
      * @param ProductCategoryVO
@@ -59,7 +62,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             criteria.andLike("name", "%" + ProductCategoryVO.getName() + "%");
         }
         List<ProductCategory> productCategories = productCategoryMapper.selectByExample(o);
-        List<ProductCategoryVO> categoryVOS= ProductCategoryConverter.converterToVOList(productCategories);
+        List<ProductCategoryVO> categoryVOS = ProductCategoryConverter.converterToVOList(productCategories);
         PageInfo<ProductCategory> info = new PageInfo<>(productCategories);
 
         return new PageVO<>(info.getTotal(), categoryVOS);
@@ -68,12 +71,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 新增商品類别
+     *
      * @param ProductCategoryVO
      */
     @Override
     public void add(ProductCategoryVO ProductCategoryVO) {
         ProductCategory productCategory = new ProductCategory();
-        BeanUtils.copyProperties(ProductCategoryVO,productCategory);
+        BeanUtils.copyProperties(ProductCategoryVO, productCategory);
         productCategory.setCreateTime(new Date());
         productCategory.setModifiedTime(new Date());
         productCategory.setStatus(1);
@@ -83,17 +87,19 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 編辑商品類别
+     *
      * @param id
      * @return
      */
     @Override
     public ProductCategoryVO edit(Long id) {
         ProductCategory productCategory = productCategoryMapper.selectByPrimaryKey(id);
-        return  ProductCategoryConverter.converterToProductCategoryVO(productCategory);
+        return ProductCategoryConverter.converterToProductCategoryVO(productCategory);
     }
 
     /**
      * 查詢商品類别名稱
+     *
      * @param id
      * @return
      */
@@ -105,13 +111,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 更新商品類别
+     *
      * @param id
      * @param ProductCategoryVO
      */
     @Override
     public void update(Long id, ProductCategoryVO ProductCategoryVO) {
         ProductCategory productCategory = new ProductCategory();
-        BeanUtils.copyProperties(ProductCategoryVO,productCategory);
+        BeanUtils.copyProperties(ProductCategoryVO, productCategory);
         productCategory.setModifiedTime(new Date());
         productCategory.setLoadTime(new Date());
         productCategoryMapper.updateByPrimaryKeySelective(productCategory);
@@ -119,35 +126,37 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 删除商品類别
+     *
      * @param id
      */
     @Override
     public void delete(Long id) throws BusinessException {
         ProductCategory category = productCategoryMapper.selectByPrimaryKey(id);
-        if(null==category){
-            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分類不存在");
-        }else {
+        if (null == category) {
+            throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "該分類不存在");
+        } else {
             //检查是否存在子分類
             Example o = new Example(ProductCategory.class);
-            o.createCriteria().andEqualTo("pid",id);
-            int childCount=productCategoryMapper.selectCountByExample(o);
-            if(childCount!=0){
-                throw  new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"存在子節點,無法直接删除");
+            o.createCriteria().andEqualTo("pid", id);
+            int childCount = productCategoryMapper.selectCountByExample(o);
+            if (childCount != 0) {
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "存在子節點,無法直接删除");
             }
             //检查該分類是否有物資引用
             Example o1 = new Example(Product.class);
-            o1.createCriteria().andEqualTo("oneCategoryId",id)
-                    .orEqualTo("twoCategoryId",id)
-                    .orEqualTo("threeCategoryId",id);
-           if(productMapper.selectCountByExample(o1)!=0){
-               throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR,"該分類存在物資引用,無法直接删除");
-           }
+            o1.createCriteria().andEqualTo("oneCategoryId", id)
+                    .orEqualTo("twoCategoryId", id)
+                    .orEqualTo("threeCategoryId", id);
+            if (productMapper.selectCountByExample(o1) != 0) {
+                throw new BusinessException(BusinessCodeEnum.PARAMETER_ERROR, "該分類存在物資引用,無法直接删除");
+            }
             productCategoryMapper.deleteByPrimaryKey(id);
         }
     }
 
     /**
      * 所有商品類别
+     *
      * @return
      */
     @Override
@@ -158,53 +167,56 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 分類树形结构
+     *
      * @return
      */
     @Override
     public PageVO<ProductCategoryTreeNodeVO> categoryTree(Integer pageNum, Integer pageSize) {
         List<ProductCategoryVO> productCategoryVOList = findAll();
         List<ProductCategoryVO> collect = productCategoryVOList.stream().filter(c -> c.getStatus() == false).collect(Collectors.toList());
-        List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(collect);
+        List<ProductCategoryTreeNodeVO> nodeVOS = ProductCategoryConverter.converterToTreeNodeVO(collect);
         List<ProductCategoryTreeNodeVO> tree = CategoryTreeBuilder.build(nodeVOS);
         List<ProductCategoryTreeNodeVO> page;
-        if(pageSize!=null&&pageNum!=null){
-            page= ListPageUtils.page(tree, pageSize, pageNum);
-            return new PageVO<>(tree.size(),page);
-        }else {
+        if (pageSize != null && pageNum != null) {
+            page = ListPageUtils.page(tree, pageSize, pageNum);
+            return new PageVO<>(tree.size(), page);
+        } else {
             return new PageVO<>(tree.size(), tree);
         }
     }
 
     /**
      * 分類树形结构
+     *
      * @return
      */
     @Override
     public PageVO<ProductCategoryTreeNodeVO> categoryTreeAll(Integer pageNum, Integer pageSize) {
         List<ProductCategoryVO> productCategoryVOList = findAll();
-        List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
+        List<ProductCategoryTreeNodeVO> nodeVOS = ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
         List<ProductCategoryTreeNodeVO> tree = CategoryTreeBuilder.build(nodeVOS);
         List<ProductCategoryTreeNodeVO> page;
-        if(pageSize!=null&&pageNum!=null){
-            page= ListPageUtils.page(tree, pageSize, pageNum);
-            return new PageVO<>(tree.size(),page);
-        }else {
+        if (pageSize != null && pageNum != null) {
+            page = ListPageUtils.page(tree, pageSize, pageNum);
+            return new PageVO<>(tree.size(), page);
+        } else {
             return new PageVO<>(tree.size(), tree);
         }
     }
 
     /**
      * 获取父级分類（2级树）
+     *
      * @return
      */
     @Override
     public List<ProductCategoryTreeNodeVO> getParentCategoryTree() {
         List<ProductCategoryVO> productCategoryVOList = findAll();
-        List<ProductCategoryTreeNodeVO> nodeVOS=ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
+        List<ProductCategoryTreeNodeVO> nodeVOS = ProductCategoryConverter.converterToTreeNodeVO(productCategoryVOList);
         List<ProductCategoryTreeNodeVO> parentNode = CategoryTreeBuilder.buildParent(nodeVOS);
         //只有兩階
         parentNode.stream()
-                .filter(v -> v.getLev()==1)
+                .filter(v -> v.getLev() == 1)
                 .forEach(v -> v.setChildren(null));
         return parentNode;
 
@@ -218,6 +230,31 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 UserStatusEnum.AVAILABLE.getStatusCode());
         p.setLoadTime(new Date());
         productCategoryMapper.updateByPrimaryKeySelective(p);
+    }
+
+    /**
+     * 取得所有vo
+     *
+     * @return
+     */
+    @Override
+    public List<ProductCategoryExportVO> getAll() {
+        List<ProductCategory> productCategories = productCategoryMapper.selectAll();
+        List<ProductCategoryExportVO> voList = new ArrayList<>();
+        productCategories.stream().forEach(c -> {
+            ProductCategoryExportVO vo = new ProductCategoryExportVO();
+            BeanUtils.copyProperties(c, vo);
+            if (c.getPid()!=0) {
+                vo.setPidName(productCategoryMapper.selectByPrimaryKey(c.getPid()).getName());
+                vo.setLevel("二級分類");
+            } else {
+                vo.setPidName(vo.getName());
+                vo.setName("");
+                vo.setLevel("一級分類");
+            }
+            voList.add(vo);
+        });
+        return voList;
     }
 
 }

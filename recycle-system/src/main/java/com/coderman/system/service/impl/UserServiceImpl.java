@@ -354,7 +354,7 @@ public class UserServiceImpl implements UserService {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶帳號已被占用");
         }
         Example o1 = new Example(User.class);
-        o.createCriteria().andEqualTo("nickname", userVO.getNickname());
+        o1.createCriteria().andEqualTo("nickname", userVO.getNickname());
         int i1 = userMapper.selectCountByExample(o1);
         if (i1 != 0) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");
@@ -405,7 +405,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         Example o1 = new Example(User.class);
-        o.createCriteria().andEqualTo("nickname", userVO.getNickname());
+        o1.createCriteria().andEqualTo("nickname", userVO.getNickname());
         int i1 = userMapper.selectCountByExample(o1);
         if (i1 != 0) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");

@@ -44,15 +44,15 @@ public class ProductVO {
 
     @NotNull(message = "分類不能为空")
     private Long[] categoryKeys;
-    @ExcelField(value = "廢棄物大分類", width = 100)
+
     private Long oneCategoryId;
-    @ExcelField(value = "廢棄物小分類", width = 100)
+
     private Long twoCategoryId;
 
     private Long threeCategoryId;
-
+    @ExcelField(value = "廢棄物大分類", width = 100)
     private String oneCategoryName;
-
+    @ExcelField(value = "廢棄物小分類", width = 100)
     private String twoCategoryName;
 
     private String threeCategoryName;

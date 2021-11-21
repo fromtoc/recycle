@@ -67,10 +67,10 @@ public class ControllerEndpointAspect extends AspectSupport {
         }
 
         //請求的参数
-        Object[] args = joinPoint.getArgs();
-        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-        String[] paramNames = u.getParameterNames(method);
-        sysLog.setParams("paramName:"+ Arrays.toString(paramNames) +",args:"+ Arrays.toString(args));
+//        Object[] args = joinPoint.getArgs();
+//        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+//        String[] paramNames = u.getParameterNames(method);
+//        sysLog.setParams("paramName:"+ Arrays.toString(paramNames) +",args:"+ Arrays.toString(args));
 
         //請求的IP
         HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
