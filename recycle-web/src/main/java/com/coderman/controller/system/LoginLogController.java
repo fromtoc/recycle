@@ -54,7 +54,7 @@ public class LoginLogController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除登入日志失败", operation = "删除登入日志")
+    @ControllerEndpoint(exceptionMessage = "删除登入日志失敗", operation = "删除登入日志")
     @ApiOperation(value = "删除日志")
     @RequiresPermissions({"loginLog:delete"})
     @DeleteMapping("/delete/{id}")
@@ -69,7 +69,7 @@ public class LoginLogController {
      * @param ids
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "批量删除登入日志失败", operation = "批量删除登入日志")
+    @ControllerEndpoint(exceptionMessage = "批量删除登入日志失敗", operation = "批量删除登入日志")
     @ApiOperation(value = "批量删除")
     @RequiresPermissions({"loginLog:batchDelete"})
     @DeleteMapping("/batchDelete/{ids}")

@@ -40,6 +40,7 @@ import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,11 +78,17 @@ public class WeightServiceImpl implements WeightService {
     private ProductMapper productMapper;
 
     @Override
-    public int add(Weight weight) {
+    public String add(Weight weight) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
         weight.setStatus(1);
         weight.setCreateTime(new Date());
-        weight.setLoadTime(new Date());
-        return weightMapper.insert(weight);
+        Date date = new Date();
+        weight.setLoadTime(date);
+        int i = weightMapper.insert(weight);
+        if (i==0) {
+            return null;
+        }
+        return sdf.format(date);
     }
 
     @Override

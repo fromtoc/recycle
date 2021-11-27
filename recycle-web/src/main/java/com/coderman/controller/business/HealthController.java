@@ -34,7 +34,7 @@ public class HealthController {
      * @param healthVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "健康上报失败", operation = "健康上报")
+    @ControllerEndpoint(exceptionMessage = "健康上报失敗", operation = "健康上报")
     @ApiOperation(value = "健康上报",notes = "用戶健康上报")
     @RequiresPermissions({"health:report"})
     @PostMapping("/report")

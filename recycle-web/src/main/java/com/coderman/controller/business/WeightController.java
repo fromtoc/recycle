@@ -26,6 +26,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
@@ -135,14 +136,16 @@ public class WeightController {
     @PostMapping("/add")
     public ResponseBean add(@RequestBody Weight weight, HttpServletRequest request) throws SystemException {
         try {
-            int add = weightService.add(weight);
-            if (add==0) {
+            String date = weightService.add(weight);
+            if (StringUtils.isEmpty(date)) {
                 return ResponseBean.error("新增秤重單失敗");
             }
+            Map<String, Object> map = new HashMap<>();
+            map.put("date", date);
+            return ResponseBean.success(map);
         } catch (Exception e) {
             return ResponseBean.error("新增秤重單失敗");
         }
-        return ResponseBean.success();
     }
 
     /**
@@ -165,7 +168,7 @@ public class WeightController {
      * @param weightVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增秤重明細失败", operation = "新增秤重明細")
+    @ControllerEndpoint(exceptionMessage = "新增秤重明細失敗", operation = "新增秤重明細")
     @ApiOperation(value = "新增秤重明細", notes = "新增秤重明細")
     @RequiresPermissions({"weight:add"})
     @PostMapping("/addVO")
@@ -193,7 +196,7 @@ public class WeightController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "編輯秤種明細失败", operation = "編輯秤種明細")
+    @ControllerEndpoint(exceptionMessage = "編輯秤種明細失敗", operation = "編輯秤種明細")
     @ApiOperation(value = "編輯秤種明細", notes = "編輯秤種明細")
     @RequiresPermissions({"weight:edit"})
     @PutMapping("/update/{id}")
@@ -225,7 +228,7 @@ public class WeightController {
     @ApiOperation(value = "導出excel", notes = "導出所有秤重明細的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("weight:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出秤重明細excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出秤重明細excel")
     public void export(HttpServletResponse response) {
         List<WeightVO> voList = this.weightService.findAll();
         ExcelKit.$Export(WeightVO.class, response).downXlsx(voList, false);

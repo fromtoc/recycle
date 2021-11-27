@@ -50,7 +50,7 @@ public class SupplierController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資来源新增失败", operation = "物資来源新增")
+    @ControllerEndpoint(exceptionMessage = "物資来源新增失敗", operation = "物資来源新增")
     @RequiresPermissions({"supplier:add"})
     @ApiOperation(value = "新增来源")
     @PostMapping("/add")
@@ -78,7 +78,7 @@ public class SupplierController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資来源更新失败", operation = "物資来源更新")
+    @ControllerEndpoint(exceptionMessage = "物資来源更新失敗", operation = "物資来源更新")
     @ApiOperation(value = "更新来源", notes = "更新来源信息")
     @RequiresPermissions({"supplier:update"})
     @PutMapping("/update/{id}")
@@ -93,7 +93,7 @@ public class SupplierController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資来源删除失败", operation = "物資来源删除")
+    @ControllerEndpoint(exceptionMessage = "物資来源删除失敗", operation = "物資来源删除")
     @ApiOperation(value = "删除来源", notes = "删除来源信息")
     @RequiresPermissions({"supplier:delete"})
     @DeleteMapping("/delete/{id}")

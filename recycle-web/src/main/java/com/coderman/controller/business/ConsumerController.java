@@ -49,7 +49,7 @@ public class ConsumerController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資去向新增失败", operation = "物資去向新增")
+    @ControllerEndpoint(exceptionMessage = "物資去向新增失敗", operation = "物資去向新增")
     @RequiresPermissions({"consumer:add"})
     @ApiOperation(value = "新增去向")
     @PostMapping("/add")
@@ -77,7 +77,7 @@ public class ConsumerController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資去向更新失败", operation = "物資去向更新")
+    @ControllerEndpoint(exceptionMessage = "物資去向更新失敗", operation = "物資去向更新")
     @ApiOperation(value = "更新去向", notes = "更新去向信息")
     @RequiresPermissions({"consumer:update"})
     @PutMapping("/update/{id}")
@@ -92,7 +92,7 @@ public class ConsumerController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資去向删除失败", operation = "物資去向删除")
+    @ControllerEndpoint(exceptionMessage = "物資去向删除失敗", operation = "物資去向删除")
     @ApiOperation(value = "删除去向", notes = "删除去向信息")
     @RequiresPermissions({"consumer:delete"})
     @DeleteMapping("/delete/{id}")

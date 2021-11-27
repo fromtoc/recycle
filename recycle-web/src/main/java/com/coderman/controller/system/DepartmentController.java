@@ -88,7 +88,7 @@ public class DepartmentController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增公司失败", operation = "新增公司")
+    @ControllerEndpoint(exceptionMessage = "新增公司失敗", operation = "新增公司")
     @RequiresPermissions({"department:add"})
     @ApiOperation(value = "新增公司")
     @PostMapping("/add")
@@ -116,7 +116,7 @@ public class DepartmentController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新公司失败", operation = "更新公司")
+    @ControllerEndpoint(exceptionMessage = "更新公司失敗", operation = "更新公司")
     @ApiOperation(value = "更新公司")
     @RequiresPermissions({"department:edit"})
     @PutMapping("/update/{id}")
@@ -131,7 +131,7 @@ public class DepartmentController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除公司失败", operation = "删除公司")
+    @ControllerEndpoint(exceptionMessage = "删除公司失敗", operation = "删除公司")
     @ApiOperation(value = "删除公司")
     @RequiresPermissions({"department:delete"})
     @DeleteMapping("/delete/{id}")
@@ -148,7 +148,7 @@ public class DepartmentController {
     @ApiOperation(value = "導出excel", notes = "導出所有公司的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("department:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出公司excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出公司excel")
     public void export(HttpServletResponse response) {
         List<DepartmentVO> voList = this.departmentService.findAll();
         ExcelKit.$Export(DepartmentVO.class, response).downXlsx(voList, false);

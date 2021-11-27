@@ -59,7 +59,7 @@ public class InStockController {
      * @param inStockVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单申請失败", operation = "入库单申請")
+    @ControllerEndpoint(exceptionMessage = "入库单申請失敗", operation = "入库单申請")
     @ApiOperation(value = "物資入库")
     @PostMapping("/addIntoStock")
     @RequiresPermissions({"inStock:in"})
@@ -97,7 +97,7 @@ public class InStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单审核失败", operation = "入库单审核")
+    @ControllerEndpoint(exceptionMessage = "入库单审核失敗", operation = "入库单审核")
     @ApiOperation(value = "入库审核")
     @PutMapping("/publish/{id}")
     @RequiresPermissions({"inStock:publish"})
@@ -126,7 +126,7 @@ public class InStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单删除失败", operation = "入库单删除")
+    @ControllerEndpoint(exceptionMessage = "入库单删除失敗", operation = "入库单删除")
     @RequiresPermissions({"inStock:delete"})
     @ApiOperation(value = "删除物資入库单")
     @GetMapping("/delete/{id}")
@@ -140,7 +140,7 @@ public class InStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单回收失败", operation = "入库单回收")
+    @ControllerEndpoint(exceptionMessage = "入库单回收失敗", operation = "入库单回收")
     @ApiOperation(value = "移入回收站", notes = "移入回收站")
     @RequiresPermissions({"inStock:remove"})
     @PutMapping("/remove/{id}")
@@ -154,7 +154,7 @@ public class InStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "入库单恢复失败", operation = "入库单恢复")
+    @ControllerEndpoint(exceptionMessage = "入库单恢复失敗", operation = "入库单恢复")
     @ApiOperation(value = "恢复数據", notes = "从回收站中恢复入库单")
     @RequiresPermissions({"inStock:back"})
     @PutMapping("/back/{id}")

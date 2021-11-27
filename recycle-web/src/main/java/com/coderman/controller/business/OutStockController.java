@@ -41,7 +41,7 @@ public class OutStockController {
      * 提交物資发放单
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "发放单申請失败", operation = "发放单申請")
+    @ControllerEndpoint(exceptionMessage = "发放单申請失敗", operation = "发放单申請")
     @ApiOperation("提交发放单")
     @PostMapping("/addOutStock")
     @RequiresPermissions({"outStock:out"})
@@ -96,7 +96,7 @@ public class OutStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "发放单回收失败", operation = "发放单回收")
+    @ControllerEndpoint(exceptionMessage = "发放单回收失敗", operation = "发放单回收")
     @ApiOperation(value = "移入回收站", notes = "移入回收站")
     @RequiresPermissions({"outStock:remove"})
     @PutMapping("/remove/{id}")
@@ -126,7 +126,7 @@ public class OutStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "发放单删除失败", operation = "发放单删除")
+    @ControllerEndpoint(exceptionMessage = "发放单删除失敗", operation = "发放单删除")
     @RequiresPermissions({"outStock:delete"})
     @ApiOperation(value = "删除物資发放单")
     @GetMapping("/delete/{id}")
@@ -141,7 +141,7 @@ public class OutStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "发放单审核失败", operation = "发放单审核")
+    @ControllerEndpoint(exceptionMessage = "发放单审核失敗", operation = "发放单审核")
     @ApiOperation(value = "入库审核")
     @PutMapping("/publish/{id}")
     @RequiresPermissions({"outStock:publish"})
@@ -157,7 +157,7 @@ public class OutStockController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "发放单恢复失败", operation = "发放单恢复")
+    @ControllerEndpoint(exceptionMessage = "发放单恢复失敗", operation = "发放单恢复")
     @ApiOperation(value = "恢复数據", notes = "从回收站中恢复入库单")
     @RequiresPermissions({"outStock:back"})
     @PutMapping("/back/{id}")

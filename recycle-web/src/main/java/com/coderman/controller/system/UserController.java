@@ -127,7 +127,7 @@ public class UserController {
      * @param rids
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "分配角色失败", operation = "分配角色")
+    @ControllerEndpoint(exceptionMessage = "分配角色失敗", operation = "分配角色")
     @ApiOperation(value = "分配角色", notes = "角色分配给用戶")
     @RequiresPermissions({"user:assign"})
     @PostMapping("/{id}/assignRoles")
@@ -142,7 +142,7 @@ public class UserController {
      * @param id 用戶ID
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除用戶失败", operation = "删除用戶")
+    @ControllerEndpoint(exceptionMessage = "删除用戶失敗", operation = "删除用戶")
     @RequiresPermissions({"user:delete"})
     @ApiOperation(value = "删除用戶", notes = "删除用戶信息，根據用戶ID")
     @DeleteMapping("/delete/{id}")
@@ -158,7 +158,7 @@ public class UserController {
      * @param newPassword
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "重設密碼失败", operation = "重設密碼")
+    @ControllerEndpoint(exceptionMessage = "重設密碼失敗", operation = "重設密碼")
     @ApiOperation(value = "重設密碼", notes = "重設密碼")
     @PutMapping("/updatePassword/{oldPassword}/{newPassword}")
     public ResponseBean updatePassword(@PathVariable String oldPassword, @PathVariable String newPassword) throws SystemException {
@@ -176,7 +176,7 @@ public class UserController {
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新用戶狀態失败", operation = "用戶|禁用/啟用")
+    @ControllerEndpoint(exceptionMessage = "更新用戶狀態失敗", operation = "用戶|禁用/啟用")
     @ApiOperation(value = "用戶狀態", notes = "禁用和啟用这两种狀態")
     @RequiresPermissions({"user:status"})
     @PutMapping("/updateStatus/{id}/{status}")
@@ -192,7 +192,7 @@ public class UserController {
      * @param userEditVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新用戶失败", operation = "更新用戶")
+    @ControllerEndpoint(exceptionMessage = "更新用戶失敗", operation = "更新用戶")
     @ApiOperation(value = "更新用戶", notes = "更新用戶信息")
     @RequiresPermissions({"user:edit"})
     @PutMapping("/update/{id}")
@@ -208,7 +208,7 @@ public class UserController {
      * @param password
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新用戶密碼失败", operation = "更新用戶密碼")
+    @ControllerEndpoint(exceptionMessage = "更新用戶密碼失敗", operation = "更新用戶密碼")
     @ApiOperation(value = "更新用戶密碼", notes = "更新用戶密碼")
     @RequiresPermissions({"user:changePassword"})
     @PutMapping("/change/password/{id}/{password}")
@@ -239,7 +239,7 @@ public class UserController {
      * @param userVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增用戶失败", operation = "新增用戶")
+    @ControllerEndpoint(exceptionMessage = "新增用戶失敗", operation = "新增用戶")
     @ApiOperation(value = "新增用戶", notes = "新增用戶信息")
     @RequiresPermissions({"user:add"})
     @PostMapping("/add")
@@ -300,7 +300,7 @@ public class UserController {
     @ApiOperation(value = "導出excel", notes = "導出所有用戶的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("user:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出用戶excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出用戶excel")
     public void export(HttpServletResponse response) {
         List<UserVO> users = this.userService.findAll();
         ExcelKit.$Export(UserVO.class, response).downXlsx(users, false);
@@ -356,7 +356,7 @@ public class UserController {
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新卡片狀態失败", operation = "卡片|禁用/啟用")
+    @ControllerEndpoint(exceptionMessage = "更新卡片狀態失敗", operation = "卡片|禁用/啟用")
     @ApiOperation(value = "卡片狀態", notes = "禁用和啟用這兩種狀態")
     @PutMapping("/updateCardStatus/{id}/{status}")
     public ResponseBean updateCardStatus(@PathVariable Long id, @PathVariable Boolean status) throws SystemException {
@@ -371,7 +371,7 @@ public class UserController {
      * @param pids
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "分配卡片廢棄物失败", operation = "分配卡片廢棄物")
+    @ControllerEndpoint(exceptionMessage = "分配卡片廢棄物失敗", operation = "分配卡片廢棄物")
     @ApiOperation(value = "分配卡片廢棄物", notes = "廢棄物分配给卡片")
     @PostMapping("/{id}/assignProducts")
     public ResponseBean assignProducts(@PathVariable String id, @RequestBody Long[] pids) throws SystemException {

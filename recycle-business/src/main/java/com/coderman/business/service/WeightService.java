@@ -23,7 +23,7 @@ public interface WeightService {
      * 新增秤重單
      * @param weight
      */
-    int add(Weight weight);
+    String add(Weight weight);
 
     /**
      * 新增秤重單

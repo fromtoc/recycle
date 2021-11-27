@@ -68,7 +68,7 @@ public class DepartmentCategoryController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增公司類型失败", operation = "新增公司類型")
+    @ControllerEndpoint(exceptionMessage = "新增公司類型失敗", operation = "新增公司類型")
     @RequiresPermissions({"departmentCategory:add"})
     @ApiOperation(value = "新增公司類型")
     @PostMapping("/add")
@@ -98,7 +98,7 @@ public class DepartmentCategoryController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新公司類型失败", operation = "更新公司類型")
+    @ControllerEndpoint(exceptionMessage = "更新公司類型失敗", operation = "更新公司類型")
     @ApiOperation(value = "更新公司類型")
     @RequiresPermissions({"departmentCategory:edit"})
     @PutMapping("/update/{id}")
@@ -113,7 +113,7 @@ public class DepartmentCategoryController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除公司類型失败", operation = "删除公司類型")
+    @ControllerEndpoint(exceptionMessage = "删除公司類型失敗", operation = "删除公司類型")
     @ApiOperation(value = "删除公司類型")
     @RequiresPermissions({"departmentCategory:delete"})
     @DeleteMapping("/delete/{id}")
@@ -130,7 +130,7 @@ public class DepartmentCategoryController {
     @ApiOperation(value = "導出excel", notes = "導出所有公司類型的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("departmentCategory:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出公司類型excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出公司類型excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> list = this.dictionaryService.selectByType(1, null);
         List<DictionaryVO> voList = new ArrayList<>();

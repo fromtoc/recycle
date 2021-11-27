@@ -1,27 +1,17 @@
 package com.coderman.business.service.imp;
 
-import com.coderman.business.converter.ProductConverter;
 import com.coderman.business.mapper.ProductMapper;
 import com.coderman.business.mapper.ProductPriceMapper;
-import com.coderman.business.mapper.ProductStockMapper;
 import com.coderman.business.service.ProductCategoryService;
 import com.coderman.business.service.ProductPriceService;
-import com.coderman.business.service.ProductService;
-import com.coderman.common.error.BusinessCodeEnum;
-import com.coderman.common.error.BusinessException;
-import com.coderman.common.error.SystemCodeEnum;
-import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.ProductPrice;
-import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.service.DictionaryService;
+import com.coderman.common.vo.business.ProductPriceUploadVO;
 import com.coderman.common.vo.business.ProductPriceVO;
-import com.coderman.common.vo.business.ProductStockVO;
-import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -188,5 +176,99 @@ public class ProductPriceServiceImpl implements ProductPriceService {
                 .map(vo -> getCategoryName(vo))
                 .collect(Collectors.toList());
         return categoryVOSWithName;
+    }
+
+    @Override
+    public int batchAdd(List<ProductPriceUploadVO> productPriceUploadVOList) {
+        int count = 0;
+        for (ProductPriceUploadVO p: productPriceUploadVOList) {
+            ProductPrice productPrice = new ProductPrice();
+            BeanUtils.copyProperties(p, productPrice);
+            String productName = productPrice.getName();
+            Example o = new Example(Product.class);
+            Example.Criteria criteria = o.createCriteria();
+            criteria.andEqualTo("name", productName);
+            List<Product> products = productMapper.selectByExample(o);
+            if (!CollectionUtils.isEmpty(products) && products.size()==1){
+                Product product = products.get(0);
+                productPrice.setProductId(product.getId());
+                productPrice.setOneCategoryId(product.getOneCategoryId());
+                productPrice.setTwoCategoryId(product.getTwoCategoryId());
+                productPrice.setLoadTime(new Date());
+                int i = productPriceMapper.insert(productPrice);
+                count = count + i;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public List<ProductPriceVO> checkSame(List<ProductPriceUploadVO> productPriceUploadVOList) {
+        List<ProductPrice> products = new ArrayList<>();
+        productPriceUploadVOList.stream().forEach(upload-> {
+            Example o = new Example(ProductPrice.class);
+            Example.Criteria criteria = o.createCriteria();
+            criteria.andEqualTo("name", upload.getName());
+            criteria.andEqualTo("validMonth", upload.getValidMonth());
+            List<ProductPrice> productPrices = productPriceMapper.selectByExample(o);
+            if (!CollectionUtils.isEmpty(productPrices)) {
+                products.add(productPrices.get(0));
+            }
+        });
+        List<ProductPriceVO> sameList = new ArrayList<>();
+        for (ProductPrice p: products){
+            ProductPriceVO vo = new ProductPriceVO();
+            BeanUtils.copyProperties(p,vo);
+            ProductPriceVO voWIthName = getCategoryName(vo);
+            sameList.add(voWIthName);
+        }
+        return sameList;
+    }
+
+    @Override
+    public List<ProductPriceUploadVO> checkNotExist(List<ProductPriceUploadVO> productPriceUploadVOList) {
+        List<ProductPriceUploadVO> emptyList = new ArrayList<>();
+        for (ProductPriceUploadVO p: productPriceUploadVOList) {
+            ProductPrice productPrice = new ProductPrice();
+            BeanUtils.copyProperties(p, productPrice);
+            String productName = productPrice.getName();
+            Example o = new Example(Product.class);
+            Example.Criteria criteria = o.createCriteria();
+            criteria.andEqualTo("name", productName);
+            List<Product> products = productMapper.selectByExample(o);
+            if (CollectionUtils.isEmpty(products)){
+                emptyList.add(p);
+            }
+        }
+        return emptyList;
+    }
+
+    @Override
+    public int recover(List<ProductPriceUploadVO> productPriceUploadVOList) {
+        int count = 0;
+        for (ProductPriceUploadVO p: productPriceUploadVOList) {
+            ProductPrice productPrice = new ProductPrice();
+            BeanUtils.copyProperties(p, productPrice);
+            Example o = new Example(ProductPrice.class);
+            Example.Criteria criteria = o.createCriteria();
+            criteria.andEqualTo("name", productPrice.getName());
+            criteria.andEqualTo("validMonth", productPrice.getValidMonth());
+            productPriceMapper.deleteByExample(o);
+
+            Example o1 = new Example(Product.class);
+            Example.Criteria criteria1 = o1.createCriteria();
+            criteria1.andEqualTo("name", productPrice.getName());
+            List<Product> products = productMapper.selectByExample(o1);
+            if (!CollectionUtils.isEmpty(products) && products.size()==1){
+                Product product = products.get(0);
+                productPrice.setProductId(product.getId());
+                productPrice.setOneCategoryId(product.getOneCategoryId());
+                productPrice.setTwoCategoryId(product.getTwoCategoryId());
+                productPrice.setLoadTime(new Date());
+                int i = productPriceMapper.insert(productPrice);
+                count = count + i;
+            }
+        }
+        return count;
     }
 }

@@ -70,7 +70,7 @@ public class RunTextController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增跑馬燈失败", operation = "新增跑馬燈")
+    @ControllerEndpoint(exceptionMessage = "新增跑馬燈失敗", operation = "新增跑馬燈")
     @RequiresPermissions({"runText:add"})
     @ApiOperation(value = "新增跑馬燈")
     @PostMapping("/add")
@@ -99,7 +99,7 @@ public class RunTextController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新跑馬燈失败", operation = "更新跑馬燈")
+    @ControllerEndpoint(exceptionMessage = "更新跑馬燈失敗", operation = "更新跑馬燈")
     @ApiOperation(value = "更新跑馬燈")
     @RequiresPermissions({"runText:edit"})
     @PutMapping("/update/{id}")
@@ -116,7 +116,7 @@ public class RunTextController {
     @ApiOperation(value = "導出excel", notes = "導出所有跑馬燈的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("runText:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出跑馬燈excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出跑馬燈excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<RunText> runTextList = this.runTextService.findAll();
         List<RunTextVO> voList = new ArrayList<>();

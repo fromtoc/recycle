@@ -50,7 +50,7 @@ public class RoleController {
      * @param mids
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "角色授權失败", operation = "角色授權")
+    @ControllerEndpoint(exceptionMessage = "角色授權失敗", operation = "角色授權")
     @ApiOperation(value = "角色授權")
     @RequiresPermissions({"role:authority"})
     @PostMapping("/authority/{id}")
@@ -99,7 +99,7 @@ public class RoleController {
      * @param roleVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增角色失败", operation = "新增角色")
+    @ControllerEndpoint(exceptionMessage = "新增角色失敗", operation = "新增角色")
     @ApiOperation(value = "新增角色")
     @RequiresPermissions({"role:add"})
     @PostMapping("/add")
@@ -114,7 +114,7 @@ public class RoleController {
      * @param id 角色ID
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除角色失败", operation = "删除角色")
+    @ControllerEndpoint(exceptionMessage = "删除角色失敗", operation = "删除角色")
     @ApiOperation(value = "删除角色", notes = "根據id删除角色信息")
     @RequiresPermissions({"role:delete"})
     @DeleteMapping("/delete/{id}")
@@ -145,7 +145,7 @@ public class RoleController {
      * @param roleVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新角色失败", operation = "更新角色")
+    @ControllerEndpoint(exceptionMessage = "更新角色失敗", operation = "更新角色")
     @ApiOperation(value = "更新角色", notes = "根據id更新角色信息")
     @RequiresPermissions({"role:edit"})
     @PutMapping("/update/{id}")
@@ -161,7 +161,7 @@ public class RoleController {
      * @param status
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "角色更新狀態失败", operation = "角色|禁用/啟用")
+    @ControllerEndpoint(exceptionMessage = "角色更新狀態失敗", operation = "角色|禁用/啟用")
     @ApiOperation(value = "更新狀態", notes = "禁用和更新两种狀態")
     @RequiresPermissions({"role:status"})
     @PutMapping("/updateStatus/{id}/{status}")
@@ -177,7 +177,7 @@ public class RoleController {
     @ApiOperation(value = "導出excel", notes = "導出所有角色的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("role:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出角色excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出角色excel")
     public void export(HttpServletResponse response) {
         List<Role> roles = this.roleService.findAll();
         List<RoleVO> voList = new ArrayList<>();

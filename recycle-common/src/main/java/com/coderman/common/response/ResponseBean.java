@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ResponseBean<T> {
 
-    /** 200:操作成功  -1：操作失败**/
+    /** 200:操作成功  -1：操作失敗**/
 
     // http 狀態碼
     private boolean success;

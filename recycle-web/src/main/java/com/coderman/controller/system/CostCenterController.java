@@ -68,7 +68,7 @@ public class CostCenterController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增成本中心失败", operation = "新增成本中心")
+    @ControllerEndpoint(exceptionMessage = "新增成本中心失敗", operation = "新增成本中心")
     @RequiresPermissions({"costCenter:add"})
     @ApiOperation(value = "新增成本中心")
     @PostMapping("/add")
@@ -98,7 +98,7 @@ public class CostCenterController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新成本中心失败", operation = "更新成本中心")
+    @ControllerEndpoint(exceptionMessage = "更新成本中心失敗", operation = "更新成本中心")
     @ApiOperation(value = "更新成本中心")
     @RequiresPermissions({"costCenter:edit"})
     @PutMapping("/update/{id}")
@@ -113,7 +113,7 @@ public class CostCenterController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除成本中心失败", operation = "删除成本中心")
+    @ControllerEndpoint(exceptionMessage = "删除成本中心失敗", operation = "删除成本中心")
     @ApiOperation(value = "删除成本中心")
     @RequiresPermissions({"costCenter:delete"})
     @DeleteMapping("/delete/{id}")
@@ -130,7 +130,7 @@ public class CostCenterController {
     @ApiOperation(value = "導出excel", notes = "導出所有成本中心的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("costCenter:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出成本中心excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出成本中心excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> list = this.dictionaryService.selectByType(2, null);
         List<DictionaryVO> voList = new ArrayList<>();

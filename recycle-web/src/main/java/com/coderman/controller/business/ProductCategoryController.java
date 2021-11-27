@@ -109,7 +109,7 @@ public class ProductCategoryController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "廢棄物分類新增失败", operation = "廢棄物分類新增")
+    @ControllerEndpoint(exceptionMessage = "廢棄物分類新增失敗", operation = "廢棄物分類新增")
     @RequiresPermissions({"productCategory:add"})
     @ApiOperation(value = "新增分類")
     @PostMapping("/add")
@@ -137,7 +137,7 @@ public class ProductCategoryController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資分類更新失败", operation = "物資分類更新")
+    @ControllerEndpoint(exceptionMessage = "物資分類更新失敗", operation = "物資分類更新")
     @ApiOperation(value = "更新分類")
     @RequiresPermissions({"productCategory:edit"})
     @PutMapping("/update/{id}")
@@ -152,7 +152,7 @@ public class ProductCategoryController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "物資分類删除失败", operation = "物資分類删除")
+    @ControllerEndpoint(exceptionMessage = "物資分類删除失敗", operation = "物資分類删除")
     @ApiOperation(value = "删除分類")
     @RequiresPermissions({"productCategory:delete"})
     @DeleteMapping("/delete/{id}")
@@ -184,7 +184,7 @@ public class ProductCategoryController {
     @ApiOperation(value = "導出excel", notes = "導出所有廢棄物類型的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("productCategory:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出廢棄物類型excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出廢棄物類型excel")
     public void export(HttpServletResponse response) {
         List<ProductCategoryExportVO> voList = this.productCategoryService.getAll();
         ExcelKit.$Export(ProductCategoryExportVO.class, response).downXlsx(voList, false);

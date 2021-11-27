@@ -5,10 +5,12 @@ import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.ProductPrice;
 import com.coderman.common.model.business.Weight;
+import com.coderman.common.vo.business.ProductPriceUploadVO;
 import com.coderman.common.vo.business.ProductPriceVO;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,4 +57,11 @@ public interface ProductPriceService {
      */
     List<ProductPriceVO> findAll();
 
+    int batchAdd(List<ProductPriceUploadVO> productPriceUploadVOList);
+
+    List<ProductPriceVO> checkSame(List<ProductPriceUploadVO> productPriceUploadVOList);
+
+    List<ProductPriceUploadVO> checkNotExist(List<ProductPriceUploadVO> productPriceUploadVOList);
+
+    int recover(List<ProductPriceUploadVO> productPriceUploadVOList);
 }

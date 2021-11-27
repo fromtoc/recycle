@@ -1,31 +1,30 @@
 package com.coderman.controller.business;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.event.AnalysisEventListener;
 import com.coderman.business.service.ProductPriceService;
-import com.coderman.business.service.ProductService;
 import com.coderman.common.annotation.ControllerEndpoint;
-import com.coderman.common.error.BusinessCodeEnum;
 import com.coderman.common.error.BusinessException;
-import com.coderman.common.error.SystemException;
-import com.coderman.common.model.business.ProductPrice;
-import com.coderman.common.model.system.Role;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.business.ProductPriceUploadVO;
 import com.coderman.common.vo.business.ProductPriceVO;
-import com.coderman.common.vo.business.ProductStockVO;
-import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.system.PageVO;
-import com.coderman.common.vo.system.RoleVO;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author zhangyukang
@@ -89,7 +88,7 @@ public class ProductPriceController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增單價維護失败", operation = "單價維護新增")
+    @ControllerEndpoint(exceptionMessage = "新增單價維護失敗", operation = "單價維護新增")
     @ApiOperation(value = "新增單價維護")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductPriceVO productPriceVO) throws BusinessException {
@@ -118,7 +117,7 @@ public class ProductPriceController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "編輯單價失败", operation = "單價資料編輯")
+    @ControllerEndpoint(exceptionMessage = "編輯單價失敗", operation = "單價資料編輯")
     @ApiOperation(value = "編輯單價", notes = "編輯單價信息")
     @PutMapping("/update/{id}")
     public ResponseBean update(@PathVariable Long id, @RequestBody ProductPriceVO productPriceVO) throws BusinessException {
@@ -132,10 +131,74 @@ public class ProductPriceController {
      */
     @ApiOperation(value = "導出excel", notes = "導出所有單價的excel表格")
     @PostMapping("/excel")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出單價excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出單價excel")
     public void export(HttpServletResponse response) {
         List<ProductPriceVO> voList = this.productPriceService.findAll();
         ExcelKit.$Export(ProductPriceVO.class, response).downXlsx(voList, false);
+    }
+
+    /**
+     * @Description  Excel文件通知信息导入
+     * @author ztt
+     * @date 2021-07-21 15:18
+     * @param file 文件流
+     */
+    @PostMapping(value = "/import")
+    public ResponseBean productPriceImport(MultipartFile file) throws IOException {
+        List<ProductPriceUploadVO> entityList = new ArrayList<>();
+        // 這裡需要指定讀用哪個class去讀，然後讀取第一個sheet檔案流會自動關閉
+        // excel中表的列要與物件的欄位相對應
+        EasyExcel.read(file.getInputStream(), ProductPriceUploadVO.class, new AnalysisEventListener<ProductPriceUploadVO>() {
+            // 每解析一條資料都會呼叫該方法
+            @Override
+            public void invoke(ProductPriceUploadVO entity, AnalysisContext analysisContext) {
+                entityList.add(entity);
+            }
+            // 解析完畢的回撥方法
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+                System.out.println("excel檔案讀取完畢！");
+            }
+        }).sheet().doRead();
+        if (!CollectionUtils.isEmpty(entityList)){
+            List<ProductPriceUploadVO> emptyList = productPriceService.checkNotExist(entityList);
+            if (!CollectionUtils.isEmpty(emptyList)){
+                Map map = new HashMap<>();
+                map.put("type", "empty");
+                map.put("list", emptyList);
+                return ResponseBean.error(map);
+            }
+            List<ProductPriceVO> sameList = productPriceService.checkSame(entityList);
+            if (!CollectionUtils.isEmpty(sameList)){
+                Map map = new HashMap<>();
+                map.put("type", "same");
+                map.put("list", sameList);
+                map.put("entityList", entityList);
+                return ResponseBean.error(map);
+            }
+            int i = productPriceService.batchAdd(entityList);
+            return ResponseBean.success(i);
+        }
+        Map map = new HashMap<>();
+        map.put("type", "default");
+        map.put("message", "批次上傳失敗");
+        return ResponseBean.error(map);
+    }
+
+    /**
+     * 新增物資
+     *
+     * @return
+     */
+    @ControllerEndpoint(exceptionMessage = "批次維護單價失敗", operation = "批次維護單價")
+    @ApiOperation(value = "批次維護單價")
+    @PostMapping("/recover")
+    public ResponseBean recover(@RequestBody List<ProductPriceUploadVO> productPriceVOList) throws BusinessException {
+        int add = productPriceService.recover(productPriceVOList);
+        if (add != productPriceVOList.size() ) {
+            return ResponseBean.error("廢棄物批次上傳失敗");
+        }
+        return ResponseBean.success();
     }
 
 }

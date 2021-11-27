@@ -56,7 +56,7 @@ public class MenuController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增選單/按钮失败", operation = "新增選單/按钮")
+    @ControllerEndpoint(exceptionMessage = "新增選單/按钮失敗", operation = "新增選單/按钮")
     @ApiOperation(value = "新增選單")
     @RequiresPermissions({"menu:add"})
     @PostMapping("/add")
@@ -76,7 +76,7 @@ public class MenuController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除選單/按钮失败", operation = "删除選單/按钮")
+    @ControllerEndpoint(exceptionMessage = "删除選單/按钮失敗", operation = "删除選單/按钮")
     @ApiOperation(value = "删除選單", notes = "根據id删除選單節點")
     @RequiresPermissions({"menu:delete"})
     @DeleteMapping("/delete/{id}")
@@ -106,7 +106,7 @@ public class MenuController {
      * @param menuVO
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新選單失败", operation = "更新選單")
+    @ControllerEndpoint(exceptionMessage = "更新選單失敗", operation = "更新選單")
     @ApiOperation(value = "更新選單", notes = "根據id更新選單節點")
     @RequiresPermissions({"menu:edit"})
     @PutMapping("/update/{id}")
@@ -122,7 +122,7 @@ public class MenuController {
     @ApiOperation(value = "導出excel", notes = "導出所有選單的excel表格")
     @PostMapping("excel")
     @RequiresPermissions("menu:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出選單excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出選單excel")
     public void export(HttpServletResponse response) {
         List<MenuExportVO> menus = this.menuService.findAll();
         ExcelKit.$Export(MenuExportVO.class, response).downXlsx(menus, false);

@@ -176,7 +176,7 @@ public class ProductController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新廢棄物失败", operation = "廢棄物資料更新")
+    @ControllerEndpoint(exceptionMessage = "更新廢棄物失敗", operation = "廢棄物資料更新")
     @ApiOperation(value = "更新廢棄物", notes = "更新廢棄物信息")
     @RequiresPermissions({"product:edit"})
     @PutMapping("/update/{id}")
@@ -198,7 +198,7 @@ public class ProductController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除廢棄物失败", operation = "廢棄物資料删除")
+    @ControllerEndpoint(exceptionMessage = "删除廢棄物失敗", operation = "廢棄物資料删除")
     @ApiOperation(value = "删除廢棄物", notes = "删除廢棄物信息")
     @RequiresPermissions({"product:delete"})
     @DeleteMapping("/delete/{id}")
@@ -214,7 +214,7 @@ public class ProductController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "回收廢棄物失败", operation = "廢棄物資料回收")
+    @ControllerEndpoint(exceptionMessage = "回收廢棄物失敗", operation = "廢棄物資料回收")
     @ApiOperation(value = "移入回收站", notes = "移入回收站")
     @RequiresPermissions({"product:remove"})
     @PutMapping("/remove/{id}")
@@ -229,7 +229,7 @@ public class ProductController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "廢棄物新增审核失败", operation = "廢棄物資料审核")
+    @ControllerEndpoint(exceptionMessage = "廢棄物新增审核失敗", operation = "廢棄物資料审核")
     @ApiOperation(value = "廢棄物新增审核", notes = "廢棄物新增审核")
     @RequiresPermissions({"product:publish"})
     @PutMapping("/publish/{id}")
@@ -244,7 +244,7 @@ public class ProductController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "恢复廢棄物失败", operation = "廢棄物資料恢复")
+    @ControllerEndpoint(exceptionMessage = "恢复廢棄物失敗", operation = "廢棄物資料恢复")
     @ApiOperation(value = "恢复廢棄物", notes = "从回收站中恢复廢棄物")
     @RequiresPermissions({"product:back"})
     @PutMapping("/back/{id}")
@@ -274,7 +274,7 @@ public class ProductController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "成本中心分配失败", operation = "成本中心分配")
+    @ControllerEndpoint(exceptionMessage = "成本中心分配失敗", operation = "成本中心分配")
     @ApiOperation(value = "成本中心分配", notes = "成本中心分配")
     @RequiresPermissions({"product:costCenter"})
     @PutMapping("/costCenter/{ids}/{costCenterId}")
@@ -297,7 +297,7 @@ public class ProductController {
     @ApiOperation(value = "導出excel", notes = "導出所有廢棄物的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("product:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败",operation = "導出廢棄物excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出廢棄物excel")
     public void export(HttpServletResponse response) {
         List<ProductVO> voList = this.productService.findAll();
         ExcelKit.$Export(ProductVO.class, response).downXlsx(voList, false);

@@ -68,7 +68,7 @@ public class RegionController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "新增區域失败", operation = "新增區域")
+    @ControllerEndpoint(exceptionMessage = "新增區域失敗", operation = "新增區域")
     @RequiresPermissions({"region:add"})
     @ApiOperation(value = "新增區域")
     @PostMapping("/add")
@@ -98,7 +98,7 @@ public class RegionController {
      *
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "更新區域失败", operation = "更新區域")
+    @ControllerEndpoint(exceptionMessage = "更新區域失敗", operation = "更新區域")
     @ApiOperation(value = "更新區域")
     @RequiresPermissions({"region:edit"})
     @PutMapping("/update/{id}")
@@ -113,7 +113,7 @@ public class RegionController {
      * @param id
      * @return
      */
-    @ControllerEndpoint(exceptionMessage = "删除區域失败", operation = "删除區域")
+    @ControllerEndpoint(exceptionMessage = "删除區域失敗", operation = "删除區域")
     @ApiOperation(value = "删除區域")
     @RequiresPermissions({"region:delete"})
     @DeleteMapping("/delete/{id}")
@@ -130,7 +130,7 @@ public class RegionController {
     @ApiOperation(value = "導出excel", notes = "導出所有區域的excel表格")
     @PostMapping("/excel")
     @RequiresPermissions("region:export")
-    @ControllerEndpoint(exceptionMessage = "導出Excel失败", operation = "導出區域excel")
+    @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出區域excel")
     public void export(HttpServletResponse response) throws SystemException {
         List<Dictionary> list = this.dictionaryService.selectByType(2, null);
         List<DictionaryVO> voList = new ArrayList<>();

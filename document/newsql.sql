@@ -188,18 +188,18 @@ USE `recycle`;
 
 /*Table structure for table `tb_login_log` */
 
--- DROP TABLE IF EXISTS `tb_login_log`;
+DROP TABLE IF EXISTS `tb_login_log`;
 --
--- CREATE TABLE `tb_login_log` (
---   `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
---   `username` varchar(50) NOT NULL COMMENT '用户名',
---   `login_time` datetime NOT NULL COMMENT '登录时间',
---   `location` varchar(50) DEFAULT NULL COMMENT '登录地点',
---   `ip` varchar(50) DEFAULT NULL COMMENT 'IP地址',
---   `user_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
---   `user_browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
---   PRIMARY KEY (`id`) USING BTREE
--- ) ENGINE=InnoDB AUTO_INCREMENT=1643 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录日志表';
+CREATE TABLE `tb_login_log` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `username` varchar(50) NOT NULL COMMENT '用户名',
+  `login_time` datetime NOT NULL COMMENT '登录时间',
+  `location` varchar(50) DEFAULT NULL COMMENT '登录地点',
+  `ip` varchar(50) DEFAULT NULL COMMENT 'IP地址',
+  `user_system` varchar(50) DEFAULT NULL COMMENT '操作系统',
+  `user_browser` varchar(50) DEFAULT NULL COMMENT '浏览器',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1643 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录日志表';
 
 
 /*==========================================*/
@@ -716,7 +716,84 @@ CREATE TABLE `tb_log` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='操作日志表';
 
+/*Table structure for table `input_element` */
 
+DROP TABLE IF EXISTS `input_element`;
+
+CREATE TABLE `input_element` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '流水號',
+  `item` varchar(100) NOT NULL COMMENT '項目',
+  `status` int(1) DEFAULT '1' COMMENT '狀態(1:正常 0:停用)',
+  `load_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='補登維表';
+
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(1, '大樓出租面積', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(2, '大樓租戶員工人數(發卡數)', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(3, '辦公大樓投遞系統（不可回收垃圾）', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(4, '該月份天數', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(5, '回收級配粗料處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(6, '回收級配細料處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(7, '回收木材處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(8, '含鐵金屬處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(9, '非鐵金屬處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(10, '回收塑膠料處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(11, '不可回收垃圾處理重量', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(12, '投遞系統壓縮櫃_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(13, '工程費棄物開放櫃_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(14, '人工投遞壓縮櫃_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(15, '木頭開放櫃_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(16, '紙類開放櫃_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(17, '資源回收物_清运次数', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(18, '契約服務費用', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(19, '資源回收金額', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(20, '焚化場規費(內湖、北投、木柵)', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(21, '焚化場規費(山豬坑)', 1, '2022-01-01 00:00:00');
+INSERT INTO recycle.input_element
+(id, item, status, load_time)
+VALUES(22, '裝修廢棄物(尊弘環保)', 1, '2022-01-01 00:00:00');
 
 
 
