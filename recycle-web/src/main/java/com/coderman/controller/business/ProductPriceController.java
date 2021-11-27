@@ -31,7 +31,7 @@ import java.util.Map;
  * @Date 2020/3/17 09:19
  * @Version 1.0
  **/
-@Api(tags = "業務模塊-物資資料相关接口")
+@Api(tags = "廢棄物單價維護")
 @RestController
 @RequestMapping("/business/productPrice")
 public class ProductPriceController {

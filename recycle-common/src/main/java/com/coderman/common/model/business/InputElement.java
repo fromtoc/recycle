@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@Table(name = "input_element")
+@Table(name = "input_data")
 public class InputElement {
 
     @Id

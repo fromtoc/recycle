@@ -795,6 +795,17 @@ INSERT INTO recycle.input_element
 (id, item, status, load_time)
 VALUES(22, '裝修廢棄物(尊弘環保)', 1, '2022-01-01 00:00:00');
 
+DROP TABLE IF EXISTS `input_data`;
+
+CREATE TABLE `input_data` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '流水號',
+  `item_id` varchar(100) NOT NULL COMMENT '補登項目代碼',
+  `value` int(1) NOT NULL COMMENT '值',
+  `valid_month` varchar(50) DEFAULT NULL COMMENT '適用月份',
+  `load_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='補登資料';
+
 
 
 
