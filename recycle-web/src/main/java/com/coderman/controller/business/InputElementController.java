@@ -3,15 +3,18 @@ package com.coderman.controller.business;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.fastjson.JSON;
 import com.coderman.business.service.InputElementService;
 import com.coderman.business.service.ProductPriceService;
 import com.coderman.common.annotation.ControllerEndpoint;
 import com.coderman.common.error.BusinessException;
 import com.coderman.common.model.business.InputElement;
+import com.coderman.common.model.system.Log;
 import com.coderman.common.response.ResponseBean;
 import com.coderman.common.vo.business.ProductPriceUploadVO;
 import com.coderman.common.vo.business.ProductPriceVO;
 import com.coderman.common.vo.system.PageVO;
+import com.coderman.system.service.LogService;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,6 +44,9 @@ public class InputElementController {
 
     @Autowired
     private InputElementService inputElementService;
+
+    @Autowired
+    private LogService logService;
 
     /**
      * @Description  相關資料補登

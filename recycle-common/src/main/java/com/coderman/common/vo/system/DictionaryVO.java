@@ -31,6 +31,9 @@ public class DictionaryVO {
     private String statusName;
 
     public String getStatusName() {
+        if (status==null){
+            return null;
+        }
         return status==0? "停用": "啟用";
     }
 

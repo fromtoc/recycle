@@ -64,6 +64,9 @@ public class ProductVO {
     private String statusName;
 
     public String getStatusName() {
+        if (status==null){
+            return null;
+        }
         return status? "停用": "啟用";
     }
 

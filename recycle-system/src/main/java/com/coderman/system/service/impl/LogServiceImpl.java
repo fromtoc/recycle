@@ -4,12 +4,14 @@ import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Log;
 import com.coderman.common.model.system.LoginLog;
+import com.coderman.common.response.ActiveUser;
 import com.coderman.common.vo.system.LogVO;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.system.mapper.LogMapper;
 import com.coderman.system.service.LogService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,5 +102,14 @@ public class LogServiceImpl implements LogService {
             }
             delete(id);
         }
+    }
+
+    @Override
+    public void saveEasyLog(Log log) {
+        log.setLoadTime(new Date());
+        log.setCreateTime(new Date());
+        ActiveUser activeUser= (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        log.setUsername(activeUser.getUser().getUsername());
+        logMapper.insert(log);
     }
 }

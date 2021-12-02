@@ -58,6 +58,9 @@ public class MenuExportVO {
     private String statusName;
 
     public String getStatusName() {
+        if (available==null){
+            return null;
+        }
         return available==0? "停用": "啟用";
     }
 }

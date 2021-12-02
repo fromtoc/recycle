@@ -63,12 +63,18 @@ public class DepartmentVO {
     private String foodName;
 
     public String getFoodName() {
+        if (food==null){
+            return null;
+        }
         return food? "是": "否";
     }
     @ExcelField(value = "狀態", width = 100)
     private String statusName;
 
     public String getStatusName() {
+        if (status==null){
+            return null;
+        }
         return status? "停用": "啟用";
     }
 

@@ -36,12 +36,18 @@ public class RoleVO {
     private String typeName;
 
     public String getTypeName() {
+        if (type==null){
+            return null;
+        }
         return type==0? "所有資料": "限本帳號";
     }
     @ExcelField(value = "狀態", width = 100)
     private String statusName;
 
     public String getStatusName() {
+        if (status==null){
+            return null;
+        }
         return status? "停用": "啟用";
     }
 

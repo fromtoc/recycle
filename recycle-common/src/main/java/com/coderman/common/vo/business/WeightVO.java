@@ -62,6 +62,9 @@ public class WeightVO {
     private String statusName;
 
     public String getStatusName() {
+        if (status==null){
+            return null;
+        }
         return status? "作廢": "啟用";
     }
 

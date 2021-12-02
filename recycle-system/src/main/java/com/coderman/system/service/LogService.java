@@ -42,4 +42,6 @@ public interface LogService  {
      * @param list
      */
     void batchDelete(List<Long> list) throws SystemException;
+
+    void saveEasyLog(Log log);
 }
