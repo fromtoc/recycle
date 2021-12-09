@@ -406,9 +406,11 @@ public class UserServiceImpl implements UserService {
         }
         Example o1 = new Example(User.class);
         o1.createCriteria().andEqualTo("nickname", userVO.getNickname());
-        int i1 = userMapper.selectCountByExample(o1);
-        if (i1 != 0) {
-            throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");
+        List<User> userList = userMapper.selectByExample(o1);
+        if (!CollectionUtils.isEmpty(userList)) {
+            if(!userList.get(0).getId().equals(id)){
+                throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "該用戶名稱已被占用");
+            }
         }
         User user = new User();
         BeanUtils.copyProperties(userVO, user);

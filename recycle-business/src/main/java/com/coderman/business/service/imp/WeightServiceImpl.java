@@ -178,7 +178,7 @@ public class WeightServiceImpl implements WeightService {
             weightVOList.add(vo);
         }
 
-        PageInfo<WeightVO> weightPageInfo = new PageInfo<>(weightVOList);
+        PageInfo<Weight> weightPageInfo = new PageInfo<>(weightList);
         return new PageVO<>(weightPageInfo.getTotal(), weightVOList);
     }
 
