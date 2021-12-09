@@ -1,5 +1,5 @@
 server:
-  port: 8989
+  port: 8089
   ssl:
     key-store: classpath:3828034_www.zykhome.club.pfx
     key-store-type: PKCS12
