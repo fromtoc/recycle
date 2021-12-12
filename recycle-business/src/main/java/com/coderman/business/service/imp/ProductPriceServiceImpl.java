@@ -92,7 +92,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
                     .map(vo -> getCategoryName(vo))
                     .collect(Collectors.toList());
-            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            PageInfo<ProductPrice> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
         if (productPriceVO.getTwoCategoryId() != null) {
@@ -107,7 +107,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
                     .map(vo -> getCategoryName(vo))
                     .collect(Collectors.toList());
-            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            PageInfo<ProductPrice> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
         if (productPriceVO.getOneCategoryId() != null) {
@@ -121,7 +121,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
                     .map(vo -> getCategoryName(vo))
                     .collect(Collectors.toList());
-            PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+            PageInfo<ProductPrice> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
 
@@ -135,7 +135,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         List<ProductPriceVO> categoryVOSWithName = productPriceVOs.stream()
                 .map(vo -> getCategoryName(vo))
                 .collect(Collectors.toList());
-        PageInfo<ProductPriceVO> info = new PageInfo<>(productPriceVOs);
+        PageInfo<ProductPrice> info = new PageInfo<>(products);
         return new PageVO<>(info.getTotal(), categoryVOSWithName);
     }
 
