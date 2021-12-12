@@ -473,7 +473,7 @@ INSERT INTO tb_menu
 VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0);
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(20, 4, 'XX報表', '/temp', '', 'el-icon-edit', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+VALUES(20, 4, '整體分析', '/business/report/report1', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(21, 7, '新增公司類型', '', 'departmentCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
@@ -639,6 +639,30 @@ VALUES(73, 18, '下載角色', '', 'role:export', 'el-icon-setting', '1', 4, '20
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(74, 18, '角色授權', '', 'role:authority', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(75, 4, '垃圾統計', '/business/report/report2', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(76, 4, '資源回收', '/business/report/report3', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(77, 4, '廚餘分析', '/business/report/report4', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(78, 4, '工程廢棄物統計', '/business/report/report5', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(79, 4, '清運及費用統計', '/business/report/report6', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(80, 4, '單價查詢', '/business/report/report7', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(81, 4, '資源回收總表', '/business/report/report8', '', 'el-icon-document', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
+VALUES(82, 4, '每月資源回收統計表', '/business/report/report9', '', 'el-icon-document', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
 
 /*Table structure for table `tb_role` */
 
@@ -671,6 +695,199 @@ CREATE TABLE `tb_role_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色選單关联表';
 
 /*Data for the table `tb_role_menu` */
+
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 11, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 36, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 37, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 39, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 40, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 3, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 15, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 4, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 20, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 75, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 76, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 77, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 78, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 79, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 80, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 81, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 82, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 6, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 19, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 1, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 3, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(2, 15, '2021-12-11 20:27:04');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 15, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 60, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 61, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 63, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 64, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(3, 3, '2021-12-11 20:28:33');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 4, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 20, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 75, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 76, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 77, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 78, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 79, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 80, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 81, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(4, 82, '2021-12-11 20:28:55');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 4, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 20, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 75, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 76, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 77, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 78, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 79, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 80, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 81, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(5, 82, '2021-12-11 20:29:17');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 15, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 60, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 61, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 63, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 64, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 4, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 20, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 75, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 76, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 77, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 78, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 79, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 80, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 81, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 82, '2021-12-11 20:29:44');
+INSERT INTO tb_role_menu
+(role_id, menu_id, load_time)
+VALUES(6, 3, '2021-12-11 20:29:44');
 
 /*Table structure for table `tb_user_role` */
 

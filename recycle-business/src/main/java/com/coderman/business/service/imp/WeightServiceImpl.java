@@ -160,10 +160,10 @@ public class WeightServiceImpl implements WeightService {
         Date createTimeStart = weightVO.getCreateTimeStart();
         Date createTimeEnd = weightVO.getCreateTimeEnd();
         if (createTimeStart != null) {
-            criteria.andGreaterThanOrEqualTo("createTime", createTimeStart);
+            criteria.andGreaterThanOrEqualTo("loadTime", createTimeStart);
         }
         if (createTimeEnd != null) {
-            criteria.andLessThanOrEqualTo("createTime", createTimeEnd);
+            criteria.andLessThanOrEqualTo("loadTime", createTimeEnd);
         }
         List<Weight> weightList = weightMapper.selectByExample(o);
         List<WeightVO> weightVOList = new ArrayList<>();

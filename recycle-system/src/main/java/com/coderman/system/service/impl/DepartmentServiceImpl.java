@@ -67,11 +67,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     public PageVO<DepartmentVO> findDepartmentList(Integer pageNum, Integer pageSize, DepartmentVO departmentVO) {
         PageHelper.startPage(pageNum, pageSize);
         Example o = new Example(Department.class);
+        Example.Criteria criteria = o.createCriteria();
         if (departmentVO.getName() != null && !"".equals(departmentVO.getName())) {
-            o.createCriteria().andLike("name", "%" + departmentVO.getName() + "%");
+            criteria.orLike("nickname", "%" + departmentVO.getName() + "%");
+            criteria.orLike("name", "%" + departmentVO.getName() + "%");
         }
+        o.and(criteria);
         List<Department> departments = departmentMapper.selectByExample(o);
-        //转vo
         List<DepartmentVO> departmentVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(departments)) {
             for (Department department : departments) {

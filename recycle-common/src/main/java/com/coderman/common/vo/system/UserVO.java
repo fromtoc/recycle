@@ -43,7 +43,6 @@ public class UserVO{
 
     private Date birth;
 
-    @NotBlank(message = "密碼不能為空")
     private String password;
 
     @ExcelField(value = "所屬公司", width = 100)

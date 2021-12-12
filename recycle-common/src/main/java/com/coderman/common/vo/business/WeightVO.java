@@ -68,4 +68,7 @@ public class WeightVO {
         return status? "作廢": "啟用";
     }
 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date loadTime;
+
 }

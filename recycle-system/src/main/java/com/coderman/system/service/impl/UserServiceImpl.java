@@ -365,7 +365,9 @@ public class UserServiceImpl implements UserService {
         }
         User user = new User();
         BeanUtils.copyProperties(userVO, user);
-        String salt = UUID.randomUUID().toString().substring(0, 32);
+//        String salt = UUID.randomUUID().toString().substring(0, 32);
+        String salt = "cfbf6d34-d3e4-4653-86f0-e33d4595d52b";
+        user.setPassword("8888");
         user.setPassword(MD5Utils.md5Encryption(user.getPassword(), salt));
         user.setModifiedTime(new Date());
         user.setCreateTime(new Date());
