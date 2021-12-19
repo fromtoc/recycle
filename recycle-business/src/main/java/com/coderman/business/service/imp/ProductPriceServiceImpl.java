@@ -55,15 +55,27 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         Example.Criteria criteria = o.createCriteria();
         criteria.andEqualTo("name", productName);
         List<Product> products = productMapper.selectByExample(o);
-        if (!CollectionUtils.isEmpty(products) && products.size()==1){
-            Product product = products.get(0);
-            productPrice.setProductId(product.getId());
-            productPrice.setOneCategoryId(product.getOneCategoryId());
-            productPrice.setTwoCategoryId(product.getTwoCategoryId());
-            productPrice.setLoadTime(new Date());
-            return productPriceMapper.insert(productPrice);
+        if (CollectionUtils.isEmpty(products) || products.size()!=1) {
+            return -1;
         }
-        return 0;
+        Example o1 = new Example(ProductPrice.class);
+        Example.Criteria criteria1 = o1.createCriteria();
+        criteria1.andEqualTo("name", productPrice.getName());
+        criteria1.andEqualTo("validMonth", productPrice.getValidMonth());
+        List<ProductPrice> productPrices = productPriceMapper.selectByExample(o1);
+        boolean recover = productPriceVO.getRecover() == null? false : productPriceVO.getRecover();
+        if (!CollectionUtils.isEmpty(productPrices) && !recover) {
+            return -2;
+        } else if (recover) {
+            productPriceMapper.deleteByPrimaryKey(productPrices.get(0).getId());
+        }
+
+        Product product = products.get(0);
+        productPrice.setProductId(product.getId());
+        productPrice.setOneCategoryId(product.getOneCategoryId());
+        productPrice.setTwoCategoryId(product.getTwoCategoryId());
+        productPrice.setLoadTime(new Date());
+        return productPriceMapper.insert(productPrice);
     }
 
     @Override
@@ -83,6 +95,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
                     .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId())
                     .andEqualTo("threeCategoryId", productPriceVO.getThreeCategoryId());
+            o.setOrderByClause("valid_month desc");
             products = productPriceMapper.selectByExample(o);
             for (ProductPrice p: products){
                 ProductPriceVO vo = new ProductPriceVO();
@@ -98,6 +111,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         if (productPriceVO.getTwoCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
                     .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId());
+            o.setOrderByClause("valid_month desc");
             products = productPriceMapper.selectByExample(o);
             for (ProductPrice p: products){
                 ProductPriceVO vo = new ProductPriceVO();
@@ -112,6 +126,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
         }
         if (productPriceVO.getOneCategoryId() != null) {
             criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId());
+            o.setOrderByClause("valid_month desc");
             products = productPriceMapper.selectByExample(o);
             for (ProductPrice p: products){
                 ProductPriceVO vo = new ProductPriceVO();
@@ -124,7 +139,7 @@ public class ProductPriceServiceImpl implements ProductPriceService {
             PageInfo<ProductPrice> info = new PageInfo<>(products);
             return new PageVO<>(info.getTotal(), categoryVOSWithName);
         }
-
+        o.setOrderByClause("valid_month desc");
         products = productPriceMapper.selectByExample(o);
         for (ProductPrice p: products){
             ProductPriceVO vo = new ProductPriceVO();

@@ -7,7 +7,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/recycle?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT
+    url: jdbc:mysql://127.0.0.1:3306/recycle?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -48,3 +48,5 @@ fdfs:
   pool:
     max-total: 500
     max-wait-millis: 2000
+jwtKey: 54407f4a-0d35-4e47-8b20-75d9e09f3257
+jwtUrl: https://211.23.139.11:8088/hengshi/

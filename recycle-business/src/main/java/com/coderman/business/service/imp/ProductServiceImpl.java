@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         Example o = new Example(Product.class);
         Example.Criteria criteria = o.createCriteria();
         if (productVO.getStatus() != null) {
-            criteria.andEqualTo("status", productVO.getStatus()? 1: 0);
+            criteria.andEqualTo("status", productVO.getStatus()? 0: 1);
         }
         o.setOrderByClause("sort asc");
         if (productVO.getName() != null && !"".equals(productVO.getName())) {

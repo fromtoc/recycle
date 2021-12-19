@@ -93,8 +93,11 @@ public class ProductPriceController {
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated ProductPriceVO productPriceVO) throws BusinessException {
         int add = productPriceService.add(productPriceVO);
-        if (add != 1 ) {
+        if (add == -1) {
             return ResponseBean.error("廢棄物名稱不存在");
+        }
+        if (add == -2) {
+            return ResponseBean.error("該筆資料已存在，請問是否覆蓋?");
         }
         return ResponseBean.success();
     }

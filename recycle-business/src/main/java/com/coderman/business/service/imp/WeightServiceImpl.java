@@ -165,6 +165,7 @@ public class WeightServiceImpl implements WeightService {
         if (createTimeEnd != null) {
             criteria.andLessThanOrEqualTo("loadTime", createTimeEnd);
         }
+        o.setOrderByClause("load_time desc");
         List<Weight> weightList = weightMapper.selectByExample(o);
         List<WeightVO> weightVOList = new ArrayList<>();
         for (Weight w : weightList) {

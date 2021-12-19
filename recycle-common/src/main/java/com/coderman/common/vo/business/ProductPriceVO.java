@@ -44,4 +44,6 @@ public class ProductPriceVO {
     private String oneCategoryName;
 
     private String threeCategoryName;
+
+    private Boolean recover;
 }

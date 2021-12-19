@@ -226,13 +226,6 @@ CREATE TABLE `tb_dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-INSERT into tb_dictionary
-(id, `type`, code, value, status)
-VALUES(2, 2, '1', '123', 1);
-INSERT INTO tb_dictionary
-(id, `type`, code, value, status)
-VALUES(1, 1, 'A', 'AA', 1);
-
 /*Table structure for table `biz_product_category` */
 
 DROP TABLE IF EXISTS `biz_product_category`;
@@ -277,10 +270,6 @@ CREATE TABLE `tb_department` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO tb_department
-(id, type_id, type_code, `number`, type_number, name, nickname, contact, phone, cell_phone, email, remark, food, status, address, create_time, modified_time)
-VALUES(1, 1, 'A', 1, 'A001', '101大樓', '101', 'jimmy', '22222222', '0911111111', '123456@gmail.com', '123', 1, 1, '123', '2020-12-17 21:31:44', '2020-12-17 21:31:44');
-
 
 /*Table structure for table `tb_user` */
 
@@ -311,7 +300,7 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO tb_user
 (id, username, nickname, department_id, region_id, email, status, password, salt, `type`, avatar, phone_number, create_time, modified_time, sex, birth)
-VALUES(5, 'admin', '小章鱼', 1, 2, 'Jana@126.com', 1, 'd7b9c28cac022955cff27947eafce0ad', 'cfbf6d34-d3e4-4653-86f0-e33d4595d52b', 0, 'http://thirdqq.qlogo.cn/g?b=oidb&k=icTYjyV5afABvE1v4ge9SLg&s=100&t=1584195695', '17744444444', '2019-06-14 21:12:16', '2020-03-19 04:20:40', 0, '2020-03-27');
+VALUES(200, 'admin', 'superuser', 1, 2, '', 1, 'd7b9c28cac022955cff27947eafce0ad', 'cfbf6d34-d3e4-4653-86f0-e33d4595d52b', 0, 'http://thirdqq.qlogo.cn/g?b=oidb&k=icTYjyV5afABvE1v4ge9SLg&s=100&t=1584195695', '17744444444', '2019-06-14 21:12:16', '2020-03-19 04:20:40', 0, '2020-03-27');
 
 DROP TABLE IF EXISTS `tb_user_card`;
 
@@ -375,6 +364,609 @@ CREATE TABLE `biz_product_price` (
   `load_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARSET=utf8mb4;
+
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(1, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(2, 3, 7, 6, '碳粉匣', 530.000000, '批', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(3, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(4, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(5, 3, 10, 12, '廢鐵', 7.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(6, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(7, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(8, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(9, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(10, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(11, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(12, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(13, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(14, 3, 12, 21, '塑膠瓶', 3.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(15, 3, 12, 22, '塑膠袋', 200.000000, '批', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(16, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(17, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(18, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(19, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(20, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(21, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(22, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(23, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(24, 3, 16, 33, '紙張/紙板', 2.500000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(25, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(26, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-01', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(27, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(28, 3, 7, 6, '碳粉匣', 0.000000, '批', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(29, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(30, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(31, 3, 10, 12, '廢鐵', 7.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(32, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(33, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(34, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(35, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(36, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(37, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(38, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(39, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(40, 3, 12, 21, '塑膠瓶', 3.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(41, 3, 12, 22, '塑膠袋', 150.000000, '批', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(42, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(43, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(44, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(45, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(46, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(47, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(48, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(49, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(50, 3, 16, 33, '紙張/紙板', 2.500000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(51, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(52, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-02', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(53, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(54, 3, 7, 6, '碳粉匣', 0.000000, '批', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(55, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(56, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(57, 3, 10, 12, '廢鐵', 7.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(58, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(59, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(60, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(61, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(62, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(63, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(64, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(65, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(66, 3, 12, 21, '塑膠瓶', 3.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(67, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(68, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(69, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(70, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(71, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(72, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(73, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(74, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(75, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(76, 3, 16, 33, '紙張/紙板', 2.500000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(77, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(78, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-03', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(79, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(80, 3, 7, 6, '碳粉匣', 350.000000, '批', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(81, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(82, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(83, 3, 10, 12, '廢鐵', 7.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(84, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(85, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(86, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(87, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(88, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(89, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(90, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(91, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(92, 3, 12, 21, '塑膠瓶', 6.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(93, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(94, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(95, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(96, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(97, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(98, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(99, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(100, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(101, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(102, 3, 16, 33, '紙張/紙板', 2.500000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(103, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(104, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-04', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(105, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(106, 3, 7, 6, '碳粉匣', 350.000000, '批', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(107, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(108, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(109, 3, 10, 12, '廢鐵', 7.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(110, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(111, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(112, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(113, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(114, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(115, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(116, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(117, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(118, 3, 12, 21, '塑膠瓶', 6.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(119, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(120, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(121, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(122, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(123, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(124, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(125, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(126, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(127, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(128, 3, 16, 33, '紙張/紙板', 1.700000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(129, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(130, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-05', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(131, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(132, 3, 7, 6, '碳粉匣', 200.000000, '批', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(133, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(134, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(135, 3, 10, 12, '廢鐵', 6.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(136, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(137, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(138, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(139, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(140, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(141, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(142, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(143, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(144, 3, 12, 21, '塑膠瓶', 4.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(145, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(146, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(147, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(148, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(149, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(150, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(151, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(152, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(153, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(154, 3, 16, 33, '紙張/紙板', 1.500000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(155, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(156, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-06', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(157, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(158, 3, 7, 6, '碳粉匣', 0.000000, '批', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(159, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(160, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(161, 3, 10, 12, '廢鐵', 6.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(162, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(163, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(164, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(165, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(166, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(167, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(168, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(169, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(170, 3, 12, 21, '塑膠瓶', 4.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(171, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(172, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(173, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(174, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(175, 3, 13, 26, '省電燈泡', 2.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(176, 3, 14, 27, '乾電池', 12.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(177, 3, 15, 30, '熟廚餘', 0.000000, '批', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(178, 3, 16, 31, '便當紙盒', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(179, 3, 16, 32, '紙杯', 0.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(180, 3, 16, 33, '紙張/紙板', 1.500000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(181, 3, 16, 34, '鋁箔包', 1.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(182, 3, 17, 35, '廢電線', 32.000000, 'KG', '2019-07', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(183, 3, 7, 4, '家用電器', 3.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(184, 3, 7, 6, '碳粉匣', 300.000000, '批', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(185, 3, 8, 8, '舊衣服', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(186, 3, 9, 9, '廢食用油', 6.600000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(187, 3, 10, 12, '廢鐵', 6.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(188, 3, 10, 13, '鋁罐/鋁料', 25.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(189, 3, 10, 14, '鐵罐', 4.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(190, 3, 11, 15, '化妝品玻璃', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(191, 3, 11, 16, '玻璃瓶', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(192, 3, 12, 17, '化妝品塑膠', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(193, 3, 12, 18, '其他塑膠', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(194, 3, 12, 19, '保麗龍', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(195, 3, 12, 20, '塑膠杯盒', 0.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(196, 3, 12, 21, '塑膠瓶', 4.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(197, 3, 12, 22, '塑膠袋', 0.000000, '批', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(198, 3, 12, 23, '廢光碟片', 5.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(199, 3, 12, 24, '壓克力', 5.000000, 'KG', '2019-08', '2021-11-01 12:00:00');
+INSERT INTO biz_product_price
+(id, one_category_id, two_category_id, product_id, name, price, unit, valid_month, load_time)
+VALUES(200, 3, 13, 25, '日光燈管', 1.500000, 'KG', '2019-08', '2021-11-01 12:00:00');
+
+
 
 /*Table structure for table `tb_weight` */
 
@@ -473,7 +1065,7 @@ INSERT INTO tb_menu
 VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0);
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(20, 4, '整體分析', '/business/report/report1', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+VALUES(20, 4, '固定報表', '/business/report/report1', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(21, 7, '新增公司類型', '', 'departmentCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
@@ -639,30 +1231,6 @@ VALUES(73, 18, '下載角色', '', 'role:export', 'el-icon-setting', '1', 4, '20
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(74, 18, '角色授權', '', 'role:authority', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(75, 4, '垃圾統計', '/business/report/report2', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(76, 4, '資源回收', '/business/report/report3', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(77, 4, '廚餘分析', '/business/report/report4', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(78, 4, '工程廢棄物統計', '/business/report/report5', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(79, 4, '清運及費用統計', '/business/report/report6', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(80, 4, '單價查詢', '/business/report/report7', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(81, 4, '資源回收總表', '/business/report/report8', '', 'el-icon-document', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
-INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(82, 4, '每月資源回收統計表', '/business/report/report9', '', 'el-icon-document', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
 
 /*Table structure for table `tb_role` */
 
@@ -725,30 +1293,6 @@ INSERT INTO tb_role_menu
 VALUES(2, 20, '2021-12-11 20:27:04');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
-VALUES(2, 75, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 76, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 77, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 78, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 79, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 80, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 81, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(2, 82, '2021-12-11 20:27:04');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
 VALUES(2, 6, '2021-12-11 20:27:04');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
@@ -788,58 +1332,10 @@ INSERT INTO tb_role_menu
 VALUES(4, 20, '2021-12-11 20:28:55');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
-VALUES(4, 75, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 76, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 77, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 78, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 79, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 80, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 81, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(4, 82, '2021-12-11 20:28:55');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
 VALUES(5, 4, '2021-12-11 20:29:17');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
 VALUES(5, 20, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 75, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 76, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 77, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 78, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 79, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 80, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 81, '2021-12-11 20:29:17');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(5, 82, '2021-12-11 20:29:17');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
 VALUES(6, 15, '2021-12-11 20:29:44');
@@ -863,30 +1359,6 @@ INSERT INTO tb_role_menu
 VALUES(6, 20, '2021-12-11 20:29:44');
 INSERT INTO tb_role_menu
 (role_id, menu_id, load_time)
-VALUES(6, 75, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 76, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 77, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 78, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 79, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 80, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 81, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
-VALUES(6, 82, '2021-12-11 20:29:44');
-INSERT INTO tb_role_menu
-(role_id, menu_id, load_time)
 VALUES(6, 3, '2021-12-11 20:29:44');
 
 /*Table structure for table `tb_user_role` */
@@ -900,7 +1372,6 @@ CREATE TABLE `tb_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户角色關聯表';
 
 /*Data for the table `tb_user_role` */
-
 
 /*Table structure for table `tb_log` */
 
@@ -931,73 +1402,6 @@ CREATE TABLE `input_element` (
   `load_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='補登維表';
-
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(1, '大樓出租面積', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(2, '大樓租戶員工人數(發卡數)', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(3, '辦公大樓投遞系統（不可回收垃圾）', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(4, '該月份天數', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(5, '回收級配粗料處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(6, '回收級配細料處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(7, '回收木材處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(8, '含鐵金屬處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(9, '非鐵金屬處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(10, '回收塑膠料處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(11, '不可回收垃圾處理重量', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(12, '投遞系統壓縮櫃_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(13, '工程費棄物開放櫃_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(14, '人工投遞壓縮櫃_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(15, '木頭開放櫃_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(16, '紙類開放櫃_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(17, '資源回收物_清运次数', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(18, '契約服務費用', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(19, '資源回收金額', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(20, '焚化場規費(內湖、北投、木柵)', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(21, '焚化場規費(山豬坑)', 1, '2022-01-01 00:00:00');
-INSERT INTO input_element
-(id, item, status, load_time)
-VALUES(22, '裝修廢棄物(尊弘環保)', 1, '2022-01-01 00:00:00');
 
 DROP TABLE IF EXISTS `input_data`;
 
