@@ -565,8 +565,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserVO> findAll() {
-        List<User> userList = userMapper.selectAll();
+    public List<UserVO> findAll(UserVO userVO) {
+        Example o = new Example(User.class);
+        String username = userVO.getUsername();
+        String nickname = userVO.getNickname();
+        Long departmentId = userVO.getDepartmentId();
+        Integer sex = userVO.getSex();
+        String email = userVO.getEmail();
+        Example.Criteria criteria = o.createCriteria();
+        if (username != null && !"".equals(username)) {
+            criteria.andLike("username", "%" + username + "%");
+        }
+        if (nickname != null && !"".equals(nickname)) {
+            criteria.andLike("nickname", "%" + nickname + "%");
+        }
+        if (email != null && !"".equals(email)) {
+            criteria.andLike("email", "%" + email + "%");
+        }
+        if (sex != null) {
+            criteria.andEqualTo("sex", sex);
+        }
+        if (departmentId != null) {
+            criteria.andEqualTo("departmentId", departmentId);
+        }
+
+
+        criteria.andNotEqualTo("type", 0);
+        List<User> userList = userMapper.selectByExample(o);
         List<UserVO> userVOS = userConverter.converterToUserVOList(userList);
         return userVOS;
     }

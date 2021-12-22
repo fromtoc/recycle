@@ -298,8 +298,11 @@ public class ProductController {
     @PostMapping("/excel")
     @RequiresPermissions("product:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出廢棄物excel")
-    public void export(HttpServletResponse response) {
-        List<ProductVO> voList = this.productService.findAll();
+    public void export(HttpServletResponse response,
+                       @RequestParam(value = "categorys", required = false) String categorys,
+                       @RequestBody ProductVO productVO) {
+        buildCategorySearch(categorys, productVO);
+        List<ProductVO> voList = this.productService.findAll(productVO);
         ExcelKit.$Export(ProductVO.class, response).downXlsx(voList, false);
     }
 }

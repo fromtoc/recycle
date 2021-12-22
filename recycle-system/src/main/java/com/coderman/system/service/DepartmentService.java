@@ -67,7 +67,7 @@ public interface DepartmentService {
      * 全部部門
      * @return
      */
-    List<DepartmentVO> findAll();
+    List<DepartmentVO> findAll(DepartmentVO departmentVO);
 
     /**
      * 更新狀態

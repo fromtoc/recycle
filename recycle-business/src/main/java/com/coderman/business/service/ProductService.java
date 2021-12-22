@@ -110,7 +110,7 @@ public interface ProductService {
      * 全部廢棄物
      * @return
      */
-    List<ProductVO> findAll();
+    List<ProductVO> findAll(ProductVO productVO);
 
 
 }

@@ -55,7 +55,7 @@ public interface ProductPriceService {
      * 全部單價
      * @return
      */
-    List<ProductPriceVO> findAll();
+    List<ProductPriceVO> findAll(ProductPriceVO productPriceVO);
 
     int batchAdd(List<ProductPriceUploadVO> productPriceUploadVOList);
 

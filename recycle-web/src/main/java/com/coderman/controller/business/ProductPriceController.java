@@ -135,8 +135,11 @@ public class ProductPriceController {
     @ApiOperation(value = "導出excel", notes = "導出所有單價的excel表格")
     @PostMapping("/excel")
     @ControllerEndpoint(exceptionMessage = "導出Excel失敗",operation = "導出單價excel")
-    public void export(HttpServletResponse response) {
-        List<ProductPriceVO> voList = this.productPriceService.findAll();
+    public void export(HttpServletResponse response,
+                       @RequestParam(value = "categorys", required = false) String categorys,
+                       @RequestBody ProductPriceVO productPriceVO) {
+        buildCategorySearch(categorys, productPriceVO);
+        List<ProductPriceVO> voList = this.productPriceService.findAll(productPriceVO);
         ExcelKit.$Export(ProductPriceVO.class, response).downXlsx(voList, false);
     }
 

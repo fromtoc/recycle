@@ -47,7 +47,6 @@ public class WeightVO {
     private BigDecimal netWeight;
 
     private Boolean status;
-    @ExcelField(value = "日期", width = 150, dateFormat = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
@@ -58,6 +57,11 @@ public class WeightVO {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTimeEnd;
+
+    @ExcelField(value = "日期", width = 150, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date loadTime;
+
     @ExcelField(value = "狀態", width = 100)
     private String statusName;
 
@@ -67,8 +71,5 @@ public class WeightVO {
         }
         return status? "作廢": "啟用";
     }
-
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date loadTime;
 
 }

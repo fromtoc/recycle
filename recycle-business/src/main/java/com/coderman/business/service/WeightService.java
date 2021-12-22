@@ -73,6 +73,6 @@ public interface WeightService {
      * 全部秤重明細
      * @return
      */
-    List<WeightVO> findAll();
+    List<WeightVO> findAll(WeightVO weightVO);
 
 }

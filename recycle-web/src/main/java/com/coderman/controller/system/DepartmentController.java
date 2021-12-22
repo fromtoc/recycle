@@ -149,8 +149,8 @@ public class DepartmentController {
     @PostMapping("/excel")
     @RequiresPermissions("department:export")
     @ControllerEndpoint(exceptionMessage = "導出Excel失敗", operation = "導出公司excel")
-    public void export(HttpServletResponse response) {
-        List<DepartmentVO> voList = this.departmentService.findAll();
+    public void export(HttpServletResponse response, @RequestBody DepartmentVO departmentVO) {
+        List<DepartmentVO> voList = this.departmentService.findAll(departmentVO);
         ExcelKit.$Export(DepartmentVO.class, response).downXlsx(voList, false);
     }
 

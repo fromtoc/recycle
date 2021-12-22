@@ -241,8 +241,51 @@ public class WeightServiceImpl implements WeightService {
     }
 
     @Override
-    public List<WeightVO> findAll() {
-        List<Weight> weightList = weightMapper.selectAll();
+    public List<WeightVO> findAll(WeightVO weightVO) {
+        Example o = new Example(Weight.class);
+        Example.Criteria criteria = o.createCriteria();
+        Long departmentId = weightVO.getDepartmentId();
+        if (weightVO.getStatus() != null) {
+            criteria.andEqualTo("status", weightVO.getStatus()? 0: 1);
+        }
+        if (departmentId != null && !"".equals(departmentId)) {
+            criteria.andEqualTo("departmentId", departmentId);
+        }
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        if (activeUser.getLimitUser()){
+            criteria.andEqualTo("userId", activeUser.getUser().getId());
+        } else {
+            String userNickname = weightVO.getUserNickname();
+            if (userNickname != null && !"".equals(userNickname)) {
+                List<User> userList = userService.findUserByNickName(userNickname);
+                if (!CollectionUtils.isEmpty(userList)) {
+                    List<Long> userIds = userList.stream().map(user -> user.getId()).collect(Collectors.toList());
+                    criteria.andIn("userId", userIds);
+                } else {
+                    criteria.andEqualTo("userId", -1);
+                }
+            }
+        }
+        String productName = weightVO.getProductName();
+        if (productName != null && !"".equals(productName)) {
+            List<Product> productList = productService.findProductByProductName(productName);
+            if (!CollectionUtils.isEmpty(productList)) {
+                List<Long> productIds = productList.stream().map(product -> product.getId()).collect(Collectors.toList());
+                criteria.andIn("productId", productIds);
+            } else {
+                criteria.andEqualTo("productId", -1);
+            }
+        }
+        Date createTimeStart = weightVO.getCreateTimeStart();
+        Date createTimeEnd = weightVO.getCreateTimeEnd();
+        if (createTimeStart != null) {
+            criteria.andGreaterThanOrEqualTo("loadTime", createTimeStart);
+        }
+        if (createTimeEnd != null) {
+            criteria.andLessThanOrEqualTo("loadTime", createTimeEnd);
+        }
+        o.setOrderByClause("load_time desc");
+        List<Weight> weightList = weightMapper.selectByExample(o);
         List<WeightVO> voList = new ArrayList<>();
         weightList.stream().forEach(w-> {
             WeightVO vo = new WeightVO();

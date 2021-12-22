@@ -241,8 +241,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentVO> findAll() {
-        List<Department> departments = departmentMapper.selectAll();
+    public List<DepartmentVO> findAll(DepartmentVO departmentVO) {
+        Example o = new Example(Department.class);
+        Example.Criteria criteria = o.createCriteria();
+        if (departmentVO.getName() != null && !"".equals(departmentVO.getName())) {
+            criteria.orLike("nickname", "%" + departmentVO.getName() + "%");
+            criteria.orLike("name", "%" + departmentVO.getName() + "%");
+        }
+        o.and(criteria);
+        List<Department> departments = departmentMapper.selectByExample(o);
         List<DepartmentVO> voList = new ArrayList<>();
         departments.stream().forEach(d -> {
             DepartmentVO vo = new DepartmentVO();

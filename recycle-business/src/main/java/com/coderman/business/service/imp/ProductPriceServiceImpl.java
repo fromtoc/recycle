@@ -179,9 +179,66 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     }
 
     @Override
-    public List<ProductPriceVO> findAll() {
-        List<ProductPrice> products = productPriceMapper.selectAll();
+    public List<ProductPriceVO> findAll(ProductPriceVO productPriceVO) {
+        List<ProductPrice> products;
         List<ProductPriceVO> voList = new ArrayList<>();
+
+        Example o = new Example(ProductPrice.class);
+        Example.Criteria criteria = o.createCriteria();
+        if (productPriceVO.getName() != null && !"".equals(productPriceVO.getName())) {
+            criteria.andLike("name", "%" + productPriceVO.getName() + "%");
+        }
+        if (productPriceVO.getValidMonth() != null && !"".equals(productPriceVO.getValidMonth())) {
+            criteria.andEqualTo("validMonth", productPriceVO.getValidMonth());
+        }
+        if (productPriceVO.getThreeCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId())
+                    .andEqualTo("threeCategoryId", productPriceVO.getThreeCategoryId());
+            o.setOrderByClause("valid_month desc");
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                voList.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = voList.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            return categoryVOSWithName;
+        }
+        if (productPriceVO.getTwoCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId())
+                    .andEqualTo("twoCategoryId", productPriceVO.getTwoCategoryId());
+            o.setOrderByClause("valid_month desc");
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                voList.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = voList.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            return categoryVOSWithName;
+        }
+        if (productPriceVO.getOneCategoryId() != null) {
+            criteria.andEqualTo("oneCategoryId", productPriceVO.getOneCategoryId());
+            o.setOrderByClause("valid_month desc");
+            products = productPriceMapper.selectByExample(o);
+            for (ProductPrice p: products){
+                ProductPriceVO vo = new ProductPriceVO();
+                BeanUtils.copyProperties(p,vo);
+                voList.add(vo);
+            }
+            List<ProductPriceVO> categoryVOSWithName = voList.stream()
+                    .map(vo -> getCategoryName(vo))
+                    .collect(Collectors.toList());
+            return categoryVOSWithName;
+        }
+        o.setOrderByClause("valid_month desc");
+        products = productPriceMapper.selectByExample(o);
+
         for (ProductPrice p: products){
             ProductPriceVO vo = new ProductPriceVO();
             BeanUtils.copyProperties(p,vo);
