@@ -64,14 +64,18 @@ public class ControllerEndpointAspect extends AspectSupport {
             String operation = controllerEndpoint.operation();
             //注解上的操作描述
             sysLog.setOperation(operation);
+
+            if (!"重設密碼".equals(operation) && !"更新用路密碼".equals(operation)) {
+                //請求的参数
+                Object[] args = joinPoint.getArgs();
+                LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+                String[] paramNames = u.getParameterNames(method);
+//        sysLog.setParams("paramName:"+ Arrays.toString(paramNames) +",args:"+ Arrays.toString(args));
+                sysLog.setParams("args:"+ Arrays.toString(args));
+            }
         }
 
-        //請求的参数
-        Object[] args = joinPoint.getArgs();
-        LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-        String[] paramNames = u.getParameterNames(method);
-//        sysLog.setParams("paramName:"+ Arrays.toString(paramNames) +",args:"+ Arrays.toString(args));
-        sysLog.setParams("args:"+ Arrays.toString(args));
+
 
         //請求的IP
         HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();

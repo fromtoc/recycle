@@ -129,6 +129,9 @@ public class WeightServiceImpl implements WeightService {
         Example o = new Example(Weight.class);
         Example.Criteria criteria = o.createCriteria();
         Long departmentId = weightVO.getDepartmentId();
+        if (weightVO.getStatus() != null) {
+            criteria.andEqualTo("status", weightVO.getStatus()? 0: 1);
+        }
         if (departmentId != null && !"".equals(departmentId)) {
             criteria.andEqualTo("departmentId", departmentId);
         }

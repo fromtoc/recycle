@@ -34,11 +34,18 @@ public class TokenController {
             String username = activeUser.getUser().getUsername();
             //根据不同角色信息分配对应权限
             List<String> roles = new ArrayList<>();
+//            if ("admin".equals(username)) {
+//                roles.add("system admin");//系统管理员
+//                roles.add("data admin");//数据管理员
+//                roles.add("data analyst");//数据分析员
+//                roles.add("api admin");//API管理员
+//            }
             roles.add("system admin");//系统管理员
             roles.add("data admin");//数据管理员
             roles.add("data analyst");//数据分析员
-            roles.add("data viewer");//数据查看员
             roles.add("api admin");//API管理员
+            roles.add("data viewer");//数据查看员
+
             //生成时间段，用于指定token过期时间
             Calendar instance = Calendar.getInstance();
             instance.add(Calendar.HOUR, 60);
@@ -63,11 +70,11 @@ public class TokenController {
              */
 //            String headerUrl = "http://219.142.241.218:20588";
             String token = signedJWT.serialize();
-            String url = headerUrl + "?activeAuth=jwt-param&jwtParam=" + token;
+//            String url = headerUrl + "?activeAuth=jwt-param&jwtParam=" + token;
             System.out.println(token);
             map = new HashMap<>();
             map.put("state",true);
-            map.put("url",url);
+            map.put("token",token);
             map.put("headerUrl",headerUrl);
         } catch (JOSEException e) {
             map.put("state",false);

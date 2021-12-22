@@ -1009,6 +1009,25 @@ CREATE TABLE `tb_menu` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='選單表';
 
+DROP TABLE IF EXISTS `tb_menu`;
+
+CREATE TABLE `tb_menu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '選單/按鈕ID',
+  `parent_id` bigint(20) DEFAULT NULL COMMENT '上级選單ID',
+  `menu_name` varchar(50) NOT NULL COMMENT '選單/按鈕名稱',
+  `url` varchar(50) DEFAULT NULL COMMENT '選單URL',
+  `perms` text COMMENT '權限標示',
+  `icon` varchar(50) DEFAULT NULL COMMENT '圖標',
+  `type` char(2) NOT NULL COMMENT '類型 0選單 1按鈕',
+  `order_num` bigint(20) DEFAULT NULL COMMENT '排序',
+  `create_time` datetime DEFAULT NULL COMMENT '創建時間',
+  `modified_time` datetime DEFAULT NULL COMMENT '修改時間',
+  `available` int(11) DEFAULT '1' COMMENT '0：不可用，1：可用',
+  `open` int(1) DEFAULT '1' COMMENT '0:不展開，1：展開',
+  `load_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='選單表';
+
 INSERT INTO tb_menu
 (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
 VALUES(1, 0, '一般設定', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2021-11-13 15:06:08', 1, 0);
