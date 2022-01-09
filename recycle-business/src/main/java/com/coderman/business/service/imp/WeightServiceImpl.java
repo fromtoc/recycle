@@ -1,6 +1,7 @@
 package com.coderman.business.service.imp;
 
 import com.coderman.business.converter.ProductConverter;
+import com.coderman.business.mapper.ProductCategoryMapper;
 import com.coderman.business.mapper.ProductMapper;
 import com.coderman.business.mapper.ProductStockMapper;
 import com.coderman.business.mapper.WeightMapper;
@@ -14,15 +15,13 @@ import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemCodeEnum;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
+import com.coderman.common.model.business.ProductCategory;
 import com.coderman.common.model.business.ProductPrice;
 import com.coderman.common.model.business.Weight;
 import com.coderman.common.model.system.*;
 import com.coderman.common.response.ActiveUser;
 import com.coderman.common.service.DictionaryService;
-import com.coderman.common.vo.business.ProductPriceVO;
-import com.coderman.common.vo.business.ProductStockVO;
-import com.coderman.common.vo.business.ProductVO;
-import com.coderman.common.vo.business.WeightVO;
+import com.coderman.common.vo.business.*;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.system.mapper.DepartmentMapper;
 import com.coderman.system.mapper.UserCardMapper;
@@ -77,6 +76,9 @@ public class WeightServiceImpl implements WeightService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private ProductCategoryMapper productCategoryMapper;
+
     @Override
     public String add(Weight weight) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd  HH:mm:ss");
@@ -93,17 +95,19 @@ public class WeightServiceImpl implements WeightService {
 
     @Override
     public int addVO(WeightVO weightVO) throws SystemException {
-        Example o1 = new Example(UserCard.class);
-        o1.createCriteria().andEqualTo("cardName", weightVO.getCardName());
-        o1.createCriteria().andEqualTo("status", 1);
-        UserCard userCard = userCardMapper.selectOneByExample(o1);
+//        Example o1 = new Example(UserCard.class);
+//        o1.createCriteria().andEqualTo("cardName", weightVO.getCardName());
+//        o1.createCriteria().andEqualTo("status", 1);
+//        UserCard userCard = userCardMapper.selectOneByExample(o1);
+        UserCard userCard = userCardMapper.selectByPrimaryKey(weightVO.getCardId());
         if (userCard == null) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "登入卡號不存在");
         }
-        Example o2 = new Example(Product.class);
-        o2.createCriteria().andEqualTo("name", weightVO.getProductName());
-        o2.createCriteria().andEqualTo("status", 1);
-        Product product = productMapper.selectOneByExample(o2);
+//        Example o2 = new Example(Product.class);
+//        o2.createCriteria().andEqualTo("name", weightVO.getProductName());
+//        o2.createCriteria().andEqualTo("status", 1);
+//        Product product = productMapper.selectOneByExample(o2);
+        Product product = productMapper.selectByPrimaryKey(weightVO.getProductId());
         if (product == null) {
             throw new SystemException(SystemCodeEnum.PARAMETER_ERROR, "廢棄物名稱不存在");
         }
@@ -116,9 +120,9 @@ public class WeightServiceImpl implements WeightService {
         weight.setUserId(user.getId());
         weight.setCardId(userCard.getId());
         weight.setProductId(product.getId());
-        weight.setCreateTime(new Date());
+//        weight.setCreateTime(new Date());
         weight.setStatus(1);
-        weight.setLoadTime(new Date());
+//        weight.setLoadTime(new Date());
         return weightMapper.insert(weight);
     }
 
@@ -298,5 +302,95 @@ public class WeightServiceImpl implements WeightService {
             voList.add(vo);
         });
         return voList;
+    }
+
+    @Override
+    public List<CardTreeNodeVO> cardTree() {
+        List<CardTreeNodeVO> cardTreeNode1VOList = new ArrayList<>();
+        List<Department> departmentList= departmentMapper.selectAll().stream().filter(d -> d.getStatus() == 1).collect(Collectors.toList());
+        for (Department d: departmentList) {
+            CardTreeNodeVO cardTreeNode1VO = new CardTreeNodeVO();
+            cardTreeNode1VO.setId(d.getId());
+            cardTreeNode1VO.setName(d.getNickname());
+
+            Example o = new Example(User.class);
+            Example.Criteria criteria = o.createCriteria();
+            criteria.andEqualTo("departmentId", d.getId());
+            criteria.andNotEqualTo("type", 0);
+            criteria.andEqualTo("status", 1);
+            List<User> userList = userMapper.selectByExample(o);
+            List<CardTreeNodeVO> cardTreeNode2VOList = new ArrayList<>();
+            for (User u : userList) {
+                CardTreeNodeVO cardTreeNode2VO = new CardTreeNodeVO();
+                cardTreeNode2VO.setId(u.getId());
+                cardTreeNode2VO.setName(u.getNickname());
+
+                Example o1 = new Example(UserCard.class);
+                o1.createCriteria()
+                        .andEqualTo("userId", u.getId())
+                        .andEqualTo("status", 1);
+                List<UserCard> userCardList = userCardMapper.selectByExample(o1);
+                List<CardTreeNodeVO> cardTreeNode3VOList = new ArrayList<>();
+                for (UserCard c : userCardList) {
+                    CardTreeNodeVO cardTreeNode3VO = new CardTreeNodeVO();
+                    cardTreeNode3VO.setId(c.getId());
+                    cardTreeNode3VO.setName(c.getCardName());
+                    cardTreeNode3VOList.add(cardTreeNode3VO);
+                }
+                cardTreeNode2VO.setChildren(cardTreeNode3VOList);
+
+                cardTreeNode2VOList.add(cardTreeNode2VO);
+            }
+            cardTreeNode1VO.setChildren(cardTreeNode2VOList);
+
+            cardTreeNode1VOList.add(cardTreeNode1VO);
+        }
+        return cardTreeNode1VOList;
+    }
+
+    @Override
+    public List<CardTreeNodeVO> productTree() {
+        List<CardTreeNodeVO> cardTreeNode1VOList = new ArrayList<>();
+        Example o = new Example(ProductCategory.class);
+        o.createCriteria().andEqualTo("pid", 0).andEqualTo("status", 1);
+        List<ProductCategory> oneProductCategoryList = productCategoryMapper.selectByExample(o);
+        for (ProductCategory p1: oneProductCategoryList) {
+            CardTreeNodeVO cardTreeNode1VO = new CardTreeNodeVO();
+            cardTreeNode1VO.setId(p1.getId());
+            cardTreeNode1VO.setName(p1.getName());
+
+            Example o1 = new Example(ProductCategory.class);
+            o1.createCriteria()
+                    .andEqualTo("pid", p1.getId())
+                    .andEqualTo("status", 1);
+            List<ProductCategory> twoProductCategoryList = productCategoryMapper.selectByExample(o1);
+            List<CardTreeNodeVO> cardTreeNode2VOList = new ArrayList<>();
+            for (ProductCategory p2 : twoProductCategoryList) {
+                CardTreeNodeVO cardTreeNode2VO = new CardTreeNodeVO();
+                cardTreeNode2VO.setId(p2.getId());
+                cardTreeNode2VO.setName(p2.getName());
+
+                Example o2 = new Example(Product.class);
+                o2.createCriteria()
+                        .andEqualTo("oneCategoryId", p1.getId())
+                        .andEqualTo("twoCategoryId", p2.getId())
+                        .andEqualTo("status", 1);
+                List<Product> productList = productMapper.selectByExample(o2);
+                List<CardTreeNodeVO> cardTreeNode3VOList = new ArrayList<>();
+                for (Product product : productList) {
+                    CardTreeNodeVO cardTreeNode3VO = new CardTreeNodeVO();
+                    cardTreeNode3VO.setId(product.getId());
+                    cardTreeNode3VO.setName(product.getName());
+                    cardTreeNode3VOList.add(cardTreeNode3VO);
+                }
+                cardTreeNode2VO.setChildren(cardTreeNode3VOList);
+
+                cardTreeNode2VOList.add(cardTreeNode2VO);
+            }
+            cardTreeNode1VO.setChildren(cardTreeNode2VOList);
+
+            cardTreeNode1VOList.add(cardTreeNode1VO);
+        }
+        return cardTreeNode1VOList;
     }
 }

@@ -10,6 +10,7 @@ import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.Weight;
 import com.coderman.common.model.system.*;
 import com.coderman.common.response.ResponseBean;
+import com.coderman.common.vo.business.ProductCategoryTreeNodeVO;
 import com.coderman.common.vo.business.ProductPriceVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.business.WeightVO;
@@ -114,6 +115,7 @@ public class WeightController {
             List<Product> productList = productsByCard.stream()
                     .map(id -> productMapper.selectByPrimaryKey(id))
                     .filter(product -> product.getStatus()==1)
+                    .sorted(Comparator.comparing((t) -> t.getSort()))
                     .collect(Collectors.toList());
 
             Map responseMap = new HashMap();
@@ -232,6 +234,28 @@ public class WeightController {
     public void export(HttpServletResponse response,@RequestBody WeightVO weightVO) {
         List<WeightVO> voList = this.weightService.findAll(weightVO);
         ExcelKit.$Export(WeightVO.class, response).downXlsx(voList, false);
+    }
+
+    /**
+     * 公司用戶卡片樹形結構
+     *
+     * @return
+     */
+    @ApiOperation(value = "公司用戶卡片樹形結構")
+    @GetMapping("/cardTree")
+    public ResponseBean cardTree() {;
+        return ResponseBean.success(weightService.cardTree());
+    }
+
+    /**
+     * 廢棄物樹形結構
+     *
+     * @return
+     */
+    @ApiOperation(value = "廢棄物樹形結構")
+    @GetMapping("/productTree")
+    public ResponseBean productTree() {;
+        return ResponseBean.success(weightService.productTree());
     }
 
 

@@ -5,11 +5,13 @@ import com.coderman.common.error.BusinessException;
 import com.coderman.common.error.SystemException;
 import com.coderman.common.model.business.Product;
 import com.coderman.common.model.business.Weight;
+import com.coderman.common.vo.business.CardTreeNodeVO;
 import com.coderman.common.vo.business.ProductStockVO;
 import com.coderman.common.vo.business.ProductVO;
 import com.coderman.common.vo.business.WeightVO;
 import com.coderman.common.vo.system.PageVO;
 
+import javax.smartcardio.Card;
 import java.util.List;
 
 /**
@@ -74,5 +76,9 @@ public interface WeightService {
      * @return
      */
     List<WeightVO> findAll(WeightVO weightVO);
+
+    List<CardTreeNodeVO> cardTree();
+
+    List<CardTreeNodeVO> productTree();
 
 }
