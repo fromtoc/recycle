@@ -1029,227 +1029,203 @@ CREATE TABLE `tb_menu` (
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='選單表';
 
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(1, 0, '一般設定', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2021-11-13 15:06:08', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(1, 0, '一般設定', '', NULL, 'el-icon-setting', '0', 1, '2020-03-07 17:41:30', '2021-11-13 15:06:08', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(2, 0, '基本資料', '', NULL, 'el-icon-setting', '0', 2, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(2, 0, '基本資料', '', NULL, 'el-icon-setting', '0', 2, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(3, 0, '秤重管理', '', NULL, 'el-icon-setting', '0', 3, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(3, 0, '秤重管理', '', NULL, 'el-icon-setting', '0', 3, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(4, 0, '報表查詢', '', NULL, 'el-icon-setting', '0', 4, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(4, 0, '報表查詢', '', NULL, 'el-icon-setting', '0', 4, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(5, 0, '權限管理', '', NULL, 'el-icon-setting', '0', 5, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(5, 0, '權限管理', '', NULL, 'el-icon-setting', '0', 5, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(6, 0, '後臺功能', '', NULL, 'el-icon-setting', '0', 6, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(6, 0, '後臺功能', '', NULL, 'el-icon-setting', '0', 6, '2020-03-07 17:41:30', '2020-08-19 17:57:20', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(7, 1, '公司類型設定', '/system/departmentCategories', '', 'el-icon-star-off', '0', 1, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(7, 1, '公司類型設定', '/system/departmentCategories', '', 'el-icon-star-off', '0', 1, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(8, 1, '區域設定', '/system/region', '', 'el-icon-star-off', '0', 2, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(8, 1, '區域設定', '/system/region', '', 'el-icon-star-off', '0', 2, '2020-03-16 09:01:48', '2020-12-15 19:51:44', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(10, 1, '廢棄物類型設定', '/business/product/categories', '', 'el-icon-star-off', '0', 3, '2020-03-16 09:01:48', '2021-11-13 15:06:04', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(10, 1, '廢棄物類型設定', '/business/product/categories', '', 'el-icon-star-off', '0', 3, '2020-03-16 09:01:48', '2021-11-13 15:06:04', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(11, 1, '跑馬燈設定', '/system/runText', '', 'el-icon-star-off', '0', 4, '2020-03-16 09:01:48', '2021-11-13 14:09:52', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(11, 1, '跑馬燈設定', '/system/runText', '', 'el-icon-star-off', '0', 4, '2020-03-16 09:01:48', '2021-11-13 14:09:52', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(12, 2, '公司管理', '/system/departments', '', 'el-icon-s-home', '0', 1, '2020-03-15 06:05:48', '2020-12-15 17:25:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(12, 2, '公司管理', '/system/departments', '', 'el-icon-s-home', '0', 1, '2020-03-15 06:05:48', '2020-12-15 17:25:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(13, 2, '用戶管理', '/system/users', 'users', 'el-icon-user', '0', 2, '2020-03-10 05:27:54', '2020-12-15 17:24:22', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(13, 2, '用戶管理', '/system/users', 'users', 'el-icon-user', '0', 2, '2020-03-10 05:27:54', '2020-12-15 17:24:22', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(14, 2, '廢棄物管理', '/business/product/list', '', 'el-icon-goods', '0', 3, '2020-03-16 09:01:02', '2020-12-15 19:51:38', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(14, 2, '廢棄物管理', '/business/product/list', '', 'el-icon-goods', '0', 3, '2020-03-16 09:01:02', '2020-12-15 19:51:38', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(15, 3, '秤重明細維護', '/business/weight/list', 'el-icon-date', 'el-icon-date', '0', 1, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(15, 3, '秤重明細維護', '/business/weight/list', 'el-icon-date', 'el-icon-date', '0', 1, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(16, 3, '相關資料補登', '/business/weight/refill', 'el-icon-date', 'el-icon-date', '0', 2, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(16, 3, '相關資料補登', '/business/weight/refill', 'el-icon-date', 'el-icon-date', '0', 2, '2020-03-10 05:34:28', '2020-12-15 19:57:21', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(17, 5, '選單管理', '/system/menus', 'menus', 'el-icon-help', '0', 1, '2020-03-07 18:57:42', '2020-12-15 17:25:02', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(17, 5, '選單管理', '/system/menus', 'menus', 'el-icon-help', '0', 1, '2020-03-07 18:57:42', '2020-12-15 17:25:02', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(18, 5, '角色權限', '/system/roles', 'roles', 'el-icon-postcard', '0', 3, '2020-03-10 05:51:28', '2020-12-15 17:24:41', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(18, 5, '角色權限', '/system/roles', 'roles', 'el-icon-postcard', '0', 3, '2020-03-10 05:51:28', '2020-12-15 17:24:41', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(19, 6, '操作日誌', '/monitor/logs', '', 'el-icon-edit', '0', 1, '2020-04-04 19:04:53', '2020-12-15 18:34:36', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(20, 4, '固定報表', '/business/report/report1', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(20, 4, '廢棄物統計', '/business/report/report1', '', 'el-icon-s-marketing', '0', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(21, 7, '新增公司類型', '', 'departmentCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(21, 7, '新增公司類型', '', 'departmentCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(22, 7, '編辑公司類型', '', 'departmentCategory:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(23, 7, '更新公司類型', '', 'departmentCategory:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(22, 7, '編辑公司類型', '', 'departmentCategory:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(24, 7, '更新公司類型狀態', '', 'departmentCategory:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(24, 7, '更新公司類型狀態', '', 'departmentCategory:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(25, 7, '下載公司類型', '', 'departmentCategory:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(25, 7, '下載公司類型', '', 'departmentCategory:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(26, 8, '新增區域', '', 'region:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(26, 8, '新增區域', '', 'region:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(27, 8, '編辑區域', '', 'region:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(28, 8, '更新區域', '', 'region:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(27, 8, '編辑區域', '', 'region:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(29, 8, '更新區域狀態', '', 'region:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(29, 8, '更新區域狀態', '', 'region:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(30, 8, '下載區域', '', 'region:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(30, 8, '下載區域', '', 'region:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(31, 10, '新增分類', '', 'productCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(31, 10, '新增分類', '', 'productCategory:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(32, 10, '編辑分類', '', 'productCategory:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(33, 10, '更新分類', '', 'productCategory:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(32, 10, '編辑分類', '', 'productCategory:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(34, 10, '更新分類狀態', '', 'productCategory:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(34, 10, '更新分類狀態', '', 'productCategory:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(35, 10, '下載分類', '', 'productCategory:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(35, 10, '下載分類', '', 'productCategory:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(36, 11, '新增跑馬燈', '', 'runText:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(36, 11, '新增跑馬燈', '', 'runText:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(37, 11, '編辑跑馬燈', '', 'runText:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(38, 11, '更新跑馬燈', '', 'runText:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(37, 11, '編辑跑馬燈', '', 'runText:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(39, 11, '更新跑馬燈狀態', '', 'runText:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(39, 11, '更新跑馬燈狀態', '', 'runText:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(40, 11, '下載跑馬燈', '', 'runText:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(40, 11, '下載跑馬燈', '', 'runText:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(41, 12, '新增公司', '', 'department:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(41, 12, '新增公司', '', 'department:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(42, 12, '編辑公司', '', 'department:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(43, 12, '更新公司', '', 'department:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(42, 12, '編辑公司', '', 'department:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(44, 12, '更新公司狀態', '', 'department:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(44, 12, '更新公司狀態', '', 'department:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(45, 12, '下載公司', '', 'department:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(45, 12, '下載公司', '', 'department:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(46, 12, '更新廚餘標記', '', 'department:food', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(46, 12, '更新廚餘標記', '', 'department:food', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(47, 13, '新增用戶', '', 'user:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(47, 13, '新增用戶', '', 'user:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(48, 13, '編辑用戶', '', 'user:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(49, 13, '更新用戶', '', 'user:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(48, 13, '編辑用戶', '', 'user:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(50, 13, '更新用戶狀態', '', 'user:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(50, 13, '更新用戶狀態', '', 'user:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(51, 13, '下載用戶', '', 'user:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(51, 13, '下載用戶', '', 'user:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(52, 13, '分配角色', '', 'user:assign', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(52, 13, '分配角色', '', 'user:assign', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(53, 13, '更新用戶密碼', '', 'user:changePassword', 'el-icon-setting', '1', 6, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(53, 13, '更新用戶密碼', '', 'user:changePassword', 'el-icon-setting', '1', 6, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(54, 13, '卡片管理', '', 'card:manage', 'el-icon-setting', '1', 7, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(54, 13, '卡片管理', '', 'card:manage', 'el-icon-setting', '1', 7, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(55, 14, '新增廢棄物', '', 'product:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(55, 14, '新增廢棄物', '', 'product:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(56, 14, '編辑廢棄物', '', 'product:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(57, 14, '更新廢棄物', '', 'product:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(56, 14, '編辑廢棄物', '', 'product:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(57, 14, '更新廢棄物狀態', '', 'product:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(57, 14, '更新廢棄物狀態', '', 'product:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(58, 14, '下載廢棄物', '', 'product:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(58, 14, '下載廢棄物', '', 'product:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(59, 14, '單價維護', '', 'product:price', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(59, 14, '單價維護', '', 'product:price', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(60, 15, '新增秤重明細', '', 'weight:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(60, 15, '新增秤重明細', '', 'weight:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(61, 15, '編辑秤重明細', '', 'weight:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(62, 15, '更新秤重明細', '', 'weight:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(61, 15, '編辑秤重明細', '', 'weight:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(63, 15, '更新秤重明細狀態', '', 'weight:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(63, 15, '更新秤重明細狀態', '', 'weight:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(64, 15, '下載秤重明細', '', 'weight:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(64, 15, '下載秤重明細', '', 'weight:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(65, 17, '新增選單', '', 'menu:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(65, 17, '新增選單', '', 'menu:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(66, 17, '編辑選單', '', 'menu:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(67, 17, '更新選單', '', 'menu:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(66, 17, '編辑選單', '', 'menu:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(68, 17, '下載選單', '', 'menu:export', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(68, 17, '下載選單', '', 'menu:export', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(69, 18, '新增角色', '', 'role:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(69, 18, '新增角色', '', 'role:add', 'el-icon-setting', '1', 1, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(70, 18, '編辑角色', '', 'role:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
--- INSERT INTO tb_menu
--- (id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
--- VALUES(71, 18, '更新角色', '', 'role:update', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(70, 18, '編辑角色', '', 'role:edit', 'el-icon-setting', '1', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(72, 18, '更新角色狀態', '', 'role:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(72, 18, '更新角色狀態', '', 'role:status', 'el-icon-setting', '1', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(73, 18, '下載角色', '', 'role:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(73, 18, '下載角色', '', 'role:export', 'el-icon-setting', '1', 4, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 INSERT INTO tb_menu
-(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`)
-VALUES(74, 18, '角色授權', '', 'role:authority', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0);
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(74, 18, '角色授權', '', 'role:authority', 'el-icon-setting', '1', 5, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(75, 4, '資源回收統計', '/business/report/report2', '', 'el-icon-s-marketing', '0', 2, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
+INSERT INTO tb_menu
+(id, parent_id, menu_name, url, perms, icon, `type`, order_num, create_time, modified_time, available, `open`, load_time)
+VALUES(76, 4, '每月過磅統計表', '/business/report/report3', '', 'el-icon-s-marketing', '0', 3, '2020-12-15 18:35:18', '2020-12-15 18:35:18', 1, 0, NULL);
 
 /*Table structure for table `tb_role` */
 

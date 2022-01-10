@@ -6,6 +6,7 @@ import com.coderman.common.model.system.Department;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.vo.system.DeanVO;
 import com.coderman.common.vo.system.DepartmentVO;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface DictionaryService {
      * @param dictionary
      * @return
      */
-    PageVO<Dictionary> findDictionaryList(Integer pageNum, Integer pageSize, Dictionary dictionary);
+    PageVO<DictionaryVO> findDictionaryList(Integer pageNum, Integer pageSize, Dictionary dictionary);
 
     /**
      * 新增資料辭典

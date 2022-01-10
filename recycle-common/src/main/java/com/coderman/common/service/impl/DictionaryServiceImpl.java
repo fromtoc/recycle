@@ -7,14 +7,18 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.mapper.DictionaryMapper;
 import com.coderman.common.model.system.*;
 import com.coderman.common.response.ActiveUser;
+import com.coderman.common.vo.system.DictionaryVO;
 import com.coderman.common.vo.system.PageVO;
 import com.coderman.common.service.DictionaryService;
+import com.coderman.common.vo.system.RunTextVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +34,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     private DictionaryMapper dictionaryMapper;
 
     @Override
-    public PageVO<Dictionary> findDictionaryList(Integer pageNum, Integer pageSize, Dictionary dictionary) {
+    public PageVO<DictionaryVO> findDictionaryList(Integer pageNum, Integer pageSize, Dictionary dictionary) {
         PageHelper.startPage(pageNum, pageSize);
         String code = dictionary.getCode();
         String value = dictionary.getValue();
@@ -47,9 +51,16 @@ public class DictionaryServiceImpl implements DictionaryService {
             criteria.andLike("value", "%" + value + "%");
         }
         List<Dictionary> dictionaries = dictionaryMapper.selectByExample(o);
+        List<DictionaryVO> voList = new ArrayList<>();
+        dictionaries.stream().forEach(d-> {
+            DictionaryVO vo = new DictionaryVO();
+            BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus()==1? false : true);
+            voList.add(vo);
+        });
 
         PageInfo<Dictionary> dictionaryPageInfo = new PageInfo<>(dictionaries);
-        return new PageVO<Dictionary>(dictionaryPageInfo.getTotal(), dictionaries);
+        return new PageVO<DictionaryVO>(dictionaryPageInfo.getTotal(), voList);
     }
 
     @Override

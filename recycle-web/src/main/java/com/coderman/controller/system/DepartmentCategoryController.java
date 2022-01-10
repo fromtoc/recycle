@@ -43,11 +43,11 @@ public class DepartmentCategoryController {
      */
     @ApiOperation(value = "公司類型列表", notes = "公司類型列表,根據公司類型名模糊查询")
     @GetMapping("/findByPage")
-    public ResponseBean<PageVO<Dictionary>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public ResponseBean<PageVO<DictionaryVO>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                        @RequestParam(value = "pageSize") Integer pageSize,
                                                        Dictionary dictionary) {
         dictionary.setType(1);
-        PageVO<Dictionary> departmentCategoryList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
+        PageVO<DictionaryVO> departmentCategoryList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
         return ResponseBean.success(departmentCategoryList);
     }
 
@@ -137,6 +137,7 @@ public class DepartmentCategoryController {
         list.stream().forEach(d-> {
             DictionaryVO vo = new DictionaryVO();
             BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus()==1? false : true);
             voList.add(vo);
         });
         ExcelKit.$Export(DictionaryVO.class, response).downXlsx(voList, false);

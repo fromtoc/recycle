@@ -23,7 +23,7 @@ public class DictionaryVO {
     @ExcelField(value = "名稱", width = 150)
     private String value;
 
-    private Integer status;
+    private Boolean status;
 
     private Date loadTime;
 
@@ -34,7 +34,7 @@ public class DictionaryVO {
         if (status==null){
             return null;
         }
-        return status==0? "停用": "啟用";
+        return status? "停用": "啟用";
     }
 
 }

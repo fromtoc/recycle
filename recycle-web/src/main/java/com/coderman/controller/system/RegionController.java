@@ -43,11 +43,11 @@ public class RegionController {
      */
     @ApiOperation(value = "區域列表", notes = "區域列表,根據區域名模糊查询")
     @GetMapping("/findByPage")
-    public ResponseBean<PageVO<Dictionary>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public ResponseBean<PageVO<DictionaryVO>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                        @RequestParam(value = "pageSize") Integer pageSize,
                                                        Dictionary dictionary) {
         dictionary.setType(2);
-        PageVO<Dictionary> regionList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
+        PageVO<DictionaryVO> regionList = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
         return ResponseBean.success(regionList);
     }
 
@@ -137,6 +137,7 @@ public class RegionController {
         list.stream().forEach(d-> {
             DictionaryVO vo = new DictionaryVO();
             BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus()==1? false : true);
             voList.add(vo);
         });
         ExcelKit.$Export(DictionaryVO.class, response).downXlsx(voList, false);

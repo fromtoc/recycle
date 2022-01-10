@@ -18,7 +18,7 @@ public class RunTextVO {
     @ExcelField(value = "跑馬燈內容", width = 300)
     private String message;
 
-    private Integer status;
+    private Boolean status;
 
     private Date loadTime;
     @ExcelField(value = "狀態", width = 100)
@@ -28,7 +28,7 @@ public class RunTextVO {
         if (status==null){
             return null;
         }
-        return status==0? "停用": "啟用";
+        return status? "停用": "啟用";
     }
 
 }

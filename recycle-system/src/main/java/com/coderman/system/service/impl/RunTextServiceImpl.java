@@ -6,14 +6,18 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.model.system.RunText;
 import com.coderman.common.vo.system.PageVO;
+import com.coderman.common.vo.system.RunTextVO;
 import com.coderman.system.mapper.RunTextMapper;
 import com.coderman.system.service.RunTextService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +28,7 @@ public class RunTextServiceImpl implements RunTextService {
     private RunTextMapper runTextMapper;
 
     @Override
-    public PageVO<RunText> findRunTextList(Integer pageNum, Integer pageSize, RunText runText) {
+    public PageVO<RunTextVO> findRunTextList(Integer pageNum, Integer pageSize, RunText runText) {
         PageHelper.startPage(pageNum, pageSize);
         String message = runText.getMessage();
         Example o = new Example(RunText.class);
@@ -33,9 +37,16 @@ public class RunTextServiceImpl implements RunTextService {
             criteria.andLike("message", "%" + message + "%");
         }
         List<RunText> runTexts = runTextMapper.selectByExample(o);
-
+        List<RunTextVO> voList = new ArrayList<>();
+        runTexts.stream().forEach(d-> {
+            RunTextVO vo = new RunTextVO();
+            BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus()==1? false : true);
+            voList.add(vo);
+        });
         PageInfo<RunText> runTextPageInfo = new PageInfo<>(runTexts);
-        return new PageVO<RunText>(runTextPageInfo.getTotal(), runTexts);
+
+        return new PageVO<RunTextVO>(runTextPageInfo.getTotal(), voList);
     }
 
     @Override
@@ -64,6 +75,7 @@ public class RunTextServiceImpl implements RunTextService {
         return runTextMapper.selectAll();
     }
 
+    @Transactional
     @Override
     public void updateStatus(Long id, Boolean status) throws SystemException {
         RunText d = new RunText();
@@ -72,5 +84,20 @@ public class RunTextServiceImpl implements RunTextService {
                 UserStatusEnum.AVAILABLE.getStatusCode());
         d.setLoadTime(new Date());
         runTextMapper.updateByPrimaryKeySelective(d);
+
+        if (!status) {
+            Example o = new Example(RunText.class);
+            o.createCriteria()
+                    .andNotEqualTo("id", id)
+                    .andEqualTo("status", 1);
+            List<RunText> runTexts = runTextMapper.selectByExample(o);
+            for (RunText r : runTexts) {
+                RunText rt = new RunText();
+                rt.setId(r.getId());
+                rt.setStatus(0);
+                rt.setLoadTime(new Date());
+                runTextMapper.updateByPrimaryKeySelective(rt);
+            }
+        }
     }
 }

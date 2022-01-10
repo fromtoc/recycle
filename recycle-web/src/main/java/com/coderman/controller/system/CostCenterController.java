@@ -43,11 +43,11 @@ public class CostCenterController {
      */
     @ApiOperation(value = "成本中心列表", notes = "成本中心列表,根據成本中心名模糊查询")
     @GetMapping("/findByPage")
-    public ResponseBean<PageVO<Dictionary>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public ResponseBean<PageVO<DictionaryVO>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                        @RequestParam(value = "pageSize") Integer pageSize,
                                                        Dictionary dictionary) {
         dictionary.setType(2);
-        PageVO<Dictionary> list = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
+        PageVO<DictionaryVO> list = dictionaryService.findDictionaryList(pageNum, pageSize, dictionary);
         return ResponseBean.success(list);
     }
 

@@ -46,10 +46,10 @@ public class RunTextController {
      */
     @ApiOperation(value = "跑馬燈列表", notes = "跑馬燈列表,根據跑馬燈名模糊查询")
     @GetMapping("/findByPage")
-    public ResponseBean<PageVO<RunText>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+    public ResponseBean<PageVO<RunTextVO>> findByPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                     @RequestParam(value = "pageSize") Integer pageSize,
                                                     RunText runText) {
-        PageVO<RunText> runTextList = runTextService.findRunTextList(pageNum, pageSize, runText);
+        PageVO<RunTextVO> runTextList = runTextService.findRunTextList(pageNum, pageSize, runText);
         return ResponseBean.success(runTextList);
     }
 
@@ -75,7 +75,7 @@ public class RunTextController {
     @ApiOperation(value = "新增跑馬燈")
     @PostMapping("/add")
     public ResponseBean add(@RequestBody @Validated RunText runText) {
-        runText.setStatus(1);
+        runText.setStatus(0);
         runTextService.add(runText);
         return ResponseBean.success();
     }
@@ -123,6 +123,7 @@ public class RunTextController {
         runTextList.stream().forEach(d-> {
             RunTextVO vo = new RunTextVO();
             BeanUtils.copyProperties(d, vo);
+            vo.setStatus(d.getStatus()==1? false : true);
             voList.add(vo);
         });
         ExcelKit.$Export(RunTextVO.class, response).downXlsx(voList, false);

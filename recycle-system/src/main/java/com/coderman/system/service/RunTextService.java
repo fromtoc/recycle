@@ -5,6 +5,7 @@ import com.coderman.common.error.SystemException;
 import com.coderman.common.model.system.Dictionary;
 import com.coderman.common.model.system.RunText;
 import com.coderman.common.vo.system.PageVO;
+import com.coderman.common.vo.system.RunTextVO;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface RunTextService {
      * @param runText
      * @return
      */
-    PageVO<RunText> findRunTextList(Integer pageNum, Integer pageSize, RunText runText);
+    PageVO<RunTextVO> findRunTextList(Integer pageNum, Integer pageSize, RunText runText);
 
     /**
      * 新增跑馬燈
