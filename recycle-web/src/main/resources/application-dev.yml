@@ -48,5 +48,5 @@ fdfs:
   pool:
     max-total: 500
     max-wait-millis: 2000
-jwtKey: 54407f4a-0d35-4e47-8b20-75d9e09f3257
-jwtUrl: https://211.23.139.11:8088/hengshi/
+jwtKey: 4748be18-8469-4483-8efe-cfab0e174ddc
+jwtUrl: https://192.168.89.50:8088/hengshi/
